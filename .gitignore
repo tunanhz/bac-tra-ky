@@ -42,3 +42,5 @@ next-env.d.ts
 
 # mẫu biến môi trường được commit
 !.env.example
+
+.vercel
