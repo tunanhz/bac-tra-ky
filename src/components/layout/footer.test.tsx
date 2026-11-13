@@ -48,7 +48,24 @@ describe("Footer (spec mục 7)", () => {
     expect(footer).toHaveTextContent("© 2026 Bác Trà Ký.");
   });
 
-  it("chưa có dữ liệu thật: hotline, email, Facebook, TikTok hiện '(đang cập nhật)', không có liên kết hỏng", async () => {
+  it("hiện kênh liên hệ chính thức khi chưa đặt biến môi trường", async () => {
+    for (const key of ENV_KEYS) vi.stubEnv(key, undefined);
+    await renderFooter();
+    const footer = within(screen.getByRole("contentinfo"));
+
+    expect(footer.getByRole("link", { name: "Facebook Bác Trà Ký" })).toHaveAttribute(
+      "href",
+      "https://www.facebook.com/bactraky/",
+    );
+    expect(footer.getByRole("link", { name: "Bactraky@gmail.com" })).toHaveAttribute("href", "mailto:Bactraky@gmail.com");
+    expect(footer.getByRole("link", { name: "0869189004" })).toHaveAttribute("href", "tel:0869189004");
+    expect(footer.getByRole("link", { name: "TikTok Bác Trà Ký" })).toHaveAttribute(
+      "href",
+      "https://www.tiktok.com/@bactraky",
+    );
+  });
+
+  it("biến rỗng: hotline, email, Facebook, TikTok hiện '(đang cập nhật)', không có liên kết hỏng", async () => {
     clearEnv();
     await renderFooter();
     const footer = screen.getByRole("contentinfo");
@@ -65,7 +82,7 @@ describe("Footer (spec mục 7)", () => {
 
   it("có dữ liệu thật: hotline tel:, email mailto:, mạng xã hội mở tab mới an toàn", async () => {
     vi.stubEnv("NEXT_PUBLIC_FACEBOOK_URL", "https://facebook.com/bactraky");
-    vi.stubEnv("NEXT_PUBLIC_TIKTOK_URL", "https://www.tiktok.com/@bactraky");
+    vi.stubEnv("NEXT_PUBLIC_TIKTOK_URL", "https://www.tiktok.com/@bactraky-preview");
     vi.stubEnv("NEXT_PUBLIC_CONTACT_EMAIL", "lienhe@bactraky.vn");
     vi.stubEnv("NEXT_PUBLIC_HOTLINE", "0912 345 678");
     await renderFooter();
@@ -80,7 +97,7 @@ describe("Footer (spec mục 7)", () => {
     expect(facebook).toHaveAttribute("rel", "noopener noreferrer");
     expect(within(footer).getByRole("link", { name: "TikTok Bác Trà Ký" })).toHaveAttribute(
       "href",
-      "https://www.tiktok.com/@bactraky",
+      "https://www.tiktok.com/@bactraky-preview",
     );
     expect(footer).not.toHaveTextContent("(đang cập nhật)");
   });

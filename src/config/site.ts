@@ -1,9 +1,8 @@
 /**
  * Cấu hình thương hiệu dùng chung (header, footer, liên hệ, metadata).
  *
- * Giá trị chưa có dữ liệu chính thức để `null` và đánh dấu `TODO: thay dữ liệu thật`.
- * Mỗi giá trị đọc được từ biến môi trường `NEXT_PUBLIC_*` (xem `.env.example`); biến rỗng hoặc sai định dạng
- * bị bỏ qua để không hiện liên kết hỏng.
+ * Kênh liên hệ chính thức có giá trị mặc định khi chưa đặt biến `NEXT_PUBLIC_*` (xem `.env.example`).
+ * Với các kênh liên hệ, biến rỗng hoặc sai định dạng trả về `null` để không hiện liên kết hỏng.
  */
 
 export type NavItem = {
@@ -90,14 +89,14 @@ export const siteConfig = {
   url: resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL, process.env.NODE_ENV),
   locale: "vi_VN",
   nav: NAV_ITEMS,
-  /** TODO: thay dữ liệu thật — link trang Facebook chính thức. `null` = chưa có. */
-  facebookUrl: readHttpUrl(process.env.NEXT_PUBLIC_FACEBOOK_URL),
-  /** TODO: thay dữ liệu thật — link TikTok chính thức. `null` = chưa có. */
-  tiktokUrl: readHttpUrl(process.env.NEXT_PUBLIC_TIKTOK_URL),
-  /** TODO: thay dữ liệu thật — email liên hệ. `null` = chưa có. */
-  email: readEmail(process.env.NEXT_PUBLIC_CONTACT_EMAIL),
-  /** TODO: thay dữ liệu thật — hotline. `null` = chưa có. */
-  hotline: readPhone(process.env.NEXT_PUBLIC_HOTLINE),
+  /** Link trang Facebook chính thức. */
+  facebookUrl: readHttpUrl(process.env.NEXT_PUBLIC_FACEBOOK_URL ?? "https://www.facebook.com/bactraky/"),
+  /** Link hồ sơ TikTok chính thức. */
+  tiktokUrl: readHttpUrl(process.env.NEXT_PUBLIC_TIKTOK_URL ?? "https://www.tiktok.com/@bactraky"),
+  /** Email liên hệ chính thức. */
+  email: readEmail(process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "Bactraky@gmail.com"),
+  /** Hotline chính thức. */
+  hotline: readPhone(process.env.NEXT_PUBLIC_HOTLINE ?? "0869189004"),
   /** Địa chỉ hoạt động theo spec mục 6. */
   address: "Làng nghề Giang Xá, xã Hoài Đức, Hà Nội",
   /** Kênh đặt hàng cho nút "Liên hệ đặt hàng". Mặc định về form liên hệ trên trang chủ. */
