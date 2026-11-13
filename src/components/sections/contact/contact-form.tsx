@@ -8,11 +8,10 @@ import {
   CONTACT_FIELDS,
   CONTACT_NOT_READY_MESSAGE,
   HONEYPOT_FIELD,
-  validateContact,
   type ContactApiResponse,
   type ContactField,
   type ContactFieldErrors,
-} from "@/lib/contact";
+} from "@/lib/contact-shared";
 import { cn } from "@/lib/cn";
 import { FacebookButton } from "./facebook-button";
 
@@ -21,6 +20,22 @@ export const CONTACT_SUCCESS_MESSAGE = "Bác Trà Ký đã nhận lời nhắn c
 
 /** Hết thời gian chờ máy chủ → coi như lỗi mạng. */
 const REQUEST_TIMEOUT_MS = 15_000;
+
+/**
+ * Nạp schema zod (`@/lib/contact`) theo nhu cầu — lần đầu người dùng chạm vào form hoặc bấm gửi — để zod không nằm
+ * trên đường tải đầu trang. Promise được nhớ lại; nạp lỗi (mạng) thì lần sau thử lại.
+ */
+let validatorPromise: Promise<typeof import("@/lib/contact").validateContact> | null = null;
+function loadValidator() {
+  validatorPromise ??= import("@/lib/contact").then(
+    (module) => module.validateContact,
+    (error: unknown) => {
+      validatorPromise = null;
+      throw error;
+    },
+  );
+  return validatorPromise;
+}
 
 type Values = Record<ContactField, string>;
 const EMPTY: Values = { name: "", phone: "", email: "", message: "" };
@@ -79,7 +94,6 @@ type ContactFormProps = {
  */
 export function ContactForm({ facebookUrl = siteConfig.facebookUrl, endpoint = "/api/contact" }: ContactFormProps) {
   const baseId = useId();
-  const formRef = useRef<HTMLFormElement>(null);
   const statusRef = useRef<HTMLDivElement>(null);
   const [values, setValues] = useState<Values>(EMPTY);
   const [honeypot, setHoneypot] = useState("");
@@ -104,6 +118,14 @@ export function ContactForm({ facebookUrl = siteConfig.facebookUrl, endpoint = "
     event.preventDefault();
     if (status === "sending") return;
 
+    let validateContact: Awaited<ReturnType<typeof loadValidator>>;
+    try {
+      validateContact = await loadValidator();
+    } catch {
+      setStatus("failed");
+      requestAnimationFrame(() => statusRef.current?.focus());
+      return;
+    }
     const result = validateContact(values);
     if (!result.success) {
       setErrors(result.fieldErrors);
@@ -147,8 +169,8 @@ export function ContactForm({ facebookUrl = siteConfig.facebookUrl, endpoint = "
 
   return (
     <form
-      ref={formRef}
       noValidate
+      onFocus={() => void loadValidator().catch(() => undefined)}
       onSubmit={onSubmit}
       aria-busy={sending}
       aria-label="Gửi lời nhắn cho Bác Trà Ký"
@@ -210,7 +232,8 @@ export function ContactForm({ facebookUrl = siteConfig.facebookUrl, endpoint = "
         </p>
       </div>
 
-      <div ref={statusRef} tabIndex={-1} className="outline-none" aria-live="polite">
+      {/* Không đặt aria-live ở đây: hộp con đã có role status/alert và được focus — đặt thêm sẽ bị đọc hai lần. */}
+      <div ref={statusRef} tabIndex={-1} className="outline-none">
         {status === "not-ready" || status === "failed" || status === "sent" ? (
           <div
             role={status === "failed" ? "alert" : "status"}

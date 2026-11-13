@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { products as allProducts } from "@/data/products";
 import type { Product } from "@/lib/types";
 import { formatPrice, isExternalUrl, PRICE_ON_REQUEST, sectionIdFromHref } from "@/lib/format";
@@ -133,5 +133,22 @@ describe("ProductsSection", () => {
     await user.click(screen.getByRole("button", { name: "Xem chi tiết: Hộp 2 bánh" }));
     await user.click(within(screen.getByRole("dialog")).getByRole("link", { name: "Liên hệ đặt hàng" }));
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  it("'Liên hệ đặt hàng' trong modal → đóng modal, focus chuyển tới tiêu đề mục Liên hệ", async () => {
+    const user = userEvent.setup();
+    render(
+      <>
+        <ProductsCatalog products={products} />
+        <section id="lien-he" aria-labelledby="contact-title">
+          <h2 id="contact-title">Liên hệ</h2>
+        </section>
+      </>,
+    );
+    await user.click(screen.getByRole("button", { name: "Xem chi tiết: Hộp 2 bánh" }));
+    await user.click(within(screen.getByRole("dialog")).getByRole("link", { name: "Liên hệ đặt hàng" }));
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    await vi.waitFor(() => expect(screen.getByRole("heading", { name: "Liên hệ" })).toHaveFocus());
+    expect(window.location.hash).toBe("#lien-he");
   });
 });

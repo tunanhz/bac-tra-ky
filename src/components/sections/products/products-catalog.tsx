@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { FilterChips, type FilterOption } from "@/components/ui/filter-chips";
 import { Modal } from "@/components/ui/modal";
 import { Reveal } from "@/components/ui/reveal";
 import { sectionHref } from "@/config/site";
@@ -19,10 +20,6 @@ export function filterProducts(products: readonly Product[], filter: ProductFilt
   return filter === "all" ? [...products] : products.filter((product) => product.category === filter);
 }
 
-/** Nút lọc — chép `.chip-btn` của bản mẫu B: viền mảnh, đang chọn = nền sơn son. */
-export const CHIP_CLASS =
-  "min-h-11 cursor-pointer border border-line bg-transparent px-4.5 font-body text-[0.86rem] text-ink transition-colors duration-250 ease-son hover:border-gac aria-pressed:border-son aria-pressed:bg-son aria-pressed:text-be";
-
 type ProductsCatalogProps = { products: Product[] };
 
 /**
@@ -38,6 +35,7 @@ export function ProductsCatalog({ products }: ProductsCatalogProps) {
   /** Sản phẩm chờ mở modal sau khi lưới đã render đúng bộ lọc. */
   const [pending, setPending] = useState<Product | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
+  const detailTitleId = useId();
 
   const visible = useMemo(() => filterProducts(products, filter), [products, filter]);
 
@@ -102,26 +100,14 @@ export function ProductsCatalog({ products }: ProductsCatalogProps) {
     setFilterChanges((count) => count + 1);
   };
 
-  const options: Array<{ value: ProductFilter; label: string }> = [
+  const options: Array<FilterOption<ProductFilter>> = [
     { value: "all", label: "Tất cả" },
     ...PRODUCT_CATEGORIES.map((category) => ({ value: category, label: PRODUCT_CATEGORY_LABELS[category] })),
   ];
 
   return (
     <div ref={rootRef}>
-      <div className="mb-8 flex flex-wrap justify-center gap-2" role="group" aria-label="Lọc sản phẩm theo nhóm">
-        {options.map((option) => (
-          <button
-            key={option.value}
-            type="button"
-            className={CHIP_CLASS}
-            aria-pressed={filter === option.value}
-            onClick={() => choose(option.value)}
-          >
-            {option.label}
-          </button>
-        ))}
-      </div>
+      <FilterChips options={options} value={filter} onChange={choose} label="Lọc sản phẩm theo nhóm" />
 
       <p className="sr-only" aria-live="polite">
         {`Đang hiển thị ${visible.length} sản phẩm`}
@@ -172,11 +158,10 @@ export function ProductsCatalog({ products }: ProductsCatalogProps) {
       <Modal
         open={selected !== null}
         onClose={closeDetail}
-        title={selected?.name ?? ""}
-        hideTitle
+        labelledBy={detailTitleId}
         closeLabel="Đóng chi tiết sản phẩm"
       >
-        {selected ? <ProductDetail product={selected} onClose={closeDetail} /> : null}
+        {selected ? <ProductDetail product={selected} titleId={detailTitleId} onClose={closeDetail} /> : null}
       </Modal>
     </div>
   );

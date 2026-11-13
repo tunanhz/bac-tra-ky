@@ -19,7 +19,7 @@ export function Hero() {
         src="/images/common/hero-am-tra-ngay-tet.webp"
         alt="Bộ ấm chén gốm trên khay gỗ, bên cạnh bình hoa đỏ và đèn dầu, không khí ngày Tết"
         fill
-        priority
+        preload
         sizes="100vw"
         className="-z-20 animate-hero-zoom object-cover"
       />

@@ -35,6 +35,8 @@ describe("validateContact", () => {
   });
 
   it.each([
+    ["name", "", "Vui lòng nhập họ và tên."],
+    ["name", "   ", "Vui lòng nhập họ và tên."],
     ["name", "A", "Họ và tên cần ít nhất 2 ký tự."],
     ["name", "a".repeat(101), "Họ và tên tối đa 100 ký tự."],
     ["phone", "", "Vui lòng nhập số điện thoại."],
@@ -42,6 +44,7 @@ describe("validateContact", () => {
     ["phone", "091234567a", "Số điện thoại chưa đúng (ví dụ: 0912345678 hoặc +84912345678)."],
     ["email", "", "Vui lòng nhập email."],
     ["email", "khong-phai-email", "Email chưa đúng định dạng (ví dụ: ten@example.com)."],
+    ["message", "", "Vui lòng nhập nội dung."],
     ["message", "ngắn", "Nội dung cần ít nhất 10 ký tự."],
     ["message", "x".repeat(2001), "Nội dung tối đa 2000 ký tự."],
   ] as const)("từ chối %s = %j với thông báo tiếng Việt", (field, value, message) => {

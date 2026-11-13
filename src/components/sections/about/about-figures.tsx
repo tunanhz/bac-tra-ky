@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { ILLUSTRATION_LABEL } from "@/components/ui/image-placeholder";
+import { IllustrationTag } from "@/components/ui/illustration-tag";
 import { cn } from "@/lib/cn";
 
 type FigureProps = {
@@ -15,14 +15,6 @@ type FigureProps = {
   mediaClassName?: string;
   className?: string;
 };
-
-function IllustrationTag() {
-  return (
-    <span className="absolute inset-x-0 bottom-3 mx-auto w-fit max-w-[90%] bg-be/95 px-2.5 py-1 text-center text-[0.68rem] leading-snug tracking-[0.06em] text-ink-soft">
-      {ILLUSTRATION_LABEL}
-    </span>
-  );
-}
 
 /** Ảnh trên tấm giấy viền đôi (`frame-paper`) với chú thích nghiêng bên dưới. Dùng trên nền be. */
 export function PaperFigure({ src, alt, sizes, caption, illustration, mediaClassName, className }: FigureProps) {

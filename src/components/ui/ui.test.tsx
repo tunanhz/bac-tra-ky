@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { Button } from "./button";
 import { ImagePlaceholder, ILLUSTRATION_LABEL } from "./image-placeholder";
 import { ImageWithFallback } from "./image-with-fallback";
+import { REVEAL_READY_FLAG } from "@/lib/reveal-boot";
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
 
@@ -84,6 +85,29 @@ describe("Reveal", () => {
     act(() => trigger?.([{ isIntersecting: true }]));
     expect(el).toHaveClass("is-visible");
     expect(disconnect).toHaveBeenCalled();
+  });
+
+  it("người dùng bật giảm chuyển động → hiện ngay, không chờ cuộn tới", async () => {
+    const observe = vi.fn();
+    vi.stubGlobal(
+      "IntersectionObserver",
+      class {
+        observe = observe;
+        disconnect() {}
+      },
+    );
+    vi.stubGlobal(
+      "matchMedia",
+      (query: string) => ({ matches: query.includes("prefers-reduced-motion"), media: query }) as MediaQueryList,
+    );
+    render(<Reveal>Nội dung</Reveal>);
+    const el = screen.getByText("Nội dung");
+    await vi.waitFor(() => expect(el).toHaveClass("is-visible"));
+    expect(observe).not.toHaveBeenCalled();
+  });
+
+  it("nạp module Reveal thì đặt cờ cho script khởi động (không gỡ class js dự phòng)", () => {
+    expect((window as unknown as Record<string, unknown>)[REVEAL_READY_FLAG]).toBe(true);
   });
 
   it("không có IntersectionObserver → hiện ngay", async () => {

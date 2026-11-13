@@ -1,7 +1,8 @@
 import { Seal } from "@/components/ornaments/seal";
 import { cn } from "@/lib/cn";
+import { ILLUSTRATION_LABEL, IllustrationTag } from "./illustration-tag";
 
-export const ILLUSTRATION_LABEL = "Ảnh minh hoạ – sẽ thay ảnh thật";
+export { ILLUSTRATION_LABEL };
 
 type ImagePlaceholderProps = {
   /** Mô tả ảnh sẽ đặt ở đây (đọc cho trình đọc màn hình). */
@@ -29,9 +30,7 @@ export function ImagePlaceholder({ alt, label = ILLUSTRATION_LABEL, className }:
       )}
     >
       <Seal className="size-14 text-son/20" withLotus={false} />
-      <span className="absolute inset-x-0 bottom-3 mx-auto w-fit max-w-[90%] bg-be/95 px-2.5 py-1 text-center text-[0.68rem] leading-snug tracking-[0.06em] text-ink-soft">
-        {label}
-      </span>
+      <IllustrationTag label={label} />
     </div>
   );
 }

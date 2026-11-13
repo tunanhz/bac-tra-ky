@@ -48,7 +48,12 @@ describe("NewsCard", () => {
     expect(screen.getByRole("img", { name: post.coverImageAlt })).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 3, name: post.title })).toBeInTheDocument();
     expect(screen.getByText(post.excerpt)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: `Đọc thêm: ${post.title}` })).toHaveAttribute("href", newsHref(post.slug));
+    expect(screen.getByText("Đọc thêm")).toBeInTheDocument();
+    // Một liên kết duy nhất (phủ cả card) → mỗi card chỉ một điểm Tab.
+    const links = screen.getAllByRole("link");
+    expect(links).toHaveLength(1);
+    expect(links[0]).toHaveAccessibleName(post.title);
+    expect(links[0]).toHaveAttribute("href", newsHref(post.slug));
   });
 
   it("bài không phải nháp → không có nhãn 'Bản nháp'", () => {

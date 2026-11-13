@@ -12,6 +12,6 @@ ghi công.
 | `bac-tra-ky-cuon-ky-su-banh-bac-ben-chen-tra.webp` | Bộ ấm chén men trên khay trà gỗ, đĩa bánh | https://images.unsplash.com/photo-1770637113004-18371c2a757a | Monody Le |
 | `banh-bac-giang-xa-sac-do-gac-huong-vung-rang.webp` | Đôi bàn tay nặn bột | https://images.unsplash.com/photo-1772981277368-33eaa0a8917a | chưa xác định được |
 | `tra-sen-net-thanh-tao-cua-van-hoa-tra-viet.webp` | Bộ ấm chén men lam vẽ hoa sen | https://images.unsplash.com/photo-1721373489867-b95a7b3fe16c | Cuong Duyen Ceramics |
-| `giang-xa-vung-dat-cua-ky-uc-va-huong-nep.webp` | Ngôi nhà mái ngói giữa vườn cây, làng quê Bắc Bộ (dùng thêm ở mục Liên hệ) | https://images.unsplash.com/photo-1689075429268-35c0169ffd6e | chưa xác định được |
+| `giang-xa-vung-dat-cua-ky-uc-va-huong-nep.webp` | Ngôi nhà mái ngói giữa vườn cây, làng quê Bắc Bộ | https://images.unsplash.com/photo-1689075429268-35c0169ffd6e | Huynh Nguyễn |
 | `nhung-huong-vi-sang-tao-cua-banh-bac.webp` | Viên bánh phủ bột trà xanh trên đĩa gốm | https://images.unsplash.com/photo-1724052526175-4a7332bd10e9 | chưa xác định được |
 | `thuong-tra-cung-banh-truyen-thong.webp` | Rót trà bên những chiếc bánh trên khay gỗ | https://images.unsplash.com/photo-1705806458615-66283dc0914e | chưa xác định được |

@@ -84,4 +84,14 @@ describe("Modal", () => {
     await user.tab({ shift: true });
     expect(link).toHaveFocus();
   });
+
+  it("labelledBy: dùng tiêu đề có sẵn trong nội dung, không vẽ tiêu đề thứ hai (tên chỉ đọc một lần)", () => {
+    render(
+      <Modal open onClose={() => {}} labelledBy="ten-sp">
+        <h2 id="ten-sp">Hộp 6 bánh</h2>
+      </Modal>,
+    );
+    expect(screen.getByRole("dialog", { name: "Hộp 6 bánh" })).toBeInTheDocument();
+    expect(screen.getAllByRole("heading", { name: "Hộp 6 bánh" })).toHaveLength(1);
+  });
 });

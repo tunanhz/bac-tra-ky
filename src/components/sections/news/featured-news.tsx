@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 import type { NewsPost } from "@/lib/types";
-import { IllustrationTag } from "./news-card";
+import { IllustrationTag } from "@/components/ui/illustration-tag";
 import { NewsMeta, newsHref } from "./news-meta";
 
 /**

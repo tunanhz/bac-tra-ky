@@ -20,6 +20,11 @@ import {
 
 const MAX_BODY_BYTES = 10_000;
 
+/** Kích thước thật theo byte UTF-8 (`raw.length` đếm đơn vị UTF-16 — chữ Việt có dấu chiếm 2–3 byte). */
+function byteLength(text: string): number {
+  return new TextEncoder().encode(text).length;
+}
+
 function json(body: ContactApiResponse, status: number) {
   return NextResponse.json(body, { status });
 }
@@ -36,7 +41,7 @@ export async function POST(request: Request) {
   } catch {
     return json({ ok: false, error: "Không đọc được dữ liệu gửi lên." }, 400);
   }
-  if (raw.length > MAX_BODY_BYTES) {
+  if (byteLength(raw) > MAX_BODY_BYTES) {
     return json({ ok: false, error: "Nội dung gửi quá dài." }, 413);
   }
 

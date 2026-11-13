@@ -15,6 +15,14 @@ type OrderLinkProps = {
   href?: string;
 };
 
+/** Focus tiêu đề của section (theo `aria-labelledby`, nếu không có thì chính section) mà không cuộn thêm. */
+export function focusSectionHeading(section: HTMLElement) {
+  const headingId = section.getAttribute("aria-labelledby");
+  const heading = (headingId && document.getElementById(headingId)) || section;
+  if (!heading.hasAttribute("tabindex")) heading.setAttribute("tabindex", "-1");
+  heading.focus({ preventScroll: true });
+}
+
 /**
  * Nút "Liên hệ đặt hàng" → kênh đặt hàng cấu hình.
  * - URL ngoài: mở tab mới an toàn.
@@ -45,10 +53,12 @@ export function OrderLink({
     const target = sectionId ? document.getElementById(sectionId) : null;
     if (!target) return; // không ở trang chủ → để trình duyệt điều hướng bình thường
     event.preventDefault();
-    // Chờ modal đóng và trả focus xong rồi mới cuộn tới section.
+    // Chờ modal đóng và trả focus xong rồi mới cuộn tới section, sau đó đưa focus tới tiêu đề section để người dùng
+    // bàn phím / trình đọc màn hình không bị kẹt lại ở nút "Xem chi tiết" phía trên.
     window.setTimeout(() => {
-      target.scrollIntoView({ block: "start" });
+      target.scrollIntoView?.({ block: "start" });
       history.replaceState(null, "", `#${sectionId}`);
+      focusSectionHeading(target);
     }, 60);
   };
 

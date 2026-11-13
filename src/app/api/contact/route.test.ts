@@ -62,4 +62,12 @@ describe("POST /api/contact", () => {
     const res = await post({ ...valid, message: "x".repeat(20_000) });
     expect(res.status).toBe(413);
   });
+
+  it("đo kích thước theo byte UTF-8: ít hơn 10.000 ký tự nhưng hơn 10.000 byte → 413", async () => {
+    const body = JSON.stringify({ ...valid, message: "ệ".repeat(4_000) });
+    expect(body.length).toBeLessThan(10_000);
+    expect(new TextEncoder().encode(body).length).toBeGreaterThan(10_000);
+    const res = await post(body);
+    expect(res.status).toBe(413);
+  });
 });

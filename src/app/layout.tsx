@@ -1,25 +1,41 @@
 import type { Metadata, Viewport } from "next";
-import { Caudex, Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { siteConfig } from "@/config/site";
 import { REVEAL_BOOT_SCRIPT } from "@/lib/reveal-boot";
 import "./globals.css";
 
-const playfair = Playfair_Display({
+/*
+ * Font tự host, đã subset đúng bộ ký tự tiếng Việt (src/app/fonts/subset_fonts.py; giấy phép SIL OFL — OFL-*.txt).
+ * Google Fonts tách mỗi kiểu chữ thành 3 file latin/latin-ext/vietnamese và trang tiếng Việt tải cả 3 (~300 KB cho 5
+ * kiểu đang dùng), giành băng thông với ảnh hero (LCP) trên mạng di động; bản subset ~125 KB, 1 file/kiểu.
+ * Không preload: trình duyệt chỉ tải đúng kiểu chữ trang dùng khi đọc CSS; `display: swap` + font dự phòng đã chỉnh số
+ * đo (adjustFontFallback) nên chữ hiện ngay, không xô bố cục.
+ */
+const playfair = localFont({
   variable: "--font-playfair",
-  subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "600", "700", "800"],
-  style: ["normal", "italic"],
+  src: [
+    // Font biến thiên, trục wght đã cắt còn 400–700.
+    { path: "./fonts/playfair-display.woff2", weight: "400 700", style: "normal" },
+    { path: "./fonts/playfair-display-italic.woff2", weight: "400 700", style: "italic" },
+  ],
   display: "swap",
+  preload: false,
+  adjustFontFallback: "Times New Roman",
 });
 
-const caudex = Caudex({
+const caudex = localFont({
   variable: "--font-caudex",
-  subsets: ["latin", "vietnamese"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
+  src: [
+    { path: "./fonts/caudex-regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/caudex-italic.woff2", weight: "400", style: "italic" },
+    { path: "./fonts/caudex-bold.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/caudex-bold-italic.woff2", weight: "700", style: "italic" },
+  ],
   display: "swap",
+  preload: false,
+  adjustFontFallback: "Times New Roman",
 });
 
 const title = `${siteConfig.name} – Gìn giữ tinh hoa, tiếp nối giá trị`;

@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { render, screen, within } from "@testing-library/react";
+import { act, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { Header } from "./header";
@@ -77,5 +77,71 @@ describe("Header", () => {
     await user.click(button);
     await user.click(screen.getByRole("link", { name: "Sản phẩm" }));
     expect(button).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("bấm ra ngoài header thì đóng menu", async () => {
+    const user = userEvent.setup();
+    render(
+      <>
+        <Header />
+        <p>Nội dung trang</p>
+      </>,
+    );
+    const button = screen.getByRole("button", { name: "Mở menu" });
+    await user.click(button);
+    await user.click(screen.getByText("Nội dung trang"));
+    expect(button).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("nới cửa sổ lên ≥ 1024px thì đóng menu", async () => {
+    let onChange: ((event: { matches: boolean }) => void) | undefined;
+    vi.stubGlobal("matchMedia", (query: string) => ({
+      matches: false,
+      media: query,
+      addEventListener: (_: string, cb: (event: { matches: boolean }) => void) => {
+        onChange = cb;
+      },
+      removeEventListener: () => {},
+    }));
+    try {
+      const user = userEvent.setup();
+      render(<Header />);
+      const button = screen.getByRole("button", { name: "Mở menu" });
+      await user.click(button);
+      act(() => onChange?.({ matches: true }));
+      expect(button).toHaveAttribute("aria-expanded", "false");
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it("menu mở: Tab xoay vòng trong các mục và nút menu", async () => {
+    const user = userEvent.setup();
+    render(<Header />);
+    const button = screen.getByRole("button", { name: "Mở menu" });
+    await user.click(button);
+    expect(button).toHaveFocus();
+    await user.tab();
+    expect(screen.getByRole("link", { name: "Trang chủ" })).toHaveFocus();
+    await user.tab({ shift: true });
+    expect(button).toHaveFocus();
+    await user.tab({ shift: true });
+    expect(screen.getByRole("link", { name: "Liên hệ" })).toHaveFocus();
+  });
+
+  it("cuộn tới đáy trang (đang xem footer) → mục 'Liên hệ' sáng, aria-current='location'", () => {
+    const scrollHeight = vi.spyOn(document.documentElement, "scrollHeight", "get").mockReturnValue(5000);
+    try {
+      render(<Header />);
+      act(() => {
+        window.scrollY = 5000 - window.innerHeight;
+        window.dispatchEvent(new Event("scroll"));
+      });
+      expect(screen.getByRole("link", { name: "Liên hệ" })).toHaveAttribute("aria-current", "location");
+      expect(screen.getByRole("link", { name: "Trang chủ" })).not.toHaveAttribute("aria-current");
+    } finally {
+      scrollHeight.mockRestore();
+      window.scrollY = 0;
+    }
   });
 });

@@ -2,11 +2,11 @@
 
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { FilterChips, type FilterOption } from "@/components/ui/filter-chips";
 import { Reveal } from "@/components/ui/reveal";
 import { NEWS_CATEGORIES, NEWS_CATEGORY_LABELS } from "@/data/news";
 import type { NewsCategory, NewsPost } from "@/lib/types";
 import { cn } from "@/lib/cn";
-import { CHIP_CLASS } from "../products/products-catalog";
 import { FeaturedNews } from "./featured-news";
 import { NewsCard } from "./news-card";
 
@@ -22,7 +22,7 @@ export function arrangeNews(posts: readonly NewsPost[], filter: NewsFilter): { f
   return { featured, grid: posts.filter((post) => post !== featured) };
 }
 
-/** Tin tức client: bài nổi bật, bộ lọc 5 chủ đề (`aria-pressed`), lưới card 1/2/3 cột. */
+/** Tin tức client: bộ lọc 5 chủ đề (`aria-pressed`), bài nổi bật, lưới card 1/2/3 cột. */
 export function NewsBoard({ posts }: { posts: NewsPost[] }) {
   const [filter, setFilter] = useState<NewsFilter>("all");
   const [filterChanges, setFilterChanges] = useState(0);
@@ -42,7 +42,7 @@ export function NewsBoard({ posts }: { posts: NewsPost[] }) {
     setFilterChanges((count) => count + 1);
   };
 
-  const options: Array<{ value: NewsFilter; label: string }> = [
+  const options: Array<FilterOption<NewsFilter>> = [
     { value: "all", label: "Tất cả" },
     ...NEWS_CATEGORIES.map((category) => ({ value: category, label: NEWS_CATEGORY_LABELS[category] })),
   ];
@@ -50,25 +50,20 @@ export function NewsBoard({ posts }: { posts: NewsPost[] }) {
 
   return (
     <>
+      {/* Chip đứng trên bài nổi bật: chọn chủ đề làm khối nổi bật biến mất phía DƯỚI chip, nên chip không nhảy chỗ. */}
+      <FilterChips
+        options={options}
+        value={filter}
+        onChange={choose}
+        label="Lọc tin tức theo chủ đề"
+        className="mb-10 flex flex-wrap justify-center gap-2 lg:mb-12"
+      />
+
       {featured ? (
         <Reveal className="mb-14 lg:mb-16">
           <FeaturedNews post={featured} />
         </Reveal>
       ) : null}
-
-      <div className="mb-8 flex flex-wrap justify-center gap-2" role="group" aria-label="Lọc tin tức theo chủ đề">
-        {options.map((option) => (
-          <button
-            key={option.value}
-            type="button"
-            className={CHIP_CLASS}
-            aria-pressed={filter === option.value}
-            onClick={() => choose(option.value)}
-          >
-            {option.label}
-          </button>
-        ))}
-      </div>
 
       <p className="sr-only" aria-live="polite">
         {`Đang hiển thị ${resultCount} bài viết`}

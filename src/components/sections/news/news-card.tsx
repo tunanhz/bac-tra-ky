@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
-import { ILLUSTRATION_LABEL } from "@/components/ui/image-placeholder";
+import { IllustrationTag } from "@/components/ui/illustration-tag";
 import type { NewsPost } from "@/lib/types";
 import { cn } from "@/lib/cn";
 import { NewsMeta, newsHref } from "./news-meta";
@@ -30,42 +30,33 @@ export function NewsCard({ post, className }: NewsCardProps) {
           src={post.coverImage}
           alt={post.coverImageAlt}
           fill
-          sizes="(min-width: 1024px) 360px, (min-width: 768px) 45vw, 92vw"
+          sizes="(min-width: 1200px) 340px, (min-width: 1024px) calc(33vw - 50px), (min-width: 768px) calc(50vw - 60px), calc(100vw - 66px)"
           className="object-cover transition-transform duration-800 ease-son group-hover:scale-105 motion-reduce:group-hover:scale-100"
         />
+        {/* Mọi ảnh bìa tin hiện là ảnh minh hoạ. TODO: thay dữ liệu thật — thêm cờ ảnh thật vào NewsPost khi có. */}
         <IllustrationTag />
       </div>
       <div className="flex flex-1 flex-col px-2 pt-4.5">
         <NewsMeta post={post} showDate={false} />
         <h3 className="mt-3 mb-2 text-[1.3rem] leading-snug font-bold text-son">
-          <Link href={href} className="no-underline transition-colors duration-300 hover:text-gac">
+          {/* Một liên kết duy nhất phủ cả card (lớp ::after) — mỗi card chỉ một điểm Tab; vòng focus vẽ quanh card. */}
+          <Link
+            href={href}
+            className="no-underline transition-colors duration-300 group-hover:text-gac after:absolute after:inset-0 after:z-10 after:content-[''] focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-4 focus-visible:after:outline-gac"
+          >
             {post.title}
           </Link>
         </h3>
         <p className="mt-0 mb-4 text-[0.95rem] text-ink-soft">{post.excerpt}</p>
-        <Link
-          href={href}
-          aria-label={`Đọc thêm: ${post.title}`}
-          className="mt-auto inline-flex min-h-11 items-center gap-2 self-start border-t border-dashed border-line pt-3 text-[0.76rem] font-bold tracking-[0.14em] text-gac uppercase no-underline"
+        {/* Chỉ là chữ gợi ý (cả card đã là liên kết). */}
+        <span
+          aria-hidden="true"
+          className="mt-auto inline-flex min-h-11 items-center gap-2 self-start border-t border-dashed border-line pt-3 text-[0.76rem] font-bold tracking-[0.14em] text-gac uppercase"
         >
           Đọc thêm
-          <span aria-hidden="true" className="transition-transform duration-300 ease-son group-hover:translate-x-1">
-            →
-          </span>
-        </Link>
+          <span className="transition-transform duration-300 ease-son group-hover:translate-x-1">→</span>
+        </span>
       </div>
     </article>
-  );
-}
-
-/**
- * Mọi ảnh bìa hiện là ảnh minh hoạ (Unsplash), chưa phải ảnh thật của Bác Trà Ký.
- * TODO: thay dữ liệu thật — khi có ảnh thật, thêm cờ kiểu `coverImageIsIllustration` vào `NewsPost` (file chung) để chỉ hiện nhãn khi cần.
- */
-export function IllustrationTag() {
-  return (
-    <span className="absolute bottom-2.5 left-1/2 -translate-x-1/2 bg-be/95 px-2.5 py-1 text-[0.62rem] leading-snug tracking-[0.06em] whitespace-nowrap text-ink-soft">
-      {ILLUSTRATION_LABEL}
-    </span>
   );
 }

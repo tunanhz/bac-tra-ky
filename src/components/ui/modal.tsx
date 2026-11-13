@@ -4,13 +4,21 @@ import { useEffect, useId, useRef, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/cn";
 
-type ModalProps = {
+type ModalTitleProps =
+  | {
+      /** Tiêu đề hộp thoại (hiện trong hộp, nối với `aria-labelledby`). */
+      title: ReactNode;
+      labelledBy?: undefined;
+    }
+  | {
+      title?: undefined;
+      /** id của tiêu đề có sẵn trong nội dung — hộp không vẽ tiêu đề riêng, tên hộp thoại chỉ đọc một lần. */
+      labelledBy: string;
+    };
+
+type ModalProps = ModalTitleProps & {
   open: boolean;
   onClose: () => void;
-  /** Tiêu đề hộp thoại (hiện trong hộp, nối với `aria-labelledby`). */
-  title: ReactNode;
-  /** Ẩn tiêu đề khỏi giao diện nhưng vẫn đọc được (khi nội dung tự có tiêu đề riêng). */
-  hideTitle?: boolean;
   children: ReactNode;
   /** Class thêm cho tấm hộp (vd. đổi max-width). */
   className?: string;
@@ -34,7 +42,7 @@ function focusableIn(container: HTMLElement): HTMLElement[] {
  * - Khoá cuộn trang khi mở (giữ chỗ thanh cuộn để trang không giật).
  * - Mobile: toàn màn hình; desktop: tối đa 960px.
  */
-export function Modal({ open, onClose, title, hideTitle = false, children, className, closeLabel = "Đóng" }: ModalProps) {
+export function Modal({ open, onClose, title, labelledBy, children, className, closeLabel = "Đóng" }: ModalProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const onCloseRef = useRef(onClose);
   const titleId = useId();
@@ -105,7 +113,7 @@ export function Modal({ open, onClose, title, hideTitle = false, children, class
         ref={panelRef}
         role="dialog"
         aria-modal="true"
-        aria-labelledby={titleId}
+        aria-labelledby={labelledBy ?? titleId}
         tabIndex={-1}
         className={cn(
           "modal-panel relative flex w-full flex-col overflow-hidden bg-be shadow-paper outline-none",
@@ -125,12 +133,11 @@ export function Modal({ open, onClose, title, hideTitle = false, children, class
           </svg>
         </button>
         <div className="relative z-10 min-h-0 flex-1 overflow-y-auto overscroll-contain">
-          <h2
-            id={titleId}
-            className={cn(hideTitle ? "sr-only" : "px-6 pt-6 pr-16 text-h3 font-semibold text-son md:px-10 md:pt-10")}
-          >
-            {title}
-          </h2>
+          {labelledBy ? null : (
+            <h2 id={titleId} className="px-6 pt-6 pr-16 text-h3 font-semibold text-son md:px-10 md:pt-10">
+              {title}
+            </h2>
+          )}
           {children}
         </div>
       </div>

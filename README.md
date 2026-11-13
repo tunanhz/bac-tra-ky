@@ -47,3 +47,8 @@ public/images/          ảnh (nguồn ghi ở CREDITS.md)
   không tồn tại). Trang tin đặt `ensureStatic = "navigation"` nên slug lạ trả **HTTP 404 ngay lần gọi đầu** (không còn
   soft 404 mã 200 do stream từ `<Suspense>`). Phase 05 đổi tin tức sang MongoDB thì dữ liệu phải đọc qua `use cache`
   (thời hạn ≥ 5 phút) mới giữ được mức này; nếu không thì gỡ export và chấp nhận soft 404 ở lần gọi đầu.
+- Font tự host trong `src/app/fonts/` (Playfair Display, Caudex — SIL OFL 1.1, xem `OFL-*.txt`): đã subset theo bộ ký
+  tự tiếng Việt (~125 KB thay cho ~300 KB từ Google Fonts, giúp LCP mobile) và ghép thêm 20 chữ ơ/ư có dấu mà Caudex
+  gốc thiếu. Theo OFL, bản sửa đổi được đổi tên họ bên trong file thành "BTK Heading"/"BTK Body". Cần thêm ký tự thì
+  chạy lại `src/app/fonts/subset_fonts.py` (hướng dẫn ở đầu file; cần Python + `fonttools`, `brotli`, không phải
+  dependency của dự án).

@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
-import { ILLUSTRATION_LABEL } from "@/components/ui/image-placeholder";
+import { IllustrationTag } from "@/components/ui/illustration-tag";
 import { PRODUCT_CATEGORY_LABELS } from "@/data/products";
 import { cn } from "@/lib/cn";
 import { formatPrice } from "@/lib/format";
@@ -18,9 +18,13 @@ type ProductCardProps = {
   style?: CSSProperties;
 };
 
-/** Hai nút cuối card — chép từ `.card .actions` của bản mẫu B. */
+/**
+ * Hai nút cuối card — chép từ `.card .actions` của bản mẫu B (không đệm ngang, chữ 0.76rem giãn 0.1em từ 1280px).
+ * Card hẹp hơn (mobile, lưới 2–3 cột ở 768–1279px) giãn chữ ít hơn để "Liên hệ đặt hàng" nằm trên một dòng, hai nút
+ * cao đều.
+ */
 export const CARD_ACTION =
-  "flex min-h-11 items-center justify-center px-2 text-center text-[0.76rem] leading-tight font-bold tracking-[0.1em] uppercase no-underline transition-colors duration-300 ease-son";
+  "flex min-h-11 items-center justify-center px-0.5 text-center text-[0.72rem] leading-tight font-bold tracking-[0.04em] uppercase no-underline transition-colors duration-300 ease-son lg:text-[0.68rem] lg:tracking-[0.02em] xl:text-[0.76rem] xl:tracking-[0.1em]";
 export const CARD_ACTION_DETAIL = "cursor-pointer border border-gac bg-transparent text-gac hover:bg-gac hover:text-be";
 export const CARD_ACTION_ORDER = "border border-gac bg-gac text-be hover:border-gac-deep hover:bg-gac-deep";
 
@@ -45,13 +49,11 @@ export function ProductCard({ product, detailAction, className, style }: Product
           src={product.image}
           alt={product.imageAlt}
           fill
-          sizes="(min-width: 1024px) 360px, (min-width: 768px) 45vw, 92vw"
+          sizes="(min-width: 1200px) 340px, (min-width: 1024px) calc(33vw - 50px), (min-width: 768px) calc(50vw - 60px), calc(100vw - 66px)"
           className="object-cover transition-transform duration-800 ease-son group-hover:scale-105 motion-reduce:group-hover:scale-100"
         />
         {product.imageIsIllustration ? (
-          <span className="absolute bottom-2.5 left-1/2 -translate-x-1/2 bg-be/95 px-2.5 py-1 text-[0.62rem] leading-snug tracking-[0.06em] whitespace-nowrap text-ink-soft">
-            {ILLUSTRATION_LABEL}
-          </span>
+          <IllustrationTag />
         ) : null}
       </div>
       <div className="flex flex-1 flex-col px-2 pt-4.5 text-center">

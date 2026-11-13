@@ -1,7 +1,7 @@
 "use client";
 
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
-import { ILLUSTRATION_LABEL } from "@/components/ui/image-placeholder";
+import { IllustrationTag } from "@/components/ui/illustration-tag";
 import { buttonClassName } from "@/components/ui/button";
 import { PRODUCT_CATEGORY_LABELS } from "@/data/products";
 import type { Product } from "@/lib/types";
@@ -10,6 +10,8 @@ import { formatPrice } from "@/lib/format";
 
 type ProductDetailProps = {
   product: Product;
+  /** id của tiêu đề (tên sản phẩm) — modal trỏ `aria-labelledby` vào đây. */
+  titleId: string;
   /** Đóng modal trước khi cuộn tới mục Liên hệ. */
   onClose: () => void;
 };
@@ -18,7 +20,7 @@ type ProductDetailProps = {
  * Nội dung modal chi tiết (design-direction 4.6): ảnh 1:1 trái, chữ phải trên desktop; mobile ảnh trên, nút
  * "Liên hệ đặt hàng" dính đáy. Chỉ hiển thị đúng dữ liệu có trong `Product` — không thêm thông tin ngoài dữ liệu.
  */
-export function ProductDetail({ product, onClose }: ProductDetailProps) {
+export function ProductDetail({ product, titleId, onClose }: ProductDetailProps) {
   return (
     <div className="grid md:grid-cols-2">
       <div className="relative aspect-square bg-be-2 md:m-4 md:mr-0">
@@ -30,17 +32,15 @@ export function ProductDetail({ product, onClose }: ProductDetailProps) {
           className="object-cover"
         />
         {product.imageIsIllustration ? (
-          <span className="absolute bottom-2.5 left-1/2 -translate-x-1/2 bg-be/95 px-2.5 py-1 text-[0.62rem] leading-snug tracking-[0.06em] whitespace-nowrap text-ink-soft">
-            {ILLUSTRATION_LABEL}
-          </span>
+          <IllustrationTag />
         ) : null}
       </div>
 
       <div className="flex flex-col px-6 pt-7 md:px-10 md:pt-14 md:pb-10">
         <p className="eyebrow m-0">{PRODUCT_CATEGORY_LABELS[product.category]}</p>
-        <h3 className="mt-3 mb-5 text-[clamp(1.6rem,1.2rem+1.4vw,2.2rem)] font-bold tracking-[0.02em] text-son">
+        <h2 id={titleId} className="mt-3 mb-5 text-[clamp(1.6rem,1.2rem+1.4vw,2.2rem)] font-bold tracking-[0.02em] text-son">
           {product.name}
-        </h3>
+        </h2>
         {product.description.map((paragraph) => (
           <p key={paragraph} className="mt-0 mb-4 text-ink-soft">
             {paragraph}
