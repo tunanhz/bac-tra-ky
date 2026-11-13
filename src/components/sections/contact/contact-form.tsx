@@ -222,7 +222,11 @@ export function ContactForm({ facebookUrl = siteConfig.facebookUrl, endpoint = "
             <p className={cn("mt-0 mb-3.5", status === "sent" ? "text-tra" : status === "failed" ? "text-gac" : "text-ink")}>
               {status === "sent" ? CONTACT_SUCCESS_MESSAGE : status === "failed" ? CONTACT_FAILED_MESSAGE : CONTACT_NOT_READY_MESSAGE}
             </p>
-            <FacebookButton url={facebookUrl} variant={status === "sent" ? "outline" : "primary"} />
+            <FacebookButton
+              url={facebookUrl}
+              variant={status === "sent" ? "outline" : "primary"}
+              className="w-full py-2.5 leading-snug sm:w-auto"
+            />
           </div>
         ) : null}
       </div>

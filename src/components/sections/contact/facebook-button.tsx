@@ -27,7 +27,8 @@ export function FacebookButton({ url = siteConfig.facebookUrl, variant = "outlin
       >
         {icon}
         <span>
-          {FACEBOOK_BUTTON_LABEL} <span className="font-normal normal-case tracking-normal">{siteConfig.pendingLabel}</span>
+          {FACEBOOK_BUTTON_LABEL}{" "}
+          <span className="font-normal whitespace-nowrap normal-case tracking-normal">{siteConfig.pendingLabel}</span>
         </span>
       </span>
     );
