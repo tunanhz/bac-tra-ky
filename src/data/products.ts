@@ -12,8 +12,8 @@ import type { Product, ProductCategory } from "@/lib/types";
 
 export const PRODUCT_CATEGORY_LABELS: Record<ProductCategory, string> = {
   "truyen-thong": "Bánh Bác truyền thống",
-  "sang-tao": "Hương vị sáng tạo",
-  "qua-tang": "Hộp bánh & quà tặng",
+  "sang-tao": "Bánh Bác hương vị sáng tạo",
+  "qua-tang": "Hộp bánh và quà tặng",
 };
 
 /** Thứ tự hiển thị bộ lọc. */

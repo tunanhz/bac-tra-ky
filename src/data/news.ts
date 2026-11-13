@@ -10,11 +10,11 @@ import type { NewsCategory, NewsPost } from "@/lib/types";
  */
 
 export const NEWS_CATEGORY_LABELS: Record<NewsCategory, string> = {
-  "hoat-dong": "Tin tức & hoạt động",
-  "am-thuc": "Ẩm thực truyền thống",
+  "hoat-dong": "Tin tức và hoạt động Bác Trà Ký",
+  "am-thuc": "Khám phá ẩm thực truyền thống",
   "van-hoa-tra": "Văn hoá thưởng trà",
   "lang-nghe": "Câu chuyện làng nghề",
-  "san-pham-uu-dai": "Sản phẩm mới & ưu đãi",
+  "san-pham-uu-dai": "Sản phẩm mới và chương trình ưu đãi",
 };
 
 /** Thứ tự hiển thị bộ lọc. */
