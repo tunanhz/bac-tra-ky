@@ -1,18 +1,19 @@
-"use client";
-
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 import { ILLUSTRATION_LABEL } from "@/components/ui/image-placeholder";
 import { PRODUCT_CATEGORY_LABELS } from "@/data/products";
-import type { Product } from "@/lib/types";
 import { cn } from "@/lib/cn";
+import { formatPrice } from "@/lib/format";
+import type { Product } from "@/lib/types";
 import { OrderLink } from "./order-link";
-import { formatPrice } from "./product-format";
 
 type ProductCardProps = {
   product: Product;
-  /** Mở modal chi tiết; nhận nút đã bấm để modal trả focus về đúng chỗ. */
-  onOpenDetail: (product: Product) => void;
+  /**
+   * Nút "Xem chi tiết" (ô trái hàng nút). Danh mục truyền `<button>` mở modal; Sản phẩm nổi bật truyền liên kết tới
+   * danh mục. Dùng class `CARD_ACTION` + `CARD_ACTION_DETAIL` cho đồng bộ.
+   */
+  detailAction: ReactNode;
   className?: string;
   style?: CSSProperties;
 };
@@ -24,17 +25,16 @@ export const CARD_ACTION_DETAIL = "cursor-pointer border border-gac bg-transpare
 export const CARD_ACTION_ORDER = "border border-gac bg-gac text-be hover:border-gac-deep hover:bg-gac-deep";
 
 /**
- * Card sản phẩm hướng B (`.card` của design-preview-b): tấm giấy viền đôi, ảnh vòm cung 4:4.4, nhãn ảnh minh hoạ,
- * chữ căn giữa, giá (null → "Liên hệ để biết giá") trên đường kẻ đứt, 2 nút cạnh nhau.
- * Hover: nhấc 6px + bóng sơn son, ảnh phóng 1.05 chậm.
+ * Card sản phẩm hướng B (`.card` của design-preview-b) — dùng chung cho Sản phẩm nổi bật (trang chủ) và Danh mục:
+ * tấm giấy viền đôi, ảnh vòm cung 4:4.4, nhãn ảnh minh hoạ, chữ căn giữa, giá (null → "Liên hệ để biết giá") trên
+ * đường kẻ đứt, 2 nút cạnh nhau. Hover: nhấc 6px + bóng sơn son, ảnh phóng 1.05 chậm.
  */
-export function ProductCard({ product, onOpenDetail, className, style }: ProductCardProps) {
-  const categoryLabel = PRODUCT_CATEGORY_LABELS[product.category];
+export function ProductCard({ product, detailAction, className, style }: ProductCardProps) {
   return (
     <article
       style={style}
       className={cn(
-        "group flex flex-col border border-line bg-paper px-3 pt-3 pb-5 outline outline-offset-4 outline-line",
+        "group flex h-full flex-col border border-line bg-paper px-3 pt-3 pb-5 outline outline-offset-4 outline-line",
         "transition-[transform,box-shadow] duration-400 ease-son hover:-translate-y-1.5 hover:shadow-card",
         "motion-reduce:hover:translate-y-0",
         className,
@@ -55,22 +55,16 @@ export function ProductCard({ product, onOpenDetail, className, style }: Product
         ) : null}
       </div>
       <div className="flex flex-1 flex-col px-2 pt-4.5 text-center">
-        <p className="m-0 text-[0.68rem] font-bold tracking-[0.24em] text-dong uppercase">{categoryLabel}</p>
-        <h3 className="my-2 text-[1.35rem] font-bold text-son">{product.name}</h3>
+        <p className="m-0 text-[0.68rem] font-bold tracking-[0.24em] text-dong uppercase">
+          {PRODUCT_CATEGORY_LABELS[product.category]}
+        </p>
+        <h3 className="my-2 text-[1.35rem] leading-[1.12] font-bold text-son">{product.name}</h3>
         <p className="mt-0 mb-4 text-[0.95rem] text-ink-soft">{product.shortDescription}</p>
         <p className="mt-auto mb-0 border-t border-dashed border-line pt-3 text-[0.9rem] text-ink-soft italic">
           {formatPrice(product.price)}
         </p>
         <div className="mt-3 grid grid-cols-2 gap-2">
-          <button
-            type="button"
-            className={cn(CARD_ACTION, CARD_ACTION_DETAIL)}
-            aria-haspopup="dialog"
-            aria-label={`Xem chi tiết: ${product.name}`}
-            onClick={() => onOpenDetail(product)}
-          >
-            Xem chi tiết
-          </button>
+          {detailAction}
           <OrderLink className={cn(CARD_ACTION, CARD_ACTION_ORDER)} productName={product.name} />
         </div>
       </div>

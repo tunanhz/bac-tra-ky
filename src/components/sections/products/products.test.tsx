@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { products as allProducts } from "@/data/products";
 import type { Product } from "@/lib/types";
-import { formatPrice, isExternalUrl, PRICE_ON_REQUEST, sectionIdFromHref } from "./product-format";
+import { formatPrice, isExternalUrl, PRICE_ON_REQUEST, sectionIdFromHref } from "@/lib/format";
 import { filterProducts, ProductsCatalog } from "./products-catalog";
 import { ProductsSection } from "./products-section";
 

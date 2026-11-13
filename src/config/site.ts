@@ -66,14 +66,28 @@ export function telHref(phone: string): string {
   return `tel:${phone.replace(/[^\d+]/g, "")}`;
 }
 
+/** Tên miền chính thức của site. */
+export const PRODUCTION_SITE_URL = "https://bactraky.io.vn";
+
+/**
+ * URL gốc cho metadata/Open Graph: `NEXT_PUBLIC_SITE_URL` hợp lệ → dùng; không có thì `next dev` dùng
+ * `http://localhost:3000`, mọi môi trường khác (build/production/Vercel) dùng tên miền chính thức — để ảnh chia sẻ
+ * Facebook/Zalo không bao giờ trỏ về localhost khi quên đặt biến.
+ */
+export function resolveSiteUrl(envUrl: string | undefined, nodeEnv: string | undefined): string {
+  const fromEnv = readHttpUrl(envUrl);
+  if (fromEnv) return fromEnv;
+  return nodeEnv === "development" ? "http://localhost:3000" : PRODUCTION_SITE_URL;
+}
+
 export const siteConfig = {
   name: "Bác Trà Ký",
   /** Slogan theo spec: "GÌN GIỮ TINH HOA – TIẾP NỐI GIÁ TRỊ" */
   slogan: "Gìn giữ tinh hoa – Tiếp nối giá trị",
   description:
     "Từ hương vị Bánh Bác Giang Xá đến nét thanh tao của Trà Sen Việt, mỗi món quà là một câu chuyện văn hoá được tiếp nối.",
-  /** URL gốc của site cho metadata/Open Graph. TODO: thay dữ liệu thật khi có tên miền. */
-  url: readHttpUrl(process.env.NEXT_PUBLIC_SITE_URL) ?? "http://localhost:3000",
+  /** URL gốc của site cho metadata/Open Graph (xem `resolveSiteUrl`). */
+  url: resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL, process.env.NODE_ENV),
   locale: "vi_VN",
   nav: NAV_ITEMS,
   /** TODO: thay dữ liệu thật — link trang Facebook chính thức. `null` = chưa có. */

@@ -4,7 +4,8 @@ import { describe, expect, it } from "vitest";
 import { products } from "@/data/products";
 import type { Product } from "@/lib/types";
 import { BRAND_VALUES, BrandValues } from "./brand-values";
-import { FEATURED_LIMIT, FeaturedProducts, formatPrice } from "./featured-products";
+import { formatPrice } from "@/lib/format";
+import { FEATURED_LIMIT, FeaturedProducts } from "./featured-products";
 import { FinalCta } from "./final-cta";
 import { Hero } from "./hero";
 import { Intro } from "./intro";
@@ -51,11 +52,11 @@ describe("FeaturedProducts", () => {
     expect(first.getByRole("heading", { level: 3, name: featured[0].name })).toBeInTheDocument();
     expect(first.getByText(featured[0].shortDescription)).toBeInTheDocument();
     expect(first.getByText("Liên hệ để biết giá")).toBeInTheDocument();
-    expect(first.getByRole("link", { name: `Xem chi tiết ${featured[0].name}` })).toHaveAttribute(
+    expect(first.getByRole("link", { name: `Xem chi tiết: ${featured[0].name}` })).toHaveAttribute(
       "href",
       "/#san-pham",
     );
-    expect(first.getByRole("link", { name: `Liên hệ đặt hàng ${featured[0].name}` })).toHaveAttribute(
+    expect(first.getByRole("link", { name: `Liên hệ đặt hàng: ${featured[0].name}` })).toHaveAttribute(
       "href",
       "/#lien-he",
     );
@@ -70,9 +71,12 @@ describe("FeaturedProducts", () => {
     expect(within(photo).queryByText("Ảnh minh hoạ – sẽ thay ảnh thật")).toBeNull();
   });
 
-  it("formatPrice: null → lời mời liên hệ; số → định dạng vi-VN", () => {
-    expect(formatPrice(null)).toBe("Liên hệ để biết giá");
-    expect(formatPrice(120000)).toBe("120.000 đ");
+  it("dùng chung formatPrice với danh mục (một định dạng giá duy nhất)", () => {
+    const priced: Product = { ...products[0], slug: "co-gia", price: 120000 };
+    render(<FeaturedProducts products={[priced]} />);
+    // Intl chèn khoảng trắng không ngắt trước "₫" — so theo textContent để không bị chuẩn hoá khoảng trắng.
+    expect(screen.getByRole("article").textContent).toContain(formatPrice(120000));
+    expect(screen.queryByText("Liên hệ để biết giá")).toBeNull();
   });
 });
 

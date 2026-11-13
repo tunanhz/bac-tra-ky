@@ -2,6 +2,12 @@
 
 import { useEffect, useRef, useState, type CSSProperties, type ElementType, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { REVEAL_READY_FLAG } from "@/lib/reveal-boot";
+
+// Báo cho script khởi động (layout) rằng mã reveal đã nạp — không cần gỡ class `js` dự phòng.
+if (typeof window !== "undefined") {
+  (window as unknown as Record<string, unknown>)[REVEAL_READY_FLAG] = true;
+}
 
 type RevealProps = {
   children: ReactNode;
@@ -22,6 +28,7 @@ function prefersReducedMotion(): boolean {
 /**
  * Scroll reveal nhẹ: fade + rise 24px, 900ms, chạy một lần (IntersectionObserver, threshold .15).
  * Người dùng bật "giảm chuyển động" hoặc trình duyệt không có IntersectionObserver → hiện ngay.
+ * Chỉ ẩn khi `<html>` có class `js` (xem `src/lib/reveal-boot.ts`): không JS hoặc JS lỗi thì nội dung vẫn hiện.
  */
 export function Reveal({ children, as: Tag = "div", className, delay = 0, threshold = 0.15, id }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);

@@ -6,7 +6,7 @@ import { buttonClassName } from "@/components/ui/button";
 import { PRODUCT_CATEGORY_LABELS } from "@/data/products";
 import type { Product } from "@/lib/types";
 import { OrderLink } from "./order-link";
-import { formatPrice } from "./product-format";
+import { formatPrice } from "@/lib/format";
 
 type ProductDetailProps = {
   product: Product;

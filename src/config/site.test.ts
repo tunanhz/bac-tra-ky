@@ -1,5 +1,16 @@
 import { describe, expect, it } from "vitest";
-import { NAV_ITEMS, readEmail, readHttpUrl, readLinkUrl, readPhone, sectionHref, siteConfig, telHref } from "./site";
+import {
+  NAV_ITEMS,
+  PRODUCTION_SITE_URL,
+  readEmail,
+  readHttpUrl,
+  readLinkUrl,
+  readPhone,
+  resolveSiteUrl,
+  sectionHref,
+  siteConfig,
+  telHref,
+} from "./site";
 
 describe("siteConfig", () => {
   it("có đủ 6 mục điều hướng theo spec, đúng thứ tự", () => {
@@ -17,6 +28,20 @@ describe("siteConfig", () => {
   it("địa chỉ đúng spec, kênh đặt hàng mặc định về form liên hệ", () => {
     expect(siteConfig.address).toBe("Làng nghề Giang Xá, xã Hoài Đức, Hà Nội");
     expect(siteConfig.orderChannelUrl).toBe("/#lien-he");
+  });
+});
+
+describe("resolveSiteUrl", () => {
+  it("ưu tiên NEXT_PUBLIC_SITE_URL hợp lệ", () => {
+    expect(resolveSiteUrl("https://preview.example.com", "production")).toBe("https://preview.example.com/");
+  });
+
+  it("thiếu hoặc sai biến → tên miền chính thức (build/production), localhost chỉ khi dev", () => {
+    expect(PRODUCTION_SITE_URL).toBe("https://bactraky.io.vn");
+    expect(resolveSiteUrl(undefined, "production")).toBe(PRODUCTION_SITE_URL);
+    expect(resolveSiteUrl("javascript:alert(1)", "production")).toBe(PRODUCTION_SITE_URL);
+    expect(resolveSiteUrl("", "test")).toBe(PRODUCTION_SITE_URL);
+    expect(resolveSiteUrl(undefined, "development")).toBe("http://localhost:3000");
   });
 });
 

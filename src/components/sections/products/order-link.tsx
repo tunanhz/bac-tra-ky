@@ -2,7 +2,7 @@
 
 import type { MouseEvent, ReactNode } from "react";
 import { siteConfig } from "@/config/site";
-import { isExternalUrl, sectionIdFromHref } from "./product-format";
+import { isExternalUrl, sectionIdFromHref } from "@/lib/format";
 
 type OrderLinkProps = {
   className?: string;

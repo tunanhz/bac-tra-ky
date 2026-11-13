@@ -304,8 +304,12 @@
     color: var(--color-nhu);
   }
 
-  /* Scroll reveal — <Reveal> thêm class is-visible khi phần tử vào khung nhìn */
-  .reveal {
+  /*
+   * Scroll reveal — <Reveal> thêm class is-visible khi phần tử vào khung nhìn.
+   * Chỉ ẩn khi <html> có class `js` (script inline trong layout gắn vào, và tự gỡ nếu JS không chạy được) — không JS
+   * hoặc JS lỗi thì nội dung vẫn hiện.
+   */
+  .js .reveal {
     opacity: 0;
     transform: translateY(24px);
     transition:
@@ -313,7 +317,7 @@
       transform 0.9s var(--ease-son);
     transition-delay: var(--reveal-delay, 0ms);
   }
-  .reveal.is-visible {
+  .js .reveal.is-visible {
     opacity: 1;
     transform: none;
   }
@@ -386,7 +390,7 @@
     transition-duration: 0.01ms !important;
     transition-delay: 0ms !important;
   }
-  .reveal {
+  .js .reveal {
     opacity: 1;
     transform: none;
   }

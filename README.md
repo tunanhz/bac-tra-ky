@@ -41,3 +41,9 @@ public/images/          ảnh (nguồn ghi ở CREDITS.md)
 - `POST /api/contact` hiện chỉ kiểm dữ liệu và trả **501** (chưa có backend lưu liên hệ); giao diện không bao giờ
   báo "gửi thành công" khi chưa lưu thật.
 - Chỗ còn thiếu dữ liệu thật được đánh dấu `TODO: thay dữ liệu thật`.
+- `NEXT_PUBLIC_SITE_URL` (Open Graph, `metadataBase`): bỏ trống thì build/production dùng `https://bactraky.io.vn`,
+  chỉ `next dev` dùng `http://localhost:3000`. Deploy ở tên miền khác (vd. bản preview) thì đặt biến này.
+- Trang 404 tiếng Việt: `src/app/not-found.tsx` (đường dẫn lạ) và `src/app/tin-tuc/[slug]/not-found.tsx` (bài viết
+  không tồn tại). Trang tin đặt `ensureStatic = "navigation"` nên slug lạ trả **HTTP 404 ngay lần gọi đầu** (không còn
+  soft 404 mã 200 do stream từ `<Suspense>`). Phase 05 đổi tin tức sang MongoDB thì dữ liệu phải đọc qua `use cache`
+  (thời hạn ≥ 5 phút) mới giữ được mức này; nếu không thì gỡ export và chấp nhận soft 404 ở lần gọi đầu.

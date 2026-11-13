@@ -8,7 +8,7 @@ import { sectionHref } from "@/config/site";
 import { PRODUCT_CATEGORIES, PRODUCT_CATEGORY_LABELS } from "@/data/products";
 import type { Product, ProductCategory } from "@/lib/types";
 import { cn } from "@/lib/cn";
-import { ProductCard } from "./product-card";
+import { CARD_ACTION, CARD_ACTION_DETAIL, ProductCard } from "./product-card";
 import { ProductDetail } from "./product-detail";
 
 export type ProductFilter = ProductCategory | "all";
@@ -95,7 +95,21 @@ export function ProductsCatalog({ products }: ProductsCatalogProps) {
                 className={cn("flex", filterChanges > 0 && "animate-rise [animation-duration:450ms]")}
                 style={filterChanges > 0 ? { animationDelay: `${Math.min(index, 5) * 60}ms` } : undefined}
               >
-                <ProductCard product={product} onOpenDetail={setSelected} className="w-full" />
+                <ProductCard
+                  product={product}
+                  className="w-full"
+                  detailAction={
+                    <button
+                      type="button"
+                      className={cn(CARD_ACTION, CARD_ACTION_DETAIL)}
+                      aria-haspopup="dialog"
+                      aria-label={`Xem chi tiết: ${product.name}`}
+                      onClick={() => setSelected(product)}
+                    >
+                      Xem chi tiết
+                    </button>
+                  }
+                />
               </li>
             ))}
           </ul>

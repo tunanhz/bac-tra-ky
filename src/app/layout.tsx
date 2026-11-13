@@ -3,6 +3,7 @@ import { Caudex, Playfair_Display } from "next/font/google";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { siteConfig } from "@/config/site";
+import { REVEAL_BOOT_SCRIPT } from "@/lib/reveal-boot";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -54,7 +55,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="vi" className={`${playfair.variable} ${caudex.variable}`}>
+    // suppressHydrationWarning: script inline gắn class `js` lên <html> trước khi React hydrate.
+    <html lang="vi" className={`${playfair.variable} ${caudex.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Nội dung cố định do ta viết (không có dữ liệu người dùng) — xem src/lib/reveal-boot.ts. */}
+        <script dangerouslySetInnerHTML={{ __html: REVEAL_BOOT_SCRIPT }} />
+      </head>
       <body className="flex min-h-svh flex-col">
         <a
           href="#noi-dung"

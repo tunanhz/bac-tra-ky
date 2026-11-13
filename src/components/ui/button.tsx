@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { isExternalUrl } from "@/lib/format";
 
 /**
  * - `primary`: nền đỏ gấc, viền trong be (đổi vàng nhũ khi hover) — hành động chính.
@@ -41,10 +42,6 @@ export function buttonClassName(variant: ButtonVariant = "primary", fullWidth = 
   return cn("btn", VARIANT_CLASS[variant], fullWidth && "w-full", className);
 }
 
-function isExternal(href: string) {
-  return /^https?:\/\//.test(href);
-}
-
 /**
  * Nút có `href` → liên kết (ngoài: mở tab mới; tới section `/#id`: thẻ `<a>` thường để cuộn mượt; trang nội bộ:
  * `next/link`). Không có `href` → `<button type="button">`.
@@ -53,7 +50,7 @@ export function Button(props: ButtonProps) {
   if (props.href !== undefined) {
     const { variant, fullWidth, className, children, href, ...rest } = props;
     const classes = buttonClassName(variant, fullWidth, className);
-    if (isExternal(href)) {
+    if (isExternalUrl(href)) {
       return (
         <a href={href} target="_blank" rel="noopener noreferrer" className={classes} {...rest}>
           {children}

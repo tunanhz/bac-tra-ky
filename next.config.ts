@@ -12,13 +12,9 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
+    // Mọi ảnh nằm trong public/images (nguồn ghi ở CREDITS.md). Không bật remotePatterns để /_next/image không thành
+    // proxy ảnh ngoài; khi cần ảnh remote thì thêm lại kèm `pathname` cụ thể.
     formats: ["image/avif", "image/webp"],
-    // Ảnh miễn phí bản quyền dùng trong các section (ghi nguồn ở public/images/CREDITS.md).
-    remotePatterns: [
-      { protocol: "https", hostname: "images.unsplash.com" },
-      { protocol: "https", hostname: "images.pexels.com" },
-      { protocol: "https", hostname: "upload.wikimedia.org" },
-    ],
   },
 };
 

@@ -1,9 +1,11 @@
+/** Định dạng giá và nhận dạng liên kết — dùng chung cho mọi card/modal/nút (một bản duy nhất). */
+
 /** Chữ hiển thị khi chưa có giá chính thức (`price: null`). */
 export const PRICE_ON_REQUEST = "Liên hệ để biết giá";
 
 const VND = new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND", maximumFractionDigits: 0 });
 
-/** Giá hiển thị trên card/modal. Không có giá chính thức (null hoặc số không hợp lệ) → "Liên hệ để biết giá". */
+/** Giá hiển thị. Không có giá chính thức (null hoặc số không hợp lệ) → "Liên hệ để biết giá". Không bao giờ tự tạo giá. */
 export function formatPrice(price: number | null): string {
   if (price === null || !Number.isFinite(price) || price < 0) return PRICE_ON_REQUEST;
   return VND.format(price);

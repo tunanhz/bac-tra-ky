@@ -15,7 +15,13 @@ import { getNewsPostBySlug, getNewsPosts, getRelatedNewsPosts } from "@/lib/news
  *
  * Mẫu Cache Components (Next 16): giữ `generateStaticParams` (prerender mọi bài khi build) và đọc `params` BÊN TRONG
  * `<Suspense>` — đọc ngoài Suspense thì dev báo lỗi "encountered URL data during prerendering".
+ *
+ * `ensureStatic = "navigation"` (Next 16.4): slug không có trong `generateStaticParams` thì lần gọi đầu tiên chờ render
+ * tĩnh xong rồi mới trả — `notFound()` chạy trước khi phản hồi bắt đầu nên slug lạ trả 404 ngay lần đầu (không còn
+ * "soft 404" 200 do stream từ Suspense). Dữ liệu tin là tĩnh nên đáp ứng được ràng buộc của mức này.
  */
+
+export const ensureStatic = "navigation";
 
 type Params = PageProps<"/tin-tuc/[slug]">["params"];
 
