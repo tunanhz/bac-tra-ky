@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "vitest run --maxWorkers=2",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "next": "16.4.6",

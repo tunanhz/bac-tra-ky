@@ -1,26 +1,393 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * Design system Bác Trà Ký — hướng B "Hộp Sơn Son"
+ * Nguồn: plans/261113-0846-bac-tra-ky-landing/design-direction.md + design-preview-b.html
+ *
+ * Luật màu bắt buộc:
+ *  - Vàng nhũ (nhu) CHỈ dùng cho chữ trên nền tối (son, son-deep, tram). Trên nền be dùng vàng đồng (dong).
+ *  - Sơn son phủ tối đa ~20% diện tích trang; giữ ít nhất 2 khoảng nền be thuần (sản phẩm, liên hệ).
+ */
+@theme {
+  /* Màu */
+  --color-gac: #ae000d; /* đỏ gấc: nút, tiêu đề trên nền be */
+  --color-gac-deep: #8a0510; /* hover nút */
+  --color-son: #6e0a10; /* sơn son: dải nền, tiêu đề card */
+  --color-son-deep: #4a0b0e; /* sơn son đậm: header khi cuộn, khung */
+  --color-tram: #4a0b0e; /* đỏ trầm: nền footer */
+  --color-tra: #1c5a1b; /* xanh lá trà: chữ phụ, trích dẫn */
+  --color-be: #fdf7e5; /* be giấy dó: nền chính */
+  --color-be-2: #f4e8cc; /* be đậm: dải chương, khung xương */
+  --color-paper: #fffaf0; /* tấm giấy: card, tấm chương truyện */
+  --color-scroll: #f3e3bd; /* giấy treo tranh Đông Hồ */
+  --color-ink: #33231c; /* nâu mực: chữ thân */
+  --color-ink-soft: #5c473c; /* nâu mực nhạt: mô tả */
+  --color-muted: #6b5244;
+  --color-nhu: #e2bf6e; /* vàng nhũ: chỉ trên nền tối */
+  --color-dong: #7a5c14; /* vàng đồng: nhãn trên nền be */
+  --color-line: #e0cfa4; /* đường kẻ, viền giấy */
+  --color-cream-soft: #efdfc0; /* chữ thân trên nền sơn son */
+  --color-cream-muted: #e9d9b7; /* chữ phụ trên nền tối */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Chữ */
+  --font-heading: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-body: var(--font-caudex), "Caudex", Georgia, serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Thang chữ (mobile → desktop qua clamp) */
+  --text-eyebrow: 0.72rem;
+  --text-eyebrow--letter-spacing: 0.28em;
+  --text-eyebrow--line-height: 1.4;
+  --text-caption: 0.78rem;
+  --text-caption--line-height: 1.4;
+  --text-h3: clamp(1.25rem, 1.1rem + 0.5vw, 1.375rem);
+  --text-h3--line-height: 1.2;
+  --text-h2: clamp(1.9rem, 1.2rem + 2.6vw, 2.9rem);
+  --text-h2--line-height: 1.1;
+  --text-h1: clamp(2.1rem, 7vw, 4.4rem);
+  --text-h1--line-height: 1.08;
+  --text-quote: clamp(1.19rem, 1.05rem + 0.5vw, 1.375rem);
+  --text-quote--line-height: 1.45;
+  --text-chapter: clamp(3rem, 2.4rem + 2vw, 3.6rem);
+  --text-chapter--line-height: 1;
+
+  /* Chuyển động */
+  --ease-son: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* Bóng đổ nhẹ tông sơn son */
+  --shadow-card: 0 22px 40px -24px rgb(74 11 14 / 0.45);
+  --shadow-paper: 0 24px 50px -30px rgb(51 35 28 / 0.45);
+  --shadow-scroll: 0 18px 40px rgb(0 0 0 / 0.35);
+
+  --animate-rise: rise 0.9s var(--ease-son) both;
+  --animate-hero-zoom: hero-zoom 2.4s var(--ease-son) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes hero-zoom {
+    from {
+      transform: scale(1.06);
+    }
+    to {
+      transform: scale(1);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ---------------------------------------------------------------- base */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Bù chiều cao header dính khi cuộn tới #section */
+    scroll-padding-top: 68px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+    /* Giấy dó: vân sợi rất nhẹ bằng gradient CSS, không dùng ảnh */
+    background:
+      radial-gradient(circle at 20% 30%, rgb(160 120 60 / 0.05) 0 1px, transparent 1.5px) 0 0 / 7px 7px,
+      radial-gradient(circle at 70% 60%, rgb(120 90 40 / 0.04) 0 1px, transparent 1.5px) 0 0 / 11px 11px,
+      var(--color-be);
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      font-size: 17px;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gac);
+    outline-offset: 3px;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: var(--color-nhu);
+  }
+
+  ::selection {
+    background: var(--color-gac);
+    color: var(--color-be);
+  }
+}
+
+/* ---------------------------------------------------------- utilities */
+
+/* Khung nội dung: tối đa 1200px, lề 20px (mobile) / 32px (≥768px) */
+@utility wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 20px;
+  @media (min-width: 768px) {
+    padding-inline: 32px;
+  }
+}
+
+/* Nhãn nhỏ viết hoa giãn chữ (eyebrow). Trên nền be: vàng đồng; trong .on-dark: vàng nhũ */
+@utility eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  letter-spacing: 0.28em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-dong);
+  .on-dark & {
+    color: var(--color-nhu);
+  }
+}
+
+/* Chú thích ảnh kiểu bảo tàng (mượn từ hướng A) */
+@utility caption {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--color-ink-soft);
+  .on-dark & {
+    color: var(--color-cream-muted);
+  }
+}
+
+/* Khung giấy viền đôi (card, tấm chương truyện, form) */
+@utility frame-paper {
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  outline: 1px solid var(--color-line);
+  outline-offset: -8px;
+}
+
+/* Khung viền đôi thếp vàng trên nền tối (hero panel, passe-partout) */
+@utility frame-gilt {
+  border: 1px solid rgb(226 191 110 / 0.75);
+  outline: 1px solid rgb(226 191 110 / 0.4);
+  outline-offset: -8px;
+}
+
+/* Ảnh vòm cung gợi cửa võng / ô cửa đình (card sản phẩm) */
+@utility arch-top {
+  border-radius: 999px 999px 0 0;
+  overflow: hidden;
+}
+
+/* Dải sơn son tràn viền có 2 đường chỉ vàng trên/dưới */
+@utility band-lacquer {
+  position: relative;
+  background: var(--color-son);
+  color: var(--color-be);
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 6px;
+    border-top: 1px solid rgb(226 191 110 / 0.6);
+    border-bottom: 1px solid rgb(226 191 110 / 0.6);
+    pointer-events: none;
+  }
+  &::before {
+    top: 10px;
+  }
+  &::after {
+    bottom: 10px;
+  }
+}
+
+/* Khoảng đệm dọc chuẩn của section: 72px mobile, 96px desktop */
+@utility section-y {
+  padding-block: 72px;
+  @media (min-width: 1024px) {
+    padding-block: 96px;
+  }
+}
+
+/* ------------------------------------------------------------ components */
+@layer components {
+  /* Nút — dùng qua component <Button>; class để dùng được cả ở chỗ không phải React */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    min-height: 48px;
+    padding: 0 1.6rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition:
+      background-color 0.3s var(--ease-son),
+      color 0.3s var(--ease-son),
+      border-color 0.3s var(--ease-son),
+      box-shadow 0.3s var(--ease-son);
+  }
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  .btn-primary {
+    background: var(--color-gac);
+    color: var(--color-be);
+    box-shadow:
+      inset 0 0 0 3px var(--color-gac),
+      inset 0 0 0 4px rgb(253 247 229 / 0.55);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-gac-deep);
+    box-shadow:
+      inset 0 0 0 3px var(--color-gac-deep),
+      inset 0 0 0 4px var(--color-nhu);
+  }
+  /* Viền sáng — trên nền tối/ảnh */
+  .btn-outline-light {
+    color: var(--color-be);
+    border-color: rgb(253 247 229 / 0.7);
+  }
+  .btn-outline-light:hover:not(:disabled) {
+    background: var(--color-be);
+    color: var(--color-son);
+  }
+  /* Viền đỏ gấc — trên nền be */
+  .btn-outline {
+    color: var(--color-gac);
+    border-color: var(--color-gac);
+  }
+  .btn-outline:hover:not(:disabled) {
+    background: var(--color-gac);
+    color: var(--color-be);
+  }
+  /* Nút chữ (ghost) — liên kết phụ */
+  .btn-ghost {
+    padding-inline: 0.5rem;
+    color: var(--color-gac);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 6px;
+  }
+  .btn-ghost:hover:not(:disabled) {
+    text-decoration-color: currentColor;
+  }
+  .on-dark .btn-ghost {
+    color: var(--color-nhu);
+  }
+
+  /* Scroll reveal — <Reveal> thêm class is-visible khi phần tử vào khung nhìn */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.9s var(--ease-son),
+      transform 0.9s var(--ease-son);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Xuất hiện lệch nhịp khi tải trang (hero): con thứ n trễ 150ms */
+  .stagger > * {
+    animation: var(--animate-rise);
+  }
+  .stagger > *:nth-child(1) {
+    animation-delay: 0.25s;
+  }
+  .stagger > *:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+  .stagger > *:nth-child(3) {
+    animation-delay: 0.55s;
+  }
+  .stagger > *:nth-child(4) {
+    animation-delay: 0.7s;
+  }
+  .stagger > *:nth-child(5) {
+    animation-delay: 0.85s;
+  }
+  .stagger > *:nth-child(n + 6) {
+    animation-delay: 1s;
+  }
+
+  /* Khung xương khi đang tải */
+  .skeleton {
+    background: var(--color-be-2);
+    animation: skeleton-pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes skeleton-pulse {
+    50% {
+      opacity: 0.55;
+    }
+  }
+
+  /* Modal */
+  .modal-overlay {
+    animation: modal-fade 0.2s var(--ease-son) both;
+  }
+  .modal-panel {
+    animation: modal-in 0.25s var(--ease-son) both;
+  }
+  @keyframes modal-fade {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes modal-in {
+    from {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+  }
+}
+
+/* -------------------------------------------------- reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }

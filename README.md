@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bác Trà Ký — landing page
 
-## Getting Started
+Landing page thương hiệu Bánh Bác Giang Xá & Trà Sen. Next.js 16 (App Router, Cache Components), TypeScript,
+Tailwind CSS v4, hướng thiết kế B "Hộp Sơn Son".
 
-First, run the development server:
+## Chạy
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```sh
+npm install
+cp .env.example .env.local   # tuỳ chọn: điền link Facebook/TikTok, email, hotline
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Lệnh | Việc |
+|---|---|
+| `npm run typecheck` | sinh kiểu route (`next typegen`) rồi `tsc --noEmit` |
+| `npm run lint` | ESLint |
+| `npm test` | Vitest (tối đa 2 worker) |
+| `npm run build` | build production |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Cấu trúc
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  app/                  layout, trang chủ, /tin-tuc/[slug], API /api/contact, globals.css (design system)
+  components/
+    layout/             Header, Footer, Logo, icon mạng xã hội
+    ui/                 Button, SectionHeading, Reveal, ImagePlaceholder, ImageWithFallback, Modal
+    ornaments/          Seal (triện), Corner (góc khung), Divider (nụ sen)
+    sections/           các section của trang chủ (home, about, story, products, news, contact)
+  config/site.ts        tên, slogan, menu, kênh liên hệ (đọc NEXT_PUBLIC_*)
+  data/                 dữ liệu tĩnh: 9 sản phẩm, 6 tin nháp
+  lib/                  getProducts/getNewsPosts…, contactSchema (zod)
+public/images/          ảnh (nguồn ghi ở CREDITS.md)
+```
 
-## Learn More
+## Ghi chú
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Dữ liệu sản phẩm/tin tức hiện là tĩnh trong `src/data`, truy cập qua hàm async trong `src/lib` để sau này đổi
+  sang MongoDB mà không sửa component.
+- `POST /api/contact` hiện chỉ kiểm dữ liệu và trả **501** (chưa có backend lưu liên hệ); giao diện không bao giờ
+  báo "gửi thành công" khi chưa lưu thật.
+- Chỗ còn thiếu dữ liệu thật được đánh dấu `TODO: thay dữ liệu thật`.
