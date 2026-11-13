@@ -43,7 +43,7 @@ describe("FeaturedProducts", () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  it("tối đa 3 card, mỗi card có tên, mô tả, nhãn giá và nút Xem chi tiết → #san-pham", () => {
+  it("tối đa 3 card, mỗi card có tên, mô tả, nhãn giá và nút Xem chi tiết → modal trong #san-pham", () => {
     const featured = products.filter((p) => p.featured);
     render(<FeaturedProducts products={featured} />);
     const cards = screen.getAllByRole("article");
@@ -54,7 +54,7 @@ describe("FeaturedProducts", () => {
     expect(first.getByText("Liên hệ để biết giá")).toBeInTheDocument();
     expect(first.getByRole("link", { name: `Xem chi tiết: ${featured[0].name}` })).toHaveAttribute(
       "href",
-      "/#san-pham",
+      `/?sp=${featured[0].slug}#san-pham`,
     );
     expect(first.getByRole("link", { name: `Liên hệ đặt hàng: ${featured[0].name}` })).toHaveAttribute(
       "href",

@@ -1,8 +1,7 @@
-import { CARD_ACTION, CARD_ACTION_DETAIL, ProductCard } from "@/components/sections/products/product-card";
+import { ProductCard } from "@/components/sections/products/product-card";
+import { ProductDetailLink } from "@/components/sections/products/product-detail-link";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { sectionHref } from "@/config/site";
-import { cn } from "@/lib/cn";
 import type { Product } from "@/lib/types";
 
 export type FeaturedProductsProps = {
@@ -15,7 +14,7 @@ export const FEATURED_LIMIT = 3;
 
 /**
  * Sản phẩm nổi bật trên trang chủ (khối "Thức quà chọn lọc" của bản mẫu B). Mảng rỗng thì không render gì.
- * "Xem chi tiết" cuộn tới mục Sản phẩm (#san-pham), nơi phase 03 mở modal chi tiết.
+ * "Xem chi tiết" mở thẳng modal chi tiết của đúng sản phẩm trong danh mục (#san-pham) — xem `ProductDetailLink`.
  */
 export function FeaturedProducts({ products }: FeaturedProductsProps) {
   const items = products.slice(0, FEATURED_LIMIT);
@@ -34,15 +33,7 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
             <Reveal as="li" key={product.slug} delay={index * 120}>
               <ProductCard
                 product={product}
-                detailAction={
-                  <a
-                    href={sectionHref("san-pham")}
-                    className={cn(CARD_ACTION, CARD_ACTION_DETAIL)}
-                    aria-label={`Xem chi tiết: ${product.name}`}
-                  >
-                    Xem chi tiết
-                  </a>
-                }
+                detailAction={<ProductDetailLink slug={product.slug} productName={product.name} />}
               />
             </Reveal>
           ))}
