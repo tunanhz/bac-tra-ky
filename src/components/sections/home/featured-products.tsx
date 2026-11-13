@@ -25,7 +25,7 @@ function isExternal(href: string) {
 }
 
 const ACTION_CLASS =
-  "flex min-h-11 items-center justify-center px-2 text-center text-[0.76rem] leading-tight font-bold tracking-[0.1em] uppercase no-underline transition-colors duration-300 ease-son";
+  "flex min-h-11 items-center justify-center px-1 text-center whitespace-nowrap text-[0.76rem] leading-tight font-bold tracking-[0.1em] uppercase no-underline transition-colors duration-300 ease-son";
 
 /** Card sản phẩm chép từ `.card` của bản mẫu B: giấy viền đôi, ảnh vòm cung, chữ căn giữa, 2 nút cạnh nhau. */
 function FeaturedProductCard({ product }: { product: Product }) {

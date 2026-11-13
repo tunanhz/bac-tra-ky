@@ -47,7 +47,7 @@ export function StoryChapter({ chapter, alignRight = false, footer }: StoryChapt
           ))}
           {chapter.legend ? (
             <aside aria-label={chapter.legend.label} className="relative mt-6 mb-2 border border-dong/45 px-5 pt-6 pb-4">
-              <p className="eyebrow absolute -top-2.5 left-4 m-0 bg-paper px-2 text-[0.66rem]">{chapter.legend.label}</p>
+              <p className="eyebrow absolute -top-2.5 left-3 m-0 bg-paper px-2 text-[0.62rem] tracking-[0.16em] whitespace-nowrap md:left-4 md:text-[0.66rem] md:tracking-[0.28em]">{chapter.legend.label}</p>
               <p className="m-0 text-[0.95rem] text-ink-soft italic">{chapter.legend.text}</p>
             </aside>
           ) : null}

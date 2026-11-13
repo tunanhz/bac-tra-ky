@@ -68,7 +68,7 @@ export function AboutSection() {
               className="absolute inset-0 hidden bg-[linear-gradient(90deg,rgb(40_10_8/0.78)_0%,rgb(40_10_8/0.45)_45%,rgb(40_10_8/0)_75%)] md:block"
             />
           </div>
-          <div className="pt-7 md:absolute md:inset-y-0 md:left-0 md:flex md:max-w-[34rem] md:flex-col md:justify-center md:px-12 md:pt-0 lg:px-16">
+          <div className="pt-7 md:absolute md:inset-y-0 md:left-0 md:flex md:max-w-[44rem] md:flex-col md:justify-center md:px-12 md:pt-0 lg:px-16">
             <p className="eyebrow m-0 md:text-nhu">Về chúng tôi</p>
             <h2
               id="about-title"

@@ -35,8 +35,18 @@ function ChapterTimeline() {
 function Interlude() {
   return (
     <Reveal className="wrap pb-16 text-center lg:pb-24">
-      <p className="m-0 font-heading text-[clamp(1.5rem,1rem+2vw,2.4rem)] tracking-[0.12em] text-gac uppercase">
-        Truyền thống – Tinh tế – Gần gũi
+      <p className="m-0 font-heading text-[clamp(1.5rem,1rem+2vw,2.4rem)] leading-[1.3] tracking-[0.12em] text-gac uppercase">
+        <span className="block md:inline">Truyền thống</span>
+        <span aria-hidden="true" className="hidden md:inline">
+          {" – "}
+        </span>
+        <span className="sr-only md:hidden">, </span>
+        <span className="block md:inline">Tinh tế</span>
+        <span aria-hidden="true" className="hidden md:inline">
+          {" – "}
+        </span>
+        <span className="sr-only md:hidden">, </span>
+        <span className="block md:inline">Gần gũi</span>
       </p>
       <span aria-hidden="true" className="mx-auto mt-5 block h-px w-20 bg-dong/60" />
     </Reveal>
