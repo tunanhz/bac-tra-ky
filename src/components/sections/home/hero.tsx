@@ -28,9 +28,16 @@ export function Hero() {
         className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(40_10_8/0.55)_0%,rgb(40_10_8/0.35)_40%,rgb(40_10_8/0.78)_100%)]"
       />
 
-      <div className="frame-gilt stagger relative mx-4 mt-24 mb-14 max-w-[760px] bg-[rgb(74_11_14/0.72)] px-5.5 pt-11 pb-9 text-center backdrop-blur-[2px] md:px-14 md:pt-14 md:pb-11">
-        <FrameCorners className="size-[46px] text-nhu" />
-        <p className="eyebrow m-0">Bánh Bác Giang Xá · Trà Sen Việt</p>
+      <div className="frame-gilt stagger relative mx-4 mt-24 mb-14 max-w-[760px] bg-[rgb(74_11_14/0.72)] px-5.5 pt-11 pb-12 text-center backdrop-blur-[2px] md:px-14 md:pt-14 md:pb-11">
+        <FrameCorners className="size-[34px] text-nhu md:size-[46px]" />
+        <p className="eyebrow m-0">
+          <span className="block sm:inline">Bánh Bác Giang Xá</span>
+          <span className="hidden sm:inline" aria-hidden="true">
+            {" · "}
+          </span>
+          <span className="sr-only sm:hidden">, </span>
+          <span className="block sm:inline">Trà Sen Việt</span>
+        </p>
         <h1 id="hero-title" className="mt-4 mb-1.5 text-h1 font-bold tracking-[0.06em] text-be uppercase">
           Bác Trà Ký
           <span className="sr-only"> – </span>
