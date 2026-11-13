@@ -1,18 +1,121 @@
+import Image from "next/image";
+import type { ReactNode } from "react";
+import { FacebookIcon, TikTokIcon } from "@/components/layout/social-icons";
+import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { StubNote } from "../stub-note";
+import { siteConfig, telHref } from "@/config/site";
+import { ContactForm } from "./contact-form";
+
+/** Ảnh gợi không khí làng quê Bắc Bộ (ảnh minh hoạ, dùng chung với bài "Giang Xá — vùng đất của ký ức và hương nếp"). */
+const VILLAGE_IMAGE = "/images/news/giang-xa-vung-dat-cua-ky-uc-va-huong-nep.webp";
+
+function Pending() {
+  // TODO: thay dữ liệu thật — giá trị lấy từ src/config/site.ts (biến môi trường NEXT_PUBLIC_*).
+  return <span className="text-muted italic">{siteConfig.pendingLabel}</span>;
+}
+
+function InfoRow({ label, icon, children }: { label: string; icon?: ReactNode; children: ReactNode }) {
+  return (
+    <div className="grid grid-cols-[7.5rem_1fr] items-baseline gap-3 border-b border-dashed border-line py-3 last:border-b-0">
+      <dt className="flex items-center gap-2 text-[0.72rem] font-bold tracking-[0.2em] text-dong uppercase">
+        {icon}
+        {label}
+      </dt>
+      <dd className="m-0 min-w-0 break-words text-ink">{children}</dd>
+    </div>
+  );
+}
+
+const LINK = "text-gac underline decoration-gac/40 underline-offset-4 transition-colors hover:decoration-gac";
 
 /**
- * STUB (phase 01) — Liên hệ (id `lien-he`).
- * Phase 03 thay nội dung: lời mời, form (Họ và tên, SĐT, Email, Nội dung + honeypot `website`) kiểm bằng
- * `validateContact`, gửi `POST /api/contact` (đang trả 501 → thông báo trung thực + nút "Nhắn qua Facebook"),
- * khối Facebook/TikTok/Email/Hotline/địa chỉ từ `siteConfig`.
+ * Liên hệ (id `lien-he`) — nền be thuần (khoảng nghỉ thứ hai, giữ sơn son ≤ 20% trang).
+ * Desktop: trái = lời mời + thông tin liên hệ + ảnh làng quê trong khung passe-partout; phải = form trên tấm giấy viền
+ * đôi. Mobile: lời mời → form → thông tin liên hệ.
  */
 export function ContactSection() {
+  const { facebookUrl, tiktokUrl, email, hotline, address } = siteConfig;
+
   return (
     <section id="lien-he" aria-labelledby="contact-title" className="section-y">
-      <div className="wrap">
-        <SectionHeading id="contact-title" title="Liên hệ" />
-        <StubNote owner="phase 03" />
+      <div className="wrap grid gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-x-16 lg:gap-y-8">
+        <div className="lg:col-start-1 lg:row-start-1">
+          <SectionHeading
+            id="contact-title"
+            align="left"
+            eyebrow="Bác Trà Ký"
+            title="Liên hệ"
+            description="Bạn muốn tìm hiểu về Bánh Bác Giang Xá, Trà Sen hay đặt một hộp quà? Hãy để lại lời nhắn, Bác Trà Ký luôn sẵn lòng lắng nghe và kể bạn nghe câu chuyện phía sau mỗi món quà."
+            className="mb-0 lg:mb-0"
+          />
+        </div>
+
+        <Reveal className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
+          <div className="frame-paper px-5 py-8 shadow-paper sm:px-9 sm:py-10">
+            <h3 className="mt-0 mb-6 text-h3 font-semibold text-son">Để lại lời nhắn</h3>
+            <ContactForm />
+          </div>
+        </Reveal>
+
+        <div className="lg:col-start-1 lg:row-start-2">
+          <h3 className="mt-0 mb-2 text-h3 font-semibold text-son">Thông tin liên hệ</h3>
+          <dl className="m-0">
+            <InfoRow label="Facebook" icon={<FacebookIcon className="size-3.5" />}>
+              {facebookUrl ? (
+                <a href={facebookUrl} target="_blank" rel="noopener noreferrer" className={LINK}>
+                  Trang Facebook Bác Trà Ký
+                </a>
+              ) : (
+                <Pending />
+              )}
+            </InfoRow>
+            <InfoRow label="TikTok" icon={<TikTokIcon className="size-3.5" />}>
+              {tiktokUrl ? (
+                <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className={LINK}>
+                  Kênh TikTok Bác Trà Ký
+                </a>
+              ) : (
+                <Pending />
+              )}
+            </InfoRow>
+            <InfoRow label="Email">
+              {email ? (
+                <a href={`mailto:${email}`} className={`${LINK} break-all`}>
+                  {email}
+                </a>
+              ) : (
+                <Pending />
+              )}
+            </InfoRow>
+            <InfoRow label="Hotline">
+              {hotline ? (
+                <a href={telHref(hotline)} className={LINK}>
+                  {hotline}
+                </a>
+              ) : (
+                <Pending />
+              )}
+            </InfoRow>
+            <InfoRow label="Địa chỉ">
+              <address className="not-italic">{address}</address>
+            </InfoRow>
+          </dl>
+
+          <figure className="on-dark mt-8 mb-0 bg-son-deep p-2.5 outline outline-offset-[-8px] outline-nhu/55 md:p-3.5">
+            <div className="relative aspect-[16/9] overflow-hidden">
+              <Image
+                src={VILLAGE_IMAGE}
+                alt="Ngôi nhà mái ngói đỏ giữa vườn cây xanh, làng quê Bắc Bộ"
+                fill
+                sizes="(min-width: 1024px) 480px, 92vw"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="caption px-1.5 pt-3 pb-0.5 text-center">
+              Làng quê Bắc Bộ — ảnh minh hoạ, sẽ thay ảnh làng nghề Giang Xá thật
+            </figcaption>
+          </figure>
+        </div>
       </div>
     </section>
   );

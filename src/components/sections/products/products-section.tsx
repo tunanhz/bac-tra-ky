@@ -1,6 +1,6 @@
 import { SectionHeading } from "@/components/ui/section-heading";
 import type { Product } from "@/lib/types";
-import { StubNote } from "../stub-note";
+import { ProductsCatalog } from "./products-catalog";
 
 export type ProductsSectionProps = {
   /** Toàn bộ sản phẩm do `page.tsx` lấy từ `getProducts()`. */
@@ -8,8 +8,8 @@ export type ProductsSectionProps = {
 };
 
 /**
- * STUB (phase 01) — Danh mục sản phẩm (id `san-pham`).
- * Phase 03 thay nội dung: bộ lọc 3 nhóm + "Tất cả", card vòm cung, modal chi tiết, trạng thái rỗng.
+ * Danh mục sản phẩm (id `san-pham`) — hướng B: nền be thuần (một trong hai khoảng nghỉ không sơn son), đầu mục căn
+ * giữa như `.sec-head`, bộ lọc nút viền, lưới card giấy viền đôi ảnh vòm cung, modal chi tiết.
  */
 export function ProductsSection({ products }: ProductsSectionProps) {
   return (
@@ -17,11 +17,11 @@ export function ProductsSection({ products }: ProductsSectionProps) {
       <div className="wrap">
         <SectionHeading
           id="products-title"
-          eyebrow="Sản phẩm"
+          eyebrow="Bác Trà Ký"
           title="Danh mục sản phẩm"
-          description="Bánh Bác truyền thống, những hương vị sáng tạo và hộp quà kết hợp Trà Sen."
+          description="Bánh Bác Giang Xá cùng Trà Sen và các hộp bánh dùng để thưởng thức hoặc làm quà tặng."
         />
-        <StubNote owner={`phase 03 · ${products.length} sản phẩm`} />
+        <ProductsCatalog products={products} />
       </div>
     </section>
   );
