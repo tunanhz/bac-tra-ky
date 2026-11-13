@@ -12,13 +12,19 @@ function ColumnTitle({ children }: { children: ReactNode }) {
   return <h2 className="mb-3.5 font-body text-[0.72rem] font-bold tracking-[0.24em] text-nhu uppercase">{children}</h2>;
 }
 
-type SocialLinkProps = { href: string | null; label: string; children: ReactNode };
+type SocialLinkProps = { href: string | null; label: string; tone: string; children: ReactNode };
 
-function SocialLink({ href, label, children }: SocialLinkProps) {
-  const box = "flex size-11 items-center justify-center border border-nhu/60";
+/** Màu thương hiệu của từng mạng xã hội (nền + icon), viền vàng nhũ mảnh giữ chất hộp sơn son. */
+const SOCIAL_TONES = {
+  facebook: "bg-[#1877f2] text-white",
+  tiktok: "bg-[#010101] text-white [&_svg]:[filter:drop-shadow(-1.5px_-1px_0_#25f4ee)_drop-shadow(1.5px_1px_0_#fe2c55)]",
+} as const;
+
+function SocialLink({ href, label, tone, children }: SocialLinkProps) {
+  const box = `flex size-11 items-center justify-center rounded-full ring-1 ring-nhu/70 ring-offset-2 ring-offset-tram shadow-[0_4px_12px_rgba(0,0,0,0.35)] ${tone}`;
   if (!href) {
     return (
-      <span className={`${box} text-nhu/45`} title={`${label}: ${siteConfig.pendingLabel}`}>
+      <span className={`${box} opacity-90`} title={`${label}: ${siteConfig.pendingLabel}`}>
         {children}
         <span className="sr-only">{`${label} ${siteConfig.pendingLabel}`}</span>
       </span>
@@ -30,7 +36,7 @@ function SocialLink({ href, label, children }: SocialLinkProps) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className={`${box} text-nhu transition-colors duration-300 hover:bg-nhu hover:text-son-deep`}
+      className={`${box} transition-transform duration-300 hover:-translate-y-0.5 hover:scale-105`}
     >
       {children}
     </a>
@@ -98,11 +104,11 @@ export function Footer() {
           <div>
             <ColumnTitle>Kết nối</ColumnTitle>
             <div className="flex gap-2.5">
-              <SocialLink href={facebookUrl} label="Facebook Bác Trà Ký">
-                <FacebookIcon className="size-[18px]" />
+              <SocialLink href={facebookUrl} label="Facebook Bác Trà Ký" tone={SOCIAL_TONES.facebook}>
+                <FacebookIcon className="size-[22px]" />
               </SocialLink>
-              <SocialLink href={tiktokUrl} label="TikTok Bác Trà Ký">
-                <TikTokIcon className="size-[18px]" />
+              <SocialLink href={tiktokUrl} label="TikTok Bác Trà Ký" tone={SOCIAL_TONES.tiktok}>
+                <TikTokIcon className="size-[20px]" />
               </SocialLink>
             </div>
             {!facebookUrl || !tiktokUrl ? (
