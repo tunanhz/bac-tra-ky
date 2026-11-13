@@ -67,7 +67,8 @@ export function ProductCard({ product, featured, detailAction, className, style 
         <p className="mt-auto mb-4 border-t border-dashed border-line pt-3 text-[0.9rem] text-ink-soft italic">
           {formatPrice(product.price)}
         </p>
-        <div className="mt-3 grid grid-cols-2 gap-2">
+        {/* ≤345px (iPhone SE đời đầu 320px): xếp dọc để "Liên hệ đặt hàng" nằm gọn một dòng; từ 346px vẫn 2 nút cạnh nhau như bản B. */}
+        <div className="mt-3 grid grid-cols-2 gap-2 max-[345px]:grid-cols-1">
           {detailAction}
           <OrderLink className={cn(CARD_ACTION, CARD_ACTION_ORDER)} productName={product.name} />
         </div>

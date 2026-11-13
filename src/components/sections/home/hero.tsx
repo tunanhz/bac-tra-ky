@@ -28,7 +28,7 @@ export function Hero() {
         />
       </div>
 
-      <div className="frame-gilt stagger relative mx-5 -mt-5 max-w-[760px] bg-son-deep px-5 pt-8 pb-7 text-center max-md:[&>*]:animate-none md:mx-4 md:mt-24 md:mb-14 md:bg-[rgb(74_11_14/0.72)] md:px-14 md:pt-14 md:pb-11 md:backdrop-blur-[2px]">
+      <div className="hero-panel frame-gilt stagger relative mx-5 -mt-5 max-w-[760px] bg-son-deep px-5 pt-8 pb-7 text-center max-md:[&>*]:animate-none md:mx-4 md:mt-24 md:mb-14 md:bg-[rgb(74_11_14/0.72)] md:px-14 md:pt-14 md:pb-11 md:backdrop-blur-[2px]">
         <FrameCorners className="size-7 text-nhu md:size-[46px]" />
         <p className="eyebrow m-0">
           <span className="block sm:inline">Bánh Bác Giang Xá</span>
@@ -41,11 +41,11 @@ export function Hero() {
         <h1 id="hero-title" className="mt-4 mb-1.5 text-h1 font-bold tracking-[0.06em] text-be uppercase">
           Bác Trà Ký{" "}
           <span className="sr-only">–</span>{" "}
-          <span className="mt-2 block font-heading text-[clamp(1.15rem,3vw,1.6rem)] font-normal tracking-normal text-nhu normal-case italic">
+          <span className="hero-slogan mt-2 block font-heading text-[clamp(1.15rem,3vw,1.6rem)] font-normal tracking-normal text-nhu normal-case italic">
             Gìn giữ tinh hoa, tiếp nối giá trị
           </span>
         </h1>
-        <p className="mx-auto mt-3 mb-5 max-w-[44ch] text-base leading-relaxed text-cream-soft md:mt-4 md:mb-7 md:text-[1.05rem] md:leading-[1.7] md:text-[#f3e6c8]">
+        <p className="hero-lead mx-auto mt-3 mb-5 max-w-[44ch] text-base leading-relaxed text-cream-soft md:mt-4 md:mb-7 md:text-[1.05rem] md:leading-[1.7] md:text-[#f3e6c8]">
           Từ hương vị Bánh Bác Giang Xá đến nét thanh tao của Trà Sen Việt, mỗi món quà là một câu chuyện văn hoá được
           tiếp nối.
         </p>

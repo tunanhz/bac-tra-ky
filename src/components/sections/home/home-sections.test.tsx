@@ -26,6 +26,16 @@ describe("Hero", () => {
       ),
     ).toBeInTheDocument();
   });
+
+  it("khung và đoạn dẫn giữ hook responsive (globals.css nén khi điện thoại xoay ngang/màn thấp)", () => {
+    // Các class này là điểm neo cho media query (orientation: landscape) and (max-height: 520px) trong globals.css.
+    // Nếu đổi tên/bỏ đi thì khung hero sẽ lại quá cao trên màn ngang thấp — test này chặn hồi quy đó.
+    render(<Hero />);
+    const section = document.getElementById("trang-chu");
+    expect(section?.querySelector(".hero-panel")).not.toBeNull();
+    expect(section?.querySelector(".hero-lead")).not.toBeNull();
+    expect(section?.querySelector(".hero-slogan")).not.toBeNull();
+  });
 });
 
 describe("Intro", () => {
