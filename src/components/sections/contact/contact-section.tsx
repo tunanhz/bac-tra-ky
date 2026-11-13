@@ -16,29 +16,29 @@ function Pending() {
 
 function InfoRow({ label, icon, children }: { label: string; icon?: ReactNode; children: ReactNode }) {
   return (
-    <div className="grid grid-cols-[7.5rem_1fr] items-baseline gap-3 border-b border-dashed border-line py-3 last:border-b-0">
-      <dt className="flex items-center gap-2 text-[0.72rem] font-bold tracking-[0.2em] text-dong uppercase">
+    <div className="grid grid-cols-[5.75rem_minmax(0,1fr)] items-center gap-2 border-b border-dashed border-line py-1 last:border-b-0 sm:grid-cols-[7.5rem_1fr] sm:items-baseline sm:gap-3 sm:py-3">
+      <dt className="flex items-center gap-2 text-[0.72rem] font-bold tracking-wider text-dong sm:tracking-[0.2em] uppercase">
         {icon}
         {label}
       </dt>
-      <dd className="m-0 min-w-0 break-words text-ink">{children}</dd>
+      <dd className="m-0 min-w-0 wrap-anywhere text-ink max-sm:py-1">{children}</dd>
     </div>
   );
 }
 
-const LINK = "text-gac underline decoration-gac/40 underline-offset-4 transition-colors hover:decoration-gac";
+const LINK = "max-sm:inline-flex max-sm:min-h-11 max-sm:items-center text-gac underline decoration-gac/40 underline-offset-4 transition-colors hover:decoration-gac";
 
 /**
  * Liên hệ (id `lien-he`) — nền be thuần (khoảng nghỉ thứ hai, giữ sơn son ≤ 20% trang).
  * Desktop: trái = lời mời + thông tin liên hệ + ảnh làng quê trong khung passe-partout; phải = form trên tấm giấy viền
- * đôi. Mobile: lời mời → form → thông tin liên hệ.
+ * đôi. Mobile: lời mời → thông tin liên hệ → form.
  */
 export function ContactSection() {
   const { facebookUrl, tiktokUrl, email, hotline, address } = siteConfig;
 
   return (
     <section id="lien-he" aria-labelledby="contact-title" className="section-y">
-      <div className="wrap grid gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-x-16 lg:gap-y-8">
+      <div className="wrap grid gap-7 lg:gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-x-16 lg:gap-y-8">
         <div className="lg:col-start-1 lg:row-start-1">
           <SectionHeading
             id="contact-title"
@@ -49,13 +49,6 @@ export function ContactSection() {
             className="mb-0 lg:mb-0"
           />
         </div>
-
-        <Reveal className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
-          <div className="frame-paper px-5 py-8 shadow-paper sm:px-9 sm:py-10">
-            <h3 className="mt-0 mb-6 text-h3 font-semibold text-son">Để lại lời nhắn</h3>
-            <ContactForm />
-          </div>
-        </Reveal>
 
         <div className="lg:col-start-1 lg:row-start-2">
           <h3 className="mt-0 mb-2 text-h3 font-semibold text-son">Thông tin liên hệ</h3>
@@ -101,7 +94,7 @@ export function ContactSection() {
             </InfoRow>
           </dl>
 
-          <figure className="on-dark mt-8 mb-0 bg-son-deep p-2.5 outline outline-offset-[-8px] outline-nhu/55 md:p-3.5">
+          <figure className="on-dark mt-8 mb-0 hidden bg-son-deep sm:block p-2.5 outline outline-offset-[-8px] outline-nhu/55 md:p-3.5">
             <div className="relative aspect-[16/9] overflow-hidden">
               <Image
                 src={VILLAGE_IMAGE}
@@ -116,6 +109,13 @@ export function ContactSection() {
             </figcaption>
           </figure>
         </div>
+
+        <Reveal className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
+          <div className="frame-paper px-5 py-8 shadow-paper sm:px-9 sm:py-10">
+            <h3 className="mt-0 mb-6 text-h3 font-semibold text-son">Để lại lời nhắn</h3>
+            <ContactForm />
+          </div>
+        </Reveal>
       </div>
     </section>
   );

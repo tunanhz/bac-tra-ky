@@ -219,9 +219,12 @@
   }
 }
 
-/* Khoảng đệm dọc chuẩn của section: 72px mobile, 96px desktop */
+/* Khoảng đệm dọc chuẩn của section: 48px điện thoại, 72px tablet, 96px desktop */
 @utility section-y {
-  padding-block: 72px;
+  padding-block: calc(var(--spacing) * 12);
+  @media (min-width: 768px) {
+    padding-block: 72px;
+  }
   @media (min-width: 1024px) {
     padding-block: 96px;
   }
@@ -393,5 +396,12 @@
   .js .reveal {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Menu và hộp thoại mở: ẩn phím tắt liên hệ khỏi tầm nhìn và thứ tự Tab. */
+@layer components {
+  body:has(header [aria-controls="menu-dieu-huong"][aria-expanded="true"], [role="dialog"][aria-modal="true"]) .quick-contact {
+    visibility: hidden;
   }
 }

@@ -59,7 +59,7 @@ function Interlude() {
  */
 export function StorySection() {
   return (
-    <section id="cau-chuyen" aria-labelledby="story-title" className="pt-[72px] lg:pt-24">
+    <section id="cau-chuyen" aria-labelledby="story-title" className="pt-12 md:pt-[72px] lg:pt-24">
       <div className="wrap">
         <SectionHeading
           id="story-title"

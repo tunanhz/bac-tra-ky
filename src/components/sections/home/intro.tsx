@@ -10,11 +10,11 @@ import { sectionHref } from "@/config/site";
  */
 export function Intro() {
   return (
-    <section aria-labelledby="intro-title" className="band-lacquer on-dark py-[72px]">
-      <div className="wrap grid items-center gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
+    <section aria-labelledby="intro-title" className="band-lacquer on-dark py-12 md:py-[72px]">
+      <div className="wrap grid items-center gap-8 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
         <Reveal
           as="figure"
-          className="relative mx-auto my-0 w-full max-w-[300px] bg-scroll px-3.5 pt-3.5 pb-[58px] shadow-scroll before:absolute before:-inset-x-2 before:-top-2.5 before:h-2.5 before:rounded-[3px] before:bg-[#3a1a0c] before:content-['']"
+          className="relative mx-auto my-0 w-full max-w-48 md:max-w-[300px] bg-scroll px-3.5 pt-3.5 pb-[58px] shadow-scroll before:absolute before:-inset-x-2 before:-top-2.5 before:h-2.5 before:rounded-[3px] before:bg-[#3a1a0c] before:content-['']"
         >
           <Image
             src="/images/story/tranh-dong-ho-ca-chep.webp"

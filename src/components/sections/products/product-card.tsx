@@ -9,6 +9,7 @@ import { OrderLink } from "./order-link";
 
 type ProductCardProps = {
   product: Product;
+  featured?: boolean;
   /**
    * Nút "Xem chi tiết" (ô trái hàng nút). Danh mục truyền `<button>` mở modal; Sản phẩm nổi bật truyền liên kết tới
    * danh mục. Dùng class `CARD_ACTION` + `CARD_ACTION_DETAIL` cho đồng bộ.
@@ -33,7 +34,7 @@ export const CARD_ACTION_ORDER = "border border-gac bg-gac text-be hover:border-
  * tấm giấy viền đôi, ảnh vòm cung 4:4.4, nhãn ảnh minh hoạ, chữ căn giữa, giá (null → "Liên hệ để biết giá") trên
  * đường kẻ đứt, 2 nút cạnh nhau. Hover: nhấc 6px + bóng sơn son, ảnh phóng 1.05 chậm.
  */
-export function ProductCard({ product, detailAction, className, style }: ProductCardProps) {
+export function ProductCard({ product, featured, detailAction, className, style }: ProductCardProps) {
   return (
     <article
       style={style}
@@ -44,19 +45,19 @@ export function ProductCard({ product, detailAction, className, style }: Product
         className,
       )}
     >
-      <div className="arch-top relative aspect-[4/4.4]">
+      <div className="arch-top relative aspect-[4/3] md:aspect-[4/4.4]">
         <ImageWithFallback
           src={product.image}
           alt={product.imageAlt}
           fill
-          sizes="(min-width: 1200px) 340px, (min-width: 1024px) calc(33vw - 50px), (min-width: 768px) calc(50vw - 60px), calc(100vw - 66px)"
+          sizes={`(min-width: 1200px) 340px, (min-width: 1024px) calc(33vw - 50px), (min-width: 768px) calc(50vw - 60px), ${featured ? "calc(85vw - 60px)" : "calc(100vw - 66px)"}`}
           className="object-cover transition-transform duration-800 ease-son group-hover:scale-105 motion-reduce:group-hover:scale-100"
         />
         {product.imageIsIllustration ? (
           <IllustrationTag />
         ) : null}
       </div>
-      <div className="flex flex-1 flex-col px-2 pt-4.5 text-center">
+      <div className="flex flex-1 flex-col px-1 pt-4 text-center md:px-2 md:pt-4.5">
         {/* Nhịp dọc theo bản B: mọi <p> trong card cách dưới 1rem (`p{margin:0 0 1rem}`). */}
         <p className="mt-0 mb-4 text-[0.68rem] font-bold tracking-[0.24em] text-dong uppercase">
           {PRODUCT_CATEGORY_LABELS[product.category]}

@@ -40,14 +40,14 @@ export function BrandValues() {
               as="li"
               key={value.numeral}
               delay={index * 120}
-              className="frame-paper px-7 pt-10 pb-9 text-center shadow-paper lg:px-8"
+              className="frame-paper grid grid-cols-[3rem_minmax(0,1fr)] gap-x-3 px-5 py-6 shadow-paper md:block md:px-7 md:pt-10 md:pb-9 md:text-center lg:px-8"
             >
-              <p aria-hidden="true" className="m-0 font-heading text-chapter font-bold text-gac">
+              <p aria-hidden="true" className="col-start-1 row-span-2 m-0 font-heading text-h2 font-bold text-gac md:text-chapter">
                 {value.numeral}
               </p>
-              <span aria-hidden="true" className="mx-auto mt-4 mb-5 block h-px w-12 bg-dong/60" />
-              <h3 className="mt-0 mb-3 text-h3 font-semibold text-son">{value.title}</h3>
-              <p className="m-0 text-[0.95rem] text-ink-soft">{value.text}</p>
+              <span aria-hidden="true" className="mx-auto mt-4 mb-5 hidden h-px w-12 bg-dong/60 md:block" />
+              <h3 className="col-start-2 mt-0 mb-2 text-h3 font-semibold text-son md:mb-3">{value.title}</h3>
+              <p className="col-start-2 m-0 text-[0.95rem] text-ink-soft">{value.text}</p>
             </Reveal>
           ))}
         </ol>

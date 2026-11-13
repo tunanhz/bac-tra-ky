@@ -142,8 +142,8 @@ export function Header() {
         solid ? "bg-son-deep shadow-[0_1px_0_rgb(226_191_110/0.35)]" : "bg-transparent",
       )}
     >
-      <div className="wrap flex h-[68px] items-center justify-between gap-4">
-        <Logo />
+      <div className="wrap flex h-[68px] items-center justify-between gap-2 lg:gap-4">
+        <Logo className="shrink-0 whitespace-nowrap" />
         <nav aria-label="Điều hướng chính">
           <ul
             ref={menuRef}
@@ -152,7 +152,7 @@ export function Header() {
               "m-0 list-none p-0",
               "lg:flex lg:items-center lg:gap-[clamp(14px,1.8vw,26px)]",
               menuOpen
-                ? "absolute inset-x-0 top-[68px] flex max-h-[calc(100svh-68px)] flex-col overflow-y-auto border-t border-nhu/30 bg-son-deep px-5 pt-2 pb-5 shadow-[0_18px_30px_-18px_rgb(0_0_0/0.6)] lg:static lg:max-h-none lg:flex-row lg:overflow-visible lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none"
+                ? "absolute inset-x-0 top-[68px] flex max-h-[calc(100dvh-68px)] flex-col overflow-y-auto overscroll-contain border-t border-nhu/30 bg-son-deep px-5 pt-2 pb-5 shadow-[0_18px_30px_-18px_rgb(0_0_0/0.6)] lg:static lg:max-h-none lg:flex-row lg:overflow-visible lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none"
                 : "hidden",
             )}
           >
@@ -165,7 +165,7 @@ export function Header() {
                     onClick={closeMenu}
                     aria-current={active ? "location" : undefined}
                     className={cn(
-                      "flex min-h-12 items-center border-b border-nhu/15 text-[0.76rem] tracking-[0.16em] uppercase no-underline transition-colors duration-300",
+                      "flex min-h-12 items-center border-b border-nhu/15 text-base tracking-wide no-underline transition-colors duration-300 lg:text-[0.76rem] lg:tracking-[0.16em] lg:uppercase",
                       "lg:min-h-11 lg:border-0",
                       active ? "text-nhu" : "text-be hover:text-nhu",
                     )}
@@ -180,7 +180,7 @@ export function Header() {
         <button
           ref={menuButtonRef}
           type="button"
-          className="flex size-12 shrink-0 cursor-pointer items-center justify-center border border-be/50 bg-transparent text-be lg:hidden"
+          className="flex min-h-12 shrink-0 cursor-pointer items-center justify-center gap-2 border border-be/50 bg-son-deep/55 px-3 text-be aria-expanded:border-nhu lg:hidden"
           aria-expanded={menuOpen}
           aria-controls={MENU_ID}
           aria-label={menuOpen ? "Đóng menu" : "Mở menu"}
@@ -193,6 +193,7 @@ export function Header() {
               <path d="M3 6 H21 M3 12 H21 M3 18 H21" strokeLinecap="round" />
             )}
           </svg>
+          <span aria-hidden="true" className="text-caption font-bold">{menuOpen ? "Đóng" : "Menu"}</span>
         </button>
       </div>
     </header>

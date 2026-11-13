@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
+import { QuickContact } from "@/components/layout/quick-contact";
 import { siteConfig } from "@/config/site";
 import { REVEAL_BOOT_SCRIPT } from "@/lib/reveal-boot";
 import "./globals.css";
@@ -89,6 +90,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <Footer />
+        <QuickContact />
       </body>
     </html>
   );
