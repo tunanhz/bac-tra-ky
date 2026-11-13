@@ -57,12 +57,13 @@ export function ProductCard({ product, detailAction, className, style }: Product
         ) : null}
       </div>
       <div className="flex flex-1 flex-col px-2 pt-4.5 text-center">
-        <p className="m-0 text-[0.68rem] font-bold tracking-[0.24em] text-dong uppercase">
+        {/* Nhịp dọc theo bản B: mọi <p> trong card cách dưới 1rem (`p{margin:0 0 1rem}`). */}
+        <p className="mt-0 mb-4 text-[0.68rem] font-bold tracking-[0.24em] text-dong uppercase">
           {PRODUCT_CATEGORY_LABELS[product.category]}
         </p>
         <h3 className="my-2 text-[1.35rem] leading-[1.12] font-bold text-son">{product.name}</h3>
         <p className="mt-0 mb-4 text-[0.95rem] text-ink-soft">{product.shortDescription}</p>
-        <p className="mt-auto mb-0 border-t border-dashed border-line pt-3 text-[0.9rem] text-ink-soft italic">
+        <p className="mt-auto mb-4 border-t border-dashed border-line pt-3 text-[0.9rem] text-ink-soft italic">
           {formatPrice(product.price)}
         </p>
         <div className="mt-3 grid grid-cols-2 gap-2">
