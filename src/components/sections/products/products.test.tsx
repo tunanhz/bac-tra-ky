@@ -74,8 +74,8 @@ describe("ProductsSection", () => {
     const user = userEvent.setup();
     render(<ProductsCatalog products={products} />);
 
-    await user.click(screen.getByRole("button", { name: "Hương vị sáng tạo" }));
-    expect(screen.getByRole("button", { name: "Hương vị sáng tạo" })).toHaveAttribute("aria-pressed", "true");
+    await user.click(screen.getByRole("button", { name: "Bánh Bác hương vị sáng tạo" }));
+    expect(screen.getByRole("button", { name: "Bánh Bác hương vị sáng tạo" })).toHaveAttribute("aria-pressed", "true");
     expect(screen.getByRole("button", { name: "Tất cả" })).toHaveAttribute("aria-pressed", "false");
     expect(cardNames()).toEqual([
       "Bánh Bác nhân mặn",
@@ -119,7 +119,7 @@ describe("ProductsSection", () => {
       expect(within(dialog).getByText(paragraph)).toBeInTheDocument();
     }
     expect(within(dialog).getByText(PRICE_ON_REQUEST)).toBeInTheDocument();
-    expect(within(dialog).getByText("Hộp bánh & quà tặng")).toBeInTheDocument();
+    expect(within(dialog).getByText("Hộp bánh và quà tặng")).toBeInTheDocument();
     expect(within(dialog).getByRole("link", { name: "Liên hệ đặt hàng" })).toHaveAttribute("href", "/#lien-he");
 
     await user.click(within(dialog).getByRole("button", { name: "Đóng chi tiết sản phẩm" }));
