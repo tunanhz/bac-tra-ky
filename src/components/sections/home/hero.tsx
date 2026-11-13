@@ -39,8 +39,8 @@ export function Hero() {
           <span className="block sm:inline">Trà Sen Việt</span>
         </p>
         <h1 id="hero-title" className="mt-4 mb-1.5 text-h1 font-bold tracking-[0.06em] text-be uppercase">
-          Bác Trà Ký
-          <span className="sr-only"> – </span>
+          Bác Trà Ký{" "}
+          <span className="sr-only">–</span>{" "}
           <span className="mt-2 block font-heading text-[clamp(1.15rem,3vw,1.6rem)] font-normal tracking-normal text-nhu normal-case italic">
             Gìn giữ tinh hoa, tiếp nối giá trị
           </span>
