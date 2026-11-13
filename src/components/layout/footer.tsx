@@ -21,7 +21,7 @@ const SOCIAL_TONES = {
 } as const;
 
 function SocialLink({ href, label, tone, children }: SocialLinkProps) {
-  const box = `flex size-11 items-center justify-center rounded-full ring-1 ring-nhu/70 ring-offset-2 ring-offset-tram shadow-[0_4px_12px_rgba(0,0,0,0.35)] ${tone}`;
+  const box = `flex size-11 items-center justify-center ring-1 ring-nhu/70 ring-offset-2 ring-offset-tram shadow-[0_4px_12px_rgba(0,0,0,0.35)] ${tone}`;
   if (!href) {
     return (
       <span className={`${box} opacity-90`} title={`${label}: ${siteConfig.pendingLabel}`}>
