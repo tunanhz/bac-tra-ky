@@ -29,7 +29,7 @@ export function ProductDetail({ product, titleId, onClose }: ProductDetailProps)
           alt={product.imageAlt}
           fill
           sizes="(min-width: 768px) 460px, 100vw"
-          className="object-cover"
+          className={product.imageIsIllustration ? "object-cover" : "object-contain"}
         />
         {product.imageIsIllustration ? (
           <IllustrationTag />

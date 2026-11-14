@@ -30,7 +30,9 @@ describe("Footer (spec mục 7)", () => {
     await renderFooter();
     const footer = screen.getByRole("contentinfo");
 
-    expect(within(footer).getByRole("link", { name: "Bác Trà Ký — về trang chủ" })).toHaveAttribute("href", "/#trang-chu");
+    const logo = within(footer).getByRole("link", { name: "Bác Trà Ký — về trang chủ" });
+    expect(logo).toHaveAttribute("href", "/#trang-chu");
+    expect(logo.querySelector("img")).toHaveAttribute("src", "/images/brand/bac-tra-ky.webp");
     expect(footer).toHaveTextContent("Gìn giữ tinh hoa – Tiếp nối giá trị");
 
     const explore = within(footer).getByRole("heading", { name: "Khám phá" }).parentElement!;

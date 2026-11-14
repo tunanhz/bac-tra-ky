@@ -59,10 +59,10 @@ describe("ProductsSection", () => {
     expect(screen.getAllByText(PRICE_ON_REQUEST)).toHaveLength(2);
   });
 
-  it("card có ảnh, nhãn ảnh minh hoạ, 2 nút; 'Liên hệ đặt hàng' trỏ tới kênh mặc định /#lien-he", () => {
+  it("card có ảnh bao bì, không gắn nhãn tạm, có 2 nút; 'Liên hệ đặt hàng' trỏ tới kênh mặc định /#lien-he", () => {
     render(<ProductsCatalog products={products.slice(0, 1)} />);
     expect(screen.getByRole("img", { name: products[0].imageAlt })).toBeInTheDocument();
-    expect(screen.getByText("Ảnh minh hoạ – sẽ thay ảnh thật")).toBeInTheDocument();
+    expect(screen.queryByText("Ảnh minh hoạ – sẽ thay ảnh thật")).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Xem chi tiết: Bánh Bác nhân đậu xanh" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Liên hệ đặt hàng: Bánh Bác nhân đậu xanh" })).toHaveAttribute(
       "href",
@@ -118,6 +118,8 @@ describe("ProductsSection", () => {
     for (const paragraph of product.description) {
       expect(within(dialog).getByText(paragraph)).toBeInTheDocument();
     }
+    expect(within(dialog).getByRole("img", { name: product.imageAlt })).toBeInTheDocument();
+    expect(within(dialog).queryByText("Ảnh minh hoạ – sẽ thay ảnh thật")).not.toBeInTheDocument();
     expect(within(dialog).getByText(PRICE_ON_REQUEST)).toBeInTheDocument();
     expect(within(dialog).getByText("Hộp bánh và quà tặng")).toBeInTheDocument();
     expect(within(dialog).getByRole("link", { name: "Liên hệ đặt hàng" })).toHaveAttribute("href", "/#lien-he");

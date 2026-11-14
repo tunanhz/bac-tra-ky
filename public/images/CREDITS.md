@@ -1,6 +1,6 @@
 # Nguồn ảnh
 
-Mọi ảnh hiện tại là ảnh minh hoạ không khí, sẽ thay bằng ảnh Bánh Bác & Trà Sen thật của Bác Trà Ký.
+Nguồn ấn phẩm Canva và ảnh minh hoạ được ghi trong từng thư mục (`brand/`, `products/`, `news/`, `story/`).
 Ảnh Wikimedia Commons theo CC BY / CC BY-SA phải ghi công tác giả + giấy phép (tại đây hoặc ngay chú thích ảnh).
 Mỗi thư mục con có thể có `CREDITS.md` riêng (phase 02: `story/`, phase 03: `products/`, `news/`).
 

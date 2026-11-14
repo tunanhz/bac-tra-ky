@@ -1,37 +1,29 @@
-import { Seal } from "@/components/ornaments/seal";
+import Image from "next/image";
 import { sectionHref, siteConfig } from "@/config/site";
 import { cn } from "@/lib/cn";
 
 type LogoProps = {
-  /** `header`: triện 36px + chữ một dòng; `footer`: triện 48px, chữ lớn xuống dòng. */
   size?: "header" | "footer";
   className?: string;
 };
 
-/**
- * Logo tạm: triện son "BTK" + chữ "Bác Trà Ký" viết hoa giãn chữ (bản mẫu B).
- * TODO: thay dữ liệu thật — thay bằng logo chính thức của Bác Trà Ký (file riêng, chỉ sửa component này).
- */
 export function Logo({ size = "header", className }: LogoProps) {
   const isFooter = size === "footer";
   return (
     <a
       href={sectionHref("trang-chu")}
       aria-label={`${siteConfig.name} — về trang chủ`}
-      className={cn(
-        "inline-flex items-center text-be no-underline",
-        isFooter ? "flex-col items-start gap-3" : "min-h-11 gap-2.5",
-        className,
-      )}
+      className={cn("inline-flex min-h-11 items-center no-underline", className)}
     >
-      <Seal className={cn("shrink-0 text-gac", isFooter ? "size-12" : "size-9")} />
-      <span
-        className={cn(
-          "font-heading font-bold tracking-[0.12em] uppercase",
-          isFooter ? "text-[1.45rem] leading-tight" : "text-[1.05rem] leading-none sm:text-[1.15rem]",
-        )}
-      >
-        {siteConfig.name}
+      <span className={cn("inline-flex rounded-sm bg-white", isFooter ? "px-3 py-2.5" : "px-2 py-1.5")}>
+        <Image
+          src="/images/brand/bac-tra-ky.webp"
+          alt=""
+          width={339}
+          height={261}
+          unoptimized
+          className={cn("block w-auto", isFooter ? "h-[70px]" : "h-10")}
+        />
       </span>
     </a>
   );

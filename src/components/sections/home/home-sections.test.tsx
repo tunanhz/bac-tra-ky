@@ -72,10 +72,9 @@ describe("FeaturedProducts", () => {
     );
   });
 
-  it("ảnh minh hoạ có nhãn, ảnh thật thì không", () => {
-    const base = products[0];
-    const real: Product = { ...base, slug: "that", name: "Ảnh thật", imageIsIllustration: false };
-    render(<FeaturedProducts products={[base, real]} />);
+  it("ảnh minh hoạ có nhãn, ấn phẩm đúng sản phẩm thì không", () => {
+    const temporary = products.find((product) => product.slug === "banh-bac-nhan-man")!;
+    render(<FeaturedProducts products={[temporary, products[0]]} />);
     const [illustrated, photo] = screen.getAllByRole("article");
     expect(within(illustrated).getByText("Ảnh minh hoạ – sẽ thay ảnh thật")).toBeInTheDocument();
     expect(within(photo).queryByText("Ảnh minh hoạ – sẽ thay ảnh thật")).toBeNull();

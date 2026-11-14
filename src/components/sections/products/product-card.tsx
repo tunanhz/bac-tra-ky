@@ -31,7 +31,7 @@ export const CARD_ACTION_ORDER = "border border-gac bg-gac text-be hover:border-
 
 /**
  * Card sản phẩm hướng B (`.card` của design-preview-b) — dùng chung cho Sản phẩm nổi bật (trang chủ) và Danh mục:
- * tấm giấy viền đôi, ảnh vòm cung 4:4.4, nhãn ảnh minh hoạ, chữ căn giữa, giá (null → "Liên hệ để biết giá") trên
+ * tấm giấy viền đôi, ảnh bao bì nguyên khung hoặc ảnh minh hoạ có nhãn, chữ căn giữa, giá (null → "Liên hệ để biết giá") trên
  * đường kẻ đứt, 2 nút cạnh nhau. Hover: nhấc 6px + bóng sơn son, ảnh phóng 1.05 chậm.
  */
 export function ProductCard({ product, featured, detailAction, className, style }: ProductCardProps) {
@@ -45,13 +45,18 @@ export function ProductCard({ product, featured, detailAction, className, style 
         className,
       )}
     >
-      <div className="arch-top relative aspect-[4/3] md:aspect-[4/4.4]">
+      <div className={cn("relative aspect-[4/3] overflow-hidden", product.imageIsIllustration ? "arch-top" : "rounded-sm bg-be-2")}>
         <ImageWithFallback
           src={product.image}
           alt={product.imageAlt}
           fill
           sizes={`(min-width: 1200px) 340px, (min-width: 1024px) calc(33vw - 50px), (min-width: 768px) calc(50vw - 60px), ${featured ? "calc(85vw - 60px)" : "calc(100vw - 66px)"}`}
-          className="object-cover transition-transform duration-800 ease-son group-hover:scale-105 motion-reduce:group-hover:scale-100"
+          className={cn(
+            "transition-transform duration-800 ease-son",
+            product.imageIsIllustration
+              ? "object-cover group-hover:scale-105 motion-reduce:group-hover:scale-100"
+              : "object-contain",
+          )}
         />
         {product.imageIsIllustration ? (
           <IllustrationTag />
