@@ -69,8 +69,12 @@ describe("NewsSection / NewsBoard", () => {
     expect(container.querySelector("section#tin-tuc")).not.toBeNull();
     expect(screen.getByRole("heading", { level: 2, name: "Tin tức" })).toBeInTheDocument();
     expect(screen.getByText("Bài nổi bật")).toBeInTheDocument();
+    expect(screen.getByText(/không phải thông báo sự kiện hay ưu đãi đang diễn ra/)).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: posts[0].coverImageAlt })).toBeInTheDocument();
+    expect(screen.getByText("Ấn phẩm Bác Trà Ký")).toBeInTheDocument();
     expect(gridTitles()).toHaveLength(5);
-    expect(screen.getAllByText(DRAFT_LABEL)).toHaveLength(6);
+    expect(screen.getAllByText(DRAFT_LABEL, { selector: "span" })).toHaveLength(6);
+    expect(container.querySelector("time")).toBeNull();
   });
 
   it("bộ lọc 5 chủ đề + Tất cả; lọc đúng chủ đề, ẩn bài nổi bật", async () => {

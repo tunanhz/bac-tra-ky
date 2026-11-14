@@ -3,6 +3,7 @@ import type { NewsPost } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
 export const DRAFT_LABEL = "Bản nháp";
+export const BRAND_BANNER_LABEL = "Ấn phẩm Bác Trà Ký";
 
 /** `YYYY-MM-DD` → `DD/MM/YYYY`; chuỗi sai định dạng trả nguyên (không dùng `Date` để render ổn định khi prerender). */
 export function formatNewsDate(iso: string): string {
@@ -36,7 +37,7 @@ export function NewsMeta({ post, className, showDate = true }: { post: NewsPost;
       <span className="text-[0.68rem] font-bold tracking-[0.24em] text-dong uppercase">
         {NEWS_CATEGORY_LABELS[post.category]}
       </span>
-      {showDate ? (
+      {showDate && !post.isDraft ? (
         <time dateTime={post.publishedAt} className="text-[0.8rem] text-ink-soft italic">
           {formatNewsDate(post.publishedAt)}
         </time>

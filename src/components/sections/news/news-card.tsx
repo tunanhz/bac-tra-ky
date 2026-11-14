@@ -3,7 +3,7 @@ import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 import { IllustrationTag } from "@/components/ui/illustration-tag";
 import type { NewsPost } from "@/lib/types";
 import { cn } from "@/lib/cn";
-import { NewsMeta, newsHref } from "./news-meta";
+import { BRAND_BANNER_LABEL, NewsMeta, newsHref } from "./news-meta";
 
 type NewsCardProps = {
   post: NewsPost;
@@ -31,10 +31,12 @@ export function NewsCard({ post, className }: NewsCardProps) {
           alt={post.coverImageAlt}
           fill
           sizes="(min-width: 1200px) 340px, (min-width: 1024px) calc(33vw - 50px), (min-width: 768px) calc(50vw - 60px), calc(100vw - 66px)"
-          className="object-cover transition-transform duration-800 ease-son group-hover:scale-105 motion-reduce:group-hover:scale-100"
+          className={cn(
+            "transition-transform duration-800 ease-son group-hover:scale-105 motion-reduce:group-hover:scale-100",
+            post.coverIsBrandBanner ? "object-contain" : "object-cover",
+          )}
         />
-        {/* Mọi ảnh bìa tin hiện là ảnh minh hoạ. TODO: thay dữ liệu thật — thêm cờ ảnh thật vào NewsPost khi có. */}
-        <IllustrationTag />
+        <IllustrationTag label={post.coverIsBrandBanner ? BRAND_BANNER_LABEL : undefined} />
       </div>
       <div className="flex flex-1 flex-col px-2 pt-4.5">
         <NewsMeta post={post} showDate={false} />

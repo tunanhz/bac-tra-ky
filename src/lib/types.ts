@@ -30,6 +30,8 @@ export type NewsPost = {
   /** Đường dẫn ảnh bìa trong `public/` (vd. `/images/news/<slug>.webp`). */
   coverImage: string;
   coverImageAlt: string;
+  /** Ấn phẩm khổ ngang từ bộ nhận diện, cần hiển thị trọn khung. */
+  coverIsBrandBanner?: boolean;
   /** Ngày ISO `YYYY-MM-DD`. */
   publishedAt: string;
   featured: boolean;

@@ -32,6 +32,8 @@ describe("/tin-tuc/[slug]", () => {
     expect(screen.getByRole("heading", { level: 1, name: post.title })).toBeInTheDocument();
     expect(screen.getAllByText(DRAFT_LABEL).length).toBeGreaterThan(0);
     expect(screen.getByText(post.content[0])).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: post.coverImageAlt })).toBeInTheDocument();
+    expect(screen.getByText("Ấn phẩm Bác Trà Ký")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Quay lại Tin tức/ })).toHaveAttribute("href", "/#tin-tuc");
     expect(screen.getByRole("heading", { level: 2, name: "Bài viết liên quan" })).toBeInTheDocument();
   });

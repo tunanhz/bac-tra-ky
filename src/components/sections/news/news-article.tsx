@@ -5,7 +5,8 @@ import { ILLUSTRATION_LABEL } from "@/components/ui/illustration-tag";
 import { sectionHref } from "@/config/site";
 import { getNewsPostBySlug, getRelatedNewsPosts } from "@/lib/news";
 import { NewsCard } from "./news-card";
-import { NewsMeta } from "./news-meta";
+import { cn } from "@/lib/cn";
+import { BRAND_BANNER_LABEL, NewsMeta } from "./news-meta";
 
 /**
  * Thân trang `/tin-tuc/[slug]` (server component): nhận `params` dạng promise để trang đọc nó bên trong
@@ -20,15 +21,20 @@ export async function NewsArticle({ params }: { params: Promise<{ slug: string }
   return (
     <>
       <article aria-labelledby="article-title">
-        <figure className="relative m-0 mt-[68px] h-[46svh] min-h-[280px] lg:h-[62svh]">
+        <figure className={cn("relative m-0 mt-[68px]", post.coverIsBrandBanner ? "mx-auto aspect-[735/273] max-w-6xl" : "h-[46svh] min-h-[280px] lg:h-[62svh]")}>
           <Image src={post.coverImage} alt={post.coverImageAlt} fill preload sizes="100vw" className="object-cover" />
-          <figcaption className="absolute right-4 bottom-3 bg-be/90 px-2.5 py-1 text-[0.72rem] text-ink-soft italic">
-            {ILLUSTRATION_LABEL}
+          <figcaption className={cn("bg-be/90 px-2.5 py-1 text-[0.72rem] text-ink-soft italic", post.coverIsBrandBanner ? "absolute inset-x-0 top-full text-center" : "absolute right-4 bottom-3")}>
+            {post.coverIsBrandBanner ? BRAND_BANNER_LABEL : ILLUSTRATION_LABEL}
           </figcaption>
         </figure>
 
         <div className="wrap">
-          <div className="frame-paper relative mx-auto -mt-20 max-w-[760px] px-5 pt-9 pb-10 shadow-paper sm:px-10 md:-mt-32 md:px-14 md:pt-12 md:pb-14">
+          <div
+            className={cn(
+              "frame-paper relative mx-auto max-w-[760px] px-5 pt-9 pb-10 shadow-paper sm:px-10 md:px-14 md:pt-12 md:pb-14",
+              post.coverIsBrandBanner ? "mt-9" : "-mt-20 md:-mt-32",
+            )}
+          >
             <NewsMeta post={post} />
             <h1 id="article-title" className="mt-5 mb-6 text-[clamp(1.8rem,1.3rem+2vw,2.7rem)] leading-tight font-bold text-son">
               {post.title}
