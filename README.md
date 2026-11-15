@@ -29,7 +29,7 @@ src/
     ornaments/          Seal (triện), Corner (góc khung), Divider (nụ sen)
     sections/           các section của trang chủ (home, about, story, products, news, contact)
   config/site.ts        tên, slogan, menu, kênh liên hệ (đọc NEXT_PUBLIC_*)
-  data/                 dữ liệu tĩnh: 9 sản phẩm, 6 tin nháp
+  data/                 dữ liệu tĩnh: 7 sản phẩm, 6 tin nháp
   lib/                  getProducts/getNewsPosts…, contactSchema (zod)
 public/images/          ảnh (nguồn ghi ở CREDITS.md)
 ```

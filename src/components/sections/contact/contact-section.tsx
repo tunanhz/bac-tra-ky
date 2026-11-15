@@ -6,8 +6,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { siteConfig, telHref } from "@/config/site";
 import { ContactForm } from "./contact-form";
 
-/** Ảnh gợi không khí làng quê Bắc Bộ (ảnh minh hoạ, riêng cho mục này — không trùng ảnh bìa tin nào). */
-const VILLAGE_IMAGE = "/images/common/lang-que-canh-dong-lua.webp";
+const VILLAGE_IMAGE = "/images/common/san-lang-giang-xa.webp";
 
 function Pending() {
   // TODO: thay dữ liệu thật — giá trị lấy từ src/config/site.ts (biến môi trường NEXT_PUBLIC_*).
@@ -98,14 +97,14 @@ export function ContactSection() {
             <div className="relative aspect-[16/9] overflow-hidden">
               <Image
                 src={VILLAGE_IMAGE}
-                alt="Người phụ nữ đội nón lá đi giữa cánh đồng lúa xanh, xa xa là xóm làng"
+                alt="Sân lát gạch với lọng và đồ lễ ở làng Giang Xá"
                 fill
                 sizes="(min-width: 1024px) 480px, 92vw"
                 className="object-cover"
               />
             </div>
             <figcaption className="caption px-1.5 pt-3 pb-0.5 text-center">
-              Làng quê Bắc Bộ — ảnh minh hoạ, sẽ thay ảnh làng nghề Giang Xá thật
+              Không gian làng Giang Xá — ảnh tư liệu
             </figcaption>
           </figure>
         </div>

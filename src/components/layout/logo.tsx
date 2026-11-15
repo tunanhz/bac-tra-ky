@@ -15,16 +15,17 @@ export function Logo({ size = "header", className }: LogoProps) {
       aria-label={`${siteConfig.name} — về trang chủ`}
       className={cn("inline-flex min-h-11 items-center no-underline", className)}
     >
-      <span className={cn("inline-flex rounded-sm bg-white", isFooter ? "px-3 py-2.5" : "px-2 py-1.5")}>
-        <Image
-          src="/images/brand/bac-tra-ky.webp"
-          alt=""
-          width={339}
-          height={261}
-          unoptimized
-          className={cn("block w-auto", isFooter ? "h-[70px]" : "h-10")}
-        />
-      </span>
+      <Image
+        src="/images/brand/bac-tra-ky.webp"
+        alt=""
+        width={420}
+        height={331}
+        unoptimized
+        className={cn(
+          "block w-auto [filter:drop-shadow(0_0_1px_#fff1cf)_drop-shadow(0_0_2px_#f5d597)]",
+          isFooter ? "h-[74px]" : "h-12",
+        )}
+      />
     </a>
   );
 }

@@ -38,19 +38,19 @@ describe("formatPrice / helpers", () => {
 
 describe("filterProducts", () => {
   it("lọc đúng nhóm và 'all' giữ nguyên", () => {
-    expect(filterProducts(products, "all")).toHaveLength(9);
+    expect(filterProducts(products, "all")).toHaveLength(7);
     expect(filterProducts(products, "truyen-thong").map((p) => p.slug)).toEqual(["banh-bac-nhan-dau-xanh"]);
-    expect(filterProducts(products, "sang-tao")).toHaveLength(4);
-    expect(filterProducts(products, "qua-tang")).toHaveLength(4);
+    expect(filterProducts(products, "sang-tao")).toHaveLength(3);
+    expect(filterProducts(products, "qua-tang")).toHaveLength(3);
   });
 });
 
 describe("ProductsSection", () => {
-  it("có id san-pham, tiêu đề đúng spec, 9 card, bộ lọc 'Tất cả' đang chọn", () => {
+  it("có id san-pham, tiêu đề đúng spec, 7 card, bộ lọc 'Tất cả' đang chọn", () => {
     const { container } = render(<ProductsSection products={products} />);
     expect(container.querySelector("section#san-pham")).not.toBeNull();
     expect(screen.getByRole("heading", { level: 2, name: "Danh mục sản phẩm" })).toBeInTheDocument();
-    expect(cardNames()).toHaveLength(9);
+    expect(cardNames()).toHaveLength(7);
     expect(screen.getByRole("button", { name: "Tất cả" })).toHaveAttribute("aria-pressed", "true");
   });
 
@@ -78,18 +78,17 @@ describe("ProductsSection", () => {
     expect(screen.getByRole("button", { name: "Bánh Bác hương vị sáng tạo" })).toHaveAttribute("aria-pressed", "true");
     expect(screen.getByRole("button", { name: "Tất cả" })).toHaveAttribute("aria-pressed", "false");
     expect(cardNames()).toEqual([
-      "Bánh Bác nhân mặn",
       "Bánh Bác nhân khoai môn",
       "Bánh Bác nhân matcha",
       "Bánh Bác nhân đậu đỏ",
     ]);
-    expect(screen.getByText("Đang hiển thị 4 sản phẩm")).toBeInTheDocument();
+    expect(screen.getByText("Đang hiển thị 3 sản phẩm")).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: "Bánh Bác truyền thống" }));
     expect(cardNames()).toEqual(["Bánh Bác nhân đậu xanh"]);
 
     await user.click(screen.getByRole("button", { name: "Tất cả" }));
-    expect(cardNames()).toHaveLength(9);
+    expect(cardNames()).toHaveLength(7);
   });
 
   it("nhóm không có sản phẩm → thông báo + 'Xem tất cả' quay lại", async () => {
@@ -98,7 +97,7 @@ describe("ProductsSection", () => {
     await user.click(screen.getByRole("button", { name: "Bánh Bác truyền thống" }));
     expect(screen.getByText("Chưa có sản phẩm trong nhóm này.")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "Xem tất cả" }));
-    expect(cardNames()).toHaveLength(4);
+    expect(cardNames()).toHaveLength(3);
   });
 
   it("danh sách rỗng → trạng thái rỗng, không có bộ lọc", () => {

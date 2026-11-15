@@ -1,11 +1,10 @@
 import type { Product, ProductCategory } from "@/lib/types";
 
 /**
- * Danh mục sản phẩm theo spec mục III.4 (9 sản phẩm).
+ * Danh mục 7 sản phẩm Bác Trà Ký đang giới thiệu trên website.
  *
  * Nguyên tắc: không tự tạo giá, thành phần, khối lượng, chứng nhận. Mô tả chỉ dựa trên điều spec nói;
- * chỗ chưa có dữ liệu ghi rõ "sẽ được cập nhật". Ảnh trỏ tới `/images/products/<slug>.webp` (phase 03 đặt file;
- * chưa có file thì component hiển thị `ImagePlaceholder`).
+ * chỗ chưa có dữ liệu ghi rõ "sẽ được cập nhật". Ảnh trỏ tới `/images/products/<slug>.webp`.
  *
  * TODO: thay dữ liệu thật — giá, mô tả chi tiết từng hương vị, danh mục bộ quà Trà Sen khi thương hiệu cung cấp.
  */
@@ -42,21 +41,9 @@ export const products: readonly Product[] = [
     ],
     price: null,
     image: productImage("banh-bac-nhan-dau-xanh"),
-    imageAlt: "Bao bì Bánh Bác nhân đậu xanh, với hình bánh cắt miếng và đậu xanh",
+    imageAlt: "Bánh Bác nhân đậu xanh gói lá xanh, bên những lát bánh có nhân vàng",
     imageIsIllustration: false,
     featured: true,
-  },
-  {
-    slug: "banh-bac-nhan-man",
-    name: "Bánh Bác nhân mặn",
-    category: "sang-tao",
-    shortDescription: "Một hương vị sáng tạo, làm mới trải nghiệm thưởng thức Bánh Bác.",
-    description: [CREATIVE_INTRO, PENDING_DETAIL],
-    price: null,
-    image: productImage("banh-bac-nhan-man"),
-    imageAlt: "Ảnh minh hoạ: đôi tay người làm bánh đang nhào bột",
-    imageIsIllustration: true,
-    featured: false,
   },
   {
     slug: "banh-bac-nhan-khoai-mon",
@@ -66,7 +53,7 @@ export const products: readonly Product[] = [
     description: [CREATIVE_INTRO, PENDING_DETAIL],
     price: null,
     image: productImage("banh-bac-nhan-khoai-mon"),
-    imageAlt: "Bao bì tím Bánh Bác nhân khoai môn, với hình bánh và khoai môn",
+    imageAlt: "Hộp Bánh Bác khoai môn có ô trong suốt, để lộ bánh nhân tím",
     imageIsIllustration: false,
     featured: false,
   },
@@ -78,7 +65,7 @@ export const products: readonly Product[] = [
     description: [CREATIVE_INTRO, PENDING_DETAIL],
     price: null,
     image: productImage("banh-bac-nhan-matcha"),
-    imageAlt: "Bao bì xanh Bánh Bác nhân matcha, với hình bánh cắt lộ phần nhân xanh",
+    imageAlt: "Hộp Bánh Bác matcha có ô trong suốt, để lộ bánh nhân xanh",
     imageIsIllustration: false,
     featured: true,
   },
@@ -90,8 +77,8 @@ export const products: readonly Product[] = [
     description: [CREATIVE_INTRO, PENDING_DETAIL],
     price: null,
     image: productImage("banh-bac-nhan-dau-do"),
-    imageAlt: "Ảnh minh hoạ: cốc đầy hạt đậu đỏ",
-    imageIsIllustration: true,
+    imageAlt: "Hộp Bánh Bác có ô trong suốt, để lộ bánh nhân đỏ sẫm",
+    imageIsIllustration: false,
     featured: false,
   },
   {
@@ -102,7 +89,7 @@ export const products: readonly Product[] = [
     description: [GIFT_BOX_INTRO, PENDING_DETAIL],
     price: null,
     image: productImage("hop-2-banh"),
-    imageAlt: "Hộp Chạm Ký Ức màu đỏ và xanh, mở nắp để lộ hai chiếc Bánh Bác",
+    imageAlt: "Hộp Bánh Bác màu đỏ và xanh, mở nắp để lộ hai chiếc bánh",
     imageIsIllustration: false,
     featured: false,
   },
@@ -114,21 +101,9 @@ export const products: readonly Product[] = [
     description: [GIFT_BOX_INTRO, PENDING_DETAIL],
     price: null,
     image: productImage("hop-6-banh"),
-    imageAlt: "Các hộp Gom Ký Ức, mỗi hộp có sáu chiếc Bánh Bác",
+    imageAlt: "Hộp Bánh Bác nhân đậu xanh với sáu ô bánh bên trong",
     imageIsIllustration: false,
     featured: true,
-  },
-  {
-    slug: "hop-9-banh",
-    name: "Hộp 9 bánh",
-    category: "qua-tang",
-    shortDescription: "Hộp Bánh Bác dành cho những dịp sum họp và trao gửi yêu thương.",
-    description: [GIFT_BOX_INTRO, PENDING_DETAIL],
-    price: null,
-    image: productImage("hop-9-banh"),
-    imageAlt: "Ảnh minh hoạ: chồng hộp quà giấy nâu thắt nơ đỏ",
-    imageIsIllustration: true,
-    featured: false,
   },
   {
     slug: "bo-qua-banh-bac-tra-sen",
@@ -142,7 +117,7 @@ export const products: readonly Product[] = [
     ],
     price: null,
     image: productImage("bo-qua-banh-bac-tra-sen"),
-    imageAlt: "Hộp quà Trao Ký Ức mở nắp, bày Bánh Bác và hộp Trà Sen Tây Hồ",
+    imageAlt: "Hộp quà Bác Trà Ký mở nắp, bày Bánh Bác và hộp Trà Sen Tây Hồ",
     imageIsIllustration: false,
     featured: true,
   },

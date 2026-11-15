@@ -20,8 +20,8 @@ export function StoryChapter({ chapter, alignRight = false, footer }: StoryChapt
   const titleId = `${chapter.id}-title`;
   return (
     <article id={chapter.id} aria-labelledby={titleId} className="relative pb-16 lg:pb-24">
-      <div className="relative h-[62vh] min-h-[340px] overflow-hidden lg:h-[78vh]">
-        <Image src={chapter.image.src} alt={chapter.image.alt} fill sizes="100vw" className="object-cover" />
+      <div className="relative h-[62vh] min-h-[340px] overflow-hidden bg-be-2 lg:h-[78vh]">
+        <Image src={chapter.image.src} alt={chapter.image.alt} fill sizes="100vw" className={chapter.image.contain ? "object-contain px-6 pt-8 pb-20 lg:pb-36" : "object-cover"} />
         <p className="absolute top-4 right-4 m-0 max-w-[80%] bg-be/90 px-2.5 py-1 text-[0.68rem] leading-snug tracking-[0.06em] text-ink-soft italic">
           {chapter.image.caption}
         </p>

@@ -15,6 +15,7 @@ describe("Hero", () => {
     render(<Hero />);
     const section = document.getElementById("trang-chu");
     expect(section).not.toBeNull();
+    expect(screen.getByRole("img", { name: /Bánh Bác cuộn lá xanh/ })).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { level: 1, name: "Bác Trà Ký – Gìn giữ tinh hoa, tiếp nối giá trị" }),
     ).toBeInTheDocument();
@@ -73,7 +74,7 @@ describe("FeaturedProducts", () => {
   });
 
   it("ảnh minh hoạ có nhãn, ấn phẩm đúng sản phẩm thì không", () => {
-    const temporary = products.find((product) => product.slug === "banh-bac-nhan-man")!;
+    const temporary: Product = { ...products[0], slug: "anh-minh-hoa", imageIsIllustration: true };
     render(<FeaturedProducts products={[temporary, products[0]]} />);
     const [illustrated, photo] = screen.getAllByRole("article");
     expect(within(illustrated).getByText("Ảnh minh hoạ – sẽ thay ảnh thật")).toBeInTheDocument();

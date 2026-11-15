@@ -45,7 +45,7 @@ export function ProductCard({ product, featured, detailAction, className, style 
         className,
       )}
     >
-      <div className={cn("relative aspect-[4/3] overflow-hidden", product.imageIsIllustration ? "arch-top" : "rounded-sm bg-be-2")}>
+      <div className={cn("relative aspect-[4/3] overflow-hidden", product.imageIsIllustration ? "arch-top" : "rounded-sm bg-[#fff6e7]")}>
         <ImageWithFallback
           src={product.image}
           alt={product.imageAlt}

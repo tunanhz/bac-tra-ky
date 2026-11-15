@@ -18,6 +18,7 @@ export type StoryChapter = {
     alt: string;
     /** Chú thích kiểu bảo tàng trên góc ảnh. */
     caption: string;
+    contain?: boolean;
   };
 };
 
@@ -35,9 +36,9 @@ export const STORY_CHAPTERS: readonly StoryChapter[] = [
     ],
     quote: { text: "Nơi hương vị truyền thống kể câu chuyện của thời gian", source: "Bác Trà Ký" },
     image: {
-      src: "/images/story/nha-co-mai-ngoi.webp",
-      alt: "Nếp nhà mái ngói giữa vườn cây xanh của một làng quê Bắc Bộ",
-      caption: "Ảnh minh hoạ không gian làng quê Bắc Bộ",
+      src: "/images/story/cong-lang-giang-xa.webp",
+      alt: "Cổng đá và hàng cờ nhiều màu tại Giang Xá",
+      caption: "Cổng làng Giang Xá",
     },
   },
   {
@@ -57,9 +58,10 @@ export const STORY_CHAPTERS: readonly StoryChapter[] = [
       source: "Bác Trà Ký",
     },
     image: {
-      src: "/images/story/tay-nan-bot.webp",
-      alt: "Đôi bàn tay đang nặn bột làm bánh",
-      caption: "Ảnh minh hoạ – sẽ thay ảnh thật",
+      src: "/images/common/banh-bac-giang-xa.webp",
+      alt: "Bánh Bác cuộn lá xanh bên những lát bánh đã cắt",
+      caption: "Bánh Bác Giang Xá — hình ảnh từ Bác Trà Ký",
+      contain: true,
     },
   },
   {

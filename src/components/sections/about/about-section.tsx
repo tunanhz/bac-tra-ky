@@ -188,37 +188,27 @@ export function AboutSection() {
           </ol>
         </div>
 
-        {/* Hình ảnh minh hoạ làng nghề và sản phẩm — 1 lớn (đình làng) + 2 nhỏ, khung passe-partout sơn son. */}
+        {/* Hình ảnh làng nghề và sản phẩm — 1 lớn + 2 nhỏ, khung passe-partout sơn son. */}
         <div className="mt-16 grid gap-6 lg:mt-24 lg:grid-cols-[1.9fr_1fr]">
           <Reveal className="flex">
             <LacquerFigure
               className="w-full"
-              src="/images/story/dinh-chu-quyen.webp"
-              alt="Mái đình làng Bắc Bộ lợp ngói ta, đầu đao cong, sân gạch phía trước"
+              src="/images/story/cong-lang-giang-xa.webp"
+              alt="Cổng đá và hàng cờ nhiều màu tại Giang Xá"
               sizes="(min-width: 1024px) 740px, 100vw"
               mediaClassName="min-h-[clamp(240px,48vw,420px)] lg:min-h-[480px]"
-              caption={
-                <>
-                  Đình làng Bắc Bộ — ảnh minh hoạ không gian làng nghề (Đình Chu Quyến).{" "}
-                  <CommonsCredit
-                    author="Duyphuong"
-                    license="CC BY 3.0"
-                    href="https://commons.wikimedia.org/wiki/File:Chu_Quy%E1%BA%BFn_Hall_09-06-2013_E1.jpg"
-                  />
-                </>
-              }
+              caption="Cổng làng Giang Xá — ảnh tư liệu"
             />
           </Reveal>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
             <Reveal delay={120} className="flex">
               <LacquerFigure
                 className="w-full"
-                src="/images/story/nghe-nhan-nhao-bot.webp"
-                alt="Đôi tay người làm bánh đang nhào bột"
+                src="/images/story/goi-banh-bac.webp"
+                alt="Đôi tay gói Bánh Bác bằng lá xanh, bên cuộn bánh và vừng"
                 sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 100vw"
                 mediaClassName="min-h-[220px]"
-                illustration
-                caption="Đôi tay người làm bánh"
+                caption="Gói Bánh Bác — trích ấn phẩm Bác Trà Ký"
               />
             </Reveal>
             <Reveal delay={240} className="flex">

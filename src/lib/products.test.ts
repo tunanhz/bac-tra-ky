@@ -3,16 +3,23 @@ import { PRODUCT_CATEGORIES, PRODUCT_CATEGORY_LABELS, products } from "@/data/pr
 import { getFeaturedProducts, getProductBySlug, getProducts } from "./products";
 
 describe("dữ liệu sản phẩm tĩnh", () => {
-  it("có đúng 9 sản phẩm theo spec, slug không trùng", () => {
-    expect(products).toHaveLength(9);
-    expect(new Set(products.map((p) => p.slug)).size).toBe(9);
+  it("chỉ có 7 sản phẩm đã chốt, không có slug trùng", () => {
+    expect(products.map((p) => p.slug)).toEqual([
+      "banh-bac-nhan-dau-xanh",
+      "banh-bac-nhan-khoai-mon",
+      "banh-bac-nhan-matcha",
+      "banh-bac-nhan-dau-do",
+      "hop-2-banh",
+      "hop-6-banh",
+      "bo-qua-banh-bac-tra-sen",
+    ]);
   });
 
-  it("đủ 3 nhóm: 1 truyền thống, 4 sáng tạo, 4 hộp/quà", () => {
+  it("đủ 3 nhóm: 1 truyền thống, 3 sáng tạo, 3 hộp/quà", () => {
     const count = (category: string) => products.filter((p) => p.category === category).length;
     expect(count("truyen-thong")).toBe(1);
-    expect(count("sang-tao")).toBe(4);
-    expect(count("qua-tang")).toBe(4);
+    expect(count("sang-tao")).toBe(3);
+    expect(count("qua-tang")).toBe(3);
     expect(PRODUCT_CATEGORIES.every((c) => PRODUCT_CATEGORY_LABELS[c])).toBe(true);
   });
 
@@ -20,9 +27,10 @@ describe("dữ liệu sản phẩm tĩnh", () => {
     expect(products.every((p) => p.price === null)).toBe(true);
   });
 
-  it("ảnh trỏ tới /images/products/<slug>.webp và có alt", () => {
+  it("ảnh trỏ tới /images/products/<slug>.webp và không dùng ảnh minh hoạ", () => {
     for (const p of products) {
       expect(p.image).toBe(`/images/products/${p.slug}.webp`);
+      expect(p.imageIsIllustration).toBe(false);
       expect(p.imageAlt.length).toBeGreaterThan(0);
       expect(p.description.length).toBeGreaterThan(0);
     }
@@ -30,9 +38,9 @@ describe("dữ liệu sản phẩm tĩnh", () => {
 });
 
 describe("lib/products", () => {
-  it("getProducts trả 9 sản phẩm và là bản sao (sửa không ảnh hưởng dữ liệu gốc)", async () => {
+  it("getProducts trả 7 sản phẩm và là bản sao (sửa không ảnh hưởng dữ liệu gốc)", async () => {
     const list = await getProducts();
-    expect(list).toHaveLength(9);
+    expect(list).toHaveLength(7);
     list[0].name = "đã sửa";
     list[0].description.push("thêm");
     const again = await getProducts();

@@ -38,11 +38,11 @@ describe("AboutSection", () => {
     }
   });
 
-  it("ảnh CC BY có ghi công tác giả + giấy phép ngay trên trang", () => {
+  it("ảnh Giang Xá có chú thích và ảnh CC BY còn lại có ghi công", () => {
     render(<AboutSection />);
-    expect(screen.getByRole("link", { name: "CC BY 3.0, Wikimedia Commons" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /Cổng đá và hàng cờ/ })).toBeInTheDocument();
+    expect(screen.getByText("Cổng làng Giang Xá — ảnh tư liệu")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "CC BY 2.0, Wikimedia Commons" })).toBeInTheDocument();
-    expect(screen.getByText(/Duyphuong/)).toBeInTheDocument();
     expect(screen.getByText(/Ron Diggity/)).toBeInTheDocument();
   });
 });

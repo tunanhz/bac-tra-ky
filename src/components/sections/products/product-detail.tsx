@@ -6,6 +6,7 @@ import { buttonClassName } from "@/components/ui/button";
 import { PRODUCT_CATEGORY_LABELS } from "@/data/products";
 import type { Product } from "@/lib/types";
 import { OrderLink } from "./order-link";
+import { cn } from "@/lib/cn";
 import { formatPrice } from "@/lib/format";
 
 type ProductDetailProps = {
@@ -23,7 +24,7 @@ type ProductDetailProps = {
 export function ProductDetail({ product, titleId, onClose }: ProductDetailProps) {
   return (
     <div className="grid md:grid-cols-2">
-      <div className="relative aspect-square bg-be-2 md:m-4 md:mr-0">
+      <div className={cn("relative aspect-square md:m-4 md:mr-0", product.imageIsIllustration ? "bg-be-2" : "bg-[#fff6e7]")}>
         <ImageWithFallback
           src={product.image}
           alt={product.imageAlt}

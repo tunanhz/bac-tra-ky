@@ -56,10 +56,10 @@ export const metadata: Metadata = {
     url: "/",
     images: [
       {
-        url: "/images/common/hero-am-tra-ngay-tet.webp",
-        width: 1920,
-        height: 1280,
-        alt: "Bộ ấm chén gốm trên khay gỗ, bên bình hoa đỏ và đèn dầu — không khí ngày Tết",
+        url: "/images/common/chia-se-banh-bac.webp",
+        width: 1200,
+        height: 630,
+        alt: "Bánh Bác Giang Xá gói lá xanh và cắt thành lát đỏ, trắng, vàng",
       },
     ],
   },
