@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ILLUSTRATION_LABEL } from "@/components/ui/illustration-tag";
 import { sectionHref } from "@/config/site";
 import { getNewsPostBySlug, getRelatedNewsPosts } from "@/lib/news";
 import { NewsCard } from "./news-card";
@@ -17,7 +16,7 @@ export async function NewsArticle({ params }: { params: Promise<{ slug: string }
   const post = await getNewsPostBySlug(slug);
   if (!post) notFound();
   const related = await getRelatedNewsPosts(post.slug, 3);
-  const { coverIsBrandBanner: isBanner, coverCaption } = post;
+  const { coverIsBrandBanner: isBanner, coverCaption, coverCredit, coverFocus } = post;
 
   return (
     <>
@@ -28,15 +27,24 @@ export async function NewsArticle({ params }: { params: Promise<{ slug: string }
             isBanner ? "mx-auto aspect-[539/267] max-w-6xl" : "h-[46svh] min-h-[280px] lg:h-[62svh]",
           )}
         >
-          <Image src={post.coverImage} alt={post.coverImageAlt} fill preload sizes="100vw" className="object-cover" />
-          <figcaption
-            className={cn(
-              "bg-be/90 px-2.5 py-1 text-[0.72rem] text-ink-soft italic",
-              isBanner ? "absolute inset-x-0 top-full text-center" : "absolute right-4 bottom-3",
-            )}
-          >
-            {coverCaption ?? ILLUSTRATION_LABEL}
-          </figcaption>
+          <Image
+            src={post.coverImage}
+            alt={post.coverImageAlt}
+            fill
+            preload
+            sizes="100vw"
+            className={cn("object-cover", coverFocus === "top-right" && "object-right-top")}
+          />
+          {coverCaption && (
+            <figcaption
+              className={cn(
+                "bg-be/90 px-2.5 py-1 text-[0.72rem] text-ink-soft italic",
+                isBanner ? "absolute inset-x-0 top-full text-center" : "absolute top-3 right-4",
+              )}
+            >
+              {coverCaption}
+            </figcaption>
+          )}
         </figure>
 
         <div className="wrap">
@@ -58,6 +66,17 @@ export async function NewsArticle({ params }: { params: Promise<{ slug: string }
                 </p>
               ))}
             </div>
+            {coverCredit ? (
+              <p className="mt-6 mb-0 text-caption text-muted">
+                <a className="underline underline-offset-2" href={coverCredit.sourceUrl}>
+                  {coverCaption}
+                </a>{" · "}
+                <a className="underline underline-offset-2" href={coverCredit.licenseUrl}>
+                  {coverCredit.license}
+                </a>{" · "}
+                {coverCredit.changes}.
+              </p>
+            ) : null}
             <div className="mt-9 border-t border-dashed border-line pt-6">
               <Button href={sectionHref("tin-tuc")} variant="outline">
                 ← Quay lại Tin tức

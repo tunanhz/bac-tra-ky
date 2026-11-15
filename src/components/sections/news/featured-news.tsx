@@ -21,9 +21,9 @@ export function FeaturedNews({ post }: { post: NewsPost }) {
             sizes="(min-width: 1200px) 660px, (min-width: 1024px) 56vw, 92vw"
             className="object-cover transition-transform duration-800 ease-son group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
           />
-          {!isBanner && <IllustrationTag label={coverCaption} />}
+          {!isBanner && coverCaption && <IllustrationTag label={coverCaption} />}
         </div>
-        {isBanner && <figcaption className="pt-2 text-center text-[0.7rem] text-be">{coverCaption}</figcaption>}
+        {isBanner && coverCaption && <figcaption className="pt-2 text-center text-[0.7rem] text-be">{coverCaption}</figcaption>}
       </figure>
       <div className="lg:col-span-5">
         <p className="eyebrow mt-0 mb-4">Bài nổi bật</p>

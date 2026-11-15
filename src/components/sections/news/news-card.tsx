@@ -11,7 +11,7 @@ type NewsCardProps = {
 };
 
 /**
- * Card tin (cùng ngôn ngữ card sản phẩm bản mẫu B): tấm giấy viền đôi, ảnh 3:2, nhãn "Bản nháp" + danh mục,
+ * Card tin (cùng ngôn ngữ card sản phẩm bản mẫu B): tấm giấy viền đôi, ảnh 3:2, danh mục và trạng thái nếu là bản nháp,
  * tiêu đề sơn son, mô tả, "Đọc thêm" → `/tin-tuc/[slug]`. Hover: nhấc 6px + bóng sơn son, ảnh phóng chậm.
  */
 export function NewsCard({ post, className }: NewsCardProps) {
@@ -35,7 +35,7 @@ export function NewsCard({ post, className }: NewsCardProps) {
             post.coverIsBrandBanner ? "object-contain" : "object-cover",
           )}
         />
-        <IllustrationTag label={post.coverCaption} />
+        {post.coverCaption && <IllustrationTag label={post.coverCaption} />}
       </div>
       <div className="flex flex-1 flex-col px-2 pt-4.5">
         <NewsMeta post={post} showDate={false} />

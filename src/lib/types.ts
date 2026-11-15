@@ -30,14 +30,18 @@ export type NewsPost = {
   /** Đường dẫn ảnh bìa trong `public/` (vd. `/images/news/<slug>.webp`). */
   coverImage: string;
   coverImageAlt: string;
-  /** Chú thích về nguồn hoặc bối cảnh; không có thì dùng nhãn ảnh minh hoạ. */
+  /** Vị trí lấy nét khi ảnh bìa được cắt trong trang chi tiết. */
+  coverFocus?: "top-right";
+  /** Chú thích về nguồn hoặc bối cảnh. */
   coverCaption?: string;
+  /** Nguồn và giấy phép ảnh bên ngoài; tên tác giả ghi trong chú thích. */
+  coverCredit?: Readonly<{ sourceUrl: string; license: string; licenseUrl: string; changes: string }>;
   /** Ấn phẩm khổ ngang từ bộ nhận diện, cần hiển thị trọn khung. */
   coverIsBrandBanner?: boolean;
   /** Ngày ISO `YYYY-MM-DD`. */
   publishedAt: string;
   featured: boolean;
-  /** Bài mẫu phục vụ thiết kế → hiện nhãn "Bản nháp" trên card và trang chi tiết. */
+  /** Bài chưa chốt nội dung → có nhãn “Bản nháp” và không lập chỉ mục. */
   isDraft: boolean;
 };
 

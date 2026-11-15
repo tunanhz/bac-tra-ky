@@ -1,12 +1,14 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { NEWS_CATEGORIES, NEWS_CATEGORY_LABELS, newsPosts } from "@/data/news";
 import { getNewsPostBySlug, getNewsPosts, getRelatedNewsPosts } from "./news";
 
 describe("dữ liệu tin tức tĩnh", () => {
-  it("có 6 bài, slug không trùng, đều là bản nháp", () => {
+  it("có 6 bài, slug không trùng, đều là bài chính thức", () => {
     expect(newsPosts).toHaveLength(6);
     expect(new Set(newsPosts.map((p) => p.slug)).size).toBe(6);
-    expect(newsPosts.every((p) => p.isDraft)).toBe(true);
+    expect(newsPosts.every((p) => !p.isDraft)).toBe(true);
   });
 
   it("mỗi nhóm nội dung có ít nhất 1 bài, nhóm nào cũng có nhãn", () => {
@@ -16,10 +18,11 @@ describe("dữ liệu tin tức tĩnh", () => {
     }
   });
 
-  it("có đúng 1 bài nổi bật; ảnh bìa trỏ tới /images/news/<slug>.webp; ngày ISO", () => {
+  it("có đúng 1 bài nổi bật; ảnh bìa WebP tồn tại; ngày ISO", () => {
     expect(newsPosts.filter((p) => p.featured)).toHaveLength(1);
     for (const p of newsPosts) {
-      expect(p.coverImage).toBe(`/images/news/${p.slug}.webp`);
+      expect(p.coverImage).toMatch(/^\/images\/news\/[a-z0-9-]+\.webp$/);
+      expect(existsSync(join("public", p.coverImage.slice(1)))).toBe(true);
       expect(p.publishedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
       expect(p.content.length).toBeGreaterThan(0);
     }

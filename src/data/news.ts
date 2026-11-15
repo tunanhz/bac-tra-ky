@@ -1,13 +1,6 @@
 import type { NewsCategory, NewsPost } from "@/lib/types";
 
-/**
- * Tin tức mẫu phục vụ thiết kế (spec mục III.5) — TẤT CẢ là bản nháp (`isDraft: true`).
- *
- * Nội dung chỉ giới thiệu chủ đề dựa trên spec; không giả lập sự kiện thực tế hay chương trình khuyến mãi chưa được
- * xác nhận. Ngày `publishedAt` là ngày soạn bản nháp. Ảnh bìa trỏ tới `/images/news/<slug>.webp` (phase 03 đặt file).
- *
- * TODO: thay dữ liệu thật — bài viết chính thức của Bác Trà Ký.
- */
+/** Bài viết chính thức của Bác Trà Ký. Chỉ đăng sự kiện hoặc ưu đãi khi đã được xác nhận. */
 
 export const NEWS_CATEGORY_LABELS: Record<NewsCategory, string> = {
   "hoat-dong": "Tin tức và hoạt động Bác Trà Ký",
@@ -46,9 +39,9 @@ export const newsPosts: readonly NewsPost[] = [
     coverImageAlt: "Khay trà với ấm đất và Bánh Bác cắt lát, trích từ ấn phẩm thương hiệu",
     coverCaption: "Ấn phẩm Bác Trà Ký",
     coverIsBrandBanner: true,
-    publishedAt: "2026-11-13",
+    publishedAt: "2026-11-15",
     featured: true,
-    isDraft: true,
+    isDraft: false,
   },
   {
     slug: "banh-bac-giang-xa-sac-do-gac-huong-vung-rang",
@@ -64,9 +57,9 @@ export const newsPosts: readonly NewsPost[] = [
     coverImage: coverImage("banh-bac-giang-xa-sac-do-gac-huong-vung-rang"),
     coverImageAlt: "Bánh Bác cuộn lá xanh và những lát bánh để lộ lớp đỏ, trắng và nhân vàng",
     coverCaption: "Hình ảnh từ Bác Trà Ký",
-    publishedAt: "2026-11-13",
+    publishedAt: "2026-11-15",
     featured: false,
-    isDraft: true,
+    isDraft: false,
   },
   {
     slug: "tra-sen-net-thanh-tao-cua-van-hoa-tra-viet",
@@ -78,11 +71,19 @@ export const newsPosts: readonly NewsPost[] = [
       "Khi thưởng trà cùng bánh, có thể bắt đầu bằng một ngụm trà nhỏ, rồi nếm một lát bánh để cảm nhận lần lượt hương trà, vị nếp và phần nhân.",
     ],
     category: "van-hoa-tra",
-    coverImage: coverImage("tra-sen-net-thanh-tao-cua-van-hoa-tra-viet"),
-    coverImageAlt: "Ấm chén men lam bên hoa sen — ảnh minh hoạ",
-    publishedAt: "2026-11-13",
+    coverImage: coverImage("chen-tra-sen-tay-ho"),
+    coverImageAlt: "Những chén trà sen có cánh hoa sen trên khay gỗ",
+    coverFocus: "top-right",
+    coverCaption: "Trà sen Tây Hồ · Ảnh: Viethavvh",
+    coverCredit: {
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Ch%C3%A9n_tr%C3%A0_sen.jpg",
+      license: "CC BY-SA 4.0",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+      changes: "Cắt khung, thu nhỏ và chuyển sang WebP",
+    },
+    publishedAt: "2026-11-15",
     featured: false,
-    isDraft: true,
+    isDraft: false,
   },
   {
     slug: "giang-xa-vung-dat-cua-ky-uc-va-huong-nep",
@@ -91,16 +92,16 @@ export const newsPosts: readonly NewsPost[] = [
       "Làng Giang Xá ở Hoài Đức, Hà Nội — nơi khởi nguồn của Bánh Bác và những nét đẹp văn hoá được gìn giữ qua nhiều thế hệ.",
     content: [
       "Giang Xá thuộc Hoài Đức, Hà Nội, là nơi khởi nguồn của Bánh Bác — thức quà đặc trưng của làng.",
-      "Vùng đất này gắn với vua Lý Nam Đế, người từng được nhận nuôi ở chùa Bảo Phúc – chùa Giang Xá hiện nay.",
+      "Theo lời kể ở Giang Xá, vua Lý Nam Đế từng được nhận nuôi tại chùa Bảo Phúc – chùa Giang Xá hiện nay.",
       "Nhìn từ sân làng đến bàn tay người gói bánh, câu chuyện Giang Xá không chỉ nằm trong một món ăn. Bánh Bác là một cách để bắt đầu tìm hiểu nếp sống và nghề làm bánh ở đây.",
     ],
     category: "lang-nghe",
     coverImage: coverImage("giang-xa-vung-dat-cua-ky-uc-va-huong-nep"),
     coverImageAlt: "Sân lát gạch với lọng và đồ lễ ở làng Giang Xá",
-    coverCaption: "Giang Xá — ảnh tư liệu, không phải thông báo sự kiện",
-    publishedAt: "2026-11-13",
+    coverCaption: "Giang Xá — ảnh tư liệu",
+    publishedAt: "2026-11-15",
     featured: false,
-    isDraft: true,
+    isDraft: false,
   },
   {
     slug: "nhung-huong-vi-sang-tao-cua-banh-bac",
@@ -110,16 +111,15 @@ export const newsPosts: readonly NewsPost[] = [
     content: [
       "Bác Trà Ký tin rằng gìn giữ truyền thống không đồng nghĩa với việc ngừng đổi mới.",
       "Nhóm Bánh Bác hương vị sáng tạo gồm nhân khoai môn, nhân matcha và nhân đậu đỏ. Mỗi sự đổi mới đều được định hướng trên nền tảng tôn trọng bản sắc của Bánh Bác Giang Xá.",
-      // TODO: thay dữ liệu thật — chuyên mục ưu đãi chỉ đăng chương trình đã được thương hiệu xác nhận.
-      "Hình hộp matcha trong bài là một ví dụ cho nhóm hương vị sáng tạo. Bài viết giới thiệu các vị bánh, không công bố giá, lịch mở bán hay ưu đãi.",
+      "Nếu bạn đã quen với vị đậu xanh, có thể chọn thử một trong ba vị mới để cảm nhận nét khác biệt trên cùng nền bánh truyền thống.",
     ],
     category: "san-pham-uu-dai",
     coverImage: coverImage("nhung-huong-vi-sang-tao-cua-banh-bac"),
     coverImageAlt: "Hộp Bánh Bác matcha có ô trong suốt, để lộ bánh nhân xanh",
     coverCaption: "Hình hộp matcha từ Bác Trà Ký",
-    publishedAt: "2026-11-13",
+    publishedAt: "2026-11-15",
     featured: false,
-    isDraft: true,
+    isDraft: false,
   },
   {
     slug: "thuong-tra-cung-banh-truyen-thong",
@@ -134,8 +134,8 @@ export const newsPosts: readonly NewsPost[] = [
     coverImage: coverImage("thuong-tra-cung-banh-truyen-thong"),
     coverImageAlt: "Đĩa Bánh Bác cắt lát bên ấm và chén trà",
     coverCaption: "Trích ấn phẩm về cách làm Bánh Bác",
-    publishedAt: "2026-11-13",
+    publishedAt: "2026-11-15",
     featured: false,
-    isDraft: true,
+    isDraft: false,
   },
 ];

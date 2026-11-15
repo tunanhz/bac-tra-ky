@@ -9,7 +9,7 @@ export type NewsSectionProps = {
 
 /**
  * Tin tức (id `tin-tuc`) — nền be-2 (dải chương) để tách nhịp với Sản phẩm phía trên; 1 bài nổi bật ảnh lớn,
- * bộ lọc 5 chủ đề, lưới card 3/2/1 cột. Mọi bài mẫu là bản nháp (nhãn "Bản nháp").
+ * bộ lọc 5 chủ đề, lưới card 3/2/1 cột.
  */
 export function NewsSection({ posts }: NewsSectionProps) {
   return (

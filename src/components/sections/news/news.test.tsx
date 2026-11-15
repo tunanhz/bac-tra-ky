@@ -41,10 +41,10 @@ describe("news helpers", () => {
 });
 
 describe("NewsCard", () => {
-  it("có ảnh, tiêu đề, mô tả, danh mục, nhãn 'Bản nháp', 'Đọc thêm' → trang chi tiết", () => {
+  it("có ảnh, tiêu đề, mô tả, danh mục, 'Đọc thêm' → trang chi tiết và không có nhãn nháp", () => {
     const post = posts[1];
     render(<NewsCard post={post} />);
-    expect(screen.getByText(DRAFT_LABEL)).toBeInTheDocument();
+    expect(screen.queryByText(DRAFT_LABEL)).not.toBeInTheDocument();
     expect(screen.getByRole("img", { name: post.coverImageAlt })).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 3, name: post.title })).toBeInTheDocument();
     expect(screen.getByText(post.excerpt)).toBeInTheDocument();
@@ -57,25 +57,35 @@ describe("NewsCard", () => {
     expect(links[0]).toHaveAttribute("href", newsHref(post.slug));
   });
 
-  it("bài không phải nháp → không có nhãn 'Bản nháp'", () => {
-    const published: NewsPost = { ...posts[1], isDraft: false };
-    render(<NewsCard post={published} />);
-    expect(screen.queryByText(DRAFT_LABEL)).not.toBeInTheDocument();
+  it("chỉ hiện nhãn 'Bản nháp' với dữ liệu nháp; không có chú thích thì không hiện nhãn ảnh mẫu", () => {
+    const draft: NewsPost = { ...posts[1], isDraft: true, coverCaption: undefined };
+    render(<NewsCard post={draft} />);
+    expect(screen.getByText(DRAFT_LABEL)).toBeInTheDocument();
+    expect(screen.queryByText("Ảnh minh hoạ – sẽ thay ảnh thật")).not.toBeInTheDocument();
+  });
+
+  it("bài trà sen hiển thị ảnh trà sen Tây Hồ kèm tác giả", () => {
+    const tea = posts.find((post) => post.slug === "tra-sen-net-thanh-tao-cua-van-hoa-tra-viet")!;
+    render(<NewsCard post={tea} />);
+    expect(screen.getByRole("img", { name: /chén trà sen có cánh hoa sen/ }).getAttribute("src"))
+      .toContain("chen-tra-sen-tay-ho.webp");
+    expect(screen.getByText("Trà sen Tây Hồ · Ảnh: Viethavvh")).toBeInTheDocument();
   });
 });
 
 describe("NewsSection / NewsBoard", () => {
-  it("id tin-tuc, tiêu đề 'Tin tức', bài nổi bật + lưới 5 card, mọi bài đều có nhãn 'Bản nháp'", () => {
+  it("id tin-tuc, tiêu đề 'Tin tức', bài nổi bật + lưới 5 card, cả 6 bài chính thức, không hiện thông báo nháp", () => {
     const { container } = render(<NewsSection posts={posts} />);
     expect(container.querySelector("section#tin-tuc")).not.toBeNull();
     expect(screen.getByRole("heading", { level: 2, name: "Tin tức" })).toBeInTheDocument();
     expect(screen.getByText("Bài nổi bật")).toBeInTheDocument();
-    expect(screen.getByText(/không phải thông báo sự kiện hay ưu đãi đang diễn ra/)).toBeInTheDocument();
+    expect(screen.queryByText(/không phải thông báo sự kiện hay ưu đãi đang diễn ra/)).not.toBeInTheDocument();
     expect(screen.getByRole("img", { name: posts[0].coverImageAlt })).toBeInTheDocument();
     expect(screen.getByText("Ấn phẩm Bác Trà Ký")).toBeInTheDocument();
     expect(gridTitles()).toHaveLength(5);
-    expect(screen.getAllByText(DRAFT_LABEL, { selector: "span" })).toHaveLength(6);
-    expect(container.querySelector("time")).toBeNull();
+    expect(screen.queryByText(DRAFT_LABEL)).not.toBeInTheDocument();
+    expect(screen.queryByText("Ảnh minh hoạ – sẽ thay ảnh thật")).not.toBeInTheDocument();
+    expect(container.querySelector("time")).toHaveAttribute("datetime", posts[0].publishedAt);
   });
 
   it("bộ lọc 5 chủ đề + Tất cả; lọc đúng chủ đề, ẩn bài nổi bật", async () => {
