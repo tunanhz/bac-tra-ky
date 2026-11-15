@@ -3,7 +3,6 @@ import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { products } from "@/data/products";
 import type { Product } from "@/lib/types";
-import { BRAND_VALUES, BrandValues } from "./brand-values";
 import { formatPrice } from "@/lib/format";
 import { FEATURED_LIMIT, FeaturedProducts } from "./featured-products";
 import { FinalCta } from "./final-cta";
@@ -17,25 +16,28 @@ describe("Hero", () => {
     expect(section).not.toBeNull();
     expect(screen.getByRole("img", { name: /Bánh Bác cuộn lá xanh/ })).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", { level: 1, name: "Bác Trà Ký – Gìn giữ tinh hoa, tiếp nối giá trị" }),
+      screen.getByRole("heading", { level: 1, name: "Bác Trà Ký – Gìn giữ tinh hoa – Tiếp nối giá trị" }),
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Khám phá sản phẩm" })).toHaveAttribute("href", "/#san-pham");
-    expect(screen.getByRole("link", { name: "Câu chuyện Bác Trà Ký" })).toHaveAttribute("href", "/#cau-chuyen");
+    expect(screen.getByRole("link", { name: "Khám phá câu chuyện" })).toHaveAttribute("href", "/#cau-chuyen");
     expect(
       screen.getByText(
-        "Từ hương vị Bánh Bác Giang Xá đến nét thanh tao của Trà Sen Việt, mỗi món quà là một câu chuyện văn hoá được tiếp nối.",
+        "Từ hương vị Bánh Bác Giang Xá đến nét thanh tao của Trà Sen Việt, Bác Trà Ký mang đến những thức quà đậm đà bản sắc, nơi hương vị truyền thống được gìn giữ và tiếp nối trong nhịp sống hiện đại.",
       ),
     ).toBeInTheDocument();
   });
 
-  it("khung và đoạn dẫn giữ hook responsive (globals.css nén khi điện thoại xoay ngang/màn thấp)", () => {
-    // Các class này là điểm neo cho media query (orientation: landscape) and (max-height: 520px) trong globals.css.
-    // Nếu đổi tên/bỏ đi thì khung hero sẽ lại quá cao trên màn ngang thấp — test này chặn hồi quy đó.
-    render(<Hero />);
-    const section = document.getElementById("trang-chu");
-    expect(section?.querySelector(".hero-panel")).not.toBeNull();
-    expect(section?.querySelector(".hero-lead")).not.toBeNull();
-    expect(section?.querySelector(".hero-slogan")).not.toBeNull();
+  it("nút mũi tên trỏ đúng phần giới thiệu", () => {
+    render(<><Hero /><Intro /></>);
+    expect(screen.getByRole("link", { name: "Cuộn xuống phần giới thiệu" })).toHaveAttribute("href", "#gioi-thieu");
+    expect(screen.getByRole("region", { name: "Một thức quà – Một câu chuyện Việt" })).toHaveAttribute("id", "gioi-thieu");
+  });
+
+  it("có ảnh chính thức thì thay riêng cụm ảnh, không thay bố cục chữ hay nút", () => {
+    render(<Hero artwork={{ src: "/images/banner.webp", alt: "Banner chính thức Bác Trà Ký" }} />);
+    expect(screen.getByRole("img", { name: "Banner chính thức Bác Trà Ký" })).toBeInTheDocument();
+    expect(screen.queryByRole("img", { name: /Bánh Bác cuộn lá xanh/ })).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Khám phá sản phẩm" })).toHaveAttribute("href", "/#san-pham");
   });
 });
 
@@ -87,20 +89,6 @@ describe("FeaturedProducts", () => {
     // Intl chèn khoảng trắng không ngắt trước "₫" — so theo textContent để không bị chuẩn hoá khoảng trắng.
     expect(screen.getByRole("article").textContent).toContain(formatPrice(120000));
     expect(screen.queryByText("Liên hệ để biết giá")).toBeNull();
-  });
-});
-
-describe("BrandValues", () => {
-  it("đúng 3 giá trị theo spec", () => {
-    render(<BrandValues />);
-    expect(BRAND_VALUES.map((v) => v.title)).toEqual([
-      "Gìn giữ hương vị truyền thống",
-      "Kết nối văn hoá qua từng thức quà",
-      "Làm mới trải nghiệm thưởng thức",
-    ]);
-    for (const value of BRAND_VALUES) {
-      expect(screen.getByRole("heading", { level: 3, name: value.title })).toBeInTheDocument();
-    }
   });
 });
 

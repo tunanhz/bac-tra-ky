@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
+import { PhotoCredit } from "@/components/ui/photo-credit";
 import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
 import type { StoryChapter as StoryChapterData } from "./story-chapters";
@@ -20,12 +21,29 @@ export function StoryChapter({ chapter, alignRight = false, footer }: StoryChapt
   const titleId = `${chapter.id}-title`;
   return (
     <article id={chapter.id} aria-labelledby={titleId} className="relative pb-16 lg:pb-24">
-      <div className="relative h-[62vh] min-h-[340px] overflow-hidden bg-be-2 lg:h-[78vh]">
-        <Image src={chapter.image.src} alt={chapter.image.alt} fill sizes="100vw" className={chapter.image.contain ? "object-contain px-6 pt-8 pb-20 lg:pb-36" : "object-cover"} />
-        <p className="absolute top-4 right-4 m-0 max-w-[80%] bg-be/90 px-2.5 py-1 text-[0.68rem] leading-snug tracking-[0.06em] text-ink-soft italic">
+      <figure className="relative m-0 h-[62vh] min-h-[340px] overflow-hidden bg-be-2 lg:h-[78vh]">
+        <Image
+          src={chapter.image.src}
+          alt={chapter.image.alt}
+          fill
+          sizes="100vw"
+          className={cn(
+            chapter.image.contain ? "object-contain px-6 pt-16 pb-20 lg:pt-8 lg:pb-36" : "object-cover",
+            chapter.image.focus === "top-right" && "object-top-right",
+          )}
+        />
+        <figcaption
+          className={cn(
+            "absolute top-4 m-0 max-w-[80%] bg-be/95 px-2.5 py-1 text-xs leading-snug text-ink-soft italic",
+            chapter.image.focus === "top-right" ? "left-4" : "right-4",
+          )}
+        >
           {chapter.image.caption}
-        </p>
-      </div>
+          {chapter.image.credit ? (
+            <span className="mt-1 block"><PhotoCredit {...chapter.image.credit} /></span>
+          ) : null}
+        </figcaption>
+      </figure>
       <div className="wrap">
         <Reveal
           className={cn(

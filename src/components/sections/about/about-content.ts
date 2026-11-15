@@ -1,8 +1,4 @@
-/**
- * Nội dung mục Về chúng tôi, chép NGUYÊN VĂN spec mục III.2 (tab 5). Chỉ được ngắt đoạn, không sửa chữ.
- * Hai dòng gạch đầu dòng "Tầm nhìn phát triển sản phẩm truyền thống trong thị trường hiện đại." và "Các giá trị cốt
- * lõi của thương hiệu." trong spec là ghi chú cấu trúc tài liệu nên không hiển thị.
- */
+// Nội dung thương hiệu theo thẻ 5 của brief Bác Trà Ký.
 
 export const ABOUT_WHO = {
   heading: "Bác Trà Ký là ai?",
@@ -28,82 +24,32 @@ export const ABOUT_INSPIRATION = {
   ],
 } as const;
 
-export type AboutStatement = {
-  label: string;
-  heading: string;
-  /** Câu trích dẫn trong ngoặc kép của spec (hiển thị nổi bật). */
-  quote: string;
-  paragraphs: readonly string[];
-  /** Câu kết, hiển thị nhấn. */
-  closing: string;
-};
-
-export const ABOUT_MISSION: AboutStatement = {
-  label: "Sứ mệnh của Bác Trà Ký",
-  heading: "Gìn giữ hương vị – Kết nối thế hệ",
-  quote:
-    "Gìn giữ bản sắc Bánh Bác Giang Xá, đổi mới cách thưởng thức và kể chuyện để kết nối giá trị truyền thống với người tiêu dùng hôm nay.",
-  paragraphs: [
-    "Bác Trà Ký mang trong mình sứ mệnh đưa Bánh Bác Giang Xá đến gần hơn với người tiêu dùng hiện đại, đặc biệt là thế hệ trẻ.",
-    "Chúng tôi trân trọng hương vị nguyên bản, nguồn gốc làng nghề và những giá trị văn hoá đã làm nên nét riêng của Bánh Bác. Trên nền tảng đó, Bác Trà Ký hướng tới đổi mới trải nghiệm thưởng thức thông qua sự kết hợp cùng Trà Sen, đa dạng hoá lựa chọn hương vị và thiết kế những sản phẩm quà tặng phù hợp với cuộc sống hiện đại.",
-    "Không chỉ mang đến một món ăn ngon, chúng tôi mong muốn mỗi sản phẩm còn trở thành cầu nối giữa người thưởng thức với câu chuyện về vùng đất Giang Xá, về con người và những giá trị được trao truyền qua nhiều thế hệ.",
-  ],
-  closing: "Bác Trà Ký không tìm cách thay thế truyền thống, mà tìm một cách mới để truyền thống tiếp tục được yêu thương.",
-};
-
-export const ABOUT_VISION: AboutStatement = {
-  label: "Tầm nhìn của Bác Trà Ký",
-  heading: "Đưa thức quà quê vươn xa trong đời sống hiện đại",
-  quote:
-    "Trở thành thương hiệu tiêu biểu trong việc đưa Bánh Bác Giang Xá trở thành thức quà truyền thống gần gũi với đời sống hiện đại.",
-  paragraphs: [
-    "Bác Trà Ký hướng tới xây dựng một thương hiệu quà tặng ẩm thực mang bản sắc Việt, nơi những giá trị truyền thống được gìn giữ và phát triển bằng tư duy sáng tạo.",
-    "Chúng tôi mong muốn Bánh Bác Giang Xá không chỉ được biết đến như một đặc sản địa phương mà còn trở thành lựa chọn quen thuộc trong những dịp gặp gỡ, sum họp và trao gửi yêu thương.",
-    "Thông qua việc phát triển sản phẩm, nâng cao trải nghiệm khách hàng và lan toả câu chuyện văn hoá, Bác Trà Ký hướng tới mở rộng sự hiện diện của Bánh Bác trên thị trường, đồng thời duy trì sự gắn kết với các cơ sở sản xuất và làng nghề địa phương.",
-  ],
-  closing:
-    "Để một ngày, khi nhắc đến Bánh Bác Giang Xá, người ta không chỉ nhớ đến một món bánh ngon mà còn nhớ đến một nét đẹp văn hoá Việt Nam đáng tự hào.",
-};
-
-export type CoreValue = {
-  number: string;
-  title: string;
-  subtitle: string;
-  paragraphs: readonly string[];
-};
+export const ABOUT_STATEMENTS = [
+  {
+    title: "Sứ mệnh của Bác Trà Ký",
+    description: "Giữ trọn hương vị xưa, thêm chút sáng tạo mới để mỗi chiếc Bánh Bác không chỉ ngon mà còn kể được câu chuyện quê hương theo cách gần gũi với thế hệ trẻ.",
+  },
+  {
+    title: "Tầm nhìn của Bác Trà Ký",
+    description: "Đưa hương vị Bánh Bác Giang Xá vượt ra khỏi làng quê, trở thành thức quà thân thuộc trong nhịp sống hiện đại, để tinh hoa ẩm thực Việt mãi được gìn giữ và lan tỏa.",
+  },
+] as const;
 
 export const ABOUT_CORE_VALUES = {
-  label: "Giá trị cốt lõi",
-  heading: "Ba giá trị làm nên Bác Trà Ký",
+  heading: "Giá trị cốt lõi",
+  tagline: "Giữ hồn vị xưa – Gửi trọn vị nay.",
   items: [
     {
-      number: "01",
-      title: "GIỮ ĐÚNG GỐC",
-      subtitle: "Trân trọng giá trị nguyên bản",
-      paragraphs: [
-        "Chúng tôi tin rằng bản sắc truyền thống chính là điều làm nên giá trị khác biệt của Bánh Bác Giang Xá.",
-        "Bác Trà Ký luôn lấy nguồn gốc, hình dáng, kỹ thuật và hương vị đặc trưng của Bánh Bác làm nền tảng phát triển. Trong đó, Bánh Bác nhân đậu xanh truyền thống giữ vai trò cốt lõi, đại diện cho những giá trị nguyên bản mà thương hiệu hướng tới gìn giữ.",
-      ],
+      title: "Giữ đúng gốc",
+      description: "Trân trọng hương vị, dáng bánh và kỹ thuật làm bánh truyền thống của làng Giang Xá, để nét đẹp xưa luôn được gìn giữ.",
     },
     {
-      number: "02",
-      title: "NGON LÀM NỀN TẢNG",
-      subtitle: "Chất lượng tạo nên niềm tin",
-      paragraphs: [
-        "Một câu chuyện đẹp chỉ thực sự có ý nghĩa khi đi cùng một sản phẩm chất lượng.",
-        "Đối với Bác Trà Ký, hương vị thơm ngon và trải nghiệm thưởng thức luôn là yếu tố quan trọng hàng đầu. Dù là Bánh Bác truyền thống hay những phiên bản hương vị mới, chúng tôi đều hướng tới sự hài hoà, chỉn chu và phù hợp với khẩu vị người tiêu dùng.",
-        "Bởi chất lượng chính là nền tảng để khách hàng tin tưởng, lựa chọn và gắn bó lâu dài.",
-      ],
+      title: "Ngon làm nền tảng",
+      description: "Mỗi chiếc bánh đều được chú trọng từ hương vị đến chất lượng, bởi một món bánh ngon chính là lý do để bạn muốn thưởng thức thêm lần nữa.",
     },
     {
-      number: "03",
-      title: "ĐỔI MỚI CÓ KIỂM SOÁT",
-      subtitle: "Sáng tạo để tiếp nối",
-      paragraphs: [
-        "Chúng tôi tin rằng gìn giữ truyền thống không đồng nghĩa với việc ngừng đổi mới.",
-        "Bác Trà Ký hướng tới phát triển những hương vị mới, kết hợp Bánh Bác với Trà Sen, đồng thời làm mới thiết kế bao bì và trải nghiệm quà tặng để phù hợp hơn với thị hiếu hiện đại.",
-        "Mỗi sự đổi mới đều được định hướng trên nền tảng tôn trọng bản sắc của Bánh Bác Giang Xá, để sản phẩm phát triển mà không đánh mất những giá trị làm nên nguồn cội.",
-      ],
+      title: "Đổi mới có kiểm soát",
+      description: "Thêm những hương vị mới, làm mới cách thưởng thức nhưng vẫn giữ nét riêng của Bánh Bác Giang Xá – để truyền thống luôn gần gũi với người trẻ.",
     },
-  ] satisfies readonly CoreValue[],
+  ],
 } as const;

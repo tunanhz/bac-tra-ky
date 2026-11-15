@@ -4,6 +4,8 @@
  * niên đại. Truyền thuyết "tiến vua" luôn đi kèm chữ "Theo truyền thuyết dân gian".
  */
 
+import type { PhotoCreditData } from "@/components/ui/photo-credit";
+
 export type StoryChapter = {
   /** id neo trong trang, dùng cho dải mục lục chương. */
   id: string;
@@ -18,6 +20,8 @@ export type StoryChapter = {
     alt: string;
     /** Chú thích kiểu bảo tàng trên góc ảnh. */
     caption: string;
+    credit?: PhotoCreditData;
+    focus?: "top-right";
     contain?: boolean;
   };
 };
@@ -32,7 +36,7 @@ export const STORY_CHAPTERS: readonly StoryChapter[] = [
     paragraphs: [
       "Giang Xá, Hoài Đức, Hà Nội là quê hương của Bánh Bác – thức quà đặc trưng của làng.",
       "Ở làng nghề, ký ức ẩm thực được gìn giữ qua đôi bàn tay khéo léo của người làm bánh và những nét đẹp văn hoá được trao truyền qua nhiều thế hệ.",
-      "Vùng đất này còn gắn với vua Lý Nam Đế, người từng được nhận nuôi ở chùa Bảo Phúc – chùa Giang Xá hiện nay.",
+      "Theo lời kể ở Giang Xá, vua Lý Nam Đế từng được nhận nuôi tại chùa Bảo Phúc – chùa Giang Xá hiện nay.",
     ],
     quote: { text: "Nơi hương vị truyền thống kể câu chuyện của thời gian", source: "Bác Trà Ký" },
     image: {
@@ -46,7 +50,7 @@ export const STORY_CHAPTERS: readonly StoryChapter[] = [
     numeral: "II",
     title: "Câu chuyện Bánh Bác",
     paragraphs: [
-      "Bánh Bác Giang Xá mang sắc đỏ đặc trưng từ gấc, lớp vỏ nếp dẻo thơm, hương vừng rang và phần nhân đậu xanh bùi ngọt.",
+      "Bánh Bác Giang Xá có dáng cuộn, khi cắt lát lộ lớp nếp đỏ gấc và nhân đậu xanh vàng. Vỏ nếp dẻo thơm, quyện với hương vừng rang và vị bùi ngọt của đậu xanh.",
       "Chiếc bánh mang nét mộc mạc, tinh tế của ẩm thực quê hương. Với người làm bánh, đó còn là câu chuyện về một vùng đất và về nghề được gìn giữ qua nhiều thế hệ trong đời sống văn hoá của làng.",
     ],
     legend: {
@@ -78,9 +82,17 @@ export const STORY_CHAPTERS: readonly StoryChapter[] = [
       source: "Bác Trà Ký",
     },
     image: {
-      src: "/images/story/am-men-lam-sen.webp",
-      alt: "Bộ ấm chén men lam vẽ hoa sen đặt trên bàn gỗ",
-      caption: "Ảnh minh hoạ – bộ ấm chén men lam vẽ sen",
+      src: "/images/news/chen-tra-sen-tay-ho.webp",
+      alt: "Những chén trà sen có cánh hoa sen trên khay gỗ",
+      caption: "Trà sen Tây Hồ",
+      focus: "top-right",
+      credit: {
+        author: "Viethavvh",
+        sourceUrl: "https://commons.wikimedia.org/wiki/File:Ch%C3%A9n_tr%C3%A0_sen.jpg",
+        license: "CC BY-SA 4.0",
+        licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+        changes: "Cắt khung, thu nhỏ và chuyển WebP",
+      },
     },
   },
   {
@@ -94,9 +106,10 @@ export const STORY_CHAPTERS: readonly StoryChapter[] = [
     ],
     quote: { text: "Truyền thống không nhất thiết phải đứng yên trong quá khứ.", source: "Bác Trà Ký" },
     image: {
-      src: "/images/story/rot-tra-ben-banh.webp",
-      alt: "Rót trà từ ấm gốm bên những chiếc bánh trên khay gỗ",
-      caption: "Ảnh minh hoạ – sẽ thay ảnh thật",
+      src: "/images/products/bo-qua-banh-bac-tra-sen.webp",
+      alt: "Hộp quà Bác Trà Ký mở nắp, bày Bánh Bác và hộp Trà Sen Tây Hồ",
+      caption: "Hộp quà Bánh Bác và Trà Sen — hình ảnh từ Bác Trà Ký",
+      contain: true,
     },
   },
 ];

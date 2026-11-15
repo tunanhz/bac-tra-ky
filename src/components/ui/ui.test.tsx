@@ -2,7 +2,7 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Button } from "./button";
-import { ImagePlaceholder, ILLUSTRATION_LABEL } from "./image-placeholder";
+import { ImagePlaceholder, IMAGE_UNAVAILABLE_LABEL } from "./image-placeholder";
 import { ImageWithFallback } from "./image-with-fallback";
 import { REVEAL_READY_FLAG } from "@/lib/reveal-boot";
 import { Reveal } from "./reveal";
@@ -44,10 +44,10 @@ describe("SectionHeading", () => {
 });
 
 describe("ImagePlaceholder", () => {
-  it("có nhãn ảnh minh hoạ và tên đọc được", () => {
+  it("báo ảnh không tải được và có mô tả đọc được", () => {
     render(<ImagePlaceholder alt="Hộp 6 bánh" />);
-    expect(screen.getByText(ILLUSTRATION_LABEL)).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: `Hộp 6 bánh (${ILLUSTRATION_LABEL})` })).toBeInTheDocument();
+    expect(screen.getByText(IMAGE_UNAVAILABLE_LABEL)).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: `Hộp 6 bánh (${IMAGE_UNAVAILABLE_LABEL})` })).toBeInTheDocument();
   });
 });
 
@@ -56,7 +56,7 @@ describe("ImageWithFallback", () => {
     render(<ImageWithFallback src="/images/products/chua-co.webp" alt="Hộp 2 bánh" width={400} height={400} />);
     const img = screen.getByRole("img", { name: "Hộp 2 bánh" });
     fireEvent.error(img);
-    expect(screen.getByText(ILLUSTRATION_LABEL)).toBeInTheDocument();
+    expect(screen.getByText(IMAGE_UNAVAILABLE_LABEL)).toBeInTheDocument();
   });
 });
 

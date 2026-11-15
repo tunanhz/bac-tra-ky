@@ -1,5 +1,7 @@
 // @vitest-environment jsdom
-import { render, screen } from "@testing-library/react";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { FOLK_LEGEND_LABEL, STORY_CHAPTERS } from "./story-chapters";
 import { StorySection } from "./story-section";
@@ -23,6 +25,24 @@ describe("StorySection", () => {
       expect(screen.getByRole("heading", { level: 3, name: chapter.title })).toBeInTheDocument();
       expect(document.getElementById(chapter.id)).not.toBeNull();
     }
+  });
+
+  it("chương III và IV có ảnh đúng chủ đề, ghi rõ nguồn và không còn nhãn minh hoạ", () => {
+    render(<StorySection />);
+    const tea = within(screen.getByRole("article", { name: "Nghệ thuật thưởng Trà Sen" }));
+    const gift = within(screen.getByRole("article", { name: "Truyền thống tiếp nối" }));
+    for (const [image, path] of [
+      [tea.getByRole("img", { name: /Những chén trà sen/ }), "/images/news/chen-tra-sen-tay-ho.webp"],
+      [gift.getByRole("img", { name: /Hộp quà Bác Trà Ký mở nắp/ }), "/images/products/bo-qua-banh-bac-tra-sen.webp"],
+    ] as const) {
+      const src = new URL(image.getAttribute("src") ?? "", "https://test.local");
+      expect(src.searchParams.get("url") ?? src.pathname).toBe(path);
+      expect(existsSync(join("public", path.slice(1)))).toBe(true);
+    }
+    expect(tea.getByRole("link", { name: "Viethavvh" })).toHaveAttribute("href", expect.stringContaining("commons.wikimedia.org"));
+    expect(tea.getByRole("link", { name: "CC BY-SA 4.0" })).toHaveAttribute("href", "https://creativecommons.org/licenses/by-sa/4.0/");
+    expect(gift.getByText(/Hộp quà Bánh Bác và Trà Sen — hình ảnh từ Bác Trà Ký/)).toBeInTheDocument();
+    expect(screen.queryByText(/Ảnh minh ho[ạa]/i)).not.toBeInTheDocument();
   });
 
   it("chương I nhắc Lý Nam Đế đúng chữ: chùa Bảo Phúc – chùa Giang Xá hiện nay", () => {

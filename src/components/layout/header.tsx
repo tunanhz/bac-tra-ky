@@ -66,15 +66,15 @@ function useActiveSection(enabled: boolean) {
   }, [enabled]);
 
   if (!enabled) return null;
-  return atBottom ? LAST_SECTION : activeId;
+  return atBottom ? LAST_SECTION : activeId ?? "trang-chu";
 }
 
 /**
  * Header dính đầu trang (hướng B):
- * - Trang chủ: nằm đè lên ảnh hero, nền trong suốt chữ be → nền sơn son + chỉ vàng khi cuộn > 40px.
+ * - Trang chủ: nằm đè lên ảnh hero, nền trong suốt chữ đỏ/nâu → nền sơn son + chỉ vàng khi cuộn > 40px.
  * - Trang khác (vd. `/tin-tuc/...`): luôn nền sơn son.
- * - Mục đang xem màu vàng nhũ + `aria-current`.
- * - Dưới 1024px: nút menu 48×48 (`aria-expanded`, `aria-controls`). Menu mở: Tab/Shift+Tab xoay vòng trong menu và
+ * - Mục đang xem có `aria-current`: gạch chân đỏ trên nền sáng, chữ vàng nhũ trên nền sơn son.
+ * - Dưới 1024px: nút menu cao tối thiểu 48px (`aria-expanded`, `aria-controls`). Menu mở: Tab/Shift+Tab xoay vòng trong menu và
  *   nút; Esc đóng và trả focus; bấm mục, bấm ra ngoài header hoặc nới cửa sổ ≥ 1024px thì tự đóng.
  */
 export function Header() {
@@ -138,8 +138,8 @@ export function Header() {
       ref={headerRef}
       data-solid={solid}
       className={cn(
-        "on-dark fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-400 ease-son",
-        solid ? "bg-son-deep shadow-[0_1px_0_rgb(226_191_110/0.35)]" : "bg-transparent",
+        "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-400 ease-son",
+        solid ? "on-dark bg-son-deep shadow-[0_1px_0_rgb(226_191_110/0.35)]" : "bg-transparent",
       )}
     >
       <div className="wrap flex h-[68px] items-center justify-between gap-2 lg:gap-4">
@@ -167,7 +167,9 @@ export function Header() {
                     className={cn(
                       "flex min-h-12 items-center border-b border-nhu/15 text-base tracking-wide no-underline transition-colors duration-300 lg:text-[0.76rem] lg:tracking-[0.16em] lg:uppercase",
                       "lg:min-h-11 lg:border-0",
-                      active ? "text-nhu" : "text-be hover:text-nhu",
+                      solid
+                        ? active ? "text-nhu" : "text-be hover:text-nhu"
+                        : active ? "text-gac-deep lg:underline lg:decoration-2 lg:underline-offset-[0.65rem]" : "text-ink hover:text-gac-deep",
                     )}
                   >
                     {item.label}
@@ -180,7 +182,10 @@ export function Header() {
         <button
           ref={menuButtonRef}
           type="button"
-          className="flex min-h-12 shrink-0 cursor-pointer items-center justify-center gap-2 border border-be/50 bg-son-deep/55 px-3 text-be aria-expanded:border-nhu lg:hidden"
+          className={cn(
+            "flex min-h-12 shrink-0 cursor-pointer items-center justify-center gap-2 border px-3 lg:hidden",
+            solid ? "border-be/50 bg-son-deep/55 text-be aria-expanded:border-nhu" : "rounded-full border-gac-deep/45 bg-paper/75 text-gac-deep",
+          )}
           aria-expanded={menuOpen}
           aria-controls={MENU_ID}
           aria-label={menuOpen ? "Đóng menu" : "Mở menu"}

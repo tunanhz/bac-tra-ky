@@ -10,7 +10,7 @@ import { sectionHref } from "@/config/site";
  */
 export function Intro() {
   return (
-    <section aria-labelledby="intro-title" className="band-lacquer on-dark py-12 md:py-[72px]">
+    <section id="gioi-thieu" aria-labelledby="intro-title" className="band-lacquer on-dark py-12 md:py-[72px]">
       <div className="wrap grid items-center gap-8 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
         <Reveal
           as="figure"

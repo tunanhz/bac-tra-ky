@@ -32,7 +32,10 @@ describe("Header", () => {
       "/#tin-tuc",
       "/#lien-he",
     ]);
-    expect(screen.getByRole("link", { name: /Bác Trà Ký — về trang chủ/ })).toHaveAttribute("href", "/#trang-chu");
+    const logo = screen.getByRole("link", { name: /Bác Trà Ký — về trang chủ/ });
+    expect(logo).toHaveAttribute("href", "/#trang-chu");
+    expect(logo.querySelector("img")).not.toBeNull();
+    expect(logo.textContent).toBe("");
   });
 
   it("trong suốt ở đầu trang chủ, luôn nền đặc ở trang khác", () => {

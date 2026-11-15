@@ -1,6 +1,5 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { IllustrationTag } from "@/components/ui/illustration-tag";
 import { cn } from "@/lib/cn";
 
 type FigureProps = {
@@ -9,20 +8,17 @@ type FigureProps = {
   sizes: string;
   /** Chú thích kiểu bảo tàng dưới ảnh (nguồn, giấy phép...). */
   caption: ReactNode;
-  /** Ảnh đặt cạnh nội dung nói về bánh nhưng không phải Bánh Bác thật → hiện nhãn minh hoạ trên ảnh. */
-  illustration?: boolean;
   /** Class cho khung ảnh (tỷ lệ/chiều cao). */
   mediaClassName?: string;
   className?: string;
 };
 
 /** Ảnh trên tấm giấy viền đôi (`frame-paper`) với chú thích nghiêng bên dưới. Dùng trên nền be. */
-export function PaperFigure({ src, alt, sizes, caption, illustration, mediaClassName, className }: FigureProps) {
+export function PaperFigure({ src, alt, sizes, caption, mediaClassName, className }: FigureProps) {
   return (
     <figure className={cn("frame-paper m-0 p-3 shadow-paper", className)}>
       <div className={cn("relative overflow-hidden", mediaClassName)}>
         <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" />
-        {illustration ? <IllustrationTag /> : null}
       </div>
       <figcaption className="caption px-1.5 pt-3 pb-1 text-center">{caption}</figcaption>
     </figure>
@@ -33,7 +29,7 @@ export function PaperFigure({ src, alt, sizes, caption, illustration, mediaClass
  * Ảnh trong khung passe-partout sơn son (khối `.band figure` của bản mẫu B): nền son đậm đệm 14px, chỉ vàng lùi vào
  * 8px, chú thích màu kem.
  */
-export function LacquerFigure({ src, alt, sizes, caption, illustration, mediaClassName, className }: FigureProps) {
+export function LacquerFigure({ src, alt, sizes, caption, mediaClassName, className }: FigureProps) {
   return (
     <figure
       className={cn(
@@ -43,7 +39,6 @@ export function LacquerFigure({ src, alt, sizes, caption, illustration, mediaCla
     >
       <div className={cn("relative flex-1 overflow-hidden", mediaClassName)}>
         <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" />
-        {illustration ? <IllustrationTag /> : null}
       </div>
       <figcaption className="px-1.5 pt-3 pb-0.5 text-center text-[0.74rem] leading-snug text-cream-muted italic">
         {caption}

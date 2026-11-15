@@ -1,23 +1,23 @@
 import { Seal } from "@/components/ornaments/seal";
 import { cn } from "@/lib/cn";
-import { ILLUSTRATION_LABEL, IllustrationTag } from "./illustration-tag";
+import { IllustrationTag } from "./illustration-tag";
 
-export { ILLUSTRATION_LABEL };
+export const IMAGE_UNAVAILABLE_LABEL = "Không tải được ảnh";
 
 type ImagePlaceholderProps = {
-  /** Mô tả ảnh sẽ đặt ở đây (đọc cho trình đọc màn hình). */
+  /** Mô tả ảnh không hiển thị (đọc cho trình đọc màn hình). */
   alt?: string;
-  /** Nhãn hiển thị; mặc định "Ảnh minh hoạ – sẽ thay ảnh thật". */
+  /** Nhãn hiển thị; mặc định "Không tải được ảnh". */
   label?: string;
   /** Kích thước/tỷ lệ do nơi dùng quyết định, vd. `aspect-[4/5] w-full`. Mặc định lấp đầy khung cha. */
   className?: string;
 };
 
 /**
- * Khung thay ảnh khi chưa có ảnh thật (hoặc file ảnh chưa tồn tại): nền giấy be-2 có vân giấy dó, triện mờ ở giữa,
+ * Khung dự phòng khi ảnh không tải được: nền giấy be-2 có vân giấy dó, triện mờ ở giữa,
  * nhãn nhỏ ở đáy.
  */
-export function ImagePlaceholder({ alt, label = ILLUSTRATION_LABEL, className }: ImagePlaceholderProps) {
+export function ImagePlaceholder({ alt, label = IMAGE_UNAVAILABLE_LABEL, className }: ImagePlaceholderProps) {
   return (
     <div
       role="img"

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../components/sections/home/hero.css";
 
 /*
  * Design system Bác Trà Ký — hướng B "Hộp Sơn Son"
@@ -31,6 +32,7 @@
 
   /* Chữ */
   --font-heading: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-display: var(--font-mely), var(--font-heading);
   --font-body: var(--font-caudex), "Caudex", Georgia, serif;
 
   /* Thang chữ (mobile → desktop qua clamp) */
@@ -115,7 +117,8 @@
   h2,
   h3,
   h4 {
-    font-family: var(--font-heading);
+    font-family: var(--font-display);
+    font-weight: 700;
     line-height: 1.12;
     text-wrap: balance;
   }
@@ -380,33 +383,8 @@
 }
 
 /* -------------------------------------------- responsive: màn thấp & rất hẹp
- * Bản mẫu B không tính tới điện thoại xoay ngang (màn rất thấp) và máy 320px. Hai khối dưới chỉ áp cho các cảnh đó,
- * không đụng tới bố cục bản B ở màn cao/thường. Đặt ngoài @layer để thắng được utility của Tailwind.
+ * Đặt quy tắc riêng cho màn rất hẹp ngoài @layer để thắng được utility của Tailwind.
  */
-
-/* Điện thoại xoay ngang / màn rất thấp: nén khung hero để nút CTA không bị đẩy xuống dưới màn, bớt khoảng trống trên. */
-@media (orientation: landscape) and (max-height: 520px) {
-  .hero-panel {
-    margin-top: 76px;
-    margin-bottom: 22px;
-    padding-top: 18px;
-    padding-bottom: 20px;
-  }
-  .hero-panel h1 {
-    margin-top: 10px;
-    margin-bottom: 2px;
-    font-size: clamp(1.7rem, 4.6vw, 2.5rem);
-  }
-  .hero-slogan {
-    margin-top: 6px;
-    font-size: clamp(1rem, 2.4vw, 1.3rem);
-  }
-  .hero-lead {
-    margin-top: 12px;
-    margin-bottom: 16px;
-    font-size: 1rem;
-  }
-}
 
 /* Màn rất hẹp (≤345px, vd iPhone SE đời đầu 320px): giảm giãn chữ & đệm để nhãn nút không rớt xuống 2 dòng. */
 @media (max-width: 345px) {

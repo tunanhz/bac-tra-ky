@@ -6,7 +6,7 @@ import { ImagePlaceholder } from "./image-placeholder";
 
 type ImageWithFallbackProps = Omit<ImageProps, "onError" | "alt"> & {
   alt: string;
-  /** Nhãn khung thay thế; mặc định "Ảnh minh hoạ – sẽ thay ảnh thật". */
+  /** Nhãn khung thay thế; mặc định "Không tải được ảnh". */
   placeholderLabel?: string;
   /** Class cho khung thay thế (mặc định lấp đầy khung cha). */
   placeholderClassName?: string;
@@ -14,7 +14,7 @@ type ImageWithFallbackProps = Omit<ImageProps, "onError" | "alt"> & {
 
 /**
  * `next/image` có dự phòng: file ảnh chưa có (404) hoặc tải lỗi → hiện `ImagePlaceholder` thay vì ảnh vỡ.
- * Dùng cho ảnh sản phẩm/tin tức mà `src/data/*.ts` trỏ tới nhưng có thể chưa đặt file.
+ * Dùng cho ảnh sản phẩm và tin tức.
  */
 export function ImageWithFallback({ placeholderLabel, placeholderClassName, alt, ...props }: ImageWithFallbackProps) {
   const [failed, setFailed] = useState(false);

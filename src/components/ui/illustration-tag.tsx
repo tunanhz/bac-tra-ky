@@ -10,8 +10,7 @@ type IllustrationTagProps = {
 
 /**
  * Nhãn nhỏ "Ảnh minh hoạ – sẽ thay ảnh thật" đặt ở đáy khung ảnh (khung cha cần `relative`). Một kiểu duy nhất cho
- * card sản phẩm, card tin, ảnh mục Về chúng tôi và khung thay ảnh (`ImagePlaceholder`) — khi ảnh lỗi, hai nhãn trùng
- * khít nhau.
+ * thẻ sản phẩm có ảnh minh hoạ và khung lỗi (`ImagePlaceholder`) với nhãn riêng.
  */
 export function IllustrationTag({ label = ILLUSTRATION_LABEL, className }: IllustrationTagProps) {
   return (
