@@ -48,6 +48,7 @@ describe("Footer (spec mục 7)", () => {
 
     expect(footer).toHaveTextContent("Làng nghề Giang Xá, xã Hoài Đức, Hà Nội");
     expect(footer).toHaveTextContent("© 2026 Bác Trà Ký.");
+    expect(footer).not.toHaveTextContent(/Nguồn ảnh|Ảnh minh hoạ|Wikimedia Commons/);
   });
 
   it("hiện kênh liên hệ chính thức khi chưa đặt biến môi trường", async () => {

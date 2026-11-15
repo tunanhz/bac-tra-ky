@@ -119,11 +119,10 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-wrap justify-between gap-2 border-t border-nhu/25 pt-4.5 text-[0.8rem] text-[#cdb68f]">
+        <div className="mt-10 border-t border-nhu/25 pt-4.5 text-[0.8rem] text-[#cdb68f]">
           <p className="m-0">
             © {siteConfig.copyrightYear} {siteConfig.name}. {siteConfig.slogan}.
           </p>
-          <p className="m-0">Ảnh minh hoạ: Unsplash &amp; Wikimedia Commons.</p>
         </div>
       </div>
     </footer>
