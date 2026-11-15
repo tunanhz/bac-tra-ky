@@ -3,7 +3,6 @@ import type { NewsPost } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
 export const DRAFT_LABEL = "Bản nháp";
-export const BRAND_BANNER_LABEL = "Ấn phẩm Bác Trà Ký";
 
 /** `YYYY-MM-DD` → `DD/MM/YYYY`; chuỗi sai định dạng trả nguyên (không dùng `Date` để render ổn định khi prerender). */
 export function formatNewsDate(iso: string): string {

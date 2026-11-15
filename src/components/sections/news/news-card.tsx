@@ -3,7 +3,7 @@ import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 import { IllustrationTag } from "@/components/ui/illustration-tag";
 import type { NewsPost } from "@/lib/types";
 import { cn } from "@/lib/cn";
-import { BRAND_BANNER_LABEL, NewsMeta, newsHref } from "./news-meta";
+import { NewsMeta, newsHref } from "./news-meta";
 
 type NewsCardProps = {
   post: NewsPost;
@@ -15,7 +15,6 @@ type NewsCardProps = {
  * tiêu đề sơn son, mô tả, "Đọc thêm" → `/tin-tuc/[slug]`. Hover: nhấc 6px + bóng sơn son, ảnh phóng chậm.
  */
 export function NewsCard({ post, className }: NewsCardProps) {
-  const href = newsHref(post.slug);
   return (
     <article
       className={cn(
@@ -36,28 +35,19 @@ export function NewsCard({ post, className }: NewsCardProps) {
             post.coverIsBrandBanner ? "object-contain" : "object-cover",
           )}
         />
-        <IllustrationTag label={post.coverIsBrandBanner ? BRAND_BANNER_LABEL : undefined} />
+        <IllustrationTag label={post.coverCaption} />
       </div>
       <div className="flex flex-1 flex-col px-2 pt-4.5">
         <NewsMeta post={post} showDate={false} />
-        <h3 className="mt-3 mb-2 text-[1.3rem] leading-snug font-bold text-son">
-          {/* Một liên kết duy nhất phủ cả card (lớp ::after) — mỗi card chỉ một điểm Tab; vòng focus vẽ quanh card. */}
-          <Link
-            href={href}
-            className="no-underline transition-colors duration-300 group-hover:text-gac after:absolute after:inset-0 after:z-10 after:content-[''] focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-4 focus-visible:after:outline-gac"
-          >
-            {post.title}
-          </Link>
-        </h3>
+        <h3 className="mt-3 mb-2 text-[1.3rem] leading-snug font-bold text-son">{post.title}</h3>
         <p className="mt-0 mb-4 text-[0.95rem] text-ink-soft">{post.excerpt}</p>
-        {/* Chỉ là chữ gợi ý (cả card đã là liên kết). */}
-        <span
-          aria-hidden="true"
-          className="mt-auto inline-flex min-h-11 items-center gap-2 self-start border-t border-dashed border-line pt-3 text-[0.76rem] font-bold tracking-[0.14em] text-gac uppercase"
+        <Link
+          href={newsHref(post.slug)}
+          aria-label={`Đọc thêm: ${post.title}`}
+          className="mt-auto inline-flex min-h-11 w-fit items-center gap-2 border border-gac/65 px-3 text-[0.76rem] font-bold tracking-wider text-gac uppercase no-underline transition-colors hover:bg-gac hover:text-be focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gac"
         >
-          Đọc thêm
-          <span className="transition-transform duration-300 ease-son group-hover:translate-x-1">→</span>
-        </span>
+          Đọc thêm <span aria-hidden="true">→</span>
+        </Link>
       </div>
     </article>
   );

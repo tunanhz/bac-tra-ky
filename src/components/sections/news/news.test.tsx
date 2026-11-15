@@ -48,11 +48,12 @@ describe("NewsCard", () => {
     expect(screen.getByRole("img", { name: post.coverImageAlt })).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 3, name: post.title })).toBeInTheDocument();
     expect(screen.getByText(post.excerpt)).toBeInTheDocument();
-    expect(screen.getByText("Đọc thêm")).toBeInTheDocument();
-    // Một liên kết duy nhất (phủ cả card) → mỗi card chỉ một điểm Tab.
+    expect(screen.getByText(/^Đọc thêm/)).toBeInTheDocument();
     const links = screen.getAllByRole("link");
     expect(links).toHaveLength(1);
-    expect(links[0]).toHaveAccessibleName(post.title);
+    expect(links[0]).toHaveAccessibleName(`Đọc thêm: ${post.title}`);
+    expect(screen.getByText("Hình ảnh từ Bác Trà Ký")).toBeInTheDocument();
+    expect(screen.queryByText("Ảnh minh hoạ – sẽ thay ảnh thật")).not.toBeInTheDocument();
     expect(links[0]).toHaveAttribute("href", newsHref(post.slug));
   });
 

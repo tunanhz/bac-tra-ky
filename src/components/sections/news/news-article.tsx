@@ -6,7 +6,7 @@ import { sectionHref } from "@/config/site";
 import { getNewsPostBySlug, getRelatedNewsPosts } from "@/lib/news";
 import { NewsCard } from "./news-card";
 import { cn } from "@/lib/cn";
-import { BRAND_BANNER_LABEL, NewsMeta } from "./news-meta";
+import { NewsMeta } from "./news-meta";
 
 /**
  * Thân trang `/tin-tuc/[slug]` (server component): nhận `params` dạng promise để trang đọc nó bên trong
@@ -17,14 +17,25 @@ export async function NewsArticle({ params }: { params: Promise<{ slug: string }
   const post = await getNewsPostBySlug(slug);
   if (!post) notFound();
   const related = await getRelatedNewsPosts(post.slug, 3);
+  const { coverIsBrandBanner: isBanner, coverCaption } = post;
 
   return (
     <>
       <article aria-labelledby="article-title">
-        <figure className={cn("relative m-0 mt-[68px]", post.coverIsBrandBanner ? "mx-auto aspect-[735/273] max-w-6xl" : "h-[46svh] min-h-[280px] lg:h-[62svh]")}>
+        <figure
+          className={cn(
+            "relative m-0 mt-[68px]",
+            isBanner ? "mx-auto aspect-[539/267] max-w-6xl" : "h-[46svh] min-h-[280px] lg:h-[62svh]",
+          )}
+        >
           <Image src={post.coverImage} alt={post.coverImageAlt} fill preload sizes="100vw" className="object-cover" />
-          <figcaption className={cn("bg-be/90 px-2.5 py-1 text-[0.72rem] text-ink-soft italic", post.coverIsBrandBanner ? "absolute inset-x-0 top-full text-center" : "absolute right-4 bottom-3")}>
-            {post.coverIsBrandBanner ? BRAND_BANNER_LABEL : ILLUSTRATION_LABEL}
+          <figcaption
+            className={cn(
+              "bg-be/90 px-2.5 py-1 text-[0.72rem] text-ink-soft italic",
+              isBanner ? "absolute inset-x-0 top-full text-center" : "absolute right-4 bottom-3",
+            )}
+          >
+            {coverCaption ?? ILLUSTRATION_LABEL}
           </figcaption>
         </figure>
 
@@ -32,7 +43,7 @@ export async function NewsArticle({ params }: { params: Promise<{ slug: string }
           <div
             className={cn(
               "frame-paper relative mx-auto max-w-[760px] px-5 pt-9 pb-10 shadow-paper sm:px-10 md:px-14 md:pt-12 md:pb-14",
-              post.coverIsBrandBanner ? "mt-9" : "-mt-20 md:-mt-32",
+              isBanner ? "mt-9" : "-mt-20 md:-mt-32",
             )}
           >
             <NewsMeta post={post} />

@@ -19,7 +19,7 @@ export function NewsSection({ posts }: NewsSectionProps) {
           id="news-title"
           eyebrow="Bác Trà Ký"
           title="Tin tức"
-          description="Chia sẻ các thông tin và câu chuyện xung quanh thương hiệu Bác Trà Ký."
+          description="Đọc chuyện làng Giang Xá, tìm hiểu Bánh Bác và văn hoá thưởng trà, hoặc khám phá những hương vị mới của Bác Trà Ký."
         />
         {posts.some((post) => post.isDraft) ? (
           <p className="mx-auto mb-6 max-w-xl text-center text-sm text-ink-soft">
