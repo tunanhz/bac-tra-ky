@@ -1,39 +1,33 @@
 @layer components {
   .home-hero {
-    --hero-paper: #ffefda;
-    --hero-tint: #f3d5aa;
-    --hero-gilt: #bd752e;
+    --hero-paper: #ffebd6;
     --hero-red: var(--color-gac-deep);
-    --hero-height: clamp(36rem, 92svh, 54rem);
+    --hero-artwork-width: 1777;
+    --hero-artwork-height: 1000;
     position: relative;
     isolation: isolate;
-    overflow: clip;
-    background:
-      radial-gradient(ellipse at 19% 31%, var(--color-paper), transparent 59%),
-      radial-gradient(circle, rgb(123 74 34 / 0.07) 0 0.6px, transparent 1px) 0 0 / 5px 5px,
-      linear-gradient(120deg, var(--hero-paper) 40%, var(--hero-tint));
+    background: var(--hero-paper);
   }
 
   .home-hero__inner {
     position: relative;
     display: grid;
     align-items: center;
-    min-height: var(--hero-height);
-    max-width: 96rem;
-    margin-inline: auto;
-    padding: 6.25rem clamp(1.25rem, 5.3vw, 5.5rem) 5rem;
+    min-height: 36rem;
+    aspect-ratio: var(--hero-artwork-width) / var(--hero-artwork-height);
+    padding: 6.25rem clamp(1.25rem, 5.3vw, 7rem) 5rem;
   }
 
   .home-hero__panel {
     position: relative;
-    z-index: 2;
+    z-index: 1;
     width: min(44%, 39rem);
   }
 
   .home-hero__title {
     margin: 0;
     color: var(--hero-red);
-    font-size: clamp(3rem, 7.6vw, 7.6rem);
+    font-size: clamp(3rem, 7.2vw, 7.6rem);
     line-height: 0.98;
     text-transform: uppercase;
     text-wrap: initial;
@@ -93,133 +87,63 @@
 
   .home-hero__stage {
     position: absolute;
-    inset: 0 0 0 40%;
-    isolation: isolate;
-  }
-
-  .home-hero__stage img { object-fit: contain; }
-  .home-hero__stage .home-hero__artwork { object-fit: cover; object-position: center; }
-
-  .home-hero__official {
-    mask-image: linear-gradient(90deg, transparent, black 30%);
-  }
-
-  .home-hero__village {
-    position: absolute;
-    inset: 6% -2% 24% -7%;
-    opacity: 0.46;
-    filter: sepia(1) saturate(0.93) contrast(0.83);
-    mix-blend-mode: multiply;
-    mask-image: radial-gradient(ellipse at 72% 47%, black 25%, transparent 72%);
-  }
-
-  .home-hero__stage .home-hero__village img { object-fit: cover; object-position: center 48%; }
-
-  .home-hero__fabric {
-    position: absolute;
-    inset: 10% 0 0 -45%;
-    clip-path: polygon(0 100%, 100% 0, 100% 100%);
-    background:
-      repeating-linear-gradient(28deg, rgb(0 0 0 / 0.08) 0 1px, transparent 1px 3px),
-      radial-gradient(ellipse at 76% 105%, transparent 30%, rgb(30 0 0 / 0.3) 59%, transparent 76%),
-      linear-gradient(152deg, var(--color-son-deep) 21%, #b22822 55%, var(--color-son) 76%, #951f24);
-  }
-
-  .home-hero__gift, .home-hero__box, .home-hero__cake { position: absolute; }
-
-  .home-hero__gift {
-    top: 27%;
-    right: 6%;
-    width: 63%;
-    aspect-ratio: 4 / 3;
+    inset: 0;
     overflow: hidden;
-    border-radius: 0.35rem;
-    box-shadow: 0 1.6rem 2.3rem -1.4rem rgb(37 6 3 / 0.84);
-    transform: rotate(2deg);
   }
 
-  .home-hero__box {
-    top: 54%;
-    left: 5%;
-    width: 36%;
-    aspect-ratio: 1000 / 593;
-    overflow: hidden;
-    border-radius: 0.25rem;
-    box-shadow: 0 1.25rem 1.6rem -0.9rem rgb(37 6 3 / 0.88);
-    transform: rotate(-8deg);
-  }
-
-  .home-hero__cake {
-    right: 13%;
-    bottom: 4%;
-    width: 50%;
-    aspect-ratio: 4 / 3;
-    filter: drop-shadow(0 1.05rem 0.65rem rgb(37 6 3 / 0.48));
-  }
-
-  .home-hero__clouds, .home-hero__lotus {
+  .home-hero__artwork {
     position: absolute;
-    z-index: 1;
-    width: clamp(6rem, 17vw, 15rem);
-    color: var(--hero-gilt);
-    opacity: 0.42;
-    pointer-events: none;
+    inset: 0;
   }
 
-  .home-hero__clouds { bottom: 5%; left: -1.1rem; }
-  .home-hero__lotus { top: -1.35rem; right: -1.2rem; }
-
+  /* The supplied banner already includes a chevron. Put the actual link directly over it. */
   .home-hero__down {
     position: absolute;
-    z-index: 3;
-    bottom: 0.85rem;
-    left: 50%;
-    display: grid;
-    width: 2.75rem;
-    height: 2.75rem;
-    place-items: center;
-    border: 1px solid var(--color-be);
+    top: 92.7%;
+    left: 49.9%;
+    width: max(2.75rem, 3.4%);
+    aspect-ratio: 1;
     border-radius: 50%;
-    background: var(--color-son-deep);
-    color: var(--color-be);
-    transform: translateX(-50%);
-    transition: background-color 200ms var(--ease-son);
+    transform: translate(-50%, -50%);
   }
 
-  .home-hero__down:hover { background: var(--hero-red); }
-  .home-hero__down:focus-visible { outline-color: var(--color-nhu); }
+  .home-hero__down:hover { box-shadow: 0 0 0 2px var(--color-be); }
+  .home-hero__down:focus-visible { outline: 2px solid var(--color-nhu); outline-offset: 3px; }
 
-  @media (48rem <= width < 64rem) {
-    .home-hero { --hero-height: clamp(35rem, 72svh, 42rem); }
-    .home-hero__cake { width: 53%; }
-  }
-
-  @media (min-width: 48rem) and (max-height: 34rem) {
-    .home-hero { --hero-height: 31rem; }
-    .home-hero__inner { padding-block: 5.5rem 3.5rem; }
-    .home-hero__title { font-size: clamp(2.85rem, 6.2vw, 5.7rem); }
-  }
-
-  @media (max-width: 47.999rem) {
-    .home-hero { --hero-height: auto; }
-    .home-hero__inner { padding: 6rem 0 0; }
-    .home-hero__panel { width: auto; padding-inline: 1.25rem; }
-    .home-hero__title { font-size: clamp(2.65rem, 13vw, 5rem); }
+  @media (width < 64rem) {
+    .home-hero__inner { min-height: 0; aspect-ratio: auto; padding: 6rem 0 0; }
+    .home-hero__panel { width: auto; padding-inline: clamp(1.25rem, 5.3vw, 3.5rem); }
+    .home-hero__title { font-size: clamp(2.65rem, 12.5vw, 5rem); }
     .home-hero__slogan { text-wrap: pretty; }
     .home-hero__lead { margin-bottom: 1.3rem; }
     .home-hero__lead::before { margin-block: 0.95rem 0.9rem; }
     .home-hero__actions { gap: 0.5rem; }
     .home-hero__action { min-height: 2.75rem; padding-inline: 0.8rem; }
-    .home-hero__stage { position: relative; inset: auto; height: clamp(17.75rem, 78vw, 31.25rem); }
-    .home-hero__official { margin-top: 1.2rem; mask-image: linear-gradient(180deg, transparent, black 24%); }
-    .home-hero__village { inset: -6% -5% 9% 0; }
-    .home-hero__fabric { inset: 1% 0 0 -10%; }
-    .home-hero__gift { top: 14%; right: 7%; width: 66%; }
-    .home-hero__box { top: 44%; left: 7%; width: 36%; }
-    .home-hero__cake { right: 13%; bottom: 10%; width: 51%; }
-    .home-hero__lotus { top: 2.75rem; }
-    .home-hero__clouds { display: none; }
-    .home-hero__down { bottom: 0.7rem; }
+    .home-hero__stage {
+      /* Crop the mostly empty left side and the top 120px, keeping the product and the full plate. */
+      --hero-crop-width: 1422;
+      position: relative;
+      inset: auto;
+      margin-top: 1rem;
+      aspect-ratio: var(--hero-crop-width) / 880;
+    }
+    .home-hero__stage::after {
+      position: absolute;
+      inset: 0 0 auto;
+      height: 2.25rem;
+      background: linear-gradient(var(--hero-paper), transparent);
+      pointer-events: none;
+      content: "";
+    }
+    .home-hero__artwork {
+      inset: -13.64% 0 auto auto;
+      width: calc(100% * var(--hero-artwork-width) / var(--hero-crop-width));
+      aspect-ratio: var(--hero-artwork-width) / var(--hero-artwork-height);
+    }
+  }
+
+  @media (width < 40rem) {
+    .home-hero__stage { --hero-crop-width: 1040; }
   }
 
   @media (max-width: 24.5rem) {

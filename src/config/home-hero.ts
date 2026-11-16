@@ -1,4 +1,4 @@
-export type HeroArtwork = { src: string; alt: string };
-
-/** Điền ảnh banner chính thức (không chữ) khi khách bàn giao; để trống để dùng ảnh có sẵn. */
-export const homeHeroArtwork: HeroArtwork | null = null;
+export const homeHeroArtwork = {
+  src: "/images/brand/home-hero-bac-tra-ky.webp",
+  alt: "Hộp quà Bác Trà Ký, đĩa Bánh Bác Giang Xá, chén trà và hoa sen trên nền vải đỏ",
+};

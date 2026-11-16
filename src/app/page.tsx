@@ -5,7 +5,6 @@ import { CustomerPanels } from "@/components/sections/home/customer-panels";
 import { FeaturedProducts } from "@/components/sections/home/featured-products";
 import { FinalCta } from "@/components/sections/home/final-cta";
 import { Hero } from "@/components/sections/home/hero";
-import { Intro } from "@/components/sections/home/intro";
 import { NewsSection } from "@/components/sections/news/news-section";
 import { ProductsSection } from "@/components/sections/products/products-section";
 import { StorySection } from "@/components/sections/story/story-section";
@@ -18,7 +17,6 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
-      <Intro />
       <FeaturedProducts products={featuredProducts} />
       <StorySection />
       <ProductsSection products={products} />

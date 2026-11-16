@@ -7,14 +7,16 @@ import { formatPrice } from "@/lib/format";
 import { FEATURED_LIMIT, FeaturedProducts } from "./featured-products";
 import { FinalCta } from "./final-cta";
 import { Hero } from "./hero";
-import { Intro } from "./intro";
 
 describe("Hero", () => {
   it("có heading đúng spec và 2 CTA trỏ đúng anchor", () => {
     render(<Hero />);
     const section = document.getElementById("trang-chu");
     expect(section).not.toBeNull();
-    expect(screen.getByRole("img", { name: /Bánh Bác cuộn lá xanh/ })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /Hộp quà Bác Trà Ký/ })).toHaveAttribute(
+      "src",
+      expect.stringContaining("home-hero-bac-tra-ky.webp"),
+    );
     expect(
       screen.getByRole("heading", { level: 1, name: "Bác Trà Ký – Gìn giữ tinh hoa – Tiếp nối giá trị" }),
     ).toBeInTheDocument();
@@ -27,26 +29,11 @@ describe("Hero", () => {
     ).toBeInTheDocument();
   });
 
-  it("nút mũi tên trỏ đúng phần giới thiệu", () => {
-    render(<><Hero /><Intro /></>);
-    expect(screen.getByRole("link", { name: "Cuộn xuống phần giới thiệu" })).toHaveAttribute("href", "#gioi-thieu");
-    expect(screen.getByRole("region", { name: "Một thức quà – Một câu chuyện Việt" })).toHaveAttribute("id", "gioi-thieu");
-  });
-
-  it("có ảnh chính thức thì thay riêng cụm ảnh, không thay bố cục chữ hay nút", () => {
-    render(<Hero artwork={{ src: "/images/banner.webp", alt: "Banner chính thức Bác Trà Ký" }} />);
-    expect(screen.getByRole("img", { name: "Banner chính thức Bác Trà Ký" })).toBeInTheDocument();
-    expect(screen.queryByRole("img", { name: /Bánh Bác cuộn lá xanh/ })).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Khám phá sản phẩm" })).toHaveAttribute("href", "/#san-pham");
-  });
-});
-
-describe("Intro", () => {
-  it("tiêu đề đúng spec, ảnh tranh Đông Hồ có alt tiếng Việt, nút Tìm hiểu thêm → #ve-chung-toi", () => {
-    render(<Intro />);
-    expect(screen.getByRole("heading", { level: 2, name: "Một thức quà – Một câu chuyện Việt" })).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: /Tranh Đông Hồ cá chép/ })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Tìm hiểu thêm" })).toHaveAttribute("href", "/#ve-chung-toi");
+  it("nút cuộn trỏ đến tiêu đề sản phẩm nổi bật", () => {
+    render(<><Hero /><FeaturedProducts products={products.filter((p) => p.featured)} /></>);
+    const link = screen.getByRole("link", { name: "Cuộn xuống sản phẩm nổi bật" });
+    expect(link).toHaveAttribute("href", "#featured-title");
+    expect(screen.getByRole("heading", { level: 2, name: "Sản phẩm nổi bật" })).toHaveAttribute("id", "featured-title");
   });
 });
 

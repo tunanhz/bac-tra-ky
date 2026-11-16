@@ -53,10 +53,12 @@ describe("Header", () => {
     const button = screen.getByRole("button", { name: "Mở menu" });
     expect(button).toHaveAttribute("aria-expanded", "false");
     expect(button).toHaveAttribute("aria-controls", "menu-dieu-huong");
+    expect(button).toHaveClass("rounded-full");
 
     await user.click(button);
     expect(button).toHaveAttribute("aria-expanded", "true");
     expect(button).toHaveAccessibleName("Đóng menu");
+    expect(button).toHaveClass("rounded-full");
 
     await user.click(button);
     expect(button).toHaveAttribute("aria-expanded", "false");

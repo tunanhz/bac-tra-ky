@@ -183,8 +183,8 @@ export function Header() {
           ref={menuButtonRef}
           type="button"
           className={cn(
-            "flex min-h-12 shrink-0 cursor-pointer items-center justify-center gap-2 border px-3 lg:hidden",
-            solid ? "border-be/50 bg-son-deep/55 text-be aria-expanded:border-nhu" : "rounded-full border-gac-deep/45 bg-paper/75 text-gac-deep",
+            "flex min-h-12 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full border px-4 lg:hidden",
+            solid ? "border-be/50 bg-son-deep/55 text-be aria-expanded:border-nhu" : "border-gac-deep/45 bg-paper/75 text-gac-deep",
           )}
           aria-expanded={menuOpen}
           aria-controls={MENU_ID}
