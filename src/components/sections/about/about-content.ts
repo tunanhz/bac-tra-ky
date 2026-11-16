@@ -13,25 +13,21 @@ export const ABOUT_WHO = {
 
 export const ABOUT_INSPIRATION = {
   label: "Nguồn cảm hứng ra đời thương hiệu",
-  heading: "Từ một chiếc bánh quê đến hành trình gìn giữ di sản",
+  heading: "Từ một lần nếm thử, đến hành trình gìn giữ vị xưa",
   paragraphs: [
-    "Giữa nhịp sống hiện đại, khi những món ăn mới liên tục xuất hiện, nhiều thức quà truyền thống vẫn âm thầm lưu giữ hương vị và ký ức của bao thế hệ.",
-    "Bánh Bác Giang Xá là một trong những thức quà như thế. Với sắc đỏ đặc trưng từ gấc, lớp vỏ nếp dẻo thơm, hương vừng rang và phần nhân đậu xanh bùi ngọt, chiếc bánh mang trong mình nét mộc mạc, tinh tế của ẩm thực quê hương.",
-    "Thế nhưng, không phải người trẻ nào cũng biết đến Bánh Bác hay hiểu được những giá trị văn hoá ẩn sau món bánh truyền thống này.",
-    "Từ đó, Bác Trà Ký ra đời với một mong muốn giản dị: Để Bánh Bác không chỉ là hương vị của ký ức, mà còn trở thành một phần trong trải nghiệm ẩm thực của thế hệ hôm nay.",
-    "Chúng tôi lựa chọn kết hợp Bánh Bác với Trà Sen – hai thức quà mang đậm dấu ấn văn hoá Việt – đồng thời phát triển những hương vị mới và hình thức quà tặng hiện đại.",
-    "Bởi chúng tôi tin rằng, truyền thống không nhất thiết phải đứng yên trong quá khứ. Khi được trân trọng và tiếp nối đúng cách, những giá trị ấy hoàn toàn có thể tìm được chỗ đứng trong đời sống đương đại.",
+    "Bác Trà Ký may mắn có dịp thưởng thức Bánh Bác Giang Xá – một thức quà truyền thống mang hương vị quê hương. Vị nếp dẻo thơm, nhân đậu xanh bùi ngọt cùng sắc đỏ gấc đặc trưng đã khơi dậy sự tò mò về món bánh mộc mạc mà đầy cuốn hút này.",
+    "Từ đó, chúng tôi bắt đầu hành trình tìm hiểu và phát triển Bánh Bác, với mong muốn giữ trọn hương vị truyền thống, sáng tạo thêm những trải nghiệm mới và đưa thức quà Giang Xá đến gần hơn với người trẻ hôm nay.",
   ],
 } as const;
 
 export const ABOUT_STATEMENTS = [
   {
-    title: "Sứ mệnh của Bác Trà Ký",
-    description: "Giữ trọn hương vị xưa, thêm chút sáng tạo mới để mỗi chiếc Bánh Bác không chỉ ngon mà còn kể được câu chuyện quê hương theo cách gần gũi với thế hệ trẻ.",
-  },
-  {
     title: "Tầm nhìn của Bác Trà Ký",
     description: "Đưa hương vị Bánh Bác Giang Xá vượt ra khỏi làng quê, trở thành thức quà thân thuộc trong nhịp sống hiện đại, để tinh hoa ẩm thực Việt mãi được gìn giữ và lan tỏa.",
+  },
+  {
+    title: "Sứ mệnh của Bác Trà Ký",
+    description: "Giữ trọn hương vị xưa, thêm chút sáng tạo mới để mỗi chiếc Bánh Bác không chỉ ngon mà còn kể được câu chuyện quê hương theo cách gần gũi với thế hệ trẻ.",
   },
 ] as const;
 

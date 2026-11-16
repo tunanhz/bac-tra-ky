@@ -95,21 +95,13 @@ export function AboutSection() {
               Chúng tôi bắt đầu từ đâu?
             </h3>
             <p className="mt-0 mb-6 font-heading text-quote text-tra italic">{ABOUT_INSPIRATION.heading}</p>
-            {ABOUT_INSPIRATION.paragraphs.map((paragraph, index) => (
-              <p
-                key={paragraph}
-                className={cn(
-                  "mt-0 mb-4",
-                  index === 3 ? "border-l-2 border-gac py-1 pl-5 font-heading text-[1.12rem] text-son italic" : "text-ink-soft",
-                )}
-              >
-                {paragraph}
-              </p>
+            {ABOUT_INSPIRATION.paragraphs.map((paragraph) => (
+              <p key={paragraph} className="mt-0 mb-4 text-ink-soft">{paragraph}</p>
             ))}
           </Reveal>
         </div>
 
-        <section aria-label="Sứ mệnh và tầm nhìn" className="mx-auto mt-16 grid max-w-[39rem] gap-8 sm:grid-cols-2 lg:mt-24">
+        <section aria-label="Tầm nhìn và sứ mệnh" className="mx-auto mt-16 grid max-w-[39rem] gap-8 sm:grid-cols-2 lg:mt-24">
           {ABOUT_STATEMENTS.map(({ title, description }, index) => (
             <Reveal key={title} as="article" delay={index * 100} className="flex flex-col">
               <h3 className="mt-0 mb-4 text-center text-h3 font-bold text-gac">{title}</h3>

@@ -1,6 +1,6 @@
 # Nguồn ảnh — giới thiệu và câu chuyện
 
-Ảnh cổng làng, ảnh sản phẩm và trích đoạn ấn phẩm gói bánh từ Drive do Bác Trà Ký cung cấp. Tác giả và giấy phép các ảnh Wikimedia Commons theo CC BY hoặc CC BY-SA còn sử dụng được ghi trên trang.
+Ảnh cổng làng, ảnh lễ tưởng niệm, ảnh sản phẩm và trích đoạn ấn phẩm làm bánh từ Drive do Bác Trà Ký cung cấp. Tác giả và giấy phép các ảnh Wikimedia Commons theo CC BY hoặc CC BY-SA còn sử dụng được ghi trên trang.
 
 | File | Nội dung | Dùng ở | Nguồn | Tác giả | Giấy phép |
 |---|---|---|---|---|---|
@@ -18,6 +18,8 @@
 | `la-sen-dong-nuoc.webp` | Lá sen đọng nước trên mặt ao (cắt 16:9) | CTA cuối trang | https://images.unsplash.com/photo-1783056956985-47d9394d8a4f | | Unsplash License |
 | `cong-lang-giang-xa.webp` | Cổng làng Giang Xá | Ảnh nền đầu trang (phủ tông nâu); Về chúng tôi; Câu chuyện, chương I | Drive: `Làng Giang Xá/IMG_4400.JPG` | Do Bác Trà Ký cung cấp | — |
 | `sen-bach-diep-tay-ho.webp` | Sen bách diệp Tây Hồ | Về chúng tôi (dải ảnh làng nghề) | [Ảnh gốc](https://commons.wikimedia.org/wiki/File:Sen_b%C3%A1ch_di%E1%BB%87p_T%C3%A2y_H%E1%BB%93.JPG) | Viethavvh | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); thu nhỏ, WebP cùng giấy phép |
-| `../news/chen-tra-sen-tay-ho.webp` | Chén trà sen Tây Hồ | Câu chuyện, chương III; Tin tức | [Ảnh gốc](https://commons.wikimedia.org/wiki/File:Ch%C3%A9n_tr%C3%A0_sen.jpg) | Viethavvh | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cắt khung, thu nhỏ, WebP cùng giấy phép |
-| `../products/bo-qua-banh-bac-tra-sen.webp` | Hộp quà Bánh Bác và Trà Sen | Câu chuyện, chương IV; đầu trang; Sản phẩm | Drive: `Ảnh sản phẩm và logo` | Do Bác Trà Ký cung cấp | — |
-| `goi-banh-bac.webp` | Trích ấn phẩm đôi tay gói bánh | Về chúng tôi | Drive: trích `Hành Trình Làm Bánh Bác Truyền Thống (1).png` | Do Bác Trà Ký cung cấp | — |
+| `../news/chen-tra-sen-tay-ho.webp` | Chén trà sen Tây Hồ | Tin tức | [Ảnh gốc](https://commons.wikimedia.org/wiki/File:Ch%C3%A9n_tr%C3%A0_sen.jpg) | Viethavvh | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cắt khung, thu nhỏ, WebP cùng giấy phép |
+| `../products/bo-qua-banh-bac-tra-sen.webp` | Hộp quà Bánh Bác và Trà Sen | Đầu trang; Sản phẩm | Drive: `Ảnh sản phẩm và logo` | Do Bác Trà Ký cung cấp | — |
+| `goi-banh-bac.webp` | Trích ấn phẩm đôi tay gói bánh | Về chúng tôi; Câu chuyện, chương IV | Drive: trích `Hành Trình Làm Bánh Bác Truyền Thống (1).png` | Do Bác Trà Ký cung cấp | — |
+| `le-tuong-niem-ly-nam-de.webp` | Lễ tưởng niệm Lý Nam Đế tại Giang Xá | Câu chuyện, chương II | Drive: `Làng Giang Xá/IMG_2572.HEIC` | Do Bác Trà Ký cung cấp | — |
+| `nguyen-lieu-banh-bac.webp`, `xay-bot-nep.webp`, `bac-banh-tren-chao.webp` | Nguyên liệu, chuẩn bị bột và bác bánh trên chảo | Câu chuyện, chương IV | Drive: trích `Hành Trình Làm Bánh Bác Truyền Thống (1).png` | Do Bác Trà Ký cung cấp | — |

@@ -35,13 +35,13 @@ describe("Footer (spec mục 7)", () => {
     expect(logo.querySelector("img")).toHaveAttribute("src", "/images/brand/bac-tra-ky.webp");
     expect(footer).toHaveTextContent("Gìn giữ tinh hoa – Tiếp nối giá trị");
 
-    const explore = within(footer).getByRole("heading", { name: "Khám phá" }).parentElement!;
+    const explore = within(footer).getByRole("heading", { name: "Thông tin" }).parentElement!;
     const links = within(explore).getAllByRole("link");
     expect(links.map((a) => [a.textContent, a.getAttribute("href")])).toEqual([
-      ["Trang chủ", "/#trang-chu"],
-      ["Về chúng tôi", "/#ve-chung-toi"],
-      ["Câu chuyện văn hoá", "/#cau-chuyen"],
-      ["Sản phẩm", "/#san-pham"],
+      ["Về trang chủ", "/#trang-chu"],
+      ["Khám phá câu chuyện làng nghề", "/#cau-chuyen"],
+      ["Sản phẩm Bác Trà Ký", "/#san-pham"],
+      ["Câu chuyện thương hiệu", "/#ve-chung-toi"],
       ["Tin tức", "/#tin-tuc"],
       ["Liên hệ", "/#lien-he"],
     ]);
@@ -61,6 +61,9 @@ describe("Footer (spec mục 7)", () => {
       "https://www.facebook.com/bactraky/",
     );
     expect(footer.getByRole("link", { name: "Bactraky@gmail.com" })).toHaveAttribute("href", "mailto:Bactraky@gmail.com");
+    const gmail = footer.getByRole("link", { name: "Gmail Bác Trà Ký" });
+    expect(gmail).toHaveAttribute("href", "mailto:Bactraky@gmail.com");
+    expect(gmail).not.toHaveAttribute("target");
     expect(footer.getByRole("link", { name: "0869189004" })).toHaveAttribute("href", "tel:0869189004");
     expect(footer.getByRole("link", { name: "TikTok Bác Trà Ký" })).toHaveAttribute(
       "href",
@@ -77,7 +80,7 @@ describe("Footer (spec mục 7)", () => {
     expect(footer).toHaveTextContent("Email: (đang cập nhật)");
     expect(within(footer).getByText("Facebook Bác Trà Ký (đang cập nhật)")).toBeInTheDocument();
     expect(within(footer).getByText("TikTok Bác Trà Ký (đang cập nhật)")).toBeInTheDocument();
-    expect(within(footer).queryByRole("link", { name: /Facebook|TikTok/ })).toBeNull();
+    expect(within(footer).queryByRole("link", { name: /Facebook|TikTok|Gmail/ })).toBeNull();
     for (const link of within(footer).getAllByRole("link")) {
       expect(link.getAttribute("href")).toMatch(/^\/#/);
     }

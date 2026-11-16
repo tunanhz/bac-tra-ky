@@ -1,83 +1,53 @@
 import Image from "next/image";
-import type { ReactNode } from "react";
-import { PhotoCredit } from "@/components/ui/photo-credit";
 import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
 import type { StoryChapter as StoryChapterData } from "./story-chapters";
 
-type StoryChapterProps = {
+export function StoryChapter({
+  chapter,
+  alignRight = false,
+}: {
   chapter: StoryChapterData;
-  /** Chương chẵn đặt tấm giấy lệch phải để tạo nhịp. */
   alignRight?: boolean;
-  /** Nội dung thêm cuối tấm giấy (vd. nút CTA ở chương IV). */
-  footer?: ReactNode;
-};
-
-/**
- * Một chương câu chuyện, chép khối `.story` của bản mẫu B: ảnh tràn viền 62vh (78vh từ 1024px) và tấm giấy viền đôi
- * đè lên ảnh (-110px mobile, -160px tablet, -240px desktop), số chương La Mã đỏ gấc, trích dẫn xanh trà.
- */
-export function StoryChapter({ chapter, alignRight = false, footer }: StoryChapterProps) {
+}) {
   const titleId = `${chapter.id}-title`;
   return (
-    <article id={chapter.id} aria-labelledby={titleId} className="relative pb-16 lg:pb-24">
-      <figure className="relative m-0 h-[62vh] min-h-[340px] overflow-hidden bg-be-2 lg:h-[78vh]">
-        <Image
-          src={chapter.image.src}
-          alt={chapter.image.alt}
-          fill
-          sizes="100vw"
-          className={cn(
-            chapter.image.contain ? "object-contain px-6 pt-16 pb-20 lg:pt-8 lg:pb-36" : "object-cover",
-            chapter.image.focus === "top-right" && "object-top-right",
-          )}
-        />
-        <figcaption
-          className={cn(
-            "absolute top-4 m-0 max-w-[80%] bg-be/95 px-2.5 py-1 text-xs leading-snug text-ink-soft italic",
-            chapter.image.focus === "top-right" ? "left-4" : "right-4",
-          )}
-        >
-          {chapter.image.caption}
-          {chapter.image.credit ? (
-            <span className="mt-1 block"><PhotoCredit {...chapter.image.credit} /></span>
-          ) : null}
-        </figcaption>
-      </figure>
-      <div className="wrap">
-        <Reveal
-          className={cn(
-            "frame-paper relative mx-4 -mt-[110px] max-w-[640px] px-6 pt-9 pb-8 shadow-paper md:-mt-[160px] md:px-11 md:py-12 lg:-mt-[240px]",
-            alignRight ? "md:mr-[8%] md:ml-auto" : "md:mr-0 md:ml-[8%]",
-          )}
-        >
-          <p className="eyebrow m-0">Chương {chapter.numeral}</p>
-          <p aria-hidden="true" className="m-0 font-heading text-[3.6rem] leading-none font-bold text-gac">
-            {chapter.numeral}
-          </p>
-          <h3 id={titleId} className="mt-2 mb-4 text-[clamp(1.7rem,4.5vw,2.4rem)] leading-[1.12] font-bold text-son">
-            {chapter.title}
+    <article id={chapter.id} aria-labelledby={titleId} className="scroll-mt-24">
+      <Reveal className="frame-paper grid items-center gap-6 p-4 shadow-paper md:grid-cols-2 md:gap-9 md:p-8 lg:gap-12">
+        <figure className={cn("m-0 min-w-0", alignRight && "md:order-2")}>
+          <div className="relative aspect-[4/3] overflow-hidden bg-be-2">
+            <Image
+              src={chapter.image.src}
+              alt={chapter.image.alt}
+              fill
+              sizes="(min-width: 1200px) 515px, (min-width: 768px) 46vw, 91vw"
+              className={chapter.image.contain ? "object-contain p-3" : "object-cover"}
+            />
+          </div>
+          <figcaption className="caption px-1 pt-3 text-center">
+            {chapter.image.caption}
+          </figcaption>
+        </figure>
+        <div className="min-w-0 px-1 pb-2 md:px-0 md:pb-0">
+          <p className="eyebrow m-0">{chapter.numeral} · {chapter.title}</p>
+          <h3 id={titleId} className="mt-3 mb-4 text-h3 font-bold text-gac">
+            {chapter.heading}
           </h3>
           {chapter.paragraphs.map((paragraph) => (
-            <p key={paragraph} className="mt-0 mb-4 text-ink-soft">
+            <p key={paragraph} className="mt-0 mb-3 text-ink-soft last:mb-0">
               {paragraph}
             </p>
           ))}
-          {chapter.legend ? (
-            <aside aria-label={chapter.legend.label} className="relative mt-6 mb-2 border border-dong/45 px-5 pt-6 pb-4">
-              <p className="eyebrow absolute -top-2.5 left-3 m-0 bg-paper px-2 text-[0.62rem] tracking-[0.16em] whitespace-nowrap md:left-4 md:text-[0.66rem] md:tracking-[0.28em]">{chapter.legend.label}</p>
-              <p className="m-0 text-[0.95rem] text-ink-soft italic">{chapter.legend.text}</p>
-            </aside>
+          {chapter.source ? (
+            <a
+              href={chapter.source.href}
+              className="inline-flex min-h-11 items-center text-sm font-bold text-tra underline underline-offset-4"
+            >
+              {chapter.source.label} <span aria-hidden="true" className="ml-2">↗</span>
+            </a>
           ) : null}
-          <blockquote className="mx-0 mt-[22px] mb-0 border-t border-line pt-[18px] font-heading text-[1.25rem] leading-[1.45] text-tra italic">
-            “{chapter.quote.text}”
-            <span className="mt-2 block font-body text-[0.72rem] tracking-[0.2em] text-dong not-italic uppercase">
-              {chapter.quote.source}
-            </span>
-          </blockquote>
-          {footer ? <div className="mt-7">{footer}</div> : null}
-        </Reveal>
-      </div>
+        </div>
+      </Reveal>
     </article>
   );
 }

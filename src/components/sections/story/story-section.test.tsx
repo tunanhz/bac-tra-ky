@@ -3,75 +3,45 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { FOLK_LEGEND_LABEL, STORY_CHAPTERS } from "./story-chapters";
+import { CRAFT_STEPS, STORY_CHAPTERS } from "./story-chapters";
 import { StorySection } from "./story-section";
 
-function chapterTexts(index: number): string[] {
-  const chapter = STORY_CHAPTERS[index];
-  return [...chapter.paragraphs, chapter.legend?.text ?? "", chapter.quote.text];
-}
-
 describe("StorySection", () => {
-  it("có id cau-chuyen và 4 chương đúng tên spec", () => {
+  it("dẫn đến đủ bốn chương trong thẻ 5", () => {
     render(<StorySection />);
     expect(document.getElementById("cau-chuyen")).not.toBeNull();
-    expect(STORY_CHAPTERS.map((c) => c.title)).toEqual([
-      "Hồn quê Giang Xá",
-      "Câu chuyện Bánh Bác",
-      "Nghệ thuật thưởng Trà Sen",
-      "Truyền thống tiếp nối",
-    ]);
-    for (const chapter of STORY_CHAPTERS) {
-      expect(screen.getByRole("heading", { level: 3, name: chapter.title })).toBeInTheDocument();
-      expect(document.getElementById(chapter.id)).not.toBeNull();
-    }
-  });
+    expect(screen.getByText(/Theo dấu làng xưa, tìm về hương vị cũ/)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Tìm hiểu thêm" })).toHaveAttribute("href", "#chuong-1");
 
-  it("chương III và IV có ảnh đúng chủ đề, ghi rõ nguồn và không còn nhãn minh hoạ", () => {
-    render(<StorySection />);
-    const tea = within(screen.getByRole("article", { name: "Nghệ thuật thưởng Trà Sen" }));
-    const gift = within(screen.getByRole("article", { name: "Truyền thống tiếp nối" }));
-    for (const [image, path] of [
-      [tea.getByRole("img", { name: /Những chén trà sen/ }), "/images/news/chen-tra-sen-tay-ho.webp"],
-      [gift.getByRole("img", { name: /Hộp quà Bác Trà Ký mở nắp/ }), "/images/products/bo-qua-banh-bac-tra-sen.webp"],
-    ] as const) {
-      const src = new URL(image.getAttribute("src") ?? "", "https://test.local");
-      expect(src.searchParams.get("url") ?? src.pathname).toBe(path);
-      expect(existsSync(join("public", path.slice(1)))).toBe(true);
-    }
-    expect(tea.getByRole("link", { name: "Viethavvh" })).toHaveAttribute("href", expect.stringContaining("commons.wikimedia.org"));
-    expect(tea.getByRole("link", { name: "CC BY-SA 4.0" })).toHaveAttribute("href", "https://creativecommons.org/licenses/by-sa/4.0/");
-    expect(gift.getByText(/Hộp quà Bánh Bác và Trà Sen — hình ảnh từ Bác Trà Ký/)).toBeInTheDocument();
-    expect(screen.queryByText(/Ảnh minh ho[ạa]/i)).not.toBeInTheDocument();
-  });
-
-  it("chương I nhắc Lý Nam Đế đúng chữ: chùa Bảo Phúc – chùa Giang Xá hiện nay", () => {
-    expect(chapterTexts(0).join(" ")).toContain("Lý Nam Đế");
-    expect(chapterTexts(0).join(" ")).toContain("chùa Bảo Phúc – chùa Giang Xá hiện nay");
-  });
-
-  it("đoạn nào nhắc 'tiến vua' thì chính đoạn đó ghi 'truyền thuyết dân gian'", () => {
-    const all = STORY_CHAPTERS.flatMap((_, i) => chapterTexts(i));
-    const mentions = all.filter((text) => /tiến vua/i.test(text));
-    for (const text of mentions) {
-      expect(text).toMatch(/truyền thuyết dân gian/i);
-    }
-    // Trên trang: có "tiến vua" thì phải có nhãn truyền thuyết dân gian.
-    render(<StorySection />);
-    const page = document.body.textContent ?? "";
-    if (/tiến vua/i.test(page)) {
-      expect(page).toMatch(/truyền thuyết dân gian/i);
-      expect(screen.getByRole("complementary", { name: FOLK_LEGEND_LABEL })).toBeInTheDocument();
-    }
-  });
-
-  it("mục lục chương trỏ đúng neo và chương IV có nút Khám phá sản phẩm → #san-pham", () => {
-    render(<StorySection />);
-    for (const chapter of STORY_CHAPTERS) {
-      expect(
-        screen.getByRole("link", { name: `Chương ${chapter.numeral}: ${chapter.title}` }),
-      ).toHaveAttribute("href", `#${chapter.id}`);
+    const nav = within(screen.getByRole("navigation", { name: "Các chương của câu chuyện" }));
+    for (const [index, name] of ["Hồn quê Giang Xá", "Dấu ấn lịch sử", "Hương vị quê nhà", "Bí quyết làm bánh Bác"].entries()) {
+      const id = `chuong-${index + 1}`;
+      expect(nav.getByRole("link", { name: new RegExp(name) })).toHaveAttribute("href", `#${id}`);
+      expect(document.getElementById(id)).not.toBeNull();
     }
     expect(screen.getByRole("link", { name: "Khám phá sản phẩm" })).toHaveAttribute("href", "/#san-pham");
+  });
+
+  it("phân biệt sự kiện lịch sử và truyền thuyết, chú thích đúng ảnh lễ tưởng niệm", () => {
+    render(<StorySection />);
+    const history = within(screen.getByRole("article", { name: /Vùng đất gắn liền với vua Lý Nam Đế/ }));
+    expect(history.getByText(/Năm 544.*Vạn Xuân/)).toBeInTheDocument();
+    expect(history.getByText(/chùa Linh Bảo.*chùa Bảo Phúc/)).toBeInTheDocument();
+    expect(history.getByRole("link", { name: "Xem tư liệu về chùa Bảo Phúc" })).toHaveAttribute("href", expect.stringContaining("tapchinghiencuuphathoc.vn"));
+    expect(history.getByText(/Lễ tưởng niệm Lý Nam Đế ở Giang Xá — ảnh tư liệu/)).toBeInTheDocument();
+    expect(screen.getByText(/Theo truyền thuyết dân gian.*dâng tiến vua/)).toBeInTheDocument();
+  });
+
+  it("có bốn công đoạn theo thứ tự, mỗi ảnh đều được ghi đúng nguồn và có tệp cục bộ", () => {
+    render(<StorySection />);
+    const craft = within(screen.getByRole("region", { name: /Bí quyết làm nên hương vị Bánh Bác/ }));
+    expect(craft.getAllByRole("heading", { level: 4 }).map(({ textContent }) => textContent)).toEqual([
+      "Chuẩn bị nguyên liệu", "Chuẩn bị bột bánh", "Bác bánh – giữ lửa nghề xưa", "Hoàn thiện chiếc bánh",
+    ]);
+    expect(craft.getByText(/trích từ ấn phẩm “Hành trình làm Bánh Bác”/)).toBeInTheDocument();
+    for (const { alt, src } of [...STORY_CHAPTERS.map(({ image }) => image), ...CRAFT_STEPS]) {
+      expect(screen.getByRole("img", { name: alt })).toBeInTheDocument();
+      expect(existsSync(join("public", src.slice(1)))).toBe(true);
+    }
   });
 });

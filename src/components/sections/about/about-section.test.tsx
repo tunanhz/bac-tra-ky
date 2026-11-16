@@ -26,11 +26,11 @@ describe("AboutSection", () => {
 
   it("có hai ô Sứ mệnh và Tầm nhìn với tiêu đề nằm ngoài khung nội dung", () => {
     render(<AboutSection />);
-    const statements = within(screen.getByRole("region", { name: "Sứ mệnh và tầm nhìn" }));
+    const statements = within(screen.getByRole("region", { name: "Tầm nhìn và sứ mệnh" }));
     const cards = statements.getAllByRole("article");
     const expected = [
-      ["Sứ mệnh của Bác Trà Ký", /Giữ trọn hương vị xưa, thêm chút sáng tạo mới/],
       ["Tầm nhìn của Bác Trà Ký", /Đưa hương vị Bánh Bác Giang Xá vượt ra khỏi làng quê/],
+      ["Sứ mệnh của Bác Trà Ký", /Giữ trọn hương vị xưa, thêm chút sáng tạo mới/],
     ] as const;
 
     expect(cards).toHaveLength(expected.length);

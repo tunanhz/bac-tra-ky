@@ -11,3 +11,6 @@ Nguồn ảnh bao bì: thư mục Drive `Ảnh sản phẩm và logo` (`18mFIPkz
 | `hop-2-banh.webp` | `Hộp 2 bánh.png` |
 | `hop-6-banh.webp` | `Hộp 6 bánh (Nhân đậu xanh truyền thống).png` |
 | `bo-qua-banh-bac-tra-sen.webp` | Ấn phẩm bộ quà cao cấp Bánh Bác và Trà Sen Tây Hồ |
+| `hop-6-banh-matcha.webp` | `Hộp 6 bánh (nhân matcha).png` |
+
+Tệp mang tên `Hộp 6 bánh ( Nhân mặn ).png` có cùng nội dung với ảnh hộp 6 bánh nhân đậu xanh, nên chưa dùng để minh họa vị mặn.

@@ -1,6 +1,7 @@
 import { AboutSection } from "@/components/sections/about/about-section";
 import { WhyChooseSection } from "@/components/sections/about/why-choose-section";
 import { ContactSection } from "@/components/sections/contact/contact-section";
+import { CustomerPanels } from "@/components/sections/home/customer-panels";
 import { FeaturedProducts } from "@/components/sections/home/featured-products";
 import { FinalCta } from "@/components/sections/home/final-cta";
 import { Hero } from "@/components/sections/home/hero";
@@ -19,11 +20,12 @@ export default async function HomePage() {
       <Hero />
       <Intro />
       <FeaturedProducts products={featuredProducts} />
-      <AboutSection />
-      <WhyChooseSection />
       <StorySection />
       <ProductsSection products={products} />
+      <AboutSection />
+      <WhyChooseSection />
       <NewsSection posts={posts} />
+      <CustomerPanels />
       <FinalCta />
       <ContactSection />
     </>

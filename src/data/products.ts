@@ -6,7 +6,7 @@ import type { Product, ProductCategory } from "@/lib/types";
  * Nguyên tắc: không tự tạo giá, thành phần, khối lượng, chứng nhận. Mô tả chỉ dựa trên điều spec nói;
  * chỗ chưa có dữ liệu ghi rõ "sẽ được cập nhật". Ảnh trỏ tới `/images/products/<slug>.webp`.
  *
- * TODO: thay dữ liệu thật — giá, mô tả chi tiết từng hương vị, danh mục bộ quà Trà Sen khi thương hiệu cung cấp.
+ * TODO: thay dữ liệu thật — giá và mô tả chi tiết từng hương vị khi thương hiệu cung cấp.
  */
 
 export const PRODUCT_CATEGORY_LABELS: Record<ProductCategory, string> = {
@@ -22,6 +22,8 @@ const PENDING_DETAIL = "Thông tin chi tiết về sản phẩm sẽ được B�
 
 const CREATIVE_INTRO =
   "Một phiên bản thuộc nhóm Bánh Bác hương vị sáng tạo, được Bác Trà Ký phát triển trên nền tảng tôn trọng bản sắc của Bánh Bác Giang Xá.";
+
+export const GIFT_BOX_CONTENT = ["03 bánh nhân matcha", "03 bánh nhân đậu xanh", "03 bánh nhân khoai môn", "01 hộp Trà Sen"] as const;
 
 const GIFT_BOX_INTRO = "Hộp Bánh Bác dùng để thưởng thức hoặc làm quà tặng trong những dịp gặp gỡ, sum họp.";
 
@@ -112,8 +114,7 @@ export const products: readonly Product[] = [
     shortDescription: "Bộ quà kết hợp Bánh Bác và Trà Sen — hai thức quà mang đậm dấu ấn văn hoá Việt.",
     description: [
       "Sự kết hợp giữa Bánh Bác Giang Xá và Trà Sen tạo nên một trải nghiệm thưởng thức hài hoà, đậm đà bản sắc Việt.",
-      // TODO: thay dữ liệu thật — các bộ sản phẩm kết hợp Trà Sen theo danh mục thương hiệu sẽ cung cấp (spec mục III.4).
-      "Danh mục các bộ quà kết hợp Trà Sen sẽ được Bác Trà Ký cập nhật. Vui lòng liên hệ để được tư vấn.",
+      `Hộp quà gồm: ${GIFT_BOX_CONTENT.join(", ")}.`,
     ],
     price: null,
     image: productImage("bo-qua-banh-bac-tra-sen"),

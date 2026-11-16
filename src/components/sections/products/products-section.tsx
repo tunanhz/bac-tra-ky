@@ -1,5 +1,6 @@
 import { SectionHeading } from "@/components/ui/section-heading";
 import type { Product } from "@/lib/types";
+import { GiftCollections } from "./gift-collections";
 import { ProductsCatalog } from "./products-catalog";
 
 export type ProductsSectionProps = {
@@ -21,6 +22,10 @@ export function ProductsSection({ products }: ProductsSectionProps) {
           title="Danh mục sản phẩm"
           description="Bánh Bác Giang Xá cùng Trà Sen và các hộp bánh dùng để thưởng thức hoặc làm quà tặng."
         />
+        {products.some(({ category }) => category === "qua-tang") && <GiftCollections products={products} />}
+        {products.length > 0 && (
+          <h3 className="mt-0 mb-5 text-center text-h3 font-bold text-gac">Xem từng sản phẩm</h3>
+        )}
         <ProductsCatalog products={products} />
       </div>
     </section>

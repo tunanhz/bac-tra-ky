@@ -1,7 +1,7 @@
-import { NAV_ITEMS, sectionHref, siteConfig, telHref } from "@/config/site";
+import { sectionHref, siteConfig, telHref, type SectionId } from "@/config/site";
 import type { ReactNode } from "react";
 import { Logo } from "./logo";
-import { FacebookIcon, TikTokIcon } from "./social-icons";
+import { FacebookIcon, GmailIcon, TikTokIcon } from "./social-icons";
 
 function Pending() {
   // TODO: thay dữ liệu thật — giá trị lấy từ src/config/site.ts / biến môi trường NEXT_PUBLIC_*.
@@ -17,8 +17,18 @@ type SocialLinkProps = { href: string | null; label: string; tone: string; child
 /** Màu thương hiệu của từng mạng xã hội (nền + icon), viền vàng nhũ mảnh giữ chất hộp sơn son. */
 const SOCIAL_TONES = {
   facebook: "bg-[#1877f2] text-white",
+  gmail: "bg-white",
   tiktok: "bg-[#010101] text-white [&_svg]:[filter:drop-shadow(-1.5px_-1px_0_#25f4ee)_drop-shadow(1.5px_1px_0_#fe2c55)]",
 } as const;
+
+const FOOTER_LINKS = [
+  { id: "trang-chu", label: "Về trang chủ" },
+  { id: "cau-chuyen", label: "Khám phá câu chuyện làng nghề" },
+  { id: "san-pham", label: "Sản phẩm Bác Trà Ký" },
+  { id: "ve-chung-toi", label: "Câu chuyện thương hiệu" },
+  { id: "tin-tuc", label: "Tin tức" },
+  { id: "lien-he", label: "Liên hệ" },
+] as const satisfies readonly { id: SectionId; label: string }[];
 
 function SocialLink({ href, label, tone, children }: SocialLinkProps) {
   const box = `flex size-11 items-center justify-center ring-1 ring-nhu/70 ring-offset-2 ring-offset-tram shadow-[0_4px_12px_rgba(0,0,0,0.35)] ${tone}`;
@@ -33,8 +43,8 @@ function SocialLink({ href, label, tone, children }: SocialLinkProps) {
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={href.startsWith("mailto:") ? undefined : "_blank"}
+      rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
       aria-label={label}
       className={`${box} transition-transform duration-300 hover:-translate-y-0.5 hover:scale-105`}
     >
@@ -45,7 +55,7 @@ function SocialLink({ href, label, tone, children }: SocialLinkProps) {
 
 /**
  * Footer (hướng B): nền đỏ trầm `#4a0b0e`, viền trên `3px double` vàng nhũ; 4 cột: thương hiệu, khám phá (6 mục),
- * liên hệ, kết nối (Facebook/TikTok 44px); dòng bản quyền.
+ * liên hệ, kết nối (Facebook/TikTok/Gmail 44px); dòng bản quyền.
  */
 export function Footer() {
   const { email, hotline, facebookUrl, tiktokUrl } = siteConfig;
@@ -62,9 +72,9 @@ export function Footer() {
           </div>
 
           <div>
-            <ColumnTitle>Khám phá</ColumnTitle>
+            <ColumnTitle>Thông tin</ColumnTitle>
             <ul className="m-0 list-none p-0">
-              {NAV_ITEMS.map((item) => (
+              {FOOTER_LINKS.map((item) => (
                 <li key={item.id}>
                   <a href={sectionHref(item.id)} className={linkClass}>
                     {item.label}
@@ -109,6 +119,9 @@ export function Footer() {
               </SocialLink>
               <SocialLink href={tiktokUrl} label="TikTok Bác Trà Ký" tone={SOCIAL_TONES.tiktok}>
                 <TikTokIcon className="size-[20px]" />
+              </SocialLink>
+              <SocialLink href={email ? `mailto:${email}` : null} label="Gmail Bác Trà Ký" tone={SOCIAL_TONES.gmail}>
+                <GmailIcon className="size-[21px]" />
               </SocialLink>
             </div>
             {!facebookUrl || !tiktokUrl ? (

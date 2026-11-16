@@ -1,88 +1,94 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { sectionHref } from "@/config/site";
 import { StoryChapter } from "./story-chapter";
-import { STORY_CHAPTERS } from "./story-chapters";
+import { CRAFT_STEPS, STORY_CHAPTERS } from "./story-chapters";
 
-/** Mục lục chương dạng dòng thời gian ngang: số La Mã nối bằng một đường chỉ vàng đồng. */
-function ChapterTimeline() {
+const CRAFT_CHAPTER = { id: "chuong-4", numeral: "IV", title: "Bí quyết làm bánh Bác" };
+
+function CraftSection() {
   return (
-    <nav aria-label="Các chương của câu chuyện" className="wrap mb-12 lg:mb-16">
-      <ol role="list" className="relative m-0 grid list-none grid-cols-2 gap-x-4 gap-y-8 p-0 md:grid-cols-4">
-        <span
-          aria-hidden="true"
-          className="absolute top-6 right-[12.5%] left-[12.5%] hidden h-px bg-dong/45 md:block"
-        />
-        {STORY_CHAPTERS.map((chapter) => (
-          <li key={chapter.id} className="relative text-center">
-            <a href={`#${chapter.id}`} className="group inline-flex flex-col items-center gap-3 no-underline">
-              <span aria-hidden="true" className="flex size-12 items-center justify-center rounded-full border border-dong/60 bg-be font-heading text-[1.1rem] font-bold text-gac transition-colors duration-300 ease-son group-hover:border-gac group-hover:bg-gac group-hover:text-be">
-                {chapter.numeral}
-              </span>
-              <span className="max-w-[16ch] text-[0.95rem] leading-snug text-ink group-hover:text-gac">
-                <span className="sr-only">Chương {chapter.numeral}:</span> {chapter.title}
-              </span>
-            </a>
-          </li>
+    <section id={CRAFT_CHAPTER.id} aria-labelledby="craft-title" className="scroll-mt-24 pt-4">
+      <div className="mb-7 text-center">
+        <p className="eyebrow m-0">IV · Giữ lửa nghề xưa</p>
+        <h3 id="craft-title" className="mt-2 mb-0 text-h2 font-bold text-gac">
+          Bí quyết làm nên hương vị Bánh Bác
+        </h3>
+      </div>
+      <ol role="list" className="m-0 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-4">
+        {CRAFT_STEPS.map((step, i) => (
+          <Reveal
+            key={step.title}
+            as="li"
+            delay={i * 80}
+            className="frame-paper min-w-0 p-3 shadow-paper"
+          >
+            <div className="relative aspect-[2/1] overflow-hidden bg-be-2">
+              <Image
+                src={step.src}
+                alt={step.alt}
+                fill
+                sizes="(min-width: 1200px) 260px, (min-width: 1024px) 24vw, (min-width: 640px) 46vw, 90vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="px-2 pt-4 pb-2">
+              <p className="eyebrow m-0 text-tra">Công đoạn 0{i + 1}</p>
+              <h4 className="mt-2 mb-2 text-lg font-bold leading-snug text-son">{step.title}</h4>
+              <p className="m-0 text-[0.95rem] leading-relaxed text-ink-soft">{step.text}</p>
+            </div>
+          </Reveal>
         ))}
       </ol>
-    </nav>
-  );
-}
-
-/** Dải nghỉ mắt giữa các chương: ba cảm nhận thương hiệu spec yêu cầu truyền tải. */
-function Interlude() {
-  return (
-    <Reveal className="wrap pb-16 text-center lg:pb-24">
-      <p className="m-0 font-heading text-[clamp(1.5rem,1rem+2vw,2.4rem)] leading-[1.3] tracking-[0.12em] text-gac uppercase">
-        <span className="block md:inline">Truyền thống</span>
-        <span aria-hidden="true" className="hidden md:inline">
-          {" – "}
-        </span>
-        <span className="sr-only md:hidden">, </span>
-        <span className="block md:inline">Tinh tế</span>
-        <span aria-hidden="true" className="hidden md:inline">
-          {" – "}
-        </span>
-        <span className="sr-only md:hidden">, </span>
-        <span className="block md:inline">Gần gũi</span>
+      <p className="caption mt-4 text-center">
+        Hình ảnh công đoạn trích từ ấn phẩm “Hành trình làm Bánh Bác” của Bác Trà Ký.
       </p>
-      <span aria-hidden="true" className="mx-auto mt-5 block h-px w-20 bg-dong/60" />
-    </Reveal>
+      <div className="mt-6 text-center">
+        <Button href={sectionHref("san-pham")}>Khám phá sản phẩm</Button>
+      </div>
+    </section>
   );
 }
 
-/**
- * Câu chuyện văn hoá (id `cau-chuyen`) — 4 chương theo spec mục III.3: dòng thời gian chương, ảnh lớn tràn viền xen
- * tấm giấy chữ ngắn, scroll reveal, trích dẫn nổi bật. Cuối chương IV có nút "Khám phá sản phẩm".
- */
 export function StorySection() {
+  const chapters = [...STORY_CHAPTERS, CRAFT_CHAPTER];
   return (
-    <section id="cau-chuyen" aria-labelledby="story-title" className="pt-12 md:pt-[72px] lg:pt-24">
+    <section id="cau-chuyen" aria-labelledby="story-title" className="section-y border-y border-line bg-be-2/40">
       <div className="wrap">
         <SectionHeading
           id="story-title"
-          eyebrow="Bốn chương"
-          title="Câu chuyện văn hoá"
-          description="Hồn quê Giang Xá, Bánh Bác, Trà Sen và hành trình tiếp nối một thức quà truyền thống."
+          eyebrow="Câu chuyện văn hoá · Giang Xá"
+          title="Khám phá câu chuyện làng nghề"
+          description="Theo dấu làng xưa, tìm về hương vị cũ. Ở Giang Xá, mỗi chiếc Bánh Bác mang theo vị quê nhà và sự khéo léo của những người gìn giữ nghề qua nhiều thế hệ."
+          className="mb-5 lg:mb-6"
         />
-      </div>
-      <ChapterTimeline />
-      {STORY_CHAPTERS.map((chapter, index) => (
-        <div key={chapter.id}>
-          <StoryChapter
-            chapter={chapter}
-            alignRight={index % 2 === 1}
-            footer={
-              index === STORY_CHAPTERS.length - 1 ? (
-                <Button href={sectionHref("san-pham")}>Khám phá sản phẩm</Button>
-              ) : undefined
-            }
-          />
-          {index === 1 ? <Interlude /> : null}
+        <div className="mb-10 text-center">
+          <Button href="#chuong-1">Tìm hiểu thêm</Button>
         </div>
-      ))}
+        <nav aria-label="Các chương của câu chuyện" className="mb-8 lg:mb-12">
+          <ol role="list" className="m-0 grid list-none grid-cols-2 gap-2 p-0 md:grid-cols-4">
+            {chapters.map(({ id, numeral, title }) => (
+              <li key={id} className="min-w-0">
+                <a
+                  href={`#${id}`}
+                  className="flex h-full min-h-11 items-center gap-2 border border-line bg-paper px-2.5 py-2 text-sm leading-snug text-son no-underline transition-colors hover:border-gac hover:text-gac sm:px-4"
+                >
+                  <span aria-hidden="true" className="shrink-0 font-heading font-bold text-gac">
+                    {numeral}
+                  </span>
+                  <span className="sr-only">Chương {numeral}: </span>{title}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+        <div className="grid gap-8 lg:gap-12">
+          {STORY_CHAPTERS.map((chapter, index) => <StoryChapter key={chapter.id} chapter={chapter} alignRight={index % 2 === 1} />)}
+          <CraftSection />
+        </div>
+      </div>
     </section>
   );
 }

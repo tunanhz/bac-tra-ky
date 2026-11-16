@@ -17,3 +17,15 @@ export function TikTokIcon(props: IconProps) {
     </svg>
   );
 }
+
+export function GmailIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 18" aria-hidden="true" focusable="false" {...props}>
+      <path fill="#4285f4" d="M0 4v12a2 2 0 0 0 2 2h3V7.75z" />
+      <path fill="#34a853" d="M24 4v12a2 2 0 0 1-2 2h-3V7.75z" />
+      <path fill="#ea4335" d="M5 1.75 12 7l7-5.25v6L12 13 5 7.75z" />
+      <path fill="#c5221f" d="M0 2.5A2.5 2.5 0 0 1 4 0.5l1 1.25v6L0 4z" />
+      <path fill="#fbbc04" d="M24 2.5a2.5 2.5 0 0 0-4-2L19 1.75v6L24 4z" />
+    </svg>
+  );
+}
