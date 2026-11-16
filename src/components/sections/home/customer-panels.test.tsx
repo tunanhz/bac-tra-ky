@@ -1,11 +1,12 @@
 // @vitest-environment jsdom
-import { render, screen, within } from "@testing-library/react";
+import { act, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { siteConfig } from "@/config/site";
 import type { CustomerOffer } from "@/data/customer-content";
 import { CustomerFeedbackForm } from "./customer-feedback-form";
 import { CustomerPanels } from "./customer-panels";
+import { OfferWindow } from "./offer-window";
 
 const draftOffer: CustomerOffer = {
   status: "draft", title: "Tên ưu đãi thử nghiệm", description: "Nội dung thử nghiệm", terms: ["Thể lệ thử nghiệm"],
@@ -22,6 +23,10 @@ describe("CustomerPanels", () => {
     expect(feedback.queryByText("Khách thử nghiệm")).not.toBeInTheDocument();
     const offers = within(screen.getByRole("region", { name: "Ưu đãi" }));
     expect(offers.queryByText(draftOffer.title)).not.toBeInTheDocument();
+    expect(offers.queryByRole("timer")).not.toBeInTheDocument();
+    expect(offers.queryByRole("form")).not.toBeInTheDocument();
+    expect(offers.queryByText(/DỮ LIỆU MẪU/)).not.toBeInTheDocument();
+    expect(offers.getByText(/Hiện chưa có chương trình ưu đãi/)).toBeInTheDocument();
     expect(offers.getByRole("link", { name: "Theo dõi trên Facebook" })).toHaveAttribute("href", siteConfig.facebookUrl);
     expect(offers.getByRole("link", { name: "Xem các bộ quà" })).toHaveAttribute("href", "/#san-pham");
   });
@@ -35,6 +40,28 @@ describe("CustomerPanels", () => {
     expect(list.getAllByRole("listitem")).toHaveLength(1);
     expect(list.getByRole("blockquote")).toHaveTextContent("Nội dung được phép đăng trong test");
     expect(list.getByText("4/5 sao")).toBeInTheDocument();
+  });
+});
+
+describe("OfferWindow", () => {
+  it("hiện thời gian thực theo mốc hết hạn và gỡ CTA chương trình khi hết giờ", () => {
+    vi.useFakeTimers({ toFake: ["setInterval", "clearInterval", "performance"] });
+    try {
+      const serverNow = Date.parse("2026-11-16T16:59:58Z");
+      render(<OfferWindow serverNow={serverNow} endTime={serverNow + 2000} expired={<p>Đã hết ưu đãi</p>}>
+        <a href="#lien-he">Liên hệ nhận ưu đãi</a>
+      </OfferWindow>);
+      expect(screen.getByRole("timer")).toHaveTextContent("02");
+      expect(screen.getByRole("link", { name: "Liên hệ nhận ưu đãi" })).toBeInTheDocument();
+      act(() => vi.advanceTimersByTime(1000));
+      expect(screen.getByRole("timer")).toHaveTextContent("01");
+      act(() => vi.advanceTimersByTime(1000));
+      expect(screen.queryByRole("timer")).not.toBeInTheDocument();
+      expect(screen.queryByRole("link", { name: "Liên hệ nhận ưu đãi" })).not.toBeInTheDocument();
+      expect(screen.getByText("Đã hết ưu đãi")).toBeInTheDocument();
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });
 

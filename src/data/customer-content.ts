@@ -36,11 +36,16 @@ function vietnamMidnight(date: string): number {
   return utc - 7 * HOUR_MS;
 }
 
+/** Mốc hết hạn là 00:00 của ngày kế tiếp theo giờ Việt Nam. */
+export function getOfferEndTime(endsOn: string): number {
+  return vietnamMidnight(endsOn) + DAY_MS;
+}
+
 export function getActiveOffer(offer: CustomerOffer | null, now: number): CustomerOffer | null {
   if (offer?.status !== "published" || !offer.title.trim() || !offer.description.trim() || !offer.terms.length || offer.terms.some((term) => !term.trim())) {
     return null;
   }
   const start = vietnamMidnight(offer.startsOn);
-  const end = vietnamMidnight(offer.endsOn) + DAY_MS;
+  const end = getOfferEndTime(offer.endsOn);
   return now >= start && now < end ? offer : null;
 }

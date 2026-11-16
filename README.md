@@ -44,6 +44,8 @@ public/images/          ảnh (nguồn ghi ở CREDITS.md)
   đăng. Dùng `src/data/customer-content.ts` để đưa phản hồi thật đã được đồng ý và chương trình được thương hiệu duyệt lên
   web. Ghi `status: "published"` khi đã xác nhận. Một ưu đãi cần tiêu đề, mô tả, điều kiện và `startsOn` / `endsOn`
   (`yyyy-mm-dd`, gồm cả ngày kết thúc theo giờ Việt Nam); chỉ chương trình trong thời gian áp dụng được hiển thị.
+  Route `/preview/uu-dai` chỉ mở bằng `npm run dev` để thử giao diện chương trình và form mẫu không gửi/lưu dữ liệu.
+  Bản production không mở route này; trang chủ vẫn chỉ hiển thị ưu đãi đã được duyệt.
 - `POST /api/contact` hiện chỉ kiểm dữ liệu và trả **501** (chưa có backend lưu liên hệ); giao diện không bao giờ
   báo "gửi thành công" khi chưa lưu thật.
 - Chỗ còn thiếu dữ liệu thật được đánh dấu `TODO: thay dữ liệu thật`.

@@ -415,9 +415,9 @@
   }
 }
 
-/* Menu và hộp thoại mở: ẩn phím tắt liên hệ khỏi tầm nhìn và thứ tự Tab. */
+/* Ẩn phím tắt liên hệ khi mở menu, hộp thoại hoặc bản xem thử form. */
 @layer components {
-  body:has(header [aria-controls="menu-dieu-huong"][aria-expanded="true"], [role="dialog"][aria-modal="true"]) .quick-contact {
+  body:has(header [aria-controls="menu-dieu-huong"][aria-expanded="true"], [role="dialog"][aria-modal="true"], [data-offer-preview]) .quick-contact {
     visibility: hidden;
   }
 }
