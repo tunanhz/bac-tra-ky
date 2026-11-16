@@ -40,6 +40,10 @@ public/images/          ảnh (nguồn ghi ở CREDITS.md)
   sang MongoDB mà không sửa component.
 - Đầu trang dùng ảnh sản phẩm sẵn có nếu `homeHeroArtwork` trong `src/config/home-hero.ts` là `null`. Khi nhận banner,
   đặt ảnh không chữ trong `public/images/` và điền `src`/`alt` để thay cụm ảnh, không phải sửa chữ hoặc nút.
+- **Góc Feedback / Ưu đãi:** khách soạn đánh giá trên trang, rồi tự bấm gửi trong ứng dụng email; website không lưu hay tự
+  đăng. Dùng `src/data/customer-content.ts` để đưa phản hồi thật đã được đồng ý và chương trình được thương hiệu duyệt lên
+  web. Ghi `status: "published"` khi đã xác nhận. Một ưu đãi cần tiêu đề, mô tả, điều kiện và `startsOn` / `endsOn`
+  (`yyyy-mm-dd`, gồm cả ngày kết thúc theo giờ Việt Nam); chỉ chương trình trong thời gian áp dụng được hiển thị.
 - `POST /api/contact` hiện chỉ kiểm dữ liệu và trả **501** (chưa có backend lưu liên hệ); giao diện không bao giờ
   báo "gửi thành công" khi chưa lưu thật.
 - Chỗ còn thiếu dữ liệu thật được đánh dấu `TODO: thay dữ liệu thật`.
