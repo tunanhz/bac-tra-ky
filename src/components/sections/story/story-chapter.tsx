@@ -19,7 +19,7 @@ export function StoryChapter({
           <div className="relative flex min-h-[560px] items-center lg:min-h-[660px] xl:min-h-[720px]">
             {/* Background scenic photo on the right matching img_001 / img_002 */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
-              <figure className="m-0 h-full w-full">
+              <figure className="relative m-0 h-full w-full">
                 <Image
                   src={chapter.image.src}
                   alt={chapter.image.alt}
