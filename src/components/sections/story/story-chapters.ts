@@ -26,9 +26,9 @@ export const STORY_CHAPTERS: readonly StoryChapter[] = [
       "Chính từ mảnh đất ấy, những thức quà dân dã như Bánh Bác đã trở thành một phần trong ký ức và nét đặc trưng của ẩm thực địa phương.",
     ],
     image: {
-      src: "/images/story/cong-lang-giang-xa.webp",
-      alt: "Cổng đá và hàng cờ nhiều màu tại Giang Xá",
-      caption: "Cổng làng Giang Xá — ảnh tư liệu",
+      src: "/images/story/hon-que-giang-xa-bg.webp",
+      alt: "Cổng làng Giang Xá, cánh đồng lúa và đĩa Bánh Bác sen",
+      caption: "Cổng làng Giang Xá — nét đẹp làng quê Bắc Bộ",
     },
     relatedPhotos: [
       {

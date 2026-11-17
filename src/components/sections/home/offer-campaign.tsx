@@ -7,31 +7,31 @@ import { cn } from "@/lib/cn";
 import { getOfferEndTime, type CustomerOffer } from "@/data/customer-content";
 import { OfferWindow } from "./offer-window";
 
-const PHOTO_SIZES = "(min-width: 1200px) 320px, (min-width: 1024px) 26vw, 41vw";
+const PHOTO_SIZES = "(min-width: 1200px) 420px, (min-width: 1024px) 30vw, 45vw";
 
 function OfferIllustrations() {
   return (
     <>
       <figure data-offer-art="banh" className="m-0 self-center lg:col-start-1 lg:row-start-1">
-        <div className="relative aspect-[5/4] overflow-hidden rounded-t-[42%] border border-nhu/60 bg-be lg:aspect-[4/5] lg:rounded-t-[48%]">
+        <div className="relative aspect-[3/4] overflow-hidden rounded-3xl shadow-lg sm:aspect-[4/5]">
           <Image
-            src={cakePhoto}
-            alt="Hộp hai chiếc Bánh Bác, bao bì xanh và đỏ"
+            src="/images/brand/uu-dai-left.webp"
+            alt="Hộp quà Bánh Bác và khay bánh thơm bùi"
             fill
             sizes={PHOTO_SIZES}
-            className="object-contain"
+            className="object-cover"
           />
         </div>
-        <figcaption className="caption pt-2 text-center text-cream-muted">Hộp Bánh Bác</figcaption>
+        <figcaption className="caption pt-2 text-center text-cream-muted">Hộp Bánh Bác truyền thống</figcaption>
       </figure>
       <figure data-offer-art="tra" className="m-0 self-center lg:col-start-3 lg:row-start-1">
-        <div className="relative aspect-[5/4] overflow-hidden rounded-t-[42%] border border-nhu/60 bg-be lg:aspect-[4/5] lg:rounded-t-[48%]">
+        <div className="relative aspect-[3/4] overflow-hidden rounded-3xl shadow-lg sm:aspect-[4/5]">
           <Image
-            src={teaPhoto}
-            alt="Ấm trà đất và chén trà đặt bên khay Bánh Bác"
+            src="/images/brand/uu-dai-right.webp"
+            alt="Ấm trà sen Tây Hồ bên chén trà ấm và hoa sen"
             fill
             sizes={PHOTO_SIZES}
-            className="object-cover object-[12%_50%]"
+            className="object-cover"
           />
         </div>
         <figcaption className="caption pt-2 text-center text-cream-muted">Bánh Bác bên chén trà sen</figcaption>
@@ -54,7 +54,7 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
       id="uu-dai"
       aria-labelledby={headingId}
       aria-describedby={preview ? "offer-preview-notice" : undefined}
-      className="on-dark frame-gilt relative isolate min-w-0 scroll-mt-24 overflow-hidden bg-son-deep text-be"
+      className="on-dark relative isolate min-w-0 scroll-mt-24 overflow-hidden rounded-3xl bg-son-deep text-be shadow-xl"
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_0%,var(--color-gac-deep),transparent_72%)]" />
       {preview && (
@@ -75,9 +75,10 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
             intro={(
               <header className="mt-4">
                 {discount && (
-                  <p className="m-0 mb-2 font-heading text-[clamp(3.5rem,8vw,6rem)] leading-none font-bold text-nhu italic">
-                    <span className="sr-only">Giảm </span>{discount}
-                  </p>
+                  <div className="m-0 mb-2">
+                    <span className="block font-display text-xl tracking-[0.2em] text-be/90 uppercase sm:text-2xl">GIẢM</span>
+                    <span className="font-heading text-[clamp(3.5rem,8vw,5.5rem)] leading-none font-bold text-nhu italic">{discount}</span>
+                  </div>
                 )}
                 <h3 className={cn("m-0 mb-2 font-bold text-be", discount ? "text-h3" : "text-h2")}>{offer.title}</h3>
                 <p className="mx-auto mt-0 mb-0 max-w-[40ch] text-sm text-cream-muted sm:text-base">{offer.description}</p>

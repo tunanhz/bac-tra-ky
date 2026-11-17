@@ -16,8 +16,8 @@ type FigureProps = {
 /** Ảnh trên tấm giấy viền đôi (`frame-paper`) với chú thích nghiêng bên dưới. Dùng trên nền be. */
 export function PaperFigure({ src, alt, sizes, caption, mediaClassName, className }: FigureProps) {
   return (
-    <figure className={cn("frame-paper m-0 p-3 shadow-paper", className)}>
-      <div className={cn("relative overflow-hidden", mediaClassName)}>
+    <figure className={cn("frame-paper m-0 rounded-2xl p-3 shadow-paper", className)}>
+      <div className={cn("relative overflow-hidden rounded-xl", mediaClassName)}>
         <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" />
       </div>
       <figcaption className="caption px-1.5 pt-3 pb-1 text-center">{caption}</figcaption>
@@ -26,18 +26,17 @@ export function PaperFigure({ src, alt, sizes, caption, mediaClassName, classNam
 }
 
 /**
- * Ảnh trong khung passe-partout sơn son (khối `.band figure` của bản mẫu B): nền son đậm đệm 14px, chỉ vàng lùi vào
- * 8px, chú thích màu kem.
+ * Ảnh trong khung sơn son: nền son đậm đệm 14px, bo góc mềm mại, chú thích màu kem.
  */
 export function LacquerFigure({ src, alt, sizes, caption, mediaClassName, className }: FigureProps) {
   return (
     <figure
       className={cn(
-        "on-dark m-0 flex flex-col bg-son-deep p-3.5 outline-1 -outline-offset-8 outline-[rgb(226_191_110/0.55)] outline-solid",
+        "on-dark m-0 flex flex-col rounded-2xl bg-son-deep p-3.5 shadow-md",
         className,
       )}
     >
-      <div className={cn("relative flex-1 overflow-hidden", mediaClassName)}>
+      <div className={cn("relative flex-1 overflow-hidden rounded-xl", mediaClassName)}>
         <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" />
       </div>
       <figcaption className="px-1.5 pt-3 pb-0.5 text-center text-[0.74rem] leading-snug text-cream-muted italic">

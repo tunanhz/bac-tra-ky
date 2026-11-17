@@ -93,8 +93,8 @@ export function ContactSection() {
             </InfoRow>
           </dl>
 
-          <figure className="on-dark mt-8 mb-0 hidden bg-son-deep sm:block p-2.5 outline outline-offset-[-8px] outline-nhu/55 md:p-3.5">
-            <div className="relative aspect-[16/9] overflow-hidden">
+          <figure className="on-dark mt-8 mb-0 hidden rounded-2xl bg-son-deep p-3.5 shadow-md sm:block">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-xl">
               <Image
                 src={VILLAGE_IMAGE}
                 alt="Sân lát gạch với lọng và đồ lễ ở làng Giang Xá"
@@ -103,14 +103,14 @@ export function ContactSection() {
                 className="object-cover"
               />
             </div>
-            <figcaption className="caption px-1.5 pt-3 pb-0.5 text-center">
+            <figcaption className="caption px-1.5 pt-3 pb-0.5 text-center text-cream-muted">
               Không gian làng Giang Xá — ảnh tư liệu
             </figcaption>
           </figure>
         </div>
 
         <Reveal className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
-          <div className="frame-paper px-5 py-8 shadow-paper sm:px-9 sm:py-10">
+          <div className="rounded-3xl bg-paper px-6 py-9 shadow-sm sm:px-10 sm:py-11">
             <h3 className="mt-0 mb-6 text-h3 font-semibold text-son">Để lại lời nhắn</h3>
             <ContactForm />
           </div>

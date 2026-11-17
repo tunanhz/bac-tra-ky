@@ -53,7 +53,7 @@ export function FlavorGallery({ slides, label }: { slides: readonly FlavorSlide[
       onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false); }}
     >
       <figure className="m-0">
-        <div className="relative aspect-[4/3] overflow-hidden border border-line bg-be-2/50">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-be-2/50">
           {slide.pending ? (
             <div aria-hidden="true" className="grid h-full place-content-center px-5 text-center">
               <span className="eyebrow block text-tra">Bác Trà Ký</span>

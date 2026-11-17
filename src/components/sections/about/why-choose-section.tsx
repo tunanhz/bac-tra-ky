@@ -15,7 +15,7 @@ const reasons = [
   {
     title: "Nhân bánh đa dạng, hợp gu người trẻ",
     description: "Bên cạnh nhân đậu xanh truyền thống là những lựa chọn mới như khoai môn, matcha, đậu đỏ và nhân mặn, cho mỗi lần thưởng thức thêm thú vị.",
-    image: "/images/products/banh-bac-nhan-matcha.webp",
+    image: "/images/products/hop-6-banh-matcha.webp",
     alt: "Ấn phẩm bao bì Bánh Bác nhân matcha của Bác Trà Ký",
     caption: "Hộp Bánh Bác nhân matcha · Ấn phẩm Bác Trà Ký",
     contain: true,
@@ -23,24 +23,25 @@ const reasons = [
   {
     title: "Bao bì chỉn chu, trao quà thêm ý nghĩa",
     description: "Thiết kế mang nét văn hóa truyền thống, với nhiều quy cách đóng gói phù hợp để tự thưởng thức, chia sẻ hay dành tặng người thân.",
-    image: "/images/products/bo-qua-banh-bac-tra-sen.webp",
-    alt: "Ấn phẩm bao bì bộ quà Bánh Bác và Trà Sen của Bác Trà Ký",
-    caption: "Bộ quà Bánh Bác và Trà Sen · Ấn phẩm Bác Trà Ký",
+    image: "/images/products/hop-2-banh.webp",
+    alt: "Hộp 2 bánh của Bác Trà Ký",
+    caption: "Hộp 2 bánh · Ấn phẩm Bác Trà Ký",
     contain: true,
   },
   {
     title: "Mỗi chiếc bánh, một câu chuyện làng nghề",
     description: "Khám phá nguồn gốc Bánh Bác Giang Xá, kỹ thuật làm bánh thủ công và những giá trị văn hóa được gìn giữ qua nhiều thế hệ.",
-    image: "/images/common/san-lang-giang-xa.webp",
-    alt: "Ảnh tư liệu sân làng Giang Xá với lọng và đồ lễ",
-    caption: "Sân làng Giang Xá · Ảnh tư liệu",
+    image: "/images/story/cong-lang-giang-xa.webp",
+    alt: "Ảnh tư liệu cổng làng Giang Xá với lọng và cờ lễ",
+    caption: "Cổng làng Giang Xá · Ảnh tư liệu",
   },
   {
     title: "Bánh Bác và trà sen – Một trải nghiệm trọn vị",
     description: "Vị bánh dẻo bùi hòa cùng hương trà sen thanh nhẹ, tạo nên những phút giây thưởng thức vừa thân quen vừa mới mẻ.",
-    image: "/images/news/thuong-tra-cung-banh-truyen-thong.webp",
-    alt: "Bánh Bác và chén trà trong ấn phẩm của Bác Trà Ký",
-    caption: "Bánh Bác bên ấm trà · Ấn phẩm Bác Trà Ký",
+    image: "/images/products/bo-qua-banh-bac-tra-sen.webp",
+    alt: "Hộp quà cao cấp Bác Trà Ký kết hợp Bánh Bác và Trà Sen Tây Hồ",
+    caption: "Hộp quà cao cấp Bánh Bác & Trà Sen · Bác Trà Ký",
+    contain: true,
   },
 ];
 
@@ -61,12 +62,12 @@ export function WhyChooseSection() {
               as="li"
               delay={(index % 3) * 90}
               className={cn(
-                "frame-paper flex flex-col gap-4 p-3 shadow-paper lg:col-span-2",
+                "flex flex-col gap-4 rounded-3xl bg-paper p-5 shadow-sm transition-shadow hover:shadow-md lg:col-span-2",
                 index === 3 && "lg:col-start-2",
               )}
             >
               <figure className="m-0">
-                <div className="relative aspect-[16/11] overflow-hidden border border-line bg-be-2/50">
+                <div className="relative aspect-[16/11] overflow-hidden rounded-xl bg-be-2/60">
                   <Image
                     src={reason.image}
                     alt={reason.alt}
@@ -75,7 +76,7 @@ export function WhyChooseSection() {
                     className={reason.contain ? "object-contain" : "object-cover"}
                   />
                 </div>
-                <figcaption className="caption border-b border-line px-2 py-2 text-ink-soft">{reason.caption}</figcaption>
+                <figcaption className="caption px-2 pt-2.5 text-center text-ink-soft">{reason.caption}</figcaption>
               </figure>
               <div className="px-2 pb-3 sm:px-3">
                 <span aria-hidden="true" className="eyebrow block text-dong">0{index + 1}</span>

@@ -18,8 +18,8 @@ export function Logo({ size = "header", className }: LogoProps) {
       <Image
         src="/images/brand/bac-tra-ky.webp"
         alt=""
-        width={420}
-        height={331}
+        width={1615}
+        height={1253}
         unoptimized
         className={cn(
           "block w-auto [filter:drop-shadow(0_0_1px_#fff1cf)_drop-shadow(0_0_2px_#f5d597)]",

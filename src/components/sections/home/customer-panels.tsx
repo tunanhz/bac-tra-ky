@@ -9,7 +9,7 @@ function FeedbackSection({ reviews }: { reviews: readonly CustomerReview[] }) {
   const published = reviews.filter((review) => review.status === "published");
 
   return (
-    <section id="goc-feedback" aria-labelledby="feedback-title" className="frame-paper mx-auto w-full max-w-3xl min-w-0 scroll-mt-24 p-5 shadow-paper sm:p-9">
+    <section id="goc-feedback" aria-labelledby="feedback-title" className="mx-auto w-full max-w-3xl min-w-0 scroll-mt-24 rounded-3xl bg-paper p-6 shadow-sm sm:p-9">
       <p className="eyebrow m-0">Lời nhắn từ bạn</p>
       <h2 id="feedback-title" className="mt-3 mb-3 text-h2 font-bold text-gac">Góc Feedback</h2>
       {published.length > 0 && (

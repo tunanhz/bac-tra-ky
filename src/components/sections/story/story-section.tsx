@@ -24,10 +24,10 @@ function CraftSection() {
             key={step.title}
             as="li"
             delay={i * 80}
-            className="frame-paper min-w-0 p-3 shadow-paper"
+            className="min-w-0 rounded-2xl bg-paper p-4 shadow-sm transition-shadow hover:shadow-md"
           >
             <figure className="m-0">
-              <div className="relative aspect-[5/2] overflow-hidden border border-line bg-be-2">
+              <div className="relative aspect-[5/2] overflow-hidden rounded-xl bg-be-2/60">
                 <Image
                   src={step.src}
                   alt={step.alt}
@@ -71,14 +71,14 @@ export function StorySection() {
           <Button href="#chuong-1">Tìm hiểu thêm</Button>
         </div>
         <nav aria-label="Các chương của câu chuyện" className="mb-8 lg:mb-12">
-          <ol role="list" className="m-0 grid list-none grid-cols-2 gap-2 p-0 md:grid-cols-4">
+          <ol role="list" className="m-0 grid list-none grid-cols-2 gap-3 p-0 md:grid-cols-4">
             {CHAPTER_NAV.map(({ id, numeral, title }) => (
               <li key={id} className="min-w-0">
                 <a
                   href={`#${id}`}
-                  className="flex h-full min-h-11 items-center gap-2 border border-line bg-paper px-2.5 py-2 text-sm leading-snug text-son no-underline transition-colors hover:border-gac hover:text-gac sm:px-4"
+                  className="flex h-full min-h-11 items-center justify-center gap-2.5 rounded-full bg-paper/90 px-4 py-2.5 text-sm font-medium leading-snug text-son no-underline shadow-sm transition-all hover:bg-gac hover:text-be hover:shadow-md sm:px-5"
                 >
-                  <span aria-hidden="true" className="shrink-0 font-heading font-bold text-gac">
+                  <span aria-hidden="true" className="shrink-0 font-heading font-bold text-gac group-hover:text-be">
                     {numeral}
                   </span>
                   <span className="sr-only">Chương {numeral}: </span>{title}

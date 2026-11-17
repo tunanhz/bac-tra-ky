@@ -27,10 +27,10 @@ describe("/tin-tuc/[slug]", () => {
     await expect(NewsArticle({ params: params("khong-ton-tai") })).rejects.toThrow(NOT_FOUND);
   });
 
-  it("bài mẫu có tiêu đề h1, nhãn Bản nháp, nội dung và bài liên quan", async () => {
+  it("bài viết có tiêu đề h1, không có nhãn Bản nháp, nội dung và bài liên quan", async () => {
     render(await NewsArticle({ params: params(post.slug) }));
     expect(screen.getByRole("heading", { level: 1, name: post.title })).toBeInTheDocument();
-    expect(screen.getAllByText(DRAFT_LABEL).length).toBeGreaterThan(0);
+    expect(screen.queryByText(DRAFT_LABEL)).not.toBeInTheDocument();
     expect(screen.getByText(post.content[0])).toBeInTheDocument();
     expect(screen.getByRole("img", { name: post.coverImageAlt })).toBeInTheDocument();
     expect(screen.getByText("Ấn phẩm Bác Trà Ký")).toBeInTheDocument();
@@ -38,12 +38,12 @@ describe("/tin-tuc/[slug]", () => {
     expect(screen.getByRole("heading", { level: 2, name: "Bài viết liên quan" })).toBeInTheDocument();
   });
 
-  it.each(newsPosts)("metadata bài mẫu: $slug có nhãn và noindex", async (draft) => {
-    const meta = await generateMetadata({ params: params(draft.slug) } as PageProps<"/tin-tuc/[slug]">);
-    expect(meta.title).toBe(`[Bản nháp] ${draft.title}`);
-    expect(meta.robots).toEqual({ index: false, follow: true });
+  it.each(newsPosts)("metadata bài viết: $slug có tiêu đề chuẩn và index", async (article) => {
+    const meta = await generateMetadata({ params: params(article.slug) } as PageProps<"/tin-tuc/[slug]">);
+    expect(meta.title).toBe(article.title);
+    expect(meta.robots).toBeUndefined();
     expect(meta.openGraph?.title).toBe(meta.title);
-    expect(meta.description).toBe(draft.excerpt);
+    expect(meta.description).toBe(article.excerpt);
   });
 
   it("bài trà sen ghi nguồn, giấy phép và mô tả phần chỉnh ảnh", async () => {

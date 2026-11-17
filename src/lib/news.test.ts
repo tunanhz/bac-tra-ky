@@ -5,10 +5,10 @@ import { NEWS_CATEGORIES, NEWS_CATEGORY_LABELS, newsPosts } from "@/data/news";
 import { getNewsPostBySlug, getNewsPosts, getRelatedNewsPosts } from "./news";
 
 describe("dữ liệu tin tức tĩnh", () => {
-  it("có 6 bài, slug không trùng, đều được ghi là nội dung mẫu", () => {
+  it("có 6 bài, slug không trùng, là bài viết chính thức đã hoàn thiện", () => {
     expect(newsPosts).toHaveLength(6);
     expect(new Set(newsPosts.map((p) => p.slug)).size).toBe(6);
-    expect(newsPosts.every((p) => p.isDraft)).toBe(true);
+    expect(newsPosts.every((p) => !p.isDraft)).toBe(true);
   });
 
   it("mỗi nhóm nội dung có ít nhất 1 bài, nhóm nào cũng có nhãn", () => {

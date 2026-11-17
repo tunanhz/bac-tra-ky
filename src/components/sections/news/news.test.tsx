@@ -74,18 +74,18 @@ describe("NewsCard", () => {
 });
 
 describe("NewsSection / NewsBoard", () => {
-  it("id tin-tuc, tiêu đề 'Tin tức', bài nổi bật + lưới 5 card, cả 6 bài mẫu đều có nhãn Bản nháp và không ghi ngày đăng", () => {
+  it("id tin-tuc, tiêu đề 'Tin tức', bài nổi bật + lưới 5 card, là bản chính thức không có nhãn Bản nháp và có ngày đăng", () => {
     const { container } = render(<NewsSection posts={posts} />);
     expect(container.querySelector("section#tin-tuc")).not.toBeNull();
     expect(screen.getByRole("heading", { level: 2, name: "Tin tức" })).toBeInTheDocument();
     expect(screen.getByText("Bài nổi bật")).toBeInTheDocument();
-    expect(screen.getByText(/không phải thông báo sự kiện hay ưu đãi đang diễn ra/)).toBeInTheDocument();
+    expect(screen.queryByText(/không phải thông báo sự kiện hay ưu đãi đang diễn ra/)).not.toBeInTheDocument();
     expect(screen.getByRole("img", { name: posts[0].coverImageAlt })).toBeInTheDocument();
     expect(screen.getByText("Ấn phẩm Bác Trà Ký")).toBeInTheDocument();
     expect(gridTitles()).toHaveLength(5);
-    expect(screen.getAllByText(DRAFT_LABEL)).toHaveLength(posts.length + 1);
+    expect(screen.queryByText(DRAFT_LABEL)).not.toBeInTheDocument();
     expect(screen.queryByText("Ảnh minh hoạ – sẽ thay ảnh thật")).not.toBeInTheDocument();
-    expect(container.querySelector("time")).toBeNull();
+    expect(container.querySelectorAll("time").length).toBeGreaterThan(0);
   });
 
   it("bộ lọc 5 chủ đề + Tất cả; lọc đúng chủ đề, ẩn bài nổi bật", async () => {

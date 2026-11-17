@@ -62,14 +62,14 @@ export function GiftCollections({ products }: { products: readonly Product[] }) 
         const premium = product === "bo-qua-banh-bac-tra-sen";
         const titleId = `collection-${product}`;
         return (
-          <article key={product} aria-labelledby={titleId} className={cn("frame-paper flex min-w-0 flex-col p-4 shadow-paper sm:p-5", premium && "md:max-lg:col-span-2 md:max-lg:w-full md:max-lg:max-w-[26rem] md:max-lg:justify-self-center")}>
+          <article key={product} aria-labelledby={titleId} className={cn("flex min-w-0 flex-col rounded-3xl bg-paper p-5 shadow-sm transition-shadow hover:shadow-md sm:p-6", premium && "md:max-lg:col-span-2 md:max-lg:w-full md:max-lg:max-w-[26rem] md:max-lg:justify-self-center")}>
             <header className="px-1 pt-1 pb-4">
               <p className="eyebrow m-0">0{index + 1} · {size}</p>
               <h3 id={titleId} className="mt-2 mb-0 text-h3 font-bold text-gac">{title}</h3>
             </header>
             {premium ? (
               <figure className="m-0">
-                <div className="relative aspect-[4/3] overflow-hidden border border-line bg-be-2/50">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-be-2/50">
                   <Image src={box.image} alt={box.imageAlt} fill sizes="(min-width: 1200px) 350px, (min-width: 1024px) 29vw, (min-width: 768px) 44vw, 88vw" className="object-contain" />
                 </div>
                 <figcaption className="caption min-h-14 px-1 pt-3 text-ink-soft">Hộp quà Bánh Bác và Trà Sen · Ảnh từ Bác Trà Ký</figcaption>

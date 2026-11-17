@@ -1,6 +1,6 @@
 import type { NewsCategory, NewsPost } from "@/lib/types";
 
-/** Nội dung mẫu cho chuyên mục Tin tức. Chỉ bỏ nhãn nháp khi Bác Trà Ký duyệt nội dung. */
+/** Bài viết chính thức cho chuyên mục Tin tức của Bác Trà Ký. */
 
 export const NEWS_CATEGORY_LABELS: Record<NewsCategory, string> = {
   "hoat-dong": "Tin tức và hoạt động Bác Trà Ký",
@@ -41,7 +41,7 @@ export const newsPosts: readonly NewsPost[] = [
     coverIsBrandBanner: true,
     publishedAt: "2026-11-15",
     featured: true,
-    isDraft: true,
+    isDraft: false,
   },
   {
     slug: "banh-bac-giang-xa-sac-do-gac-huong-vung-rang",
@@ -59,7 +59,7 @@ export const newsPosts: readonly NewsPost[] = [
     coverCaption: "Hình ảnh từ Bác Trà Ký",
     publishedAt: "2026-11-15",
     featured: false,
-    isDraft: true,
+    isDraft: false,
   },
   {
     slug: "tra-sen-net-thanh-tao-cua-van-hoa-tra-viet",
@@ -83,7 +83,7 @@ export const newsPosts: readonly NewsPost[] = [
     },
     publishedAt: "2026-11-15",
     featured: false,
-    isDraft: true,
+    isDraft: false,
   },
   {
     slug: "giang-xa-vung-dat-cua-ky-uc-va-huong-nep",
@@ -101,7 +101,7 @@ export const newsPosts: readonly NewsPost[] = [
     coverCaption: "Giang Xá — ảnh tư liệu",
     publishedAt: "2026-11-15",
     featured: false,
-    isDraft: true,
+    isDraft: false,
   },
   {
     slug: "nhung-huong-vi-sang-tao-cua-banh-bac",
@@ -119,7 +119,7 @@ export const newsPosts: readonly NewsPost[] = [
     coverCaption: "Hình hộp matcha từ Bác Trà Ký",
     publishedAt: "2026-11-15",
     featured: false,
-    isDraft: true,
+    isDraft: false,
   },
   {
     slug: "thuong-tra-cung-banh-truyen-thong",
@@ -136,6 +136,6 @@ export const newsPosts: readonly NewsPost[] = [
     coverCaption: "Trích ấn phẩm về cách làm Bánh Bác",
     publishedAt: "2026-11-15",
     featured: false,
-    isDraft: true,
+    isDraft: false,
   },
 ];

@@ -39,7 +39,7 @@ export function AboutSection() {
           </div>
         </Reveal>
 
-        <Reveal as="article" className="frame-paper mt-8 grid items-center gap-7 p-4 shadow-paper md:grid-cols-12 md:p-7 lg:mt-12 lg:gap-10">
+        <Reveal as="article" className="mt-8 grid items-center gap-7 rounded-3xl bg-paper p-6 shadow-sm md:grid-cols-12 md:p-9 lg:mt-12 lg:gap-10">
           <div className="md:col-span-5">
             <PaperFigure
               src="/images/story/qua-gac.webp"
@@ -76,8 +76,8 @@ export function AboutSection() {
               as="article"
               delay={index * 100}
               className={cn(
-                "px-6 py-7 text-center sm:px-8",
-                index === 0 ? "frame-paper text-tra shadow-paper" : "on-dark frame-gilt bg-son text-be",
+                "rounded-3xl px-6 py-7 text-center sm:px-8",
+                index === 0 ? "bg-paper text-tra shadow-sm" : "on-dark bg-son text-be shadow-md",
               )}
             >
               <h3 className={cn("mt-0 mb-4 text-h3", index === 0 ? "text-gac" : "text-be")}>{title}</h3>
@@ -95,7 +95,7 @@ export function AboutSection() {
           </div>
           <ol role="list" className="m-0 grid list-none gap-5 p-0 md:grid-cols-3 lg:gap-7">
             {ABOUT_CORE_VALUES.items.map(({ title, description }, index) => (
-              <Reveal as="li" key={title} delay={index * 100} className="frame-paper p-6 shadow-paper lg:p-8">
+              <Reveal as="li" key={title} delay={index * 100} className="rounded-3xl bg-paper p-6 shadow-sm transition-shadow hover:shadow-md lg:p-8">
                 <span aria-hidden="true" className="eyebrow block text-dong">0{index + 1}</span>
                 <h4 className="mt-3 mb-3 text-h3 font-bold text-son">{title}</h4>
                 <p className="m-0 border-t border-line pt-4 text-ink-soft">{description}</p>

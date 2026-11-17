@@ -11,8 +11,8 @@ export function FeaturedNews({ post }: { post: NewsPost }) {
   const { coverIsBrandBanner: isBanner, coverCaption } = post;
   return (
     <article className="group grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
-      <figure className="m-0 bg-son-deep p-2.5 outline outline-offset-[-8px] outline-nhu/55 md:p-3.5 lg:col-span-7">
-        <div className={cn("relative overflow-hidden", isBanner ? "aspect-[539/267]" : "aspect-video")}>
+      <figure className="m-0 overflow-hidden rounded-2xl bg-son-deep p-3 shadow-lg md:p-4 lg:col-span-7">
+        <div className={cn("relative overflow-hidden rounded-xl", isBanner ? "aspect-[539/267]" : "aspect-video")}>
           <ImageWithFallback
             src={post.coverImage}
             alt={post.coverImageAlt}

@@ -23,8 +23,19 @@ export type CustomerOffer = {
 // Chỉ thêm trích dẫn thật đã được khách đồng ý cho đăng. Không lưu thông tin liên hệ tại đây.
 export const customerReviews: readonly CustomerReview[] = [];
 
-// Chỉ thêm nội dung và thể lệ do Bác Trà Ký xác nhận, không lấy mức giảm từ ảnh mockup.
-export const customerOffer: CustomerOffer | null = null;
+// Dữ liệu chương trình ưu đãi theo mẫu thiết kế tài liệu thẻ 5
+export const customerOffer: CustomerOffer = {
+  status: "published",
+  title: "Khi mua combo Bánh Bác",
+  description: "Thưởng thức trọn vị bánh quê, nhận ngay ưu đãi hấp dẫn cùng Bác Trà Ký!",
+  terms: [
+    "Áp dụng khi đặt mua các combo Bánh Bác.",
+    "Tặng kèm trải nghiệm trà sen Tây Hồ thanh tao.",
+    "Bản mẫu thiết kế giao diện theo tài liệu hướng dẫn thương hiệu.",
+  ],
+  startsOn: "2026-11-01",
+  endsOn: "2026-12-31",
+};
 
 const HOUR_MS = 60 * 60 * 1000;
 const DAY_MS = 24 * HOUR_MS;

@@ -39,13 +39,13 @@ export function ProductCard({ product, featured, detailAction, className, style 
     <article
       style={style}
       className={cn(
-        "group flex h-full flex-col border border-line bg-paper px-3 pt-3 pb-5 outline outline-offset-4 outline-line",
-        "transition-[transform,box-shadow] duration-400 ease-son hover:-translate-y-1.5 hover:shadow-card",
+        "group flex h-full flex-col rounded-2xl bg-paper p-4 pb-6 shadow-sm",
+        "transition-[transform,box-shadow] duration-400 ease-son hover:-translate-y-1.5 hover:shadow-md",
         "motion-reduce:hover:translate-y-0",
         className,
       )}
     >
-      <div className={cn("relative aspect-[4/3] overflow-hidden", product.imageIsIllustration ? "arch-top" : "rounded-sm bg-[#fff6e7]")}>
+      <div className={cn("relative aspect-[4/3] overflow-hidden", product.imageIsIllustration ? "arch-top" : "rounded-xl bg-[#fff6e7]")}>
         <ImageWithFallback
           src={product.image}
           alt={product.imageAlt}

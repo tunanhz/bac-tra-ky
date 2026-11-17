@@ -30,8 +30,8 @@
   --color-cream-soft: #efdfc0; /* chữ thân trên nền sơn son */
   --color-cream-muted: #e9d9b7; /* chữ phụ trên nền tối */
 
-  /* Chữ */
-  --font-heading: var(--font-playfair), "Playfair Display", Georgia, serif;
+  /* Chữ theo tài liệu: Heading dùng CDA Mê Ly Display, Body dùng Caudex */
+  --font-heading: var(--font-mely), var(--font-playfair), "Playfair Display", Georgia, serif;
   --font-display: var(--font-mely), var(--font-heading);
   --font-body: var(--font-caudex), "Caudex", Georgia, serif;
 
@@ -177,19 +177,19 @@
   }
 }
 
-/* Khung giấy viền đôi (card, tấm chương truyện, form) */
+/* Khung giấy cao cấp (card, tấm chương truyện, form) - bo góc mềm mại, không viền kép thô */
 @utility frame-paper {
   background: var(--color-paper);
-  border: 1px solid var(--color-line);
-  outline: 1px solid var(--color-line);
-  outline-offset: -8px;
+  border-radius: 1rem;
+  border: 1px solid rgb(226 214 186 / 0.5);
+  box-shadow: 0 4px 20px -2px rgba(40, 10, 8, 0.04);
 }
 
-/* Khung viền đôi thếp vàng trên nền tối (hero panel, passe-partout) */
+/* Khung thếp vàng trên nền tối (hero panel, passe-partout) */
 @utility frame-gilt {
-  border: 1px solid rgb(226 191 110 / 0.75);
-  outline: 1px solid rgb(226 191 110 / 0.4);
-  outline-offset: -8px;
+  border-radius: 1rem;
+  border: 1px solid rgb(226 191 110 / 0.4);
+  box-shadow: 0 6px 24px -2px rgba(0, 0, 0, 0.2);
 }
 
 /* Ảnh vòm cung gợi cửa võng / ô cửa đình (card sản phẩm) */

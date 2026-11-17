@@ -17,14 +17,14 @@ export function NewsCard({ post, className }: NewsCardProps) {
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col border border-line bg-paper p-3 pb-5 outline outline-offset-4 outline-line",
-        "transition-[transform,box-shadow] duration-400 ease-son hover:-translate-y-1.5 hover:shadow-card",
+        "group relative flex h-full flex-col rounded-2xl bg-paper p-4 pb-6 shadow-sm",
+        "transition-[transform,box-shadow] duration-400 ease-son hover:-translate-y-1.5 hover:shadow-md",
         "motion-reduce:hover:translate-y-0",
         className,
       )}
     >
       <figure className="m-0">
-        <div className="relative aspect-[3/2] overflow-hidden bg-be-2">
+        <div className="relative aspect-[3/2] overflow-hidden rounded-xl bg-be-2">
           <ImageWithFallback
             src={post.coverImage}
             alt={post.coverImageAlt}
@@ -37,7 +37,7 @@ export function NewsCard({ post, className }: NewsCardProps) {
             )}
           />
         </div>
-        {post.coverCaption && <figcaption className="caption border-b border-line px-2 py-2 text-ink-soft">{post.coverCaption}</figcaption>}
+        {post.coverCaption && <figcaption className="caption px-2 pt-2.5 text-center text-ink-soft">{post.coverCaption}</figcaption>}
       </figure>
       <div className="flex flex-1 flex-col px-2 pt-4.5">
         <NewsMeta post={post} showDate={false} />
