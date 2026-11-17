@@ -140,15 +140,11 @@
 
 /* ---------------------------------------------------------- utilities */
 
-/* Khung nội dung: tối đa 1200px, lề 20px (mobile) / 32px (≥768px) */
+/* Khung nội dung tràn rộng toàn màn hình đồng bộ với trang chủ (home-hero) */
 @utility wrap {
   width: 100%;
-  max-width: 1200px;
   margin-inline: auto;
-  padding-inline: 20px;
-  @media (min-width: 768px) {
-    padding-inline: 32px;
-  }
+  padding-inline: clamp(1.25rem, 5.3vw, 7rem);
 }
 
 /* Nhãn nhỏ viết hoa giãn chữ (eyebrow). Trên nền be: vàng đồng; trong .on-dark: vàng nhũ */

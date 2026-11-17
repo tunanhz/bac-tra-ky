@@ -117,24 +117,24 @@ export function StoryChapter({
     );
   }
 
-  // Chapter 2: Dấu ấn lịch sử (Slide 3: ảnh bên trái, text bên phải, không khung mờ ở dưới, to tiêu đề, bỏ badge)
+  // Chapter 2: Dấu ấn lịch sử (Slide 3: ảnh bên trái, text bên phải, không khung mờ ở dưới, to tiêu đề, blur aura ảnh)
   if (chapter.id === "chuong-2") {
     return (
       <article id={chapter.id} aria-labelledby={titleId} className="scroll-mt-24 py-4">
         <Reveal className="grid items-center gap-8 md:grid-cols-12 md:gap-12">
-          {/* Ảnh bên trái với hiệu ứng mềm viền / blur shadow */}
-          <figure className="m-0 md:col-span-5 lg:col-span-5">
-            <div className="group relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lg ring-1 ring-gac/10">
-              <div
-                aria-hidden="true"
-                className="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-gac/20 via-nhu/20 to-transparent blur-md transition-opacity group-hover:opacity-100"
-              />
+          {/* Ảnh bên trái với hiệu ứng mềm viền / blur shadow aura */}
+          <figure className="relative m-0 md:col-span-5 lg:col-span-5">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -inset-3 -z-10 rounded-3xl bg-gac/20 blur-2xl"
+            />
+            <div className="group relative aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl ring-1 ring-gac/20">
               <Image
                 src={chapter.image.src}
                 alt={chapter.image.alt}
                 fill
                 sizes="(min-width: 1024px) 460px, 90vw"
-                className="object-cover"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </div>
             <figcaption className="caption px-1 pt-3 text-center text-ink-soft">
@@ -142,11 +142,11 @@ export function StoryChapter({
             </figcaption>
           </figure>
 
-          {/* Text bên phải */}
+          {/* Text bên phải - Tiêu đề to ra theo Slide 3 */}
           <div className="min-w-0 md:col-span-7 lg:col-span-7">
             <h3
               id={titleId}
-              className="mt-0 mb-4 font-display text-2xl font-bold leading-snug text-gac sm:text-3xl lg:text-4xl"
+              className="mt-0 mb-4 font-display text-3xl font-bold leading-tight text-gac sm:text-4xl lg:text-5xl"
             >
               {chapter.heading}
             </h3>
@@ -195,7 +195,7 @@ export function StoryChapter({
           <div className="relative z-10 w-full p-6 sm:p-9 md:p-11 lg:w-[58%] lg:p-14">
             <h3
               id={titleId}
-              className="mt-0 mb-4 font-display text-2xl font-bold leading-snug text-gac sm:text-3xl lg:text-4xl"
+              className="mt-0 mb-4 font-display text-3xl font-bold leading-tight text-gac sm:text-4xl lg:text-5xl"
             >
               {chapter.heading}
             </h3>

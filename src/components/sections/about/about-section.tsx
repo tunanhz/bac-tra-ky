@@ -102,8 +102,8 @@ export function AboutSection() {
           </div>
         </Reveal>
 
-        {/* Slide 11: Giá trị cốt lõi - Tiêu đề to, nền làng quê hoa sen, số 01 02 03 nổi bật, di chuột đổi màu đỏ */}
-        <Reveal className="relative overflow-hidden rounded-3xl bg-[#fbf6ea] p-7 shadow-md sm:p-10 lg:p-14">
+        {/* Slide 11: Giá trị cốt lõi - Tràn rộng, Khung màu đỏ đậm, Tiêu đề to ra theo Slide 11 */}
+        <Reveal className="relative overflow-hidden rounded-3xl bg-[#fbf6ea] p-6 shadow-md sm:p-9 md:p-10 lg:p-14">
           {/* Nền làng quê hoa sen theo Slide 11 */}
           <div className="pointer-events-none absolute inset-0 opacity-20">
             <Image
@@ -115,32 +115,32 @@ export function AboutSection() {
             />
           </div>
 
-          <div className="relative z-10">
-            <div className="mx-auto mb-10 max-w-2xl text-center">
-              <h3 id="core-values-title" className="mt-0 mb-3 font-display text-3xl font-bold tracking-tight text-gac sm:text-4xl lg:text-5xl">
+          <div className="relative z-10 w-full">
+            <div className="mb-8 text-center sm:mb-12">
+              <h3 id="core-values-title" className="mt-0 mb-3 font-display text-3xl font-bold tracking-tight text-gac sm:text-4xl lg:text-5xl xl:text-6xl">
                 {ABOUT_CORE_VALUES.heading}
               </h3>
-              <p className="m-0 font-serif text-base font-semibold text-tra sm:text-lg">
+              <p className="m-0 font-serif text-base font-semibold text-tra sm:text-xl">
                 {ABOUT_CORE_VALUES.tagline}
               </p>
             </div>
 
-            {/* 3 cards: khi hover đổi sang màu đỏ đậm theo Slide 11 */}
+            {/* 3 cards: Khung màu đỏ đậm, số 01 02 03 nổi bật, tràn rộng theo Slide 11 */}
             <ol role="list" className="m-0 grid list-none gap-6 p-0 md:grid-cols-3 lg:gap-8">
               {ABOUT_CORE_VALUES.items.map(({ title, description }, index) => (
                 <li
                   key={title}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-line/60 bg-paper/95 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gac hover:bg-gac hover:text-be hover:shadow-xl sm:p-7"
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-nhu/35 bg-[#8e0b16] p-6 text-be shadow-lg transition-all duration-300 hover:-translate-y-1.5 hover:border-nhu hover:bg-[#a10e1b] hover:shadow-2xl sm:p-8"
                 >
                   <div>
                     {/* Đánh số như ảnh mẫu Slide 11 */}
-                    <div className="mb-4 inline-flex size-12 items-center justify-center rounded-xl bg-tra/10 font-heading text-lg font-bold text-tra transition-colors duration-300 group-hover:bg-be group-hover:text-gac">
+                    <div className="mb-4 inline-flex size-12 items-center justify-center rounded-xl bg-white/15 font-heading text-xl font-bold text-nhu shadow-inner">
                       0{index + 1}
                     </div>
-                    <h4 className="mt-0 mb-3 text-xl font-bold text-son transition-colors duration-300 group-hover:text-be">
+                    <h4 className="mt-0 mb-3 text-xl font-bold text-be transition-colors duration-300 sm:text-2xl">
                       {title}
                     </h4>
-                    <p className="m-0 border-t border-line/50 pt-3.5 text-sm leading-relaxed text-ink-soft transition-colors duration-300 group-hover:border-be/30 group-hover:text-be/90 sm:text-base">
+                    <p className="m-0 border-t border-white/20 pt-4 text-sm leading-relaxed text-be/90 sm:text-base">
                       {description}
                     </p>
                   </div>
