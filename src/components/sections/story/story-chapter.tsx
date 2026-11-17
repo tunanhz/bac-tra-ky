@@ -54,7 +54,7 @@ export function StoryChapter({
                 />
                 <span className="text-son/40">|</span>
                 <span className="border-b-2 border-gac pb-0.5 text-xs font-bold tracking-wider text-son uppercase sm:text-sm">
-                  Section 1 – Hồn quê Giang Xá
+                  {chapter.title}
                 </span>
               </div>
 
@@ -139,7 +139,7 @@ export function StoryChapter({
         <div className="min-w-0 px-1 pb-2 md:px-0 md:pb-0">
           <div className="mb-2 flex items-center gap-2">
             <span className="border-b-2 border-gac pb-0.5 text-xs font-bold tracking-wider text-son uppercase sm:text-sm">
-              Section {chapter.numeral === "II" ? "2" : "3"} – {chapter.title}
+              {chapter.title}
             </span>
           </div>
           <h3 id={titleId} className="mt-2 mb-4 text-h3 font-bold text-gac">
