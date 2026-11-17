@@ -5,42 +5,28 @@ import { cn } from "@/lib/cn";
 const reasons = [
   {
     title: "Hương vị truyền thống, chất riêng Giang Xá",
-    description: "Bánh nếp dẻo thơm, nhân đậu xanh bùi ngọt cùng sắc đỏ gấc đặc trưng, lưu giữ hương vị Bánh Bác qua bao thế hệ.",
+    description: "Bánh nếp dẻo thơm, nhân đậu xanh bùi ngọt cùng sắc đỏ gấc đặc trưng, lưu giữ trọn vẹn qua bao thế hệ.",
     image: "/images/common/banh-bac-giang-xa.webp",
-    alt: "Bánh Bác cuộn lá xanh bên những lát bánh có nhân đậu xanh",
-    caption: "Bánh Bác nhân đậu xanh truyền thống",
-    contain: true,
   },
   {
     title: "Nhân bánh đa dạng, hợp gu người trẻ",
-    description: "Bên cạnh nhân đậu xanh truyền thống là những lựa chọn mới như khoai môn, matcha, đậu đỏ và nhân mặn, cho mỗi lần thưởng thức thêm thú vị.",
+    description: "Bên cạnh đậu xanh truyền thống là khoai môn, matcha, đậu đỏ và nhân mặn, cho mỗi lần thưởng thức thêm thú vị.",
     image: "/images/products/hop-6-banh-matcha.webp",
-    alt: "Ấn phẩm bao bì Bánh Bác nhân matcha của Bác Trà Ký",
-    caption: "Hộp Bánh Bác nhân matcha · Ấn phẩm Bác Trà Ký",
-    contain: true,
   },
   {
     title: "Bao bì chỉn chu, trao quà thêm ý nghĩa",
-    description: "Thiết kế mang nét văn hóa truyền thống, với nhiều quy cách đóng gói phù hợp để tự thưởng thức, chia sẻ hay dành tặng người thân.",
+    description: "Thiết kế mang nét văn hóa truyền thống, nhiều quy cách đóng gói tiện lợi để thưởng thức hoặc làm quà biếu.",
     image: "/images/products/hop-2-banh.webp",
-    alt: "Hộp 2 bánh của Bác Trà Ký",
-    caption: "Hộp 2 bánh · Ấn phẩm Bác Trà Ký",
-    contain: true,
   },
   {
     title: "Mỗi chiếc bánh, một câu chuyện làng nghề",
-    description: "Khám phá nguồn gốc Bánh Bác Giang Xá, kỹ thuật làm bánh thủ công và những giá trị văn hóa được gìn giữ qua nhiều thế hệ.",
+    description: "Khám phá nguồn gốc Bánh Bác Giang Xá, kỹ thuật thủ công và những giá trị văn hóa được tiếp nối ngàn năm.",
     image: "/images/story/cong-lang-giang-xa.webp",
-    alt: "Ảnh tư liệu cổng làng Giang Xá với lọng và cờ lễ",
-    caption: "Cổng làng Giang Xá · Ảnh tư liệu",
   },
   {
     title: "Bánh Bác và trà sen – Một trải nghiệm trọn vị",
-    description: "Vị bánh dẻo bùi hòa cùng hương trà sen thanh nhẹ, tạo nên những phút giây thưởng thức vừa thân quen vừa mới mẻ.",
+    description: "Vị bánh dẻo bùi hòa cùng hương trà sen Tây Hồ thanh nhẹ, tạo nên những phút giây thưởng trà an yên, đậm vị.",
     image: "/images/products/bo-qua-banh-bac-tra-sen.webp",
-    alt: "Hộp quà cao cấp Bác Trà Ký kết hợp Bánh Bác và Trà Sen Tây Hồ",
-    caption: "Hộp quà cao cấp Bánh Bác & Trà Sen · Bác Trà Ký",
-    contain: true,
   },
 ];
 
@@ -48,26 +34,37 @@ export function WhyChooseSection() {
   return (
     <section id="tai-sao-chon-bac-tra-ky" aria-labelledby="why-choose-title" className="section-y border-y border-line bg-be-2/45">
       <div className="wrap">
-        {/* Slide 13: Format phong cách Làng Nghề Nổi Tiếng - Nền đỏ trầm sang trọng, tiêu đề to, card tinh tế */}
-        <div className="relative overflow-hidden rounded-3xl bg-[#300609] p-7 text-be shadow-xl sm:p-10 lg:p-14">
-          <div className="pointer-events-none absolute inset-0 opacity-15">
+        {/* Banner format theo ảnh mẫu người dùng cung cấp:
+            - Nền làng nghề mái ngói cổ kính, phủ màu đỏ sơn son cinematic
+            - Tiêu đề MỤC LỤC kiểu dáng cao, dõng dạc màu vàng nhũ Bác Trà Ký
+            - Dãy 5 thẻ bo góc tròn màu giấy dó, trên đầu góc trái có huy hiệu tròn lồi màu đỏ sơn son & viền vàng nhũ (chuẩn bảng màu thương hiệu, không lấy màu xanh rêu như ảnh mẫu)
+        */}
+        <div className="relative overflow-hidden rounded-3xl bg-[#250406] p-7 text-be shadow-2xl sm:p-10 lg:p-14">
+          {/* Nền làng quê cổ kính với mái ngói và không gian thủ công */}
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <Image
               src="/images/story/hon-que-giang-xa-bg.webp"
-              alt="Phong cảnh làng nghề Giang Xá"
+              alt="Phong cảnh làng nghề cổ truyền Giang Xá"
               fill
               sizes="100vw"
-              className="object-cover"
+              className="object-cover object-center opacity-30"
+            />
+            {/* Lớp phủ màu sơn son trầm cinematic */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-b from-[#1f0305]/95 via-[#2d0508]/85 to-[#1c0204]/95"
             />
           </div>
 
           <div className="relative z-10">
-            <div className="mx-auto mb-10 max-w-2xl text-center">
-              <span className="text-xs font-bold tracking-widest text-nhu uppercase">
+            {/* Tiêu đề cao, dõng dạc, màu vàng nhũ theo phong cách MỤC LỤC trong ảnh mẫu */}
+            <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-14">
+              <span className="inline-block rounded-full border border-nhu/60 bg-black/30 px-4 py-1 text-xs font-bold tracking-[0.25em] text-nhu uppercase backdrop-blur-sm">
                 Giá trị khác biệt
               </span>
               <h2
                 id="why-choose-title"
-                className="mt-2 mb-3 font-display text-3xl font-bold tracking-tight text-be sm:text-4xl lg:text-5xl"
+                className="mt-4 mb-3 font-display text-3xl font-extrabold tracking-wide text-nhu uppercase drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] sm:text-4xl md:text-5xl lg:text-6xl"
               >
                 Tại sao nên chọn Bác Trà Ký?
               </h2>
@@ -76,48 +73,31 @@ export function WhyChooseSection() {
               </p>
             </div>
 
-            <ol role="list" className="m-0 grid list-none gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Hàng 5 thẻ theo format ảnh mẫu: Card bo góc giấy dó, huy hiệu số tròn lồi ở góc trên bên trái, màu đỏ sơn son chuẩn bản sắc thương hiệu */}
+            <ol role="list" className="m-0 grid list-none grid-cols-1 gap-8 pt-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-4 lg:pt-6">
               {reasons.map((reason, index) => (
                 <Reveal
                   key={reason.title}
                   as="li"
-                  delay={(index % 3) * 90}
-                  className={cn(
-                    "group flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-black/35 p-5 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-nhu/60 hover:bg-black/50 hover:shadow-xl sm:p-6",
-                    index === 3 && "sm:max-lg:col-span-2",
-                    index === 4 && "lg:col-span-2"
-                  )}
+                  delay={index * 80}
+                  className="group relative flex flex-col justify-between rounded-3xl border border-line/70 bg-[#fbf5e6] p-5 pt-9 text-center text-ink shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-nhu hover:shadow-2xl sm:p-5 sm:pt-10"
                 >
-                  <div>
-                    <figure className="m-0">
-                      <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-black/40">
-                        <Image
-                          src={reason.image}
-                          alt={reason.alt}
-                          fill
-                          sizes="(min-width: 1200px) 340px, (min-width: 768px) 44vw, 88vw"
-                          className={cn(
-                            "transition-transform duration-500 group-hover:scale-105",
-                            reason.contain ? "object-contain p-2" : "object-cover"
-                          )}
-                        />
-                      </div>
-                      <figcaption className="caption px-1 pt-2 text-center text-xs text-cream-muted">
-                        {reason.caption}
-                      </figcaption>
-                    </figure>
+                  {/* Huy hiệu số tròn lồi ở góc trên bên trái theo format ảnh mẫu, đổi sang màu đỏ sơn son & viền vàng nhũ chuẩn Bác Trà Ký */}
+                  <div
+                    className="absolute -top-5 left-4 flex size-12 items-center justify-center rounded-full border-2 border-nhu bg-[#8e0b16] font-heading text-xl font-extrabold text-be shadow-lg ring-4 ring-[#fbf5e6] transition-transform duration-300 group-hover:scale-110 sm:-top-5 sm:left-5 sm:size-13 sm:text-2xl"
+                    aria-hidden="true"
+                  >
+                    0{index + 1}
+                  </div>
 
-                    <div className="pt-4">
-                      <span className="inline-block rounded-full bg-nhu/20 px-2.5 py-0.5 text-xs font-bold text-nhu uppercase">
-                        0{index + 1}
-                      </span>
-                      <h3 className="mt-2 mb-2 text-lg font-bold text-be sm:text-xl">
-                        {reason.title}
-                      </h3>
-                      <p className="m-0 text-sm leading-relaxed text-cream-muted">
-                        {reason.description}
-                      </p>
-                    </div>
+                  <div className="flex flex-1 flex-col justify-between">
+                    {/* Tiêu đề cấp 3 chuẩn test & font chữ thương hiệu */}
+                    <h3 className="mt-1 mb-3 font-display text-[1.05rem] font-bold leading-snug text-son sm:text-[1.15rem]">
+                      {reason.title}
+                    </h3>
+                    <p className="m-0 border-t border-line/70 pt-3 text-xs leading-relaxed text-ink-soft sm:text-[0.84rem]">
+                      {reason.description}
+                    </p>
                   </div>
                 </Reveal>
               ))}
