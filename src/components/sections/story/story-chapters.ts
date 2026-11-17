@@ -87,9 +87,9 @@ export const CRAFT_STEPS: readonly (StoryPhoto & { title: string; text: string }
   },
   {
     title: "Chuẩn bị bột bánh",
-    src: "/images/story/xay-bot-nep.webp",
-    alt: "Cối đá xay gạo nếp, bột trắng chảy xuống bát",
-    caption: "Xay gạo nếp bằng cối đá",
+    src: "/images/story/nghe-nhan-nhao-bot.webp",
+    alt: "Đôi tay nghệ nhân nhào phần bột nếp dẻo mềm trong chậu",
+    caption: "Xử lý và nhào bột nếp mềm dẻo",
     text: "Xử lý và chuẩn bị phần bột nếp đạt độ mềm dẻo phù hợp.",
   },
   {

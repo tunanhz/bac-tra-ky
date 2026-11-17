@@ -17,33 +17,34 @@ function CraftSection() {
         </p>
       </div>
 
-      <ol role="list" className="m-0 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Slide 6: Bố cục form 2x2 ảnh bên phải text bên trái theo mẫu Slide 6 */}
+      <ol role="list" className="m-0 grid list-none gap-5 p-0 sm:grid-cols-2 lg:gap-6">
         {CRAFT_STEPS.map((step, i) => (
           <Reveal
             key={step.title}
             as="li"
             delay={i * 80}
-            className="group min-w-0 rounded-2xl bg-paper p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+            className="group flex flex-col-reverse items-center justify-between gap-4 overflow-hidden rounded-2xl border border-line/60 bg-paper p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gac/40 hover:shadow-md sm:flex-row"
           >
-            <figure className="m-0">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-be-2/60">
-                <Image
-                  src={step.src}
-                  alt={step.alt}
-                  fill
-                  sizes="(min-width: 1200px) 260px, (min-width: 1024px) 22vw, (min-width: 640px) 44vw, 88vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <figcaption className="caption px-1 pt-2 text-ink-soft">{step.caption}</figcaption>
-            </figure>
-            <div className="px-1 pt-4 pb-2">
+            <div className="flex-1 min-w-0 pr-0 sm:pr-2">
               <span className="inline-block rounded-full bg-tra/10 px-2.5 py-0.5 text-xs font-bold text-tra">
                 Công đoạn 0{i + 1}
               </span>
               <h4 className="mt-2 mb-2 text-lg font-bold leading-snug text-son">{step.title}</h4>
               <p className="m-0 text-sm leading-relaxed text-ink-soft">{step.text}</p>
             </div>
+            <figure className="m-0 w-full shrink-0 sm:w-44 lg:w-48">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-be-2/60 shadow-inner">
+                <Image
+                  src={step.src}
+                  alt={step.alt}
+                  fill
+                  sizes="220px"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <figcaption className="caption px-1 pt-1.5 text-center text-xs text-ink-soft">{step.caption}</figcaption>
+            </figure>
           </Reveal>
         ))}
       </ol>

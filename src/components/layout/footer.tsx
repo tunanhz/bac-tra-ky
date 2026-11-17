@@ -30,7 +30,8 @@ const FOOTER_LINKS = [
 ] as const satisfies readonly { id: SectionId; label: string }[];
 
 function SocialLink({ href, label, tone, children }: SocialLinkProps) {
-  const box = `flex size-11 items-center justify-center ring-1 ring-nhu/70 ring-offset-2 ring-offset-tram shadow-[0_4px_12px_rgba(0,0,0,0.35)] ${tone}`;
+  /* Slide 17: Button bo góc zô */
+  const box = `flex size-11 items-center justify-center rounded-xl ring-1 ring-nhu/70 ring-offset-2 ring-offset-tram shadow-[0_4px_12px_rgba(0,0,0,0.35)] ${tone}`;
   if (!href) {
     return (
       <span className={`${box} opacity-90`} title={`${label}: ${siteConfig.pendingLabel}`}>
@@ -58,13 +59,14 @@ function SocialLink({ href, label, tone, children }: SocialLinkProps) {
  */
 export function Footer() {
   const { email, hotline, facebookUrl, tiktokUrl } = siteConfig;
+  /* Slide 17: Khám phá câu chuyện làng nghề viết thẳng ra ko xuống dòng */
   const linkClass =
-    "inline-flex min-h-11 items-center text-[#efe2c6] no-underline transition-colors duration-300 hover:text-white hover:underline";
+    "inline-flex min-h-11 items-center whitespace-nowrap text-[#efe2c6] no-underline transition-colors duration-300 hover:text-white hover:underline";
 
   return (
     <footer className="on-dark border-t border-nhu/50 bg-tram pt-12 pb-7 text-be has-[+_.quick-contact]:pb-20 md:pt-16 md:has-[+_.quick-contact]:pb-7">
       <div className="wrap">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr]">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-[1.2fr_1.5fr_1fr_1fr]">
           <div>
             <Logo size="footer" />
             <p className="mt-2 mb-0 font-heading text-[1.05rem] text-nhu italic">{siteConfig.slogan}</p>

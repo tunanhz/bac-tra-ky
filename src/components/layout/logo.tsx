@@ -23,7 +23,7 @@ export function Logo({ size = "header", className }: LogoProps) {
         unoptimized
         className={cn(
           "block w-auto [filter:drop-shadow(0_0_1px_#fff1cf)_drop-shadow(0_0_2px_#f5d597)]",
-          isFooter ? "h-[74px]" : "h-12",
+          isFooter ? "h-[92px] sm:h-[108px]" : "h-12",
         )}
       />
     </a>

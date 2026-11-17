@@ -56,7 +56,17 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
       aria-describedby={preview ? "offer-preview-notice" : undefined}
       className="on-dark relative isolate min-w-0 scroll-mt-24 overflow-hidden rounded-3xl bg-son-deep text-be shadow-xl"
     >
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_0%,var(--color-gac-deep),transparent_72%)]" />
+      {/* Slide 16: Sử dụng nền này và hiệu ứng tràn màn hình sang trọng */}
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <Image
+          src="/images/brand/uu-dai-dac-biet.webp"
+          alt="Nền ưu đãi đặc biệt Bác Trà Ký"
+          fill
+          sizes="100vw"
+          className="object-cover object-center opacity-30"
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-[#40070a]/90 via-[#4a0b0e]/95 to-[#2a0406]/95" />
+      </div>
       {preview && (
         <p id="offer-preview-notice" className="m-0 border-b border-nhu/55 bg-be px-4 py-3 text-center text-xs font-bold tracking-widest text-son">
           DỮ LIỆU MẪU / KHÔNG NHẬN ĐƠN
@@ -74,10 +84,15 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
             panelClassName="mt-3 rounded-2xl border border-nhu/70 bg-son-deep/75 px-2.5 pt-4 pb-2 sm:px-4"
             intro={(
               <header className="mt-4">
+                {/* Slide 16: TO CÁI GIẢM 10% LÊN */}
                 {discount && (
-                  <div className="m-0 mb-2">
-                    <span className="block font-display text-xl tracking-[0.2em] text-be/90 uppercase sm:text-2xl">GIẢM</span>
-                    <span className="font-heading text-[clamp(3.5rem,8vw,5.5rem)] leading-none font-bold text-nhu italic">{discount}</span>
+                  <div className="m-0 mb-3 text-center">
+                    <span className="block font-display text-2xl font-bold tracking-[0.25em] text-be/95 uppercase sm:text-3xl">
+                      GIẢM
+                    </span>
+                    <span className="font-heading text-[clamp(4.5rem,11vw,7.5rem)] leading-none font-extrabold text-nhu italic drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
+                      {discount}
+                    </span>
                   </div>
                 )}
                 <h3 className={cn("m-0 mb-2 font-bold text-be", discount ? "text-h3" : "text-h2")}>{offer.title}</h3>

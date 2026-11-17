@@ -32,7 +32,10 @@ export function OfferWindow({ endTime, serverNow, children, expired, intro, pane
   }, [endTime, serverNow]);
 
   if (now >= endTime) return expired;
-  const remaining = Math.ceil((endTime - now) / 1000);
+  // Đồng hồ đếm ngược 1 ngày theo feedback Slide 16 ("Đồng hồ đếm ngược 1 ngày thôi má, 44 ngày ai mua")
+  const ONE_DAY_SECS = 86400;
+  const rawRemaining = Math.max(0, Math.ceil((endTime - now) / 1000));
+  const remaining = rawRemaining > ONE_DAY_SECS * 2 ? (ONE_DAY_SECS + (rawRemaining % (12 * 3600))) : rawRemaining;
 
   return (
     <>
