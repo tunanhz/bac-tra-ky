@@ -38,16 +38,31 @@ export function StoryChapter({
               {paragraph}
             </p>
           ))}
-          {chapter.source ? (
-            <a
-              href={chapter.source.href}
-              className="inline-flex min-h-11 items-center text-sm font-bold text-tra underline underline-offset-4"
-            >
-              {chapter.source.label} <span aria-hidden="true" className="ml-2">↗</span>
-            </a>
+          {chapter.sources?.length ? (
+            <ul role="list" className="m-0 mt-5 list-none border-t border-line p-0 pt-2">
+              {chapter.sources.map(({ href, label }) => (
+                <li key={href}>
+                  <a href={href} className="inline-flex min-h-11 items-center text-sm font-bold text-tra underline underline-offset-4">
+                    {label} <span aria-hidden="true" className="ml-2">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
           ) : null}
         </div>
       </Reveal>
+      {chapter.relatedPhotos?.length ? (
+        <section aria-label="Ảnh tư liệu làng Giang Xá" className="mt-4 grid grid-cols-2 gap-3 sm:gap-5">
+          {chapter.relatedPhotos.map((photo) => (
+            <figure key={photo.src} className="frame-paper m-0 min-w-0 p-2 shadow-paper sm:p-3">
+              <div className="relative aspect-[5/4] overflow-hidden bg-be-2 sm:aspect-[16/9]">
+                <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 1200px) 535px, 45vw" className="object-cover" />
+              </div>
+              <figcaption className="caption px-1 pt-2 text-center text-ink-soft">{photo.caption}</figcaption>
+            </figure>
+          ))}
+        </section>
+      ) : null}
     </article>
   );
 }

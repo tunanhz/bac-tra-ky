@@ -27,7 +27,6 @@ const FOOTER_LINKS = [
   { id: "san-pham", label: "Sản phẩm Bác Trà Ký" },
   { id: "ve-chung-toi", label: "Câu chuyện thương hiệu" },
   { id: "tin-tuc", label: "Tin tức" },
-  { id: "lien-he", label: "Liên hệ" },
 ] as const satisfies readonly { id: SectionId; label: string }[];
 
 function SocialLink({ href, label, tone, children }: SocialLinkProps) {
@@ -54,7 +53,7 @@ function SocialLink({ href, label, tone, children }: SocialLinkProps) {
 }
 
 /**
- * Footer (hướng B): nền đỏ trầm `#4a0b0e`, viền trên `3px double` vàng nhũ; 4 cột: thương hiệu, khám phá (6 mục),
+ * Footer (hướng B): nền đỏ trầm `#4a0b0e`, viền trên `3px double` vàng nhũ; 4 cột: thương hiệu, thông tin (5 liên kết),
  * liên hệ, kết nối (Facebook/TikTok/Gmail 44px); dòng bản quyền.
  */
 export function Footer() {
@@ -87,7 +86,7 @@ export function Footer() {
           <div>
             <ColumnTitle>Liên hệ</ColumnTitle>
             <address className="space-y-2 text-cream-muted not-italic">
-              <p className="m-0">{siteConfig.address}</p>
+              <p className="m-0">Địa chỉ: {siteConfig.address}</p>
               <p className="m-0">
                 Hotline:{" "}
                 {hotline ? (

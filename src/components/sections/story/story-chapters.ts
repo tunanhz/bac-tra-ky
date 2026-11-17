@@ -7,7 +7,8 @@ export type StoryChapter = {
   heading: string;
   paragraphs: readonly string[];
   image: StoryPhoto;
-  source?: { label: string; href: string };
+  relatedPhotos?: readonly StoryPhoto[];
+  sources?: readonly { label: string; href: string }[];
 };
 
 export const FOLK_LEGEND_LABEL = "Theo truyền thuyết dân gian";
@@ -20,44 +21,58 @@ export const STORY_CHAPTERS: readonly StoryChapter[] = [
     heading: "Giang Xá – Nét đẹp làng quê Bắc Bộ",
     paragraphs: [
       "Giang Xá – nơi mỗi góc làng đều mang theo một câu chuyện, mỗi nếp nhà đều lưu giữ một phần ký ức quê hương.",
-      "Nằm ở Hoài Đức, Hà Nội, Giang Xá vẫn giữ những mái đình, ngôi chùa, cổng làng và các phong tục được trao truyền qua nhiều thế hệ. Nếp sống cộng đồng ấy là một phần không thể tách rời của làng.",
-      "Chính từ mảnh đất ấy, Bánh Bác đã trở thành một phần ký ức và một nét riêng của ẩm thực địa phương.",
+      "Nằm trên mảnh đất Hoài Đức, Hà Nội, Giang Xá mang trong mình những nét đẹp thân thuộc của một làng quê Bắc Bộ. Nơi đây lưu giữ những mái đình, ngôi chùa cổ kính, cổng làng và những phong tục truyền thống được gìn giữ qua nhiều thế hệ.",
+      "Không chỉ là nơi lưu giữ những dấu tích lịch sử, Giang Xá còn là vùng đất của những câu chuyện quê hương, của nếp sống cộng đồng và những giá trị văn hóa được người dân trân trọng, tiếp nối.",
+      "Chính từ mảnh đất ấy, những thức quà dân dã như Bánh Bác đã trở thành một phần trong ký ức và nét đặc trưng của ẩm thực địa phương.",
     ],
     image: {
       src: "/images/story/cong-lang-giang-xa.webp",
       alt: "Cổng đá và hàng cờ nhiều màu tại Giang Xá",
       caption: "Cổng làng Giang Xá — ảnh tư liệu",
     },
+    relatedPhotos: [
+      {
+        src: "/images/story/loi-vao-hoi-lang-giang-xa.webp",
+        alt: "Người dân đi giữa hai trụ đá để vào không gian lễ hội Giang Xá",
+        caption: "Lối vào hội làng Giang Xá",
+      },
+      {
+        src: "/images/common/san-lang-giang-xa.webp",
+        alt: "Sân lát gạch với lọng, kiệu và đồ lễ tại Giang Xá",
+        caption: "Sân làng trong ngày hội",
+      },
+    ],
   },
   {
     id: "chuong-2",
     numeral: "II",
     title: "Dấu ấn lịch sử",
-    heading: "Giang Xá – Vùng đất gắn liền với vua Lý Nam Đế",
+    heading: "Giang Xá – Vùng đất gắn liền với Vua Lý Nam Đế",
     paragraphs: [
-      "Theo lời kể lưu truyền tại địa phương, thuở nhỏ Lý Bí từng được Pháp Tổ Thiền sư cưu mang, rồi theo thầy về tu học tại chùa Linh Bảo, nay là chùa Bảo Phúc (chùa Giang Xá).",
-      "Lý Bí lãnh đạo cuộc khởi nghĩa chống nhà Lương. Năm 544, ông lên ngôi hoàng đế, lấy hiệu Lý Nam Đế và đặt quốc hiệu là Vạn Xuân.",
-      "Các di tích và lễ hội tại Giang Xá vẫn là nơi người dân tưởng nhớ Lý Nam Đế và kể lại câu chuyện ấy cho thế hệ sau.",
+      "Giang Xá không chỉ được biết đến bởi những nét đẹp văn hóa làng quê mà còn là vùng đất gắn liền với cuộc đời và sự nghiệp của Lý Nam Đế – vị hoàng đế sáng lập nhà nước Vạn Xuân trong lịch sử Việt Nam.",
+      "Theo câu chuyện lịch sử được lưu truyền tại địa phương, thuở nhỏ, Lý Bí (sau này là Lý Nam Đế) được Pháp Tổ Thiền sư cưu mang, nuôi dưỡng. Sau đó, ông theo thầy về tu học ở chùa Linh Bảo, nay là chùa Bảo Phúc (chùa Giang Xá).",
+      "Lớn lên, với chí hướng lớn và khát vọng giành lại độc lập cho dân tộc, Lý Bí đã khởi binh chống lại ách đô hộ nhà Lương. Năm 544, sau khi giành thắng lợi, ông lên ngôi hoàng đế, đặt quốc hiệu là Vạn Xuân, mở ra một dấu mốc quan trọng trong lịch sử dân tộc.",
+      "Ngày nay, những di tích và lễ hội truyền thống tại Giang Xá vẫn góp phần gìn giữ, nhắc nhớ về vị anh hùng dân tộc và niềm tự hào lịch sử của người dân địa phương.",
     ],
     image: {
       src: "/images/story/le-tuong-niem-ly-nam-de.webp",
       alt: "Sân lễ với lọng và đồ lễ trong dịp tưởng niệm Lý Nam Đế tại Giang Xá",
-      caption: "Lễ tưởng niệm Lý Nam Đế ở Giang Xá — ảnh tư liệu",
+      caption: "Lễ tưởng niệm Lý Nam Đế ở Giang Xá — ảnh tư liệu.",
     },
-    source: {
-      label: "Xem tư liệu về chùa Bảo Phúc",
-      href: "https://tapchinghiencuuphathoc.vn/gioi-thieu-truong-ha-giang-xa-va-lai-yen-o-hoai-duc-ha-noi.html",
-    },
+    sources: [
+      { label: "Xem ảnh chùa Bảo Phúc trên Báo Công lý", href: "https://congly.vn/ngoi-co-tu-ben-dong-tieu-giang-bien-394714.html" },
+      { label: "Xem tư liệu về chùa Bảo Phúc", href: "https://tapchinghiencuuphathoc.vn/chua-huong-ap-thai-nguyen-chua-bao-phuc-ha-noi-trong-cuoc-doi-va-su-nghiep-ly-nam-de.html" },
+    ],
   },
   {
     id: "chuong-3",
     numeral: "III",
     title: "Hương vị quê nhà",
-    heading: "Bánh Bác – Niềm tự hào đất Giang Xá",
+    heading: "Bánh Bác – Sản vật tiến vua, niềm tự hào đất Giang Xá",
     paragraphs: [
-      "Bánh Bác có dáng cuộn, khi cắt lát lộ lớp nếp đỏ gấc và phần nhân đậu xanh. Vỏ nếp dẻo thơm quyện với hương vừng rang và vị bùi ngọt của nhân.",
-      `${FOLK_LEGEND_LABEL}, Bánh Bác từng là sản vật được dâng tiến vua. Đây là câu chuyện truyền miệng của làng Giang Xá.`,
-      "Chiếc bánh gắn với dịp lễ hội, ngày giỗ và những buổi sum họp. Qua nhiều thế hệ, hương vị ấy vẫn là một phần nếp sống và ký ức của người dân Giang Xá.",
+      `Nhắc đến Giang Xá, Hoài Đức, không thể không nhắc đến Bánh Bác – thức quà truyền thống mang đậm dấu ấn văn hóa và niềm tự hào của người dân nơi đây. ${FOLK_LEGEND_LABEL}, Bánh Bác từng là sản vật được dùng để tiến vua, góp phần làm nên giá trị đặc biệt của thức quà quê này.`,
+      "Không chỉ đơn thuần là một món ăn, Bánh Bác còn gắn bó mật thiết với đời sống văn hóa tinh thần của người dân Giang Xá. Chiếc bánh thường xuất hiện trong các dịp lễ hội truyền thống, ngày giỗ, những dịp sum họp gia đình và các sự kiện quan trọng của địa phương. Qua đó, Bánh Bác trở thành một phần trong phong tục, nếp sống và ký ức của nhiều thế hệ người dân.",
+      "Trải qua thời gian, dù cuộc sống có nhiều đổi thay, thức quà mang hương vị quê nhà ấy vẫn được gìn giữ và lưu truyền, trở thành nét đặc trưng trong văn hóa ẩm thực của vùng đất Hoài Đức.",
     ],
     image: {
       src: "/images/common/banh-bac-giang-xa.webp",
@@ -68,29 +83,33 @@ export const STORY_CHAPTERS: readonly StoryChapter[] = [
   },
 ];
 
-export const CRAFT_STEPS: readonly (Omit<StoryPhoto, "caption" | "contain"> & { title: string; text: string })[] = [
+export const CRAFT_STEPS: readonly (StoryPhoto & { title: string; text: string })[] = [
   {
     title: "Chuẩn bị nguyên liệu",
     src: "/images/story/nguyen-lieu-banh-bac.webp",
     alt: "Gạo nếp, đậu xanh, gấc, vừng và lá gói",
-    text: "Chọn gạo nếp, đậu xanh, gấc, vừng và lá gói để chuẩn bị cho từng lớp bánh.",
+    caption: "Gạo nếp, đậu xanh, gấc và vừng",
+    text: "Lựa chọn gạo nếp và các nguyên liệu cần thiết để tạo nên hương vị đặc trưng của bánh.",
   },
   {
     title: "Chuẩn bị bột bánh",
     src: "/images/story/xay-bot-nep.webp",
     alt: "Cối đá xay gạo nếp, bột trắng chảy xuống bát",
-    text: "Xay và chuẩn bị bột nếp mịn để lớp vỏ sau khi bác có độ mềm dẻo.",
+    caption: "Xay gạo nếp bằng cối đá",
+    text: "Xử lý và chuẩn bị phần bột nếp đạt độ mềm dẻo phù hợp.",
   },
   {
     title: "Bác bánh – giữ lửa nghề xưa",
     src: "/images/story/bac-banh-tren-chao.webp",
     alt: "Đôi tay dàn lớp bột nếp trên chảo",
-    text: "Bột được bác trên chảo với lửa nhỏ và mỡ thăn lợn. Người thợ đảo, kéo và dàn đều tay để lớp vỏ mỏng, mềm và dẻo.",
+    caption: "Dàn mỏng lớp bột nếp trên chảo",
+    text: "Bột được bác trên chảo với lửa nhỏ, kết hợp mỡ thăn lợn và thao tác đảo, kéo đều tay để tạo độ mỏng, mềm và dẻo.",
   },
   {
     title: "Hoàn thiện chiếc bánh",
     src: "/images/story/goi-banh-bac.webp",
     alt: "Đôi tay cuộn các lớp bột và nhân bánh trong lá xanh",
-    text: "Ghép lớp vỏ, đặt nhân đậu xanh, cuốn bánh trong lá rồi rắc vừng trước khi cắt thành khoanh.",
+    caption: "Cuộn và buộc bánh trong lá xanh",
+    text: "Bánh được hoàn thiện với phần vỏ mềm dẻo, kết hợp cùng nhân bánh thơm bùi, tạo nên thức quà đặc trưng của Giang Xá.",
   },
 ];

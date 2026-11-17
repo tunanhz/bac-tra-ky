@@ -5,7 +5,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { FeaturedProducts } from "@/components/sections/home/featured-products";
 import { products as allProducts } from "@/data/products";
 import { productDetailHref, readProductSlug, urlWithoutProductSlug } from "@/lib/product-link";
-import { ProductsSection } from "./products-section";
+import { ProductsCatalog } from "./products-catalog";
 
 const products = [...allProducts];
 
@@ -26,27 +26,29 @@ describe("product-link helpers", () => {
   });
 });
 
-describe("Xem chi tiết ở Sản phẩm nổi bật → modal của đúng sản phẩm", () => {
+describe("Luồng catalogue cũ: Sản phẩm nổi bật → modal của đúng sản phẩm", () => {
   const featured = products.filter((product) => product.featured);
 
-  function renderHome() {
+  function renderLegacyCatalog() {
     return render(
       <>
         <FeaturedProducts products={featured} />
-        <ProductsSection products={products} />
+        <section id="san-pham">
+          <ProductsCatalog products={products} />
+        </section>
       </>,
     );
   }
 
   it("nút có href dự phòng /?sp=<slug>#san-pham", () => {
-    renderHome();
+    renderLegacyCatalog();
     const link = screen.getByRole("link", { name: `Xem chi tiết: ${featured[0].name}` });
     expect(link).toHaveAttribute("href", productDetailHref(featured[0].slug));
   });
 
   it("bấm → mở modal đúng sản phẩm, URL giữ sạch; đóng → focus về card trong danh mục", async () => {
     const user = userEvent.setup();
-    renderHome();
+    renderLegacyCatalog();
     const target = featured[1];
     await user.click(screen.getByRole("link", { name: `Xem chi tiết: ${target.name}` }));
 
@@ -61,7 +63,7 @@ describe("Xem chi tiết ở Sản phẩm nổi bật → modal của đúng s�
 
   it("bộ lọc đang ẩn sản phẩm → tự về 'Tất cả' rồi mở modal", async () => {
     const user = userEvent.setup();
-    renderHome();
+    renderLegacyCatalog();
     const target = featured.find((product) => product.category !== "truyen-thong")!;
     await user.click(screen.getByRole("button", { name: "Bánh Bác truyền thống" }));
     await user.click(screen.getByRole("link", { name: `Xem chi tiết: ${target.name}` }));
@@ -72,7 +74,7 @@ describe("Xem chi tiết ở Sản phẩm nổi bật → modal của đúng s�
   it("mở trang với ?sp=<slug> → modal tự mở; đóng → xoá sp, giữ #san-pham", async () => {
     const user = userEvent.setup();
     window.history.replaceState(null, "", "/?sp=hop-6-banh#san-pham");
-    render(<ProductsSection products={products} />);
+    render(<ProductsCatalog products={products} />);
     const dialog = await screen.findByRole("dialog", { name: "Hộp 6 bánh" });
     await user.click(within(dialog).getByRole("button", { name: "Đóng chi tiết sản phẩm" }));
     expect(window.location.search).toBe("");
@@ -81,7 +83,7 @@ describe("Xem chi tiết ở Sản phẩm nổi bật → modal của đúng s�
 
   it("?sp=<slug> không tồn tại → không mở gì", async () => {
     window.history.replaceState(null, "", "/?sp=khong-co#san-pham");
-    render(<ProductsSection products={products} />);
+    render(<ProductsCatalog products={products} />);
     await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });

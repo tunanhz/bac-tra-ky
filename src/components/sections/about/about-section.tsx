@@ -6,7 +6,6 @@ import {
   ABOUT_CORE_VALUES,
   ABOUT_INSPIRATION,
   ABOUT_STATEMENTS,
-  ABOUT_WHO,
 } from "./about-content";
 import { CommonsCredit, LacquerFigure, PaperFigure } from "./about-figures";
 
@@ -35,48 +34,18 @@ export function AboutSection() {
               id="about-title"
               className="my-3 text-h2 font-bold tracking-[0.04em] text-gac md:text-[clamp(2.2rem,1.4rem+2.6vw,3.4rem)] md:text-be"
             >
-              {ABOUT_WHO.heading}
+              Câu chuyện thương hiệu
             </h2>
-            <p className="m-0 font-heading text-quote text-tra italic md:text-[#f3e6c8]">{ABOUT_WHO.tagline}</p>
           </div>
         </Reveal>
 
-        {/* 1. Bác Trà Ký là ai? — chữ 7 cột | ảnh 5 cột; mobile ảnh trước chữ. */}
-        <div className="mt-12 grid items-center gap-10 lg:mt-20 lg:grid-cols-12 lg:gap-14">
-          <Reveal className="lg:order-2 lg:col-span-5">
-            <PaperFigure
-              src="/images/story/guong-sen-non-la.webp"
-              alt="Những gương sen tươi trong nong tre đặt cạnh chiếc nón lá trên bãi cỏ"
-              sizes="(min-width: 1024px) 440px, 90vw"
-              mediaClassName="aspect-[4/5]"
-              caption="Gương sen và nón lá — chất liệu quen thuộc của làng quê Việt"
-            />
-          </Reveal>
-          <Reveal className="lg:order-1 lg:col-span-7">
-            {ABOUT_WHO.paragraphs.map((paragraph, index) => (
-              <p
-                key={paragraph}
-                className={cn(
-                  "mt-0 mb-5",
-                  index === 0
-                    ? "font-heading text-[clamp(1.2rem,1.05rem+0.6vw,1.45rem)] leading-[1.5] text-ink"
-                    : "text-ink-soft",
-                )}
-              >
-                {paragraph}
-              </p>
-            ))}
-          </Reveal>
-        </div>
-
-        {/* 2. Chúng tôi bắt đầu từ đâu? — ảnh | chữ */}
-        <div className="mt-16 grid items-center gap-10 lg:mt-24 lg:grid-cols-12 lg:gap-14">
-          <Reveal className="lg:col-span-5">
+        <Reveal as="article" className="frame-paper mt-8 grid items-center gap-7 p-4 shadow-paper md:grid-cols-12 md:p-7 lg:mt-12 lg:gap-10">
+          <div className="md:col-span-5">
             <PaperFigure
               src="/images/story/qua-gac.webp"
               alt="Những quả gấc chín đỏ cam, vỏ gai, bày trên quầy"
               sizes="(min-width: 1024px) 440px, 90vw"
-              mediaClassName="aspect-[4/3] lg:aspect-[4/5]"
+              mediaClassName="aspect-[4/3]"
               caption={
                 <>
                   Quả gấc — nguồn sắc đỏ đặc trưng của Bánh Bác.{" "}
@@ -88,31 +57,31 @@ export function AboutSection() {
                 </>
               }
             />
-          </Reveal>
-          <Reveal className="lg:col-span-7">
-            <p className="eyebrow m-0">{ABOUT_INSPIRATION.label}</p>
+          </div>
+          <div className="px-2 md:col-span-7">
             <h3 className="mt-3 mb-2 text-[clamp(1.6rem,1.2rem+1.4vw,2.3rem)] font-bold tracking-[0.02em] text-gac">
-              Chúng tôi bắt đầu từ đâu?
+              {ABOUT_INSPIRATION.title}
             </h3>
             <p className="mt-0 mb-6 font-heading text-quote text-tra italic">{ABOUT_INSPIRATION.heading}</p>
             {ABOUT_INSPIRATION.paragraphs.map((paragraph) => (
               <p key={paragraph} className="mt-0 mb-4 text-ink-soft">{paragraph}</p>
             ))}
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
 
         <section aria-label="Tầm nhìn và sứ mệnh" className="mx-auto mt-16 grid max-w-[39rem] gap-8 sm:grid-cols-2 lg:mt-24">
           {ABOUT_STATEMENTS.map(({ title, description }, index) => (
-            <Reveal key={title} as="article" delay={index * 100} className="flex flex-col">
-              <h3 className="mt-0 mb-4 text-center text-h3 font-bold text-gac">{title}</h3>
-              <div
-                className={cn(
-                  "grid aspect-square flex-1 place-items-center px-5 py-7 text-center sm:px-7",
-                  index === 0 ? "frame-paper text-tra shadow-paper" : "on-dark frame-gilt bg-son text-be",
-                )}
-              >
-                <p className="m-0 max-w-[24ch] text-[clamp(1rem,0.94rem+0.4vw,1.16rem)] leading-relaxed">{description}</p>
-              </div>
+            <Reveal
+              key={title}
+              as="article"
+              delay={index * 100}
+              className={cn(
+                "px-6 py-7 text-center sm:px-8",
+                index === 0 ? "frame-paper text-tra shadow-paper" : "on-dark frame-gilt bg-son text-be",
+              )}
+            >
+              <h3 className={cn("mt-0 mb-4 text-h3", index === 0 ? "text-gac" : "text-be")}>{title}</h3>
+              <p className="m-0 leading-relaxed">{description}</p>
             </Reveal>
           ))}
         </section>

@@ -21,5 +21,6 @@
 | `../news/chen-tra-sen-tay-ho.webp` | Chén trà sen Tây Hồ | Tin tức | [Ảnh gốc](https://commons.wikimedia.org/wiki/File:Ch%C3%A9n_tr%C3%A0_sen.jpg) | Viethavvh | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cắt khung, thu nhỏ, WebP cùng giấy phép |
 | `../products/bo-qua-banh-bac-tra-sen.webp` | Hộp quà Bánh Bác và Trà Sen | Đầu trang; Sản phẩm | Drive: `Ảnh sản phẩm và logo` | Do Bác Trà Ký cung cấp | — |
 | `goi-banh-bac.webp` | Trích ấn phẩm đôi tay gói bánh | Về chúng tôi; Câu chuyện, chương IV | Drive: trích `Hành Trình Làm Bánh Bác Truyền Thống (1).png` | Do Bác Trà Ký cung cấp | — |
+| `loi-vao-hoi-lang-giang-xa.webp` | Trụ đá và người dân đi vào khu vực lễ hội | Câu chuyện, chương I | Drive: `Làng Giang Xá/IMG_2557.HEIC` | Do Bác Trà Ký cung cấp | — |
 | `le-tuong-niem-ly-nam-de.webp` | Lễ tưởng niệm Lý Nam Đế tại Giang Xá | Câu chuyện, chương II | Drive: `Làng Giang Xá/IMG_2572.HEIC` | Do Bác Trà Ký cung cấp | — |
 | `nguyen-lieu-banh-bac.webp`, `xay-bot-nep.webp`, `bac-banh-tren-chao.webp` | Nguyên liệu, chuẩn bị bột và bác bánh trên chảo | Câu chuyện, chương IV | Drive: trích `Hành Trình Làm Bánh Bác Truyền Thống (1).png` | Do Bác Trà Ký cung cấp | — |

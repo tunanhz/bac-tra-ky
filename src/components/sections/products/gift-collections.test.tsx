@@ -26,7 +26,10 @@ describe("GiftCollections", () => {
       expect(card.getByText(new RegExp(size))).toBeInTheDocument();
       expect(card.getByRole("link", { name: `Liên hệ ngay về ${title}` })).toHaveAttribute("href", expect.stringMatching(/^(\/#lien-he|https?:\/\/)/));
     }
+    expect(within(screen.getByRole("article", { name: "Chạm Ký Ức" })).getByText(/gói ghém ký ức thân quen và tình quê Giang Xá/)).toBeInTheDocument();
+    expect(within(screen.getByRole("article", { name: "Gom Ký Ức" })).getByText(/Hộp 6 chiếc thích hợp để thưởng thức trọn vẹn/)).toBeInTheDocument();
     const premium = within(screen.getByRole("article", { name: "Trao Ký Ức" }));
+    expect(premium.getByText(/mang đến trải nghiệm thưởng thức trọn vẹn và tinh tế/)).toBeInTheDocument();
     expect(premium.getAllByRole("listitem").map((item) => item.textContent)).toEqual([
       "03 bánh nhân matcha", "03 bánh nhân đậu xanh", "03 bánh nhân khoai môn", "01 hộp Trà Sen",
     ]);
@@ -47,6 +50,19 @@ describe("GiftCollections", () => {
     const comboSix = gallery("Gom Ký Ức");
     fireEvent.click(comboSix.getByRole("button", { name: "Matcha" }));
     expect(comboSix.getByRole("img", { name: "Hộp 6 Bánh Bác nhân matcha" })).toHaveAttribute("src", expect.stringContaining("hop-6-banh-matcha.webp"));
+  });
+
+  it("dùng nút trước/sau để xem từng mục và dừng tự chuyển khi chọn tay", () => {
+    vi.useFakeTimers();
+    renderCollections();
+    const images = gallery("Chạm Ký Ức");
+    expect(images.getByLabelText("Mục 1 trên 6")).toBeInTheDocument();
+    fireEvent.click(images.getByRole("button", { name: "Ảnh trước" }));
+    expect(images.getByRole("button", { name: "Nhân mặn" })).toHaveAttribute("aria-pressed", "true");
+    fireEvent.click(images.getByRole("button", { name: "Ảnh tiếp theo" }));
+    act(() => vi.advanceTimersByTime(11000));
+    expect(images.getByLabelText("Mục 1 trên 6")).toBeInTheDocument();
+    expect(images.getByRole("button", { name: "Hộp bánh" })).toHaveAttribute("aria-pressed", "true");
   });
 
   it("tự chuyển ảnh sau mỗi lượt, có thể tạm dừng", () => {

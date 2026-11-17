@@ -94,7 +94,7 @@ export const siteConfig = {
   /** Link hồ sơ TikTok chính thức. */
   tiktokUrl: readHttpUrl(process.env.NEXT_PUBLIC_TIKTOK_URL ?? "https://www.tiktok.com/@bactraky"),
   /** Email liên hệ chính thức. */
-  email: readEmail(process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "Bactraky@gmail.com"),
+  email: readEmail(process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "bactraky@gmail.com"),
   /** Hotline chính thức. */
   hotline: readPhone(process.env.NEXT_PUBLIC_HOTLINE ?? "0869189004"),
   /** Địa chỉ hoạt động theo spec mục 6. */

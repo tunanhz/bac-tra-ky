@@ -1,6 +1,5 @@
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
-import { IllustrationTag } from "@/components/ui/illustration-tag";
 import type { NewsPost } from "@/lib/types";
 import { cn } from "@/lib/cn";
 import { NewsMeta, newsHref } from "./news-meta";
@@ -24,30 +23,34 @@ export function NewsCard({ post, className }: NewsCardProps) {
         className,
       )}
     >
-      <div className="relative aspect-[3/2] overflow-hidden bg-be-2">
-        <ImageWithFallback
-          src={post.coverImage}
-          alt={post.coverImageAlt}
-          fill
-          sizes="(min-width: 1200px) 340px, (min-width: 1024px) calc(33vw - 50px), (min-width: 768px) calc(50vw - 60px), calc(100vw - 66px)"
-          className={cn(
-            "transition-transform duration-800 ease-son group-hover:scale-105 motion-reduce:group-hover:scale-100",
-            post.coverIsBrandBanner ? "object-contain" : "object-cover",
-          )}
-        />
-        {post.coverCaption && <IllustrationTag label={post.coverCaption} />}
-      </div>
+      <figure className="m-0">
+        <div className="relative aspect-[3/2] overflow-hidden bg-be-2">
+          <ImageWithFallback
+            src={post.coverImage}
+            alt={post.coverImageAlt}
+            fill
+            sizes="(min-width: 1200px) 340px, (min-width: 1024px) calc(33vw - 50px), (min-width: 768px) calc(50vw - 60px), calc(100vw - 66px)"
+            className={cn(
+              "transition-transform duration-800 ease-son group-hover:scale-105 motion-reduce:group-hover:scale-100",
+              post.coverIsBrandBanner ? "object-contain" : "object-cover",
+              post.coverFocus === "top-right" && "object-right-top",
+            )}
+          />
+        </div>
+        {post.coverCaption && <figcaption className="caption border-b border-line px-2 py-2 text-ink-soft">{post.coverCaption}</figcaption>}
+      </figure>
       <div className="flex flex-1 flex-col px-2 pt-4.5">
         <NewsMeta post={post} showDate={false} />
         <h3 className="mt-3 mb-2 text-[1.3rem] leading-snug font-bold text-son">{post.title}</h3>
         <p className="mt-0 mb-4 text-[0.95rem] text-ink-soft">{post.excerpt}</p>
-        <Link
+        <Button
           href={newsHref(post.slug)}
+          variant="outline"
           aria-label={`Đọc thêm: ${post.title}`}
-          className="mt-auto inline-flex min-h-11 w-fit items-center gap-2 border border-gac/65 px-3 text-[0.76rem] font-bold tracking-wider text-gac uppercase no-underline transition-colors hover:bg-gac hover:text-be focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gac"
+          className="mt-auto w-fit"
         >
           Đọc thêm <span aria-hidden="true">→</span>
-        </Link>
+        </Button>
       </div>
     </article>
   );

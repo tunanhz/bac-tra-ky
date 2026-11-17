@@ -3,7 +3,7 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { ABOUT_INSPIRATION, ABOUT_WHO } from "./about-content";
+import { ABOUT_INSPIRATION } from "./about-content";
 import { AboutSection } from "./about-section";
 import { WhyChooseSection } from "./why-choose-section";
 
@@ -11,11 +11,9 @@ describe("AboutSection", () => {
   it("giữ neo Về chúng tôi và nội dung kể chuyện từ thẻ 5", () => {
     render(<AboutSection />);
     expect(document.getElementById("ve-chung-toi")).not.toBeNull();
-    expect(screen.getByRole("heading", { level: 2, name: "Bác Trà Ký là ai?" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "Câu chuyện thương hiệu" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 3, name: "Chúng tôi bắt đầu từ đâu?" })).toBeInTheDocument();
     const storyCopy = [
-      ABOUT_WHO.tagline,
-      ...ABOUT_WHO.paragraphs,
       ABOUT_INSPIRATION.heading,
       ...ABOUT_INSPIRATION.paragraphs,
     ];
@@ -24,20 +22,20 @@ describe("AboutSection", () => {
     }
   });
 
-  it("có hai ô Sứ mệnh và Tầm nhìn với tiêu đề nằm ngoài khung nội dung", () => {
+  it("có hai card Tầm nhìn và Sứ mệnh với đúng nội dung", () => {
     render(<AboutSection />);
     const statements = within(screen.getByRole("region", { name: "Tầm nhìn và sứ mệnh" }));
     const cards = statements.getAllByRole("article");
     const expected = [
-      ["Tầm nhìn của Bác Trà Ký", /Đưa hương vị Bánh Bác Giang Xá vượt ra khỏi làng quê/],
-      ["Sứ mệnh của Bác Trà Ký", /Giữ trọn hương vị xưa, thêm chút sáng tạo mới/],
+      ["Tầm nhìn", /Đưa hương vị Bánh Bác Giang Xá vượt ra khỏi làng quê/],
+      ["Sứ mệnh", /Giữ trọn hương vị xưa, thêm chút sáng tạo mới/],
     ] as const;
 
     expect(cards).toHaveLength(expected.length);
     for (const [index, [name, description]] of expected.entries()) {
       const card = within(cards[index]);
-      const heading = card.getByRole("heading", { level: 3, name });
-      expect(heading.nextElementSibling).toContainElement(card.getByText(description));
+      expect(card.getByRole("heading", { level: 3, name })).toBeInTheDocument();
+      expect(card.getByText(description)).toBeInTheDocument();
     }
   });
 
@@ -84,6 +82,7 @@ describe("WhyChooseSection", () => {
       "Mỗi chiếc bánh, một câu chuyện làng nghề",
       "Bánh Bác và trà sen – Một trải nghiệm trọn vị",
     ]);
+    expect(within(cards[1]).getByText(/khoai môn, matcha, đậu đỏ và nhân mặn/)).toBeInTheDocument();
     const imagePaths = cards.map((card) => {
       const image = within(card).getByRole("img", { name: /\S/ });
       const src = new URL(image.getAttribute("src") ?? "", "https://test.local");

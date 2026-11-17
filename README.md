@@ -40,6 +40,9 @@ public/images/          ảnh (nguồn ghi ở CREDITS.md)
   sang MongoDB mà không sửa component.
 - Banner trang chủ (`src/config/home-hero.ts`) dùng thiết kế do Bác Trà Ký cung cấp, nén sang WebP. Tiêu đề và nút vẫn là HTML.
   Khi thay ảnh, kiểm tra lại vùng cắt mobile và vị trí link cuộn trong `src/components/sections/home/hero.css`.
+- **Catalogue trang chủ:** chỉ hiển thị ba bộ quà theo thẻ 5 (Chạm Ký Ức, Gom Ký Ức, Trao Ký Ức).
+- **Nội dung duyệt:** sáu bài trong `src/data/news.ts` đang là nội dung mẫu (`isDraft: true`); chỉ đổi trạng thái và đặt ngày đăng sau khi được duyệt.
+  Chương Dấu ấn lịch sử tạm dùng ảnh lễ Giang Xá và dẫn tới tư liệu chùa Bảo Phúc. Hai catalogue ghi rõ khi chưa có ảnh đúng quy cách hoặc ảnh riêng vị nhân mặn.
 - **Góc Feedback / Ưu đãi:** khách soạn đánh giá trên trang, rồi tự bấm gửi trong ứng dụng email; website không lưu hay tự
   đăng. Dùng `src/data/customer-content.ts` để đưa phản hồi thật đã được đồng ý và chương trình được thương hiệu duyệt lên
   web. Ghi `status: "published"` khi đã xác nhận. Một ưu đãi cần tiêu đề, mô tả, điều kiện và `startsOn` / `endsOn`

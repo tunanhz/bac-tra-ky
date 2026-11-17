@@ -46,14 +46,28 @@ describe("filterProducts", () => {
 });
 
 describe("ProductsSection", () => {
-  it("có id san-pham, tiêu đề đúng spec, 7 card, bộ lọc 'Tất cả' đang chọn", () => {
-    const { container } = render(<ProductsSection products={products} />);
-    expect(container.querySelector("section#san-pham")).not.toBeNull();
-    expect(screen.getByRole("heading", { level: 2, name: "Danh mục sản phẩm" })).toBeInTheDocument();
-    expect(cardNames()).toHaveLength(7);
-    expect(screen.getByRole("button", { name: "Tất cả" })).toHaveAttribute("aria-pressed", "true");
+  it("chỉ hiển thị ba bộ quà theo thẻ 5, không lặp danh mục sản phẩm lẻ", () => {
+    render(<ProductsSection products={products} />);
+    const section = screen.getByRole("region", { name: "Sản phẩm Bác Trà Ký" });
+    expect(section).toHaveAttribute("id", "san-pham");
+    const scope = within(section);
+    expect(scope.getAllByRole("article").map((card) => within(card).getByRole("heading").textContent)).toEqual([
+      "Chạm Ký Ức", "Gom Ký Ức", "Trao Ký Ức",
+    ]);
+    expect(scope.getAllByRole("link", { name: /Liên hệ ngay/ })).toHaveLength(3);
+    expect(scope.queryByRole("heading", { name: "Xem từng sản phẩm" })).not.toBeInTheDocument();
+    expect(scope.queryByRole("button", { name: "Tất cả" })).not.toBeInTheDocument();
   });
 
+  it("chưa có bộ quà → hiện hướng dẫn liên hệ, không hiện lưới sản phẩm lẻ", () => {
+    render(<ProductsSection products={products.filter(({ category }) => category !== "qua-tang")} />);
+    expect(screen.getByText("Bộ sưu tập đang được cập nhật. Liên hệ để được tư vấn.")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Liên hệ Bác Trà Ký" })).toHaveAttribute("href", "/#lien-he");
+    expect(screen.queryByRole("article")).not.toBeInTheDocument();
+  });
+});
+
+describe("ProductsCatalog", () => {
   it("giá null → card hiện 'Liên hệ để biết giá'", () => {
     render(<ProductsCatalog products={products.slice(0, 2)} />);
     expect(screen.getAllByText(PRICE_ON_REQUEST)).toHaveLength(2);

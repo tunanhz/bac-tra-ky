@@ -41,7 +41,7 @@ export function Hero() {
               preload
               sizes="(max-width: 39.999rem) 171vw, (max-width: 63.999rem) 125vw, 100vw"
             />
-            <a href="#featured-title" className="home-hero__down" aria-label="Cuộn xuống sản phẩm nổi bật" />
+            <a href={sectionHref("cau-chuyen")} className="home-hero__down" aria-label="Cuộn xuống câu chuyện làng nghề" />
           </div>
         </div>
       </div>

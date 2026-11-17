@@ -25,7 +25,7 @@ describe("Footer (spec mục 7)", () => {
     vi.unstubAllEnvs();
   });
 
-  it("có logo về trang chủ, slogan, 6 liên kết nhanh và địa chỉ hoạt động", async () => {
+  it("có logo về trang chủ, slogan, 5 liên kết nhanh và địa chỉ hoạt động", async () => {
     clearEnv();
     await renderFooter();
     const footer = screen.getByRole("contentinfo");
@@ -43,10 +43,9 @@ describe("Footer (spec mục 7)", () => {
       ["Sản phẩm Bác Trà Ký", "/#san-pham"],
       ["Câu chuyện thương hiệu", "/#ve-chung-toi"],
       ["Tin tức", "/#tin-tuc"],
-      ["Liên hệ", "/#lien-he"],
     ]);
 
-    expect(footer).toHaveTextContent("Làng nghề Giang Xá, xã Hoài Đức, Hà Nội");
+    expect(footer).toHaveTextContent("Địa chỉ: Làng nghề Giang Xá, xã Hoài Đức, Hà Nội");
     expect(footer).toHaveTextContent("© 2026 Bác Trà Ký.");
     expect(footer).not.toHaveTextContent(/Nguồn ảnh|Ảnh minh hoạ|Wikimedia Commons/);
   });
@@ -60,9 +59,9 @@ describe("Footer (spec mục 7)", () => {
       "href",
       "https://www.facebook.com/bactraky/",
     );
-    expect(footer.getByRole("link", { name: "Bactraky@gmail.com" })).toHaveAttribute("href", "mailto:Bactraky@gmail.com");
+    expect(footer.getByRole("link", { name: "bactraky@gmail.com" })).toHaveAttribute("href", "mailto:bactraky@gmail.com");
     const gmail = footer.getByRole("link", { name: "Gmail Bác Trà Ký" });
-    expect(gmail).toHaveAttribute("href", "mailto:Bactraky@gmail.com");
+    expect(gmail).toHaveAttribute("href", "mailto:bactraky@gmail.com");
     expect(gmail).not.toHaveAttribute("target");
     expect(footer.getByRole("link", { name: "0869189004" })).toHaveAttribute("href", "tel:0869189004");
     expect(footer.getByRole("link", { name: "TikTok Bác Trà Ký" })).toHaveAttribute(

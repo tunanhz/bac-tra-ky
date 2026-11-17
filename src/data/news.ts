@@ -1,6 +1,6 @@
 import type { NewsCategory, NewsPost } from "@/lib/types";
 
-/** Bài viết chính thức của Bác Trà Ký. Chỉ đăng sự kiện hoặc ưu đãi khi đã được xác nhận. */
+/** Nội dung mẫu cho chuyên mục Tin tức. Chỉ bỏ nhãn nháp khi Bác Trà Ký duyệt nội dung. */
 
 export const NEWS_CATEGORY_LABELS: Record<NewsCategory, string> = {
   "hoat-dong": "Tin tức và hoạt động Bác Trà Ký",
@@ -41,7 +41,7 @@ export const newsPosts: readonly NewsPost[] = [
     coverIsBrandBanner: true,
     publishedAt: "2026-11-15",
     featured: true,
-    isDraft: false,
+    isDraft: true,
   },
   {
     slug: "banh-bac-giang-xa-sac-do-gac-huong-vung-rang",
@@ -59,7 +59,7 @@ export const newsPosts: readonly NewsPost[] = [
     coverCaption: "Hình ảnh từ Bác Trà Ký",
     publishedAt: "2026-11-15",
     featured: false,
-    isDraft: false,
+    isDraft: true,
   },
   {
     slug: "tra-sen-net-thanh-tao-cua-van-hoa-tra-viet",
@@ -83,7 +83,7 @@ export const newsPosts: readonly NewsPost[] = [
     },
     publishedAt: "2026-11-15",
     featured: false,
-    isDraft: false,
+    isDraft: true,
   },
   {
     slug: "giang-xa-vung-dat-cua-ky-uc-va-huong-nep",
@@ -92,7 +92,7 @@ export const newsPosts: readonly NewsPost[] = [
       "Làng Giang Xá ở Hoài Đức, Hà Nội — nơi khởi nguồn của Bánh Bác và những nét đẹp văn hoá được gìn giữ qua nhiều thế hệ.",
     content: [
       "Giang Xá thuộc Hoài Đức, Hà Nội, là nơi khởi nguồn của Bánh Bác — thức quà đặc trưng của làng.",
-      "Theo lời kể ở Giang Xá, vua Lý Nam Đế từng được nhận nuôi tại chùa Bảo Phúc – chùa Giang Xá hiện nay.",
+      "Theo lời kể ở Giang Xá, thuở nhỏ Lý Bí được Thiền sư Pháp Tổ cưu mang, sau đó theo thầy về tu học tại chùa Linh Bảo, nay là chùa Bảo Phúc.",
       "Nhìn từ sân làng đến bàn tay người gói bánh, câu chuyện Giang Xá không chỉ nằm trong một món ăn. Bánh Bác là một cách để bắt đầu tìm hiểu nếp sống và nghề làm bánh ở đây.",
     ],
     category: "lang-nghe",
@@ -101,17 +101,17 @@ export const newsPosts: readonly NewsPost[] = [
     coverCaption: "Giang Xá — ảnh tư liệu",
     publishedAt: "2026-11-15",
     featured: false,
-    isDraft: false,
+    isDraft: true,
   },
   {
     slug: "nhung-huong-vi-sang-tao-cua-banh-bac",
     title: "Những hương vị sáng tạo của Bánh Bác",
     excerpt:
-      "Bên cạnh Bánh Bác nhân đậu xanh truyền thống, Bác Trà Ký giới thiệu ba hương vị sáng tạo: khoai môn, matcha và đậu đỏ.",
+      "Bên cạnh Bánh Bác nhân đậu xanh truyền thống, Bác Trà Ký giới thiệu các hương vị sáng tạo: khoai môn, matcha, đậu đỏ và nhân mặn.",
     content: [
       "Bác Trà Ký tin rằng gìn giữ truyền thống không đồng nghĩa với việc ngừng đổi mới.",
-      "Nhóm Bánh Bác hương vị sáng tạo gồm nhân khoai môn, nhân matcha và nhân đậu đỏ. Mỗi sự đổi mới đều được định hướng trên nền tảng tôn trọng bản sắc của Bánh Bác Giang Xá.",
-      "Nếu bạn đã quen với vị đậu xanh, có thể chọn thử một trong ba vị mới để cảm nhận nét khác biệt trên cùng nền bánh truyền thống.",
+      "Nhóm Bánh Bác hương vị sáng tạo gồm nhân khoai môn, nhân matcha, nhân đậu đỏ và nhân mặn. Mỗi sự đổi mới đều được định hướng trên nền tảng tôn trọng bản sắc của Bánh Bác Giang Xá.",
+      "Nếu bạn đã quen với vị đậu xanh, có thể chọn thử một trong những vị mới để cảm nhận nét khác biệt trên cùng nền bánh truyền thống.",
     ],
     category: "san-pham-uu-dai",
     coverImage: coverImage("nhung-huong-vi-sang-tao-cua-banh-bac"),
@@ -119,7 +119,7 @@ export const newsPosts: readonly NewsPost[] = [
     coverCaption: "Hình hộp matcha từ Bác Trà Ký",
     publishedAt: "2026-11-15",
     featured: false,
-    isDraft: false,
+    isDraft: true,
   },
   {
     slug: "thuong-tra-cung-banh-truyen-thong",
@@ -136,6 +136,6 @@ export const newsPosts: readonly NewsPost[] = [
     coverCaption: "Trích ấn phẩm về cách làm Bánh Bác",
     publishedAt: "2026-11-15",
     featured: false,
-    isDraft: false,
+    isDraft: true,
   },
 ];

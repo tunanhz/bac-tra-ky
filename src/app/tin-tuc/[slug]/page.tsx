@@ -26,12 +26,13 @@ export async function generateMetadata({ params }: PageProps<"/tin-tuc/[slug]">)
   const { slug } = await params;
   const post = await getNewsPostBySlug(slug);
   if (!post) return { title: "Không tìm thấy bài viết" };
+  const title = post.isDraft ? `[Bản nháp] ${post.title}` : post.title;
   return {
-    title: post.isDraft ? `[Bản nháp] ${post.title}` : post.title,
+    title,
     description: post.excerpt,
     // Bài nháp không cho máy tìm kiếm lập chỉ mục.
     robots: post.isDraft ? { index: false, follow: true } : undefined,
-    openGraph: { type: "article", title: post.title, description: post.excerpt, images: [post.coverImage] },
+    openGraph: { type: "article", title, description: post.excerpt, images: [post.coverImage] },
   };
 }
 

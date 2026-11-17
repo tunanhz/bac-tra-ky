@@ -1,11 +1,11 @@
 // @vitest-environment jsdom
 import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { StorySection } from "@/components/sections/story/story-section";
 import { products } from "@/data/products";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
 import { FEATURED_LIMIT, FeaturedProducts } from "./featured-products";
-import { FinalCta } from "./final-cta";
 import { Hero } from "./hero";
 
 describe("Hero", () => {
@@ -29,11 +29,11 @@ describe("Hero", () => {
     ).toBeInTheDocument();
   });
 
-  it("nút cuộn trỏ đến tiêu đề sản phẩm nổi bật", () => {
-    render(<><Hero /><FeaturedProducts products={products.filter((p) => p.featured)} /></>);
-    const link = screen.getByRole("link", { name: "Cuộn xuống sản phẩm nổi bật" });
-    expect(link).toHaveAttribute("href", "#featured-title");
-    expect(screen.getByRole("heading", { level: 2, name: "Sản phẩm nổi bật" })).toHaveAttribute("id", "featured-title");
+  it("nút cuộn trỏ đến phần câu chuyện làng nghề", () => {
+    render(<><Hero /><StorySection /></>);
+    const link = screen.getByRole("link", { name: "Cuộn xuống câu chuyện làng nghề" });
+    expect(link).toHaveAttribute("href", "/#cau-chuyen");
+    expect(screen.getByRole("region", { name: "Khám phá câu chuyện làng nghề" })).toHaveAttribute("id", "cau-chuyen");
   });
 });
 
@@ -76,15 +76,5 @@ describe("FeaturedProducts", () => {
     // Intl chèn khoảng trắng không ngắt trước "₫" — so theo textContent để không bị chuẩn hoá khoảng trắng.
     expect(screen.getByRole("article").textContent).toContain(formatPrice(120000));
     expect(screen.queryByText("Liên hệ để biết giá")).toBeNull();
-  });
-});
-
-describe("FinalCta", () => {
-  it("heading và nút đúng spec", () => {
-    render(<FinalCta />);
-    expect(
-      screen.getByRole("heading", { level: 2, name: "Mang một chút hương vị quê nhà đến gần bạn hơn" }),
-    ).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Khám phá bộ sưu tập" })).toHaveAttribute("href", "/#san-pham");
   });
 });

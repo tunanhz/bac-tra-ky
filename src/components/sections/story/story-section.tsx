@@ -7,12 +7,13 @@ import { StoryChapter } from "./story-chapter";
 import { CRAFT_STEPS, STORY_CHAPTERS } from "./story-chapters";
 
 const CRAFT_CHAPTER = { id: "chuong-4", numeral: "IV", title: "Bí quyết làm bánh Bác" };
+const CHAPTER_NAV = [...STORY_CHAPTERS, CRAFT_CHAPTER];
 
 function CraftSection() {
   return (
     <section id={CRAFT_CHAPTER.id} aria-labelledby="craft-title" className="scroll-mt-24 pt-4">
       <div className="mb-7 text-center">
-        <p className="eyebrow m-0">IV · Giữ lửa nghề xưa</p>
+        <p className="eyebrow m-0">{CRAFT_CHAPTER.numeral} · Giữ lửa nghề xưa</p>
         <h3 id="craft-title" className="mt-2 mb-0 text-h2 font-bold text-gac">
           Bí quyết làm nên hương vị Bánh Bác
         </h3>
@@ -25,16 +26,19 @@ function CraftSection() {
             delay={i * 80}
             className="frame-paper min-w-0 p-3 shadow-paper"
           >
-            <div className="relative aspect-[2/1] overflow-hidden bg-be-2">
-              <Image
-                src={step.src}
-                alt={step.alt}
-                fill
-                sizes="(min-width: 1200px) 260px, (min-width: 1024px) 24vw, (min-width: 640px) 46vw, 90vw"
-                className="object-cover"
-              />
-            </div>
-            <div className="px-2 pt-4 pb-2">
+            <figure className="m-0">
+              <div className="relative aspect-[5/2] overflow-hidden border border-line bg-be-2">
+                <Image
+                  src={step.src}
+                  alt={step.alt}
+                  fill
+                  sizes="(min-width: 1200px) 245px, (min-width: 1024px) 22vw, (min-width: 640px) 44vw, 88vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="caption px-1 pt-2 text-ink-soft">{step.caption}</figcaption>
+            </figure>
+            <div className="px-1 pt-4 pb-2">
               <p className="eyebrow m-0 text-tra">Công đoạn 0{i + 1}</p>
               <h4 className="mt-2 mb-2 text-lg font-bold leading-snug text-son">{step.title}</h4>
               <p className="m-0 text-[0.95rem] leading-relaxed text-ink-soft">{step.text}</p>
@@ -53,7 +57,6 @@ function CraftSection() {
 }
 
 export function StorySection() {
-  const chapters = [...STORY_CHAPTERS, CRAFT_CHAPTER];
   return (
     <section id="cau-chuyen" aria-labelledby="story-title" className="section-y border-y border-line bg-be-2/40">
       <div className="wrap">
@@ -61,15 +64,15 @@ export function StorySection() {
           id="story-title"
           eyebrow="Câu chuyện văn hoá · Giang Xá"
           title="Khám phá câu chuyện làng nghề"
-          description="Theo dấu làng xưa, tìm về hương vị cũ. Ở Giang Xá, mỗi chiếc Bánh Bác mang theo vị quê nhà và sự khéo léo của những người gìn giữ nghề qua nhiều thế hệ."
-          className="mb-5 lg:mb-6"
+          description="Theo dấu làng xưa, tìm về hương vị cũ. Ẩn mình giữa vùng đất Giang Xá, Hoài Đức, Hà Nội là câu chuyện về một thức quà truyền thống được gìn giữ qua nhiều thế hệ. Mỗi chiếc Bánh Bác không chỉ mang hương vị quê nhà mà còn chứa đựng sự khéo léo, tâm huyết và những nét đẹp văn hóa của người dân nơi đây."
+          className="mb-5 md:max-w-[62ch] lg:mb-6"
         />
         <div className="mb-10 text-center">
           <Button href="#chuong-1">Tìm hiểu thêm</Button>
         </div>
         <nav aria-label="Các chương của câu chuyện" className="mb-8 lg:mb-12">
           <ol role="list" className="m-0 grid list-none grid-cols-2 gap-2 p-0 md:grid-cols-4">
-            {chapters.map(({ id, numeral, title }) => (
+            {CHAPTER_NAV.map(({ id, numeral, title }) => (
               <li key={id} className="min-w-0">
                 <a
                   href={`#${id}`}

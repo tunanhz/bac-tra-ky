@@ -10,7 +10,8 @@ describe("StorySection", () => {
   it("dẫn đến đủ bốn chương trong thẻ 5", () => {
     render(<StorySection />);
     expect(document.getElementById("cau-chuyen")).not.toBeNull();
-    expect(screen.getByText(/Theo dấu làng xưa, tìm về hương vị cũ/)).toBeInTheDocument();
+    expect(screen.getByText(/Theo dấu làng xưa, tìm về hương vị cũ.*tâm huyết và những nét đẹp văn hóa/)).toBeInTheDocument();
+    expect(screen.getByText(/Không chỉ là nơi lưu giữ những dấu tích lịch sử/)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Tìm hiểu thêm" })).toHaveAttribute("href", "#chuong-1");
 
     const nav = within(screen.getByRole("navigation", { name: "Các chương của câu chuyện" }));
@@ -22,14 +23,16 @@ describe("StorySection", () => {
     expect(screen.getByRole("link", { name: "Khám phá sản phẩm" })).toHaveAttribute("href", "/#san-pham");
   });
 
-  it("phân biệt sự kiện lịch sử và truyền thuyết, chú thích đúng ảnh lễ tưởng niệm", () => {
+  it("phân biệt sự kiện lịch sử và truyền thuyết, chú thích đúng ảnh lễ và dẫn tới ảnh chùa", () => {
     render(<StorySection />);
-    const history = within(screen.getByRole("article", { name: /Vùng đất gắn liền với vua Lý Nam Đế/ }));
+    const history = within(screen.getByRole("article", { name: /Vùng đất gắn liền với Vua Lý Nam Đế/ }));
     expect(history.getByText(/Năm 544.*Vạn Xuân/)).toBeInTheDocument();
     expect(history.getByText(/chùa Linh Bảo.*chùa Bảo Phúc/)).toBeInTheDocument();
     expect(history.getByRole("link", { name: "Xem tư liệu về chùa Bảo Phúc" })).toHaveAttribute("href", expect.stringContaining("tapchinghiencuuphathoc.vn"));
     expect(history.getByText(/Lễ tưởng niệm Lý Nam Đế ở Giang Xá — ảnh tư liệu/)).toBeInTheDocument();
-    expect(screen.getByText(/Theo truyền thuyết dân gian.*dâng tiến vua/)).toBeInTheDocument();
+    expect(history.getByRole("link", { name: "Xem ảnh chùa Bảo Phúc trên Báo Công lý" })).toHaveAttribute("href", expect.stringContaining("congly.vn"));
+    expect(screen.getByRole("heading", { name: "Bánh Bác – Sản vật tiến vua, niềm tự hào đất Giang Xá" })).toBeInTheDocument();
+    expect(screen.getByText(/Theo truyền thuyết dân gian.*được dùng để tiến vua/)).toBeInTheDocument();
   });
 
   it("có bốn công đoạn theo thứ tự, mỗi ảnh đều được ghi đúng nguồn và có tệp cục bộ", () => {
@@ -39,7 +42,10 @@ describe("StorySection", () => {
       "Chuẩn bị nguyên liệu", "Chuẩn bị bột bánh", "Bác bánh – giữ lửa nghề xưa", "Hoàn thiện chiếc bánh",
     ]);
     expect(craft.getByText(/trích từ ấn phẩm “Hành trình làm Bánh Bác”/)).toBeInTheDocument();
-    for (const { alt, src } of [...STORY_CHAPTERS.map(({ image }) => image), ...CRAFT_STEPS]) {
+    const villagePhotos = within(screen.getByRole("region", { name: "Ảnh tư liệu làng Giang Xá" }));
+    expect(villagePhotos.getAllByRole("img")).toHaveLength(2);
+    for (const step of CRAFT_STEPS) expect(craft.getByText(step.caption)).toBeInTheDocument();
+    for (const { alt, src } of [...STORY_CHAPTERS.flatMap(({ image, relatedPhotos }) => [image, ...(relatedPhotos ?? [])]), ...CRAFT_STEPS]) {
       expect(screen.getByRole("img", { name: alt })).toBeInTheDocument();
       expect(existsSync(join("public", src.slice(1)))).toBe(true);
     }

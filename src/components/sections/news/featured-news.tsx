@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 import type { NewsPost } from "@/lib/types";
-import { IllustrationTag } from "@/components/ui/illustration-tag";
 import { cn } from "@/lib/cn";
 import { NewsMeta, newsHref } from "./news-meta";
 
@@ -19,11 +18,13 @@ export function FeaturedNews({ post }: { post: NewsPost }) {
             alt={post.coverImageAlt}
             fill
             sizes="(min-width: 1200px) 660px, (min-width: 1024px) 56vw, 92vw"
-            className="object-cover transition-transform duration-800 ease-son group-hover:scale-[1.03] motion-reduce:group-hover:scale-100"
+            className={cn(
+              "object-cover transition-transform duration-800 ease-son group-hover:scale-[1.03] motion-reduce:group-hover:scale-100",
+              post.coverFocus === "top-right" && "object-right-top",
+            )}
           />
-          {!isBanner && coverCaption && <IllustrationTag label={coverCaption} />}
         </div>
-        {isBanner && coverCaption && <figcaption className="pt-2 text-center text-[0.7rem] text-be">{coverCaption}</figcaption>}
+        {coverCaption && <figcaption className="caption px-2 pt-2 text-center text-cream-muted">{coverCaption}</figcaption>}
       </figure>
       <div className="lg:col-span-5">
         <p className="eyebrow mt-0 mb-4">Bài nổi bật</p>
