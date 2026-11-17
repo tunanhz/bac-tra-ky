@@ -102,16 +102,21 @@ export function AboutSection() {
           </div>
         </Reveal>
 
-        {/* Slide 11: Giá trị cốt lõi - Tràn rộng, Khung màu đỏ đậm, Tiêu đề to ra theo Slide 11 */}
-        <Reveal className="relative overflow-hidden rounded-3xl bg-[#fbf6ea] p-6 shadow-md sm:p-9 md:p-10 lg:p-14">
-          {/* Nền làng quê hoa sen theo Slide 11 */}
-          <div className="pointer-events-none absolute inset-0 opacity-25">
+        {/* Slide 11: Giá trị cốt lõi - Tràn rộng, Nền làng quê hoa sen người dùng cung cấp, Tiêu đề to ra */}
+        <Reveal className="relative overflow-hidden rounded-3xl bg-[#fbf5e6] p-6 shadow-md sm:p-9 md:p-12 lg:p-16">
+          {/* Nền làng quê hoa sen do người dùng tải lên */}
+          <div className="pointer-events-none absolute inset-0">
             <Image
-              src="/images/brand/nen-lang-que-hoa-sen-clean.webp"
-              alt="Họa tiết làng quê hoa sen"
+              src="/images/brand/nen-gia-tri-cot-loi.webp"
+              alt="Họa tiết làng quê hoa sen và cổng làng Giang Xá"
               fill
               sizes="100vw"
-              className="object-cover object-bottom"
+              className="object-cover object-bottom opacity-85 sm:opacity-95"
+            />
+            {/* Scrim nhẹ để đảm bảo độ tương phản chữ */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-b from-[#fbf5e6]/40 via-transparent to-[#fbf5e6]/30"
             />
           </div>
 
@@ -130,7 +135,7 @@ export function AboutSection() {
               {ABOUT_CORE_VALUES.items.map(({ title, description }, index) => (
                 <li
                   key={title}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-line/70 bg-paper/95 p-6 text-ink shadow-md backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-nhu hover:bg-[#8e0b16] hover:text-be hover:shadow-2xl sm:p-8"
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-line/80 bg-paper/90 p-6 text-ink shadow-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:border-nhu hover:bg-[#8e0b16] hover:text-be hover:shadow-2xl sm:p-8"
                 >
                   <div>
                     {/* Đánh số như ảnh mẫu Slide 11 */}
