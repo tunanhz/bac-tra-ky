@@ -58,7 +58,7 @@ export async function NewsArticle({ params }: { params: Promise<{ slug: string }
             <h1 id="article-title" className="mt-5 mb-6 text-[clamp(1.8rem,1.3rem+2vw,2.7rem)] leading-tight font-bold text-son">
               {post.title}
             </h1>
-            <p className="mt-0 mb-7 border-b border-line pb-7 font-heading text-quote text-tra italic">{post.excerpt}</p>
+            <p className="mt-0 mb-7 border-b border-line pb-7 font-heading text-quote text-son italic">{post.excerpt}</p>
             <div className="max-w-[680px] text-ink-soft">
               {post.content.map((paragraph) => (
                 <p key={paragraph} className="mt-0 mb-5">

@@ -92,8 +92,8 @@ export function GiftCollections({ products }: { products: readonly Product[] }) 
             aria-labelledby={titleId}
             className="group flex min-w-0 flex-col overflow-hidden rounded-3xl bg-paper shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
-            {/* Header thanh lịch kiểu thẻ tham khảo */}
-            <div className="bg-[#1c5a1b] px-6 py-4 text-be">
+            {/* Header sơn son sang trọng theo bảng màu chủ đạo Đỏ Gấc & Vàng Nhũ */}
+            <div className="border-b border-nhu/30 bg-[#8e0b16] px-6 py-4 text-be shadow-inner">
               <span className="text-xs font-bold tracking-widest text-nhu uppercase">
                 Nhóm 0{index + 1} · {size}
               </span>
@@ -129,7 +129,7 @@ export function GiftCollections({ products }: { products: readonly Product[] }) 
 
               {/* Chi tiết / Quy cách */}
               <div className="mt-auto border-t border-line/60 pt-4 pb-5">
-                <p className="caption mb-2 font-bold text-tra uppercase">Quy cách & hương vị:</p>
+                <p className="caption mb-2 font-bold text-son uppercase">Quy cách & hương vị:</p>
                 <ul role="list" className="m-0 space-y-1.5 list-none p-0 text-xs text-ink sm:text-sm">
                   {specs.map((item) => (
                     <li key={item} className="flex items-start gap-2">

@@ -15,9 +15,9 @@ export function NewsSection({ posts }: NewsSectionProps) {
   return (
     <section id="tin-tuc" aria-labelledby="news-title" className="section-y relative overflow-hidden bg-be-2/80">
       {/* Slide 14: Sử dụng nền này */}
-      <div className="pointer-events-none absolute inset-0 opacity-20">
+      <div className="pointer-events-none absolute inset-0 opacity-25">
         <Image
-          src="/images/story/nen-lang-que-hoa-sen.webp"
+          src="/images/brand/nen-lang-que-hoa-sen-clean.webp"
           alt="Họa tiết phong cảnh làng quê hoa sen"
           fill
           sizes="100vw"

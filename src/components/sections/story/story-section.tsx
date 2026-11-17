@@ -27,7 +27,7 @@ function CraftSection() {
             className="group flex flex-col-reverse items-center justify-between gap-4 overflow-hidden rounded-2xl border border-line/60 bg-paper p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gac/40 hover:shadow-md sm:flex-row"
           >
             <div className="flex-1 min-w-0 pr-0 sm:pr-2">
-              <span className="inline-block rounded-full bg-tra/10 px-2.5 py-0.5 text-xs font-bold text-tra">
+              <span className="inline-block rounded-full bg-gac/10 px-2.5 py-0.5 text-xs font-bold text-gac">
                 Công đoạn 0{i + 1}
               </span>
               <h4 className="mt-2 mb-2 text-lg font-bold leading-snug text-son">{step.title}</h4>
@@ -68,33 +68,33 @@ function CraftSection() {
 
 export function StorySection() {
   return (
-    <section id="cau-chuyen" aria-labelledby="story-title" className="section-y border-y border-line bg-be-2/40">
-      <div className="wrap space-y-12 lg:space-y-16">
-        {/* Slide 1: Intro Banner có nền cán bánh, blur đen đổ từ trái sang, chữ dạt trái, nút pill */}
-        <Reveal className="relative overflow-hidden rounded-3xl bg-[#2a130f] shadow-lg">
-          <div className="pointer-events-none absolute inset-0">
-            <figure className="relative m-0 h-full w-full">
-              <Image
-                src="/images/story/poster-hanh-trinh-lam-banh.webp"
-                alt="Đôi tay nghệ nhân làm Bánh Bác truyền thống"
-                fill
-                priority
-                sizes="100vw"
-                className="object-cover object-center"
-              />
-            </figure>
-            {/* Blur đen đổ từ trái vào để làm nổi text */}
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/40 backdrop-blur-[2px] lg:w-[65%]"
+    <section id="cau-chuyen" aria-labelledby="story-title" className="border-y border-line bg-be-2/40 pb-16 lg:pb-24">
+      {/* Slide 1: Intro Banner tràn luôn như phần trang chủ theo yêu cầu người dùng */}
+      <div className="relative mb-12 overflow-hidden bg-[#2a130f] shadow-lg lg:mb-16">
+        <div className="pointer-events-none absolute inset-0">
+          <figure className="relative m-0 h-full w-full">
+            <Image
+              src="/images/story/poster-hanh-trinh-lam-banh.webp"
+              alt="Đôi tay nghệ nhân làm Bánh Bác truyền thống"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
             />
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 bg-black/60 lg:hidden"
-            />
-          </div>
+          </figure>
+          {/* Blur đen đổ từ trái vào để làm nổi text */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/30 backdrop-blur-[2px] lg:w-[65%]"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-black/60 lg:hidden"
+          />
+        </div>
 
-          <div className="relative z-10 max-w-2xl p-7 text-left sm:p-10 md:p-12 lg:p-14">
+        <div className="wrap relative z-10 py-12 sm:py-16 md:py-20 lg:py-24">
+          <div className="max-w-2xl text-left">
             <h2
               id="story-title"
               className="mt-0 mb-4 font-display text-3xl font-bold leading-tight text-be sm:text-4xl lg:text-5xl"
@@ -121,8 +121,10 @@ export function StorySection() {
               </a>
             </div>
           </div>
-        </Reveal>
+        </div>
+      </div>
 
+      <div className="wrap space-y-12 lg:space-y-16">
         {/* Các chương của câu chuyện */}
         <div className="grid gap-12 lg:gap-16">
           {STORY_CHAPTERS.map((chapter) => (

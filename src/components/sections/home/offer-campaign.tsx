@@ -54,18 +54,19 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
       id="uu-dai"
       aria-labelledby={headingId}
       aria-describedby={preview ? "offer-preview-notice" : undefined}
-      className="on-dark relative isolate min-w-0 scroll-mt-24 overflow-hidden rounded-3xl bg-son-deep text-be shadow-xl"
+      className="on-dark relative isolate min-w-0 scroll-mt-24 overflow-hidden w-full bg-son-deep py-12 text-be shadow-2xl lg:py-20"
     >
       {/* Slide 16: Sử dụng nền này và hiệu ứng tràn màn hình sang trọng */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <Image
-          src="/images/brand/uu-dai-dac-biet.webp"
+          src="/images/brand/nen-uu-dai-clean.webp"
           alt="Nền ưu đãi đặc biệt Bác Trà Ký"
           fill
+          priority
           sizes="100vw"
-          className="object-cover object-center opacity-30"
+          className="object-cover object-left md:object-center"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-[#40070a]/90 via-[#4a0b0e]/95 to-[#2a0406]/95" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[#300609]/60 md:hidden" />
       </div>
       {preview && (
         <p id="offer-preview-notice" className="m-0 border-b border-nhu/55 bg-be px-4 py-3 text-center text-xs font-bold tracking-widest text-son">

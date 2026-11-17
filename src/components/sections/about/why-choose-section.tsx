@@ -48,8 +48,8 @@ export function WhyChooseSection() {
   return (
     <section id="tai-sao-chon-bac-tra-ky" aria-labelledby="why-choose-title" className="section-y border-y border-line bg-be-2/45">
       <div className="wrap">
-        {/* Slide 13: Format phong cách Làng Nghề Nổi Tiếng - Nền trầm sang trọng, tiêu đề to, card tinh tế */}
-        <div className="relative overflow-hidden rounded-3xl bg-[#1d2b1c] p-7 text-be shadow-xl sm:p-10 lg:p-14">
+        {/* Slide 13: Format phong cách Làng Nghề Nổi Tiếng - Nền đỏ trầm sang trọng, tiêu đề to, card tinh tế */}
+        <div className="relative overflow-hidden rounded-3xl bg-[#300609] p-7 text-be shadow-xl sm:p-10 lg:p-14">
           <div className="pointer-events-none absolute inset-0 opacity-15">
             <Image
               src="/images/story/hon-que-giang-xa-bg.webp"

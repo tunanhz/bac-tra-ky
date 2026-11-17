@@ -30,7 +30,7 @@ export function AboutSection() {
             </figure>
           </div>
           <div className="min-w-0 md:col-span-7">
-            <span className="text-xs font-bold tracking-widest text-tra uppercase">
+            <span className="text-xs font-bold tracking-widest text-dong uppercase">
               Hành trình Bác Trà Ký
             </span>
             <h2
@@ -39,7 +39,7 @@ export function AboutSection() {
             >
               {ABOUT_INSPIRATION.title}
             </h2>
-            <p className="mt-0 mb-4 font-serif text-base font-semibold text-tra sm:text-lg">
+            <p className="mt-0 mb-4 font-serif text-base font-semibold text-son sm:text-lg">
               {ABOUT_INSPIRATION.heading}
             </p>
             <div className="space-y-3.5 text-base leading-relaxed text-ink-soft">
@@ -52,9 +52,9 @@ export function AboutSection() {
           </div>
         </Reveal>
 
-        {/* Slide 10: Tầm nhìn & Sứ mệnh - Format phong cách Văn hoá Đan Tre (Xanh rêu đậm, sang trọng, ảnh lát bánh) */}
-        <Reveal className="relative overflow-hidden rounded-3xl bg-[#1c5a1b] p-7 text-be shadow-xl sm:p-10 lg:p-14">
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-0 opacity-10 bg-[radial-gradient(circle_at_top_right,white,transparent_70%)]" />
+        {/* Slide 10: Tầm nhìn & Sứ mệnh - Tone sơn son đỏ trầm sang trọng, vàng nhũ đồng bộ bản sắc Bác Trà Ký */}
+        <Reveal className="relative overflow-hidden rounded-3xl bg-[#4a0b0e] p-7 text-be shadow-xl sm:p-10 lg:p-14">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-0 opacity-15 bg-[radial-gradient(circle_at_top_right,var(--color-gac-deep),transparent_70%)]" />
 
           <div className="relative z-10 grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-7">
@@ -105,9 +105,9 @@ export function AboutSection() {
         {/* Slide 11: Giá trị cốt lõi - Tràn rộng, Khung màu đỏ đậm, Tiêu đề to ra theo Slide 11 */}
         <Reveal className="relative overflow-hidden rounded-3xl bg-[#fbf6ea] p-6 shadow-md sm:p-9 md:p-10 lg:p-14">
           {/* Nền làng quê hoa sen theo Slide 11 */}
-          <div className="pointer-events-none absolute inset-0 opacity-20">
+          <div className="pointer-events-none absolute inset-0 opacity-25">
             <Image
-              src="/images/story/nen-lang-que-hoa-sen.webp"
+              src="/images/brand/nen-lang-que-hoa-sen-clean.webp"
               alt="Họa tiết làng quê hoa sen"
               fill
               sizes="100vw"
@@ -120,27 +120,27 @@ export function AboutSection() {
               <h3 id="core-values-title" className="mt-0 mb-3 font-display text-3xl font-bold tracking-tight text-gac sm:text-4xl lg:text-5xl xl:text-6xl">
                 {ABOUT_CORE_VALUES.heading}
               </h3>
-              <p className="m-0 font-serif text-base font-semibold text-tra sm:text-xl">
+              <p className="m-0 font-serif text-base font-semibold text-son sm:text-xl">
                 {ABOUT_CORE_VALUES.tagline}
               </p>
             </div>
 
-            {/* 3 cards: Khung màu đỏ đậm, số 01 02 03 nổi bật, tràn rộng theo Slide 11 */}
+            {/* 3 cards: Nền giấy sang trọng, hover đổi sang màu đỏ sơn son đậm theo Slide 11 */}
             <ol role="list" className="m-0 grid list-none gap-6 p-0 md:grid-cols-3 lg:gap-8">
               {ABOUT_CORE_VALUES.items.map(({ title, description }, index) => (
                 <li
                   key={title}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-nhu/35 bg-[#8e0b16] p-6 text-be shadow-lg transition-all duration-300 hover:-translate-y-1.5 hover:border-nhu hover:bg-[#a10e1b] hover:shadow-2xl sm:p-8"
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-line/70 bg-paper/95 p-6 text-ink shadow-md backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-nhu hover:bg-[#8e0b16] hover:text-be hover:shadow-2xl sm:p-8"
                 >
                   <div>
                     {/* Đánh số như ảnh mẫu Slide 11 */}
-                    <div className="mb-4 inline-flex size-12 items-center justify-center rounded-xl bg-white/15 font-heading text-xl font-bold text-nhu shadow-inner">
+                    <div className="mb-4 inline-flex size-12 items-center justify-center rounded-xl bg-son/10 font-heading text-xl font-bold text-son shadow-inner transition-colors duration-300 group-hover:bg-white/15 group-hover:text-nhu">
                       0{index + 1}
                     </div>
-                    <h4 className="mt-0 mb-3 text-xl font-bold text-be transition-colors duration-300 sm:text-2xl">
+                    <h4 className="mt-0 mb-3 text-xl font-bold text-son transition-colors duration-300 group-hover:text-be sm:text-2xl">
                       {title}
                     </h4>
-                    <p className="m-0 border-t border-white/20 pt-4 text-sm leading-relaxed text-be/90 sm:text-base">
+                    <p className="m-0 border-t border-line/50 pt-4 text-sm leading-relaxed text-ink-soft transition-colors duration-300 group-hover:border-white/20 group-hover:text-be/95 sm:text-base">
                       {description}
                     </p>
                   </div>

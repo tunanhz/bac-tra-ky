@@ -34,7 +34,7 @@ export function CustomerFeedbackForm({ email }: { email: string }) {
         placeholder="Bạn thích điểm nào? Chúng mình có thể làm gì tốt hơn?"
         className={`${INPUT_CLASS} resize-y`}
       />
-      <p className="mt-1 mb-4 text-right text-sm text-tra">{message.length}/{MESSAGE_LIMIT} ký tự</p>
+      <p className="mt-1 mb-4 text-right text-sm text-ink-soft">{message.length}/{MESSAGE_LIMIT} ký tự</p>
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         {note ? (
           <Button href={`${emailHref}&body=${body}`} variant="primary">Mở email để gửi</Button>
@@ -43,7 +43,7 @@ export function CustomerFeedbackForm({ email }: { email: string }) {
         )}
         <a href={emailHref} className="inline-flex min-h-11 items-center text-sm text-son underline underline-offset-4">Soạn email theo cách khác</a>
       </div>
-      <p id={`${id}-help`} className="mt-2 mb-0 text-sm leading-relaxed text-tra">
+      <p id={`${id}-help`} className="mt-2 mb-0 text-sm leading-relaxed text-ink-soft">
         Website mở bản nháp trong ứng dụng email. Bạn cần bấm Gửi trong email; đánh giá sẽ không tự đăng lên web.
       </p>
     </fieldset>

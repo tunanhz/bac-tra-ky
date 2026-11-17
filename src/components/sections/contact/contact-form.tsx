@@ -239,10 +239,10 @@ export function ContactForm({ facebookUrl = siteConfig.facebookUrl, endpoint = "
             role={status === "failed" ? "alert" : "status"}
             className={cn(
               "border px-5 py-4",
-              status === "sent" ? "border-tra/50 bg-tra/8" : status === "failed" ? "border-gac/50 bg-gac/5" : "border-dong/50 bg-be",
+              status === "sent" ? "border-dong/60 bg-dong/10" : status === "failed" ? "border-gac/50 bg-gac/5" : "border-dong/50 bg-be",
             )}
           >
-            <p className={cn("mt-0 mb-3.5", status === "sent" ? "text-tra" : status === "failed" ? "text-gac" : "text-ink")}>
+            <p className={cn("mt-0 mb-3.5", status === "sent" ? "text-son font-semibold" : status === "failed" ? "text-gac" : "text-ink")}>
               {status === "sent" ? CONTACT_SUCCESS_MESSAGE : status === "failed" ? CONTACT_FAILED_MESSAGE : CONTACT_NOT_READY_MESSAGE}
             </p>
             <FacebookButton

@@ -156,7 +156,7 @@ export function OfferPreviewForm() {
 
       <p
         role="status"
-        className="mt-2.5 mb-0 text-center text-sm font-medium text-tra"
+        className="mt-2.5 mb-0 text-center text-sm font-medium text-son"
       >
         {checked
           ? "Đã kiểm tra thông tin mẫu thành công! Không có đơn hàng nào được gửi."

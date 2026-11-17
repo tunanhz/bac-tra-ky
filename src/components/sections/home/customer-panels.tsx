@@ -43,7 +43,7 @@ function ReviewSlider({ reviews }: { reviews: readonly CustomerReview[] }) {
         >
           {reviews.map((review, idx) => (
             <div key={review.id} className="w-full shrink-0 px-2 sm:px-4">
-              <article className="group mx-auto max-w-2xl overflow-hidden rounded-3xl bg-[#1c5a1b] p-6 text-be shadow-xl transition-all duration-300 hover:shadow-2xl sm:p-9">
+              <article className="group mx-auto max-w-2xl overflow-hidden rounded-3xl border border-nhu/30 bg-[#8e0b16] p-6 text-be shadow-xl transition-all duration-300 hover:shadow-2xl sm:p-9">
                 <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6">
                   {/* Avatar / Icon */}
                   <div className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-nhu/20 font-display text-2xl font-bold text-nhu shadow-inner">
@@ -122,7 +122,7 @@ function FeedbackSection({ reviews }: { reviews: readonly CustomerReview[] }) {
     <section id="goc-feedback" aria-labelledby="feedback-title" className="mx-auto w-full max-w-4xl min-w-0 scroll-mt-24">
       {/* Slide 15: Tiêu đề theo concept ĐÁNH GIÁ CỦA KHÁCH HÀNG */}
       <div className="mb-8 text-center sm:mb-10">
-        <span className="text-xs font-bold tracking-widest text-tra uppercase">
+        <span className="text-xs font-bold tracking-widest text-dong uppercase">
           Chia sẻ từ người thưởng thức
         </span>
         <h2 id="feedback-title" className="mt-2 mb-3 font-display text-3xl font-bold tracking-tight text-gac sm:text-4xl lg:text-5xl">
@@ -164,9 +164,14 @@ export function CustomerPanels({
   offer = customerOffer,
 }: { reviews?: readonly CustomerReview[]; offer?: CustomerOffer | null } = {}) {
   return (
-    <div className="wrap section-y grid gap-12 lg:gap-16">
-      <FeedbackSection reviews={reviews} />
-      <OfferSection offer={offer} />
+    <div className="section-y space-y-16 lg:space-y-24">
+      <div className="wrap">
+        <FeedbackSection reviews={reviews} />
+      </div>
+      {/* Slide 16: Làm tràn màn cho mục ưu đãi */}
+      <div className="w-full">
+        <OfferSection offer={offer} />
+      </div>
     </div>
   );
 }

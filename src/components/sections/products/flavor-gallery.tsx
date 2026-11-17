@@ -56,7 +56,7 @@ export function FlavorGallery({ slides, label }: { slides: readonly FlavorSlide[
         <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-be-2/50">
           {slide.pending ? (
             <div aria-hidden="true" className="grid h-full place-content-center px-5 text-center">
-              <span className="eyebrow block text-tra">Bác Trà Ký</span>
+              <span className="eyebrow block text-dong">Bác Trà Ký</span>
               <span className="mt-2 font-display text-h3 font-bold text-son">{slide.name}</span>
               <span className="mx-auto mt-3 h-px w-10 bg-dong/60" />
             </div>
@@ -94,7 +94,7 @@ export function FlavorGallery({ slides, label }: { slides: readonly FlavorSlide[
               <span aria-hidden="true">→</span>
             </button>
           </div>
-          <button type="button" onClick={() => setPlaying((current) => !current)} className="min-h-11 cursor-pointer text-sm text-tra underline underline-offset-4 hover:text-gac">
+          <button type="button" onClick={() => setPlaying((current) => !current)} className="min-h-11 cursor-pointer text-sm text-son underline underline-offset-4 hover:text-gac">
             {playing ? "Tạm dừng tự chuyển ảnh" : "Bật tự chuyển ảnh"}
           </button>
         </div>
