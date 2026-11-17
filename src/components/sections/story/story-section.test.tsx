@@ -23,14 +23,13 @@ describe("StorySection", () => {
     expect(screen.getByRole("link", { name: "Khám phá sản phẩm" })).toHaveAttribute("href", "/#san-pham");
   });
 
-  it("phân biệt sự kiện lịch sử và truyền thuyết, chú thích đúng ảnh lễ và dẫn tới ảnh chùa", () => {
+  it("phân biệt sự kiện lịch sử và truyền thuyết, chú thích đúng ảnh lễ", () => {
     render(<StorySection />);
     const history = within(screen.getByRole("article", { name: /Vùng đất gắn liền với Vua Lý Nam Đế/ }));
     expect(history.getByText(/Năm 544.*Vạn Xuân/)).toBeInTheDocument();
     expect(history.getByText(/chùa Linh Bảo.*chùa Bảo Phúc/)).toBeInTheDocument();
-    expect(history.getByRole("link", { name: "Xem tư liệu về chùa Bảo Phúc" })).toHaveAttribute("href", expect.stringContaining("tapchinghiencuuphathoc.vn"));
     expect(history.getByText(/Lễ tưởng niệm Lý Nam Đế ở Giang Xá — ảnh tư liệu/)).toBeInTheDocument();
-    expect(history.getByRole("link", { name: "Xem ảnh chùa Bảo Phúc trên Báo Công lý" })).toHaveAttribute("href", expect.stringContaining("congly.vn"));
+    expect(screen.queryByText(/Xem ảnh chùa Bảo Phúc/)).not.toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Bánh Bác – Sản vật tiến vua, niềm tự hào đất Giang Xá" })).toBeInTheDocument();
     expect(screen.getByText(/Theo truyền thuyết dân gian.*được dùng để tiến vua/)).toBeInTheDocument();
   });

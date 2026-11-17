@@ -8,7 +8,6 @@ export type StoryChapter = {
   paragraphs: readonly string[];
   image: StoryPhoto;
   relatedPhotos?: readonly StoryPhoto[];
-  sources?: readonly { label: string; href: string }[];
 };
 
 export const FOLK_LEGEND_LABEL = "Theo truyền thuyết dân gian";
@@ -59,10 +58,6 @@ export const STORY_CHAPTERS: readonly StoryChapter[] = [
       alt: "Sân lễ với lọng và đồ lễ trong dịp tưởng niệm Lý Nam Đế tại Giang Xá",
       caption: "Lễ tưởng niệm Lý Nam Đế ở Giang Xá — ảnh tư liệu.",
     },
-    sources: [
-      { label: "Xem ảnh chùa Bảo Phúc trên Báo Công lý", href: "https://congly.vn/ngoi-co-tu-ben-dong-tieu-giang-bien-394714.html" },
-      { label: "Xem tư liệu về chùa Bảo Phúc", href: "https://tapchinghiencuuphathoc.vn/chua-huong-ap-thai-nguyen-chua-bao-phuc-ha-noi-trong-cuoc-doi-va-su-nghiep-ly-nam-de.html" },
-    ],
   },
   {
     id: "chuong-3",

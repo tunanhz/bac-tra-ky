@@ -150,20 +150,6 @@ export function StoryChapter({
               {paragraph}
             </p>
           ))}
-          {chapter.sources?.length ? (
-            <ul role="list" className="m-0 mt-5 list-none border-t border-line/60 p-0 pt-2">
-              {chapter.sources.map(({ href, label }) => (
-                <li key={href}>
-                  <a
-                    href={href}
-                    className="inline-flex min-h-11 items-center text-sm font-bold text-tra underline underline-offset-4"
-                  >
-                    {label} <span aria-hidden="true" className="ml-2">↗</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          ) : null}
         </div>
       </Reveal>
       {chapter.relatedPhotos?.length ? (
