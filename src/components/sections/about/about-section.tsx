@@ -15,7 +15,7 @@ export function AboutSection() {
         <Reveal as="article" className="grid items-center gap-8 rounded-3xl bg-paper p-6 shadow-sm md:grid-cols-12 md:p-10 lg:gap-12 lg:p-12">
           <div className="md:col-span-5">
             <figure className="m-0">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-be-2/60 shadow-md">
+              <div className="relative aspect-square overflow-hidden rounded-2xl bg-be-2/60 shadow-md">
                 <Image
                   src="/images/story/phong-tra-bac-tra-ky.webp"
                   alt="Không gian thưởng trà và Bánh Bác tại Bác Trà Ký"
