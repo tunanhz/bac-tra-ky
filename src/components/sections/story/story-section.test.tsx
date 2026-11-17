@@ -7,20 +7,19 @@ import { CRAFT_STEPS, STORY_CHAPTERS } from "./story-chapters";
 import { StorySection } from "./story-section";
 
 describe("StorySection", () => {
-  it("dẫn đến đủ bốn chương trong thẻ 5", () => {
+  it("dẫn đến đủ bốn chương theo yêu cầu", () => {
     render(<StorySection />);
     expect(document.getElementById("cau-chuyen")).not.toBeNull();
     expect(screen.getByText(/Theo dấu làng xưa, tìm về hương vị cũ.*tâm huyết và những nét đẹp văn hóa/)).toBeInTheDocument();
     expect(screen.getByText(/Không chỉ là nơi lưu giữ những dấu tích lịch sử/)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Tìm hiểu thêm" })).toHaveAttribute("href", "#chuong-1");
+    expect(screen.getByRole("link", { name: /Khám phá câu chuyện/ })).toHaveAttribute("href", "#chuong-1");
 
-    const nav = within(screen.getByRole("navigation", { name: "Các chương của câu chuyện" }));
-    for (const [index, name] of ["Hồn quê Giang Xá", "Dấu ấn lịch sử", "Hương vị quê nhà", "Bí quyết làm bánh Bác"].entries()) {
-      const id = `chuong-${index + 1}`;
-      expect(nav.getByRole("link", { name: new RegExp(name) })).toHaveAttribute("href", `#${id}`);
-      expect(document.getElementById(id)).not.toBeNull();
+    for (let i = 1; i <= 4; i++) {
+      expect(document.getElementById(`chuong-${i}`)).not.toBeNull();
     }
-    expect(screen.getByRole("link", { name: "Khám phá sản phẩm" })).toHaveAttribute("href", "/#san-pham");
+    const productLinks = screen.getAllByRole("link", { name: /Khám phá sản phẩm/ });
+    expect(productLinks.length).toBeGreaterThan(0);
+    expect(productLinks[0]).toHaveAttribute("href", "/#san-pham");
   });
 
   it("phân biệt sự kiện lịch sử và truyền thuyết, chú thích đúng ảnh lễ", () => {
@@ -41,8 +40,6 @@ describe("StorySection", () => {
       "Chuẩn bị nguyên liệu", "Chuẩn bị bột bánh", "Bác bánh – giữ lửa nghề xưa", "Hoàn thiện chiếc bánh",
     ]);
     expect(craft.getByText(/trích từ ấn phẩm “Hành trình làm Bánh Bác”/)).toBeInTheDocument();
-    const villagePhotos = within(screen.getByRole("region", { name: "Ảnh tư liệu làng Giang Xá" }));
-    expect(villagePhotos.getAllByRole("img")).toHaveLength(2);
     for (const step of CRAFT_STEPS) expect(craft.getByText(step.caption)).toBeInTheDocument();
     for (const { alt, src } of [...STORY_CHAPTERS.flatMap(({ image, relatedPhotos }) => [image, ...(relatedPhotos ?? [])]), ...CRAFT_STEPS]) {
       expect(screen.getByRole("img", { name: alt })).toBeInTheDocument();

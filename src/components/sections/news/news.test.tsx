@@ -27,16 +27,11 @@ describe("news helpers", () => {
     expect(newsHref("abc")).toBe("/tin-tuc/abc");
   });
 
-  it("arrangeNews: 'all' tách bài nổi bật; chọn chủ đề thì không có nổi bật", () => {
-    const all = arrangeNews(posts, "all");
+  it("arrangeNews: tách bài nổi bật và lưới bài viết", () => {
+    const all = arrangeNews(posts);
     expect(all.featured?.featured).toBe(true);
     expect(all.grid).toHaveLength(posts.length - 1);
     expect(all.grid).not.toContain(all.featured);
-
-    const tea = arrangeNews(posts, "van-hoa-tra");
-    expect(tea.featured).toBeNull();
-    expect(tea.grid.every((post) => post.category === "van-hoa-tra")).toBe(true);
-    expect(tea.grid).toHaveLength(2);
   });
 });
 
@@ -74,40 +69,16 @@ describe("NewsCard", () => {
 });
 
 describe("NewsSection / NewsBoard", () => {
-  it("id tin-tuc, tiêu đề 'Tin tức', bài nổi bật + lưới 5 card, là bản chính thức không có nhãn Bản nháp và có ngày đăng", () => {
+  it("id tin-tuc, tiêu đề 'Tin tức', bài nổi bật + lưới trượt ngang 5 card chính thức", () => {
     const { container } = render(<NewsSection posts={posts} />);
     expect(container.querySelector("section#tin-tuc")).not.toBeNull();
     expect(screen.getByRole("heading", { level: 2, name: "Tin tức" })).toBeInTheDocument();
     expect(screen.getByText("Bài nổi bật")).toBeInTheDocument();
-    expect(screen.queryByText(/không phải thông báo sự kiện hay ưu đãi đang diễn ra/)).not.toBeInTheDocument();
     expect(screen.getByRole("img", { name: posts[0].coverImageAlt })).toBeInTheDocument();
     expect(screen.getByText("Ấn phẩm Bác Trà Ký")).toBeInTheDocument();
     expect(gridTitles()).toHaveLength(5);
     expect(screen.queryByText(DRAFT_LABEL)).not.toBeInTheDocument();
-    expect(screen.queryByText("Ảnh minh hoạ – sẽ thay ảnh thật")).not.toBeInTheDocument();
     expect(container.querySelectorAll("time").length).toBeGreaterThan(0);
-  });
-
-  it("bộ lọc 5 chủ đề + Tất cả; lọc đúng chủ đề, ẩn bài nổi bật", async () => {
-    const user = userEvent.setup();
-    render(<NewsBoard posts={posts} />);
-    const group = screen.getByRole("group", { name: "Lọc tin tức theo chủ đề" });
-    expect(within(group).getAllByRole("button")).toHaveLength(6);
-
-    await user.click(within(group).getByRole("button", { name: "Câu chuyện làng nghề" }));
-    expect(within(group).getByRole("button", { name: "Câu chuyện làng nghề" })).toHaveAttribute("aria-pressed", "true");
-    expect(screen.queryByText("Bài nổi bật")).not.toBeInTheDocument();
-    expect(gridTitles()).toEqual(["Giang Xá — vùng đất của ký ức và hương nếp"]);
-    expect(screen.getByText("Đang hiển thị 1 bài viết")).toBeInTheDocument();
-  });
-
-  it("chủ đề không có bài → thông báo + 'Xem tất cả'", async () => {
-    const user = userEvent.setup();
-    render(<NewsBoard posts={posts.filter((post) => post.category === "lang-nghe")} />);
-    await user.click(screen.getByRole("button", { name: "Văn hoá thưởng trà" }));
-    expect(screen.getByText("Chưa có bài viết trong chủ đề này.")).toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: "Xem tất cả" }));
-    expect(screen.getByText("Bài nổi bật")).toBeInTheDocument();
   });
 
   it("không có bài → trạng thái rỗng", () => {

@@ -1,32 +1,20 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { FilterChips, type FilterOption } from "@/components/ui/filter-chips";
-import { Reveal } from "@/components/ui/reveal";
-import { NEWS_CATEGORIES, NEWS_CATEGORY_LABELS } from "@/data/news";
-import type { NewsCategory, NewsPost } from "@/lib/types";
-import { cn } from "@/lib/cn";
+import { useRef, useState } from "react";
+import type { NewsPost } from "@/lib/types";
 import { FeaturedNews } from "./featured-news";
 import { NewsCard } from "./news-card";
 
-export type NewsFilter = NewsCategory | "all";
-
-/**
- * Chia bài cho bố cục: "Tất cả" → bài nổi bật (bài `featured` đầu tiên, nếu không có thì bài đầu) đứng riêng, lưới là
- * phần còn lại; chọn chủ đề → không có khối nổi bật, lưới gồm mọi bài thuộc chủ đề.
- */
-export function arrangeNews(posts: readonly NewsPost[], filter: NewsFilter): { featured: NewsPost | null; grid: NewsPost[] } {
-  if (filter !== "all") return { featured: null, grid: posts.filter((post) => post.category === filter) };
+export function arrangeNews(posts: readonly NewsPost[], filter?: string): { featured: NewsPost | null; grid: NewsPost[] } {
   const featured = posts.find((post) => post.featured) ?? posts[0] ?? null;
   return { featured, grid: posts.filter((post) => post !== featured) };
 }
 
-/** Tin tức client: bộ lọc 5 chủ đề (`aria-pressed`), bài nổi bật, lưới card 1/2/3 cột. */
+/** Tin tức client: bài nổi bật và thanh cuộn/slider trượt ngang theo Slide 14 */
 export function NewsBoard({ posts }: { posts: NewsPost[] }) {
-  const [filter, setFilter] = useState<NewsFilter>("all");
-  const [filterChanges, setFilterChanges] = useState(0);
-  const { featured, grid } = useMemo(() => arrangeNews(posts, filter), [posts, filter]);
+  const scrollRef = useRef<HTMLOListElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
   if (posts.length === 0) {
     return (
@@ -36,61 +24,70 @@ export function NewsBoard({ posts }: { posts: NewsPost[] }) {
     );
   }
 
-  const choose = (next: NewsFilter) => {
-    if (next === filter) return;
-    setFilter(next);
-    setFilterChanges((count) => count + 1);
+  const { featured, grid } = arrangeNews(posts);
+
+  const checkScroll = () => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+    setCanScrollLeft(scrollLeft > 10);
+    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 10);
   };
 
-  const options: Array<FilterOption<NewsFilter>> = [
-    { value: "all", label: "Tất cả" },
-    ...NEWS_CATEGORIES.map((category) => ({ value: category, label: NEWS_CATEGORY_LABELS[category] })),
-  ];
-  const resultCount = grid.length + (featured ? 1 : 0);
+  const scroll = (direction: "left" | "right") => {
+    if (!scrollRef.current) return;
+    const offset = direction === "left" ? -360 : 360;
+    scrollRef.current.scrollBy({ left: offset, behavior: "smooth" });
+  };
 
   return (
-    <>
-      {/* Chip đứng trên bài nổi bật: chọn chủ đề làm khối nổi bật biến mất phía DƯỚI chip, nên chip không nhảy chỗ. */}
-      <FilterChips
-        options={options}
-        value={filter}
-        onChange={choose}
-        label="Lọc tin tức theo chủ đề"
-        className="mb-10 flex flex-wrap justify-center gap-2 lg:mb-12"
-      />
+    <div className="space-y-10 lg:space-y-12">
+      {/* Bài viết nổi bật */}
+      {featured ? <FeaturedNews post={featured} /> : null}
 
-      {featured ? (
-        <Reveal className="mb-14 lg:mb-16">
-          <FeaturedNews post={featured} />
-        </Reveal>
-      ) : null}
-
-      <p className="sr-only" aria-live="polite">
-        {`Đang hiển thị ${resultCount} bài viết`}
-      </p>
-
-      {grid.length === 0 ? (
-        <div className="frame-paper mx-auto max-w-2xl px-6 py-12 text-center">
-          <p className="mt-0 mb-6 text-ink-soft">Chưa có bài viết trong chủ đề này.</p>
-          <Button variant="outline" onClick={() => choose("all")}>
-            Xem tất cả
-          </Button>
+      {/* Slide 14: Lưới tin tức trượt sang ngang */}
+      <div className="relative">
+        <div className="mb-4 flex items-center justify-between">
+          <h3 className="m-0 font-display text-xl font-bold text-son sm:text-2xl">
+            Các câu chuyện mới nhất
+          </h3>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              aria-label="Cuộn tin tức sang trái"
+              disabled={!canScrollLeft}
+              onClick={() => scroll("left")}
+              className="flex size-10 items-center justify-center rounded-full border border-line bg-paper text-son shadow-sm transition-all hover:bg-gac hover:text-be disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              <span aria-hidden="true" className="font-bold">←</span>
+            </button>
+            <button
+              type="button"
+              aria-label="Cuộn tin tức sang phải"
+              disabled={!canScrollRight}
+              onClick={() => scroll("right")}
+              className="flex size-10 items-center justify-center rounded-full border border-line bg-paper text-son shadow-sm transition-all hover:bg-gac hover:text-be disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              <span aria-hidden="true" className="font-bold">→</span>
+            </button>
+          </div>
         </div>
-      ) : (
-        <Reveal>
-          <ul key={filter} className="m-0 grid list-none gap-7 p-0 md:grid-cols-2 lg:grid-cols-3">
-            {grid.map((post, index) => (
-              <li
-                key={post.slug}
-                className={cn(filterChanges > 0 && "animate-rise [animation-duration:450ms]")}
-                style={filterChanges > 0 ? { animationDelay: `${Math.min(index, 5) * 60}ms` } : undefined}
-              >
-                <NewsCard post={post} />
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-      )}
-    </>
+
+        <ol
+          ref={scrollRef}
+          onScroll={checkScroll}
+          role="list"
+          className="m-0 flex snap-x snap-mandatory gap-5 overflow-x-auto p-0 pb-4 pt-1 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-line sm:gap-6"
+        >
+          {grid.map((post) => (
+            <li
+              key={post.slug}
+              className="w-[280px] shrink-0 snap-start sm:w-[340px] md:w-[360px]"
+            >
+              <NewsCard post={post} />
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
   );
 }

@@ -12,12 +12,13 @@ export function StoryChapter({
 }) {
   const titleId = `${chapter.id}-title`;
 
+  // Chapter 1: Hồn quê Giang Xá (Slide 2: không viền cứng, bỏ chữ Hồn quê Giang Xá, ảnh nền làng, 2 ảnh tư liệu nổi bên phải)
   if (chapter.id === "chuong-1") {
     return (
       <article id={chapter.id} aria-labelledby={titleId} className="scroll-mt-24">
-        <Reveal className="relative overflow-hidden rounded-3xl bg-[#fcf7ea] shadow-sm">
-          <div className="relative flex min-h-[560px] items-center lg:min-h-[660px] xl:min-h-[720px]">
-            {/* Background scenic photo on the right matching img_001 / img_002 */}
+        <Reveal className="relative overflow-hidden rounded-3xl bg-[#fcf7ea]">
+          <div className="relative flex min-h-[580px] flex-col justify-center lg:min-h-[640px]">
+            {/* Background scenic photo */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
               <figure className="relative m-0 h-full w-full">
                 <Image
@@ -30,140 +31,184 @@ export function StoryChapter({
                 />
                 <figcaption className="sr-only">{chapter.image.caption}</figcaption>
               </figure>
-              {/* Soft gradient on desktop to blend seamlessly with left content */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#fcf7ea] via-[#fcf7ea]/95 to-transparent lg:w-[56%]"
+                className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#fcf7ea] via-[#fcf7ea]/95 to-transparent lg:w-[60%]"
               />
-              {/* Subtle translucent tint on mobile to maintain contrast */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 bg-[#fcf7ea]/50 lg:hidden"
+                className="pointer-events-none absolute inset-0 bg-[#fcf7ea]/65 lg:hidden"
               />
             </div>
 
-            {/* Left text column matching img_001 */}
-            <div className="relative z-10 w-full p-6 sm:p-9 md:p-11 lg:w-[52%] lg:p-12 xl:w-[48%] xl:p-14">
-              <div className="mb-3 flex items-center gap-2.5 sm:mb-4">
-                <Image
-                  src="/images/brand/logo.png"
-                  alt="Bác Trà Ký"
-                  width={28}
-                  height={28}
-                  className="size-7 object-contain"
+            <div className="relative z-10 grid items-center gap-8 p-6 sm:p-9 md:p-11 lg:grid-cols-12 lg:p-14">
+              {/* Left text column */}
+              <div className="lg:col-span-7 xl:col-span-6">
+                <div className="mb-3 flex items-center gap-2.5 sm:mb-4">
+                  <Image
+                    src="/images/brand/logo.png"
+                    alt="Bác Trà Ký"
+                    width={28}
+                    height={28}
+                    className="size-7 object-contain"
+                  />
+                  <span className="font-heading text-xs font-bold tracking-wider text-son uppercase sm:text-sm">
+                    Bác Trà Ký
+                  </span>
+                </div>
+
+                <h3
+                  id={titleId}
+                  className="mt-0 mb-3 font-display text-2xl font-bold leading-[1.2] text-gac sm:mb-4 sm:text-3xl lg:text-4xl xl:text-5xl"
+                >
+                  {chapter.heading}
+                </h3>
+
+                {/* Sửa text lỗi: dùng font rõ ràng, không nghiêng lỗi dấu */}
+                <p className="mt-0 mb-3 font-serif text-base font-semibold leading-relaxed text-ink sm:mb-4 sm:text-lg">
+                  {chapter.paragraphs[0]}
+                </p>
+
+                <div
+                  aria-hidden="true"
+                  className="mb-4 h-1 w-16 rounded-full bg-gradient-to-r from-gac via-gac/80 to-transparent sm:mb-5"
                 />
-                <span className="text-son/40">|</span>
-                <span className="border-b-2 border-gac pb-0.5 text-xs font-bold tracking-wider text-son uppercase sm:text-sm">
-                  {chapter.title}
-                </span>
+
+                <div className="space-y-3 text-sm leading-relaxed text-ink-soft sm:space-y-3.5 sm:text-base">
+                  {chapter.paragraphs.slice(1).map((paragraph) => (
+                    <p key={paragraph} className="m-0">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
               </div>
 
-              <h3
-                id={titleId}
-                className="mt-0 mb-3 font-display text-2xl font-bold leading-[1.18] text-gac sm:mb-4 sm:text-3xl lg:text-4xl xl:text-5xl"
-              >
-                {chapter.heading}
-              </h3>
-
-              <p className="mt-0 mb-3 font-serif text-base font-medium leading-relaxed text-ink italic sm:mb-4 sm:text-lg">
-                {chapter.paragraphs[0]}
-              </p>
-
-              {/* Red decorative brush flourish */}
-              <div
-                aria-hidden="true"
-                className="mb-4 h-1 w-16 rounded-full bg-gradient-to-r from-gac via-gac/80 to-transparent sm:mb-5"
-              />
-
-              <div className="space-y-3 text-sm leading-relaxed text-ink-soft sm:space-y-3.5 sm:text-base">
-                {chapter.paragraphs.slice(1).map((paragraph) => (
-                  <p key={paragraph} className="m-0">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
+              {/* Right floating archival photos (Slide 2: Chèn 2 ảnh lên kiểu giấy ghi nhớ / ảnh nổi) */}
+              {chapter.relatedPhotos?.length ? (
+                <div className="flex flex-col gap-4 sm:flex-row lg:col-span-5 lg:flex-col lg:items-end xl:col-span-6">
+                  {chapter.relatedPhotos.map((photo, i) => (
+                    <figure
+                      key={photo.src}
+                      className={cn(
+                        "m-0 max-w-sm rounded-2xl bg-paper/95 p-3 shadow-xl backdrop-blur-sm transition-transform duration-300 hover:scale-105",
+                        i === 0 ? "lg:-rotate-2" : "lg:rotate-2 lg:mr-4"
+                      )}
+                    >
+                      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-be-2/60 sm:w-64 lg:w-72">
+                        <Image
+                          src={photo.src}
+                          alt={photo.alt}
+                          fill
+                          sizes="300px"
+                          className="object-cover"
+                        />
+                      </div>
+                      <figcaption className="caption px-1 pt-2.5 text-center font-medium text-ink">
+                        {photo.caption}
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              ) : null}
             </div>
           </div>
-
-          {chapter.relatedPhotos?.length ? (
-            <section
-              aria-label="Ảnh tư liệu làng Giang Xá"
-              className="relative z-10 border-t border-line/40 px-6 pt-6 pb-6 sm:px-9 sm:pb-9 lg:px-12 lg:pb-12"
-            >
-              <p className="eyebrow m-0 mb-3 text-tra">Ảnh tư liệu làng Giang Xá</p>
-              <div className="grid grid-cols-2 gap-3 sm:gap-5">
-                {chapter.relatedPhotos.map((photo) => (
-                  <figure
-                    key={photo.src}
-                    className="m-0 min-w-0 overflow-hidden rounded-2xl bg-be/80 p-2.5 shadow-sm"
-                  >
-                    <div className="relative aspect-[16/10] overflow-hidden rounded-xl">
-                      <Image
-                        src={photo.src}
-                        alt={photo.alt}
-                        fill
-                        sizes="(min-width: 1200px) 535px, 45vw"
-                        className="object-cover"
-                      />
-                    </div>
-                    <figcaption className="caption px-1 pt-2 text-center text-ink-soft">
-                      {photo.caption}
-                    </figcaption>
-                  </figure>
-                ))}
-              </div>
-            </section>
-          ) : null}
         </Reveal>
       </article>
     );
   }
 
+  // Chapter 2: Dấu ấn lịch sử (Slide 3: ảnh bên trái, text bên phải, không khung mờ ở dưới, to tiêu đề, bỏ badge)
+  if (chapter.id === "chuong-2") {
+    return (
+      <article id={chapter.id} aria-labelledby={titleId} className="scroll-mt-24 py-4">
+        <Reveal className="grid items-center gap-8 md:grid-cols-12 md:gap-12">
+          {/* Ảnh bên trái với hiệu ứng mềm viền / blur shadow */}
+          <figure className="m-0 md:col-span-5 lg:col-span-5">
+            <div className="group relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lg ring-1 ring-gac/10">
+              <div
+                aria-hidden="true"
+                className="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-gac/20 via-nhu/20 to-transparent blur-md transition-opacity group-hover:opacity-100"
+              />
+              <Image
+                src={chapter.image.src}
+                alt={chapter.image.alt}
+                fill
+                sizes="(min-width: 1024px) 460px, 90vw"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="caption px-1 pt-3 text-center text-ink-soft">
+              {chapter.image.caption}
+            </figcaption>
+          </figure>
+
+          {/* Text bên phải */}
+          <div className="min-w-0 md:col-span-7 lg:col-span-7">
+            <h3
+              id={titleId}
+              className="mt-0 mb-4 font-display text-2xl font-bold leading-snug text-gac sm:text-3xl lg:text-4xl"
+            >
+              {chapter.heading}
+            </h3>
+            <div className="space-y-3.5 text-base leading-relaxed text-ink-soft sm:text-lg">
+              {chapter.paragraphs.map((paragraph) => (
+                <p key={paragraph} className="m-0">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </article>
+    );
+  }
+
+  // Chapter 3: Hương vị quê nhà (Slide 4: chèn chữ lên nền ảnh, bỏ badge, to tiêu đề)
   return (
-    <article id={chapter.id} aria-labelledby={titleId} className="scroll-mt-24">
-      <Reveal className="grid items-center gap-6 rounded-3xl bg-be/70 p-6 shadow-sm md:grid-cols-2 md:gap-10 md:p-10 lg:gap-14">
-        <figure className={cn("m-0 min-w-0", alignRight && "md:order-2")}>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-be-2/60 shadow-sm">
-            <Image
-              src={chapter.image.src}
-              alt={chapter.image.alt}
-              fill
-              sizes="(min-width: 1200px) 515px, (min-width: 768px) 46vw, 91vw"
-              className={chapter.image.contain ? "object-contain p-3" : "object-cover"}
+    <article id={chapter.id} aria-labelledby={titleId} className="scroll-mt-24 py-4">
+      <Reveal className="relative overflow-hidden rounded-3xl bg-[#fcf7ea]">
+        <div className="relative flex min-h-[540px] items-center lg:min-h-[600px]">
+          {/* Background scenic photo */}
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            <figure className="relative m-0 h-full w-full">
+              <Image
+                src={chapter.image.src}
+                alt={chapter.image.alt}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 1491px"
+                className="object-cover object-right"
+              />
+              <figcaption className="sr-only">{chapter.image.caption}</figcaption>
+            </figure>
+            {/* Scrim overlay to keep text readable on left */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#fcf7ea] via-[#fcf7ea]/95 to-transparent lg:w-[60%]"
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-[#fcf7ea]/70 lg:hidden"
             />
           </div>
-          <figcaption className="caption px-1 pt-3 text-center">
-            {chapter.image.caption}
-          </figcaption>
-        </figure>
-        <div className="min-w-0 px-1 pb-2 md:px-0 md:pb-0">
-          <div className="mb-2 flex items-center gap-2">
-            <span className="border-b-2 border-gac pb-0.5 text-xs font-bold tracking-wider text-son uppercase sm:text-sm">
-              {chapter.title}
-            </span>
+
+          <div className="relative z-10 w-full p-6 sm:p-9 md:p-11 lg:w-[58%] lg:p-14">
+            <h3
+              id={titleId}
+              className="mt-0 mb-4 font-display text-2xl font-bold leading-snug text-gac sm:text-3xl lg:text-4xl"
+            >
+              {chapter.heading}
+            </h3>
+            <div className="space-y-3.5 text-base leading-relaxed text-ink-soft sm:text-lg">
+              {chapter.paragraphs.map((paragraph) => (
+                <p key={paragraph} className="m-0">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </div>
-          <h3 id={titleId} className="mt-2 mb-4 text-h3 font-bold text-gac">
-            {chapter.heading}
-          </h3>
-          {chapter.paragraphs.map((paragraph) => (
-            <p key={paragraph} className="mt-0 mb-3 text-ink-soft last:mb-0">
-              {paragraph}
-            </p>
-          ))}
         </div>
       </Reveal>
-      {chapter.relatedPhotos?.length ? (
-        <section aria-label="Ảnh tư liệu làng Giang Xá" className="mt-4 grid grid-cols-2 gap-3 sm:gap-5">
-          {chapter.relatedPhotos.map((photo) => (
-            <figure key={photo.src} className="m-0 min-w-0 rounded-2xl bg-be/70 p-2.5 shadow-sm sm:p-3.5">
-              <div className="relative aspect-[5/4] overflow-hidden rounded-xl bg-be-2/60 sm:aspect-[16/9]">
-                <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 1200px) 535px, 45vw" className="object-cover" />
-              </div>
-              <figcaption className="caption px-1 pt-2 text-center text-ink-soft">{photo.caption}</figcaption>
-            </figure>
-          ))}
-        </section>
-      ) : null}
     </article>
   );
 }

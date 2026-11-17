@@ -18,7 +18,7 @@ describe("CustomerPanels", () => {
     render(<CustomerPanels offer={draftOffer} reviews={[
       { id: "draft", status: "draft", displayName: "Khách thử nghiệm", quote: "Bản nháp không được hiển thị", rating: 5 },
     ]} />);
-    const feedback = within(screen.getByRole("region", { name: "Góc Feedback" }));
+    const feedback = within(screen.getByRole("region", { name: /ĐÁNH GIÁ CỦA KHÁCH HÀNG/ }));
     expect(feedback.queryByRole("blockquote")).not.toBeInTheDocument();
     expect(feedback.queryByText("Khách thử nghiệm")).not.toBeInTheDocument();
     const offers = within(screen.getByRole("region", { name: "Ưu đãi" }));
@@ -31,15 +31,14 @@ describe("CustomerPanels", () => {
     expect(offers.getByRole("link", { name: "Xem các bộ quà" })).toHaveAttribute("href", "/#san-pham");
   });
 
-  it("chỉ hiển thị trích dẫn đã được phép đăng", () => {
+  it("chỉ hiển thị trích dẫn đã được phép đăng trong slider", () => {
     render(<CustomerPanels reviews={[
       { id: "approved", status: "published", displayName: "Tên dùng trong test", quote: "Nội dung được phép đăng trong test", rating: 4 },
       { id: "draft", status: "draft", displayName: "Khách thử nghiệm", quote: "Bản nháp không được hiển thị" },
     ]} />);
-    const list = within(screen.getByRole("list", { name: "Cảm nhận đã được phép đăng" }));
-    expect(list.getAllByRole("listitem")).toHaveLength(1);
-    expect(list.getByRole("blockquote")).toHaveTextContent("Nội dung được phép đăng trong test");
-    expect(list.getByText("4/5 sao")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 3, name: "Tên dùng trong test" })).toBeInTheDocument();
+    expect(screen.getByRole("blockquote")).toHaveTextContent("Nội dung được phép đăng trong test");
+    expect(screen.queryByText("Khách thử nghiệm")).not.toBeInTheDocument();
   });
 });
 

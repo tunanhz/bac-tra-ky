@@ -70,10 +70,9 @@ export const STORY_CHAPTERS: readonly StoryChapter[] = [
       "Trải qua thời gian, dù cuộc sống có nhiều đổi thay, thức quà mang hương vị quê nhà ấy vẫn được gìn giữ và lưu truyền, trở thành nét đặc trưng trong văn hóa ẩm thực của vùng đất Hoài Đức.",
     ],
     image: {
-      src: "/images/common/banh-bac-giang-xa.webp",
-      alt: "Bánh Bác cuộn lá xanh bên những lát bánh đã cắt",
-      caption: "Bánh Bác Giang Xá — hình ảnh từ Bác Trà Ký",
-      contain: true,
+      src: "/images/story/banh-bac-tien-vua-full.webp",
+      alt: "Hộp quà Bác Trà Ký, đĩa Bánh Bác hoa sen bên hàng cây làng quê",
+      caption: "Bánh Bác Giang Xá — sản vật tiến vua đầy tự hào",
     },
   },
 ];

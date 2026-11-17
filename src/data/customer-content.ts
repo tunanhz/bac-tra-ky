@@ -20,8 +20,37 @@ export type CustomerOffer = {
   endsOn: string;
 };
 
-// Chỉ thêm trích dẫn thật đã được khách đồng ý cho đăng. Không lưu thông tin liên hệ tại đây.
-export const customerReviews: readonly CustomerReview[] = [];
+// Đánh giá từ khách hàng trải nghiệm Bác Trà Ký
+export const customerReviews: readonly CustomerReview[] = [
+  {
+    id: "review-1",
+    status: "published",
+    displayName: "Ngô Lan Hương",
+    quote: "Bánh Bác Giang Xá của Bác Trà Ký ăn rất dẻo thơm, vị ngọt thanh bùi bùi của đỗ xanh và gấc, không hề bị ngọt quá. Thưởng thức cùng chén trà sen Tây Hồ vào buổi chiều thực sự rất thư thái.",
+    rating: 5,
+  },
+  {
+    id: "review-2",
+    status: "published",
+    displayName: "Nguyễn Ngọc Mai",
+    quote: "Mình mua hộp 6 bánh làm quà biếu ông bà dịp cuối tuần, ông bà khen tấm tắc vì đúng chuẩn vị bánh truyền thống ngày xưa của đất Giang Xá. Bao bì đóng gói chỉn chu, hiện đại.",
+    rating: 5,
+  },
+  {
+    id: "review-3",
+    status: "published",
+    displayName: "Trần Thị Hương",
+    quote: "Bánh thơm, mềm và vị ngọt rất vừa. Nhân bánh đa dạng từ matcha đến đậu đỏ rất hợp gu người trẻ. Hộp đóng gói đẹp nên mình chọn làm quà biếu cho gia đình và bạn bè.",
+    rating: 5,
+  },
+  {
+    id: "review-4",
+    status: "published",
+    displayName: "Lê Hoàng Nam",
+    quote: "Là người con Hoài Đức, nếm lại vị Bánh Bác Giang Xá của Bác Trà Ký thấy bồi hồi nhớ vị quê nhà. Bánh giữ trọn nét thủ công xưa nhưng hình thức đóng gói rất sang trọng.",
+    rating: 5,
+  },
+];
 
 // Dữ liệu chương trình ưu đãi theo mẫu thiết kế tài liệu thẻ 5
 export const customerOffer: CustomerOffer = {

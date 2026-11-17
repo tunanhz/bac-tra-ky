@@ -1,90 +1,160 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/config/site";
+import { siteConfig, telHref } from "@/config/site";
 import { GIFT_BOX_CONTENT } from "@/data/products";
 import { cn } from "@/lib/cn";
 import type { Product } from "@/lib/types";
 import { FlavorGallery, type FlavorSlide } from "./flavor-gallery";
 
-const FLAVORS = [
-  { name: "Truyền thống", slug: "banh-bac-nhan-dau-xanh" },
-  { name: "Khoai môn", slug: "banh-bac-nhan-khoai-mon" },
-  { name: "Matcha", slug: "banh-bac-nhan-matcha" },
-  { name: "Đậu đỏ", slug: "banh-bac-nhan-dau-do" },
-] as const;
+const SIX_PACK_FLAVORS: FlavorSlide[] = [
+  {
+    name: "Truyền thống",
+    src: "/images/products/hop-6-banh.webp",
+    alt: "Hộp 6 bánh nhân đậu xanh truyền thống",
+    note: "Nhân đậu xanh truyền thống thơm bùi",
+  },
+  {
+    name: "Matcha",
+    src: "/images/products/hop-6-banh-matcha.webp",
+    alt: "Hộp 6 Bánh Bác nhân matcha",
+    note: "Nhân matcha thanh mát, dịu nhẹ",
+  },
+  {
+    name: "Khoai môn",
+    src: "/images/products/hop-6-banh-khoai-mon.webp",
+    alt: "Hộp 6 Bánh Bác nhân khoai môn",
+    note: "Nhân khoai môn dẻo bùi tự nhiên",
+  },
+  {
+    name: "Đậu đỏ",
+    src: "/images/products/hop-6-banh-dau-do.webp",
+    alt: "Hộp 6 Bánh Bác nhân đậu đỏ",
+    note: "Nhân đậu đỏ ngọt dịu đậm vị quê",
+  },
+  {
+    name: "Nhân mặn",
+    src: "/images/products/hop-6-banh-nhan-man.webp",
+    alt: "Hộp 6 Bánh Bác nhân mặn đặc biệt",
+    note: "Nhân mặn hài hòa, tròn vị",
+  },
+];
 
 const COLLECTIONS = [
   {
     product: "hop-2-banh",
     title: "Chạm Ký Ức",
     size: "Combo 2 bánh",
+    image: "/images/products/hop-2-banh.webp",
+    imageAlt: "Hộp 2 chiếc Bánh Bác Giang Xá",
+    caption: "Hộp 2 Bánh Bác truyền thống",
     description: "Những chiếc Bánh Bác mang hương vị truyền thống, gói ghém ký ức thân quen và tình quê Giang Xá.",
+    specs: ["02 bánh hương vị truyền thống", "Đóng gói hút chân không tiện lợi", "Bảo quản dễ dàng, thích hợp dùng thử"],
   },
   {
     product: "hop-6-banh",
     title: "Gom Ký Ức",
     size: "Combo 6 bánh",
+    image: "/images/products/hop-6-banh.webp",
+    imageAlt: "Hộp 6 Bánh Bác đa dạng hương vị",
+    caption: "Hộp 6 Bánh Bác – Tự chuyển các vị nhân",
     description: "Hộp 6 chiếc thích hợp để thưởng thức trọn vẹn hương vị yêu thích hoặc gửi trao món quà quê thân tình.",
+    specs: ["Đủ 5 vị nhân: mặn, truyền thống, khoai môn, matcha, đậu đỏ", "Bao bì trang nhã, đẹp mắt", "Thích hợp sum họp gia đình hoặc làm quà biếu"],
   },
   {
     product: "bo-qua-banh-bac-tra-sen",
     title: "Trao Ký Ức",
     size: "Hộp quà cao cấp",
+    image: "/images/products/bo-qua-banh-bac-tra-sen.webp",
+    imageAlt: "Hộp quà cao cấp Bánh Bác và Trà Sen Tây Hồ",
+    caption: "Hộp quà cao cấp Bánh Bác và Trà Sen",
     description: "Sự kết hợp hài hòa giữa hương vị bánh Bác truyền thống và nét thanh tao của trà sen Tây Hồ, mang đến trải nghiệm thưởng thức trọn vẹn và tinh tế.",
+    specs: [
+      "03 bánh nhân matcha",
+      "03 bánh nhân đậu xanh",
+      "03 bánh nhân khoai môn",
+      "01 hộp trà sen Tây Hồ thượng hạng",
+    ],
   },
 ] as const;
 
-function getFlavorSlides(products: readonly Product[], box: Product): FlavorSlide[] {
-  const sixPack = box.slug === "hop-6-banh";
-  const boxSlide = { name: "Hộp bánh", src: box.image, alt: box.imageAlt, note: sixPack ? "Hộp 6 bánh nhân đậu xanh truyền thống" : "Hộp 2 Bánh Bác của Bác Trà Ký" };
-  const slides: FlavorSlide[] = sixPack
-    ? [{ ...boxSlide, name: "Truyền thống" }]
-    : [boxSlide];
-  for (const { name, slug } of FLAVORS) {
-    if (sixPack && name === "Truyền thống") continue;
-    if (sixPack && name === "Matcha") {
-      slides.push({ name, src: "/images/products/hop-6-banh-matcha.webp", alt: "Hộp 6 Bánh Bác nhân matcha", note: "Hộp 6 bánh nhân matcha" });
-      continue;
-    }
-    const flavor = products.find((item) => item.slug === slug);
-    if (flavor) slides.push({ name, src: flavor.image, alt: flavor.imageAlt, note: `Ảnh vị ${name.toLowerCase()} · Không phải ảnh combo` });
-  }
-  slides.push({ name: "Nhân mặn", note: "Ảnh riêng vị nhân mặn đang cập nhật.", pending: true });
-  return slides;
-}
-
 export function GiftCollections({ products }: { products: readonly Product[] }) {
+  const hotlineHref = siteConfig.hotline ? telHref(siteConfig.hotline) : "tel:0966453916";
+
   return (
-    <div className="grid items-stretch gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-      {COLLECTIONS.map(({ product, title, size, description }, index) => {
-        const box = products.find((item) => item.slug === product);
-        if (!box) return null;
-        const premium = product === "bo-qua-banh-bac-tra-sen";
+    <div className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+      {COLLECTIONS.map(({ product, title, size, image, imageAlt, caption, description, specs }, index) => {
+        const isSixPack = product === "hop-6-banh";
+        const isPremium = product === "bo-qua-banh-bac-tra-sen";
         const titleId = `collection-${product}`;
+
         return (
-          <article key={product} aria-labelledby={titleId} className={cn("flex min-w-0 flex-col rounded-3xl bg-paper p-5 shadow-sm transition-shadow hover:shadow-md sm:p-6", premium && "md:max-lg:col-span-2 md:max-lg:w-full md:max-lg:max-w-[26rem] md:max-lg:justify-self-center")}>
-            <header className="px-1 pt-1 pb-4">
-              <p className="eyebrow m-0">0{index + 1} · {size}</p>
-              <h3 id={titleId} className="mt-2 mb-0 text-h3 font-bold text-gac">{title}</h3>
-            </header>
-            {premium ? (
-              <figure className="m-0">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-be-2/50">
-                  <Image src={box.image} alt={box.imageAlt} fill sizes="(min-width: 1200px) 350px, (min-width: 1024px) 29vw, (min-width: 768px) 44vw, 88vw" className="object-contain" />
-                </div>
-                <figcaption className="caption min-h-14 px-1 pt-3 text-ink-soft">Hộp quà Bánh Bác và Trà Sen · Ảnh từ Bác Trà Ký</figcaption>
-              </figure>
-            ) : <FlavorGallery label={title} slides={getFlavorSlides(products, box)} />}
-            <p className="mt-4 mb-4 px-1 text-ink-soft">{description}</p>
-            {premium && (
-              <ul role="list" className="m-0 mb-5 grid list-none gap-2 border-t border-line px-1 pt-4 text-sm text-tra">
-                {GIFT_BOX_CONTENT.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-            )}
-            <div className="mt-auto px-1 pt-2 pb-1">
-              <Button href={siteConfig.orderChannelUrl} variant={premium ? "primary" : "outline"} aria-label={`Liên hệ ngay về ${title}`}>
-                Liên hệ ngay <span aria-hidden="true">→</span>
-              </Button>
+          <article
+            key={product}
+            aria-labelledby={titleId}
+            className="group flex min-w-0 flex-col overflow-hidden rounded-3xl bg-paper shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+          >
+            {/* Header thanh lịch kiểu thẻ tham khảo */}
+            <div className="bg-[#1c5a1b] px-6 py-4 text-be">
+              <span className="text-xs font-bold tracking-widest text-nhu uppercase">
+                Nhóm 0{index + 1} · {size}
+              </span>
+              <h3 id={titleId} className="mt-1 mb-0 font-display text-2xl font-bold text-be">
+                {title}
+              </h3>
+            </div>
+
+            <div className="flex flex-1 flex-col p-6">
+              {/* Ảnh: Hộp 6 bánh tự chuyển ảnh (Slide 7: Tự chuyển ảnh để nguyên cho hộp 6, hộp 2 với box kia để 1 ảnh thôi) */}
+              {isSixPack ? (
+                <FlavorGallery label={title} slides={SIX_PACK_FLAVORS} />
+              ) : (
+                <figure className="m-0">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-be-2/50 p-2">
+                    <Image
+                      src={image}
+                      alt={imageAlt}
+                      fill
+                      sizes="(min-width: 1200px) 350px, (min-width: 1024px) 29vw, (min-width: 768px) 44vw, 88vw"
+                      className="object-contain transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <figcaption className="caption px-1 pt-3 text-center text-ink-soft">
+                    {caption}
+                  </figcaption>
+                </figure>
+              )}
+
+              <p className="mt-4 mb-4 text-sm leading-relaxed text-ink-soft sm:text-base">
+                {description}
+              </p>
+
+              {/* Chi tiết / Quy cách */}
+              <div className="mt-auto border-t border-line/60 pt-4 pb-5">
+                <p className="caption mb-2 font-bold text-tra uppercase">Quy cách & hương vị:</p>
+                <ul role="list" className="m-0 space-y-1.5 list-none p-0 text-xs text-ink sm:text-sm">
+                  {specs.map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <span className="mt-1 size-1.5 shrink-0 rounded-full bg-gac" aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Nút Liên hệ ngay: Gọi điện thoại trực tiếp theo Slide 7 */}
+              <div className="pt-2">
+                <a
+                  href={hotlineHref}
+                  aria-label={`Liên hệ ngay về ${title} (Gọi ${siteConfig.hotline})`}
+                  className={cn(
+                    "flex min-h-12 w-full items-center justify-center gap-2 rounded-full font-body text-sm font-bold no-underline shadow-sm transition-all duration-300 hover:shadow-md sm:text-base",
+                    isPremium
+                      ? "bg-gac text-be hover:bg-gac-deep"
+                      : "border-2 border-gac bg-transparent text-gac hover:bg-gac hover:text-be"
+                  )}
+                >
+                  LIÊN HỆ NGAY <span aria-hidden="true">→</span>
+                </a>
+              </div>
             </div>
           </article>
         );

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { cn } from "@/lib/cn";
 
 const reasons = [
@@ -49,43 +48,82 @@ export function WhyChooseSection() {
   return (
     <section id="tai-sao-chon-bac-tra-ky" aria-labelledby="why-choose-title" className="section-y border-y border-line bg-be-2/45">
       <div className="wrap">
-        <SectionHeading
-          id="why-choose-title"
-          title="Tại sao nên chọn Bác Trà Ký?"
-          description="Giữ trọn nét xưa, thêm những trải nghiệm mới – để mỗi chiếc bánh không chỉ ngon mà còn mang theo một câu chuyện."
-          className="max-w-[58ch]"
-        />
-        <ol role="list" className="m-0 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-6 lg:gap-7">
-          {reasons.map((reason, index) => (
-            <Reveal
-              key={reason.title}
-              as="li"
-              delay={(index % 3) * 90}
-              className={cn(
-                "flex flex-col gap-4 rounded-3xl bg-paper p-5 shadow-sm transition-shadow hover:shadow-md lg:col-span-2",
-                index === 3 && "lg:col-start-2",
-              )}
-            >
-              <figure className="m-0">
-                <div className="relative aspect-[16/11] overflow-hidden rounded-xl bg-be-2/60">
-                  <Image
-                    src={reason.image}
-                    alt={reason.alt}
-                    fill
-                    sizes="(min-width: 1200px) 352px, (min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
-                    className={reason.contain ? "object-contain" : "object-cover"}
-                  />
-                </div>
-                <figcaption className="caption px-2 pt-2.5 text-center text-ink-soft">{reason.caption}</figcaption>
-              </figure>
-              <div className="px-2 pb-3 sm:px-3">
-                <span aria-hidden="true" className="eyebrow block text-dong">0{index + 1}</span>
-                <h3 className="mt-2 mb-3 text-h3 font-bold text-son">{reason.title}</h3>
-                <p className="m-0 text-ink-soft">{reason.description}</p>
-              </div>
-            </Reveal>
-          ))}
-        </ol>
+        {/* Slide 13: Format phong cách Làng Nghề Nổi Tiếng - Nền trầm sang trọng, tiêu đề to, card tinh tế */}
+        <div className="relative overflow-hidden rounded-3xl bg-[#1d2b1c] p-7 text-be shadow-xl sm:p-10 lg:p-14">
+          <div className="pointer-events-none absolute inset-0 opacity-15">
+            <Image
+              src="/images/story/hon-que-giang-xa-bg.webp"
+              alt="Phong cảnh làng nghề Giang Xá"
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
+
+          <div className="relative z-10">
+            <div className="mx-auto mb-10 max-w-2xl text-center">
+              <span className="text-xs font-bold tracking-widest text-nhu uppercase">
+                Giá trị khác biệt
+              </span>
+              <h2
+                id="why-choose-title"
+                className="mt-2 mb-3 font-display text-3xl font-bold tracking-tight text-be sm:text-4xl lg:text-5xl"
+              >
+                Tại sao nên chọn Bác Trà Ký?
+              </h2>
+              <p className="m-0 font-serif text-base text-cream-muted sm:text-lg">
+                Giữ trọn nét xưa, thêm những trải nghiệm mới – để mỗi chiếc bánh không chỉ ngon mà còn mang theo một câu chuyện.
+              </p>
+            </div>
+
+            <ol role="list" className="m-0 grid list-none gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3">
+              {reasons.map((reason, index) => (
+                <Reveal
+                  key={reason.title}
+                  as="li"
+                  delay={(index % 3) * 90}
+                  className={cn(
+                    "group flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-black/35 p-5 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-nhu/60 hover:bg-black/50 hover:shadow-xl sm:p-6",
+                    index === 3 && "sm:max-lg:col-span-2",
+                    index === 4 && "lg:col-span-2"
+                  )}
+                >
+                  <div>
+                    <figure className="m-0">
+                      <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-black/40">
+                        <Image
+                          src={reason.image}
+                          alt={reason.alt}
+                          fill
+                          sizes="(min-width: 1200px) 340px, (min-width: 768px) 44vw, 88vw"
+                          className={cn(
+                            "transition-transform duration-500 group-hover:scale-105",
+                            reason.contain ? "object-contain p-2" : "object-cover"
+                          )}
+                        />
+                      </div>
+                      <figcaption className="caption px-1 pt-2 text-center text-xs text-cream-muted">
+                        {reason.caption}
+                      </figcaption>
+                    </figure>
+
+                    <div className="pt-4">
+                      <span className="inline-block rounded-full bg-nhu/20 px-2.5 py-0.5 text-xs font-bold text-nhu uppercase">
+                        0{index + 1}
+                      </span>
+                      <h3 className="mt-2 mb-2 text-lg font-bold text-be sm:text-xl">
+                        {reason.title}
+                      </h3>
+                      <p className="m-0 text-sm leading-relaxed text-cream-muted">
+                        {reason.description}
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </ol>
+          </div>
+        </div>
       </div>
     </section>
   );
