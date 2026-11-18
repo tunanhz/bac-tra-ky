@@ -6,6 +6,7 @@ import { siteConfig } from "@/config/site";
 import type { CustomerOffer } from "@/data/customer-content";
 import { CustomerFeedbackForm } from "./customer-feedback-form";
 import { CustomerPanels } from "./customer-panels";
+import { OfferSection } from "./offer-section";
 import { OfferWindow } from "./offer-window";
 
 const draftOffer: CustomerOffer = {
@@ -14,21 +15,13 @@ const draftOffer: CustomerOffer = {
 };
 
 describe("CustomerPanels", () => {
-  it("không hiển thị đánh giá hay chương trình khi dữ liệu chưa được xác nhận", () => {
-    render(<CustomerPanels offer={draftOffer} reviews={[
+  it("không hiển thị đánh giá khi dữ liệu chưa được xác nhận", () => {
+    render(<CustomerPanels reviews={[
       { id: "draft", status: "draft", displayName: "Khách thử nghiệm", quote: "Bản nháp không được hiển thị", rating: 5 },
     ]} />);
     const feedback = within(screen.getByRole("region", { name: /ĐÁNH GIÁ CỦA KHÁCH HÀNG/ }));
     expect(feedback.queryByRole("blockquote")).not.toBeInTheDocument();
     expect(feedback.queryByText("Khách thử nghiệm")).not.toBeInTheDocument();
-    const offers = within(screen.getByRole("region", { name: "Ưu đãi" }));
-    expect(offers.queryByText(draftOffer.title)).not.toBeInTheDocument();
-    expect(offers.queryByRole("timer")).not.toBeInTheDocument();
-    expect(offers.queryByRole("form")).not.toBeInTheDocument();
-    expect(offers.queryByText(/DỮ LIỆU MẪU/)).not.toBeInTheDocument();
-    expect(offers.getByText(/Hiện chưa có chương trình ưu đãi/)).toBeInTheDocument();
-    expect(offers.getByRole("link", { name: "Theo dõi trên Facebook" })).toHaveAttribute("href", siteConfig.facebookUrl);
-    expect(offers.getByRole("link", { name: "Xem các bộ quà" })).toHaveAttribute("href", "/#san-pham");
   });
 
   it("chỉ hiển thị trích dẫn đã được phép đăng trong slider", () => {
@@ -39,6 +32,20 @@ describe("CustomerPanels", () => {
     expect(screen.getByRole("heading", { level: 3, name: "Tên dùng trong test" })).toBeInTheDocument();
     expect(screen.getByRole("blockquote")).toHaveTextContent("Nội dung được phép đăng trong test");
     expect(screen.queryByText("Khách thử nghiệm")).not.toBeInTheDocument();
+  });
+});
+
+describe("OfferSection", () => {
+  it("không hiển thị chương trình khi dữ liệu chưa được xác nhận", () => {
+    render(<OfferSection offer={draftOffer} />);
+    const offers = within(screen.getByRole("region", { name: "Ưu đãi" }));
+    expect(offers.queryByText(draftOffer.title)).not.toBeInTheDocument();
+    expect(offers.queryByRole("timer")).not.toBeInTheDocument();
+    expect(offers.queryByRole("form")).not.toBeInTheDocument();
+    expect(offers.queryByText(/DỮ LIỆU MẪU/)).not.toBeInTheDocument();
+    expect(offers.getByText(/Hiện chưa có chương trình ưu đãi/)).toBeInTheDocument();
+    expect(offers.getByRole("link", { name: "Theo dõi trên Facebook" })).toHaveAttribute("href", siteConfig.facebookUrl);
+    expect(offers.getByRole("link", { name: "Xem các bộ quà" })).toHaveAttribute("href", "/#san-pham");
   });
 });
 

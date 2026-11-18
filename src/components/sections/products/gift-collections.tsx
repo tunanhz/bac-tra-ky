@@ -47,7 +47,7 @@ const COLLECTIONS = [
     imageAlt: "Hộp 2 chiếc Bánh Bác Giang Xá",
     caption: "Hộp 2 Bánh Bác truyền thống",
     description: "Những chiếc Bánh Bác mang hương vị truyền thống, gói ghém ký ức thân quen và tình quê Giang Xá.",
-    specs: ["02 bánh hương vị truyền thống", "Đóng gói hút chân không tiện lợi", "Bảo quản dễ dàng, thích hợp dùng thử"],
+    specs: ["02 bánh hương vị truyền thống", "Bảo quản dễ dàng, thích hợp dùng thử"],
   },
   {
     product: "hop-6-banh",

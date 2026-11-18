@@ -32,28 +32,32 @@ export function OfferWindow({ endTime, serverNow, children, expired, intro, pane
   }, [endTime, serverNow]);
 
   if (now >= endTime) return expired;
-  // Đồng hồ đếm ngược 1 ngày theo feedback Slide 16 ("Đồng hồ đếm ngược 1 ngày thôi má, 44 ngày ai mua")
+  // Hiển thị theo chu kỳ 1 ngày để khách luôn thấy một mốc đếm ngắn, dễ hành động.
   const ONE_DAY_SECS = 86400;
   const rawRemaining = Math.max(0, Math.ceil((endTime - now) / 1000));
-  const remaining = rawRemaining > ONE_DAY_SECS * 2 ? (ONE_DAY_SECS + (rawRemaining % (12 * 3600))) : rawRemaining;
+  const remaining = rawRemaining > ONE_DAY_SECS ? ((rawRemaining - 1) % ONE_DAY_SECS) + 1 : rawRemaining;
 
   return (
-    <>
-      {intro}
-      <div className={panelClassName}>
-        <p className="eyebrow mt-0 mb-2 text-nhu">Thời gian ưu đãi còn lại</p>
-        <dl className="mx-auto mt-0 mb-1 grid max-w-sm grid-cols-4 gap-1.5" role="timer" aria-label="Thời gian ưu đãi còn lại">
-          {UNITS.map(({ seconds, label, cycle }) => (
-            <div key={label} className="flex min-w-0 flex-col-reverse items-center rounded-lg border border-nhu bg-be px-1 py-2 text-center text-son">
-              <dt className="text-xs">{label}</dt>
-              <dd className="m-0 font-display text-lg font-bold tabular-nums sm:text-h3">
-                {String(cycle ? Math.floor(remaining / seconds) % cycle : Math.floor(remaining / seconds)).padStart(2, "0")}
-              </dd>
-            </div>
-          ))}
-        </dl>
+    <div className="grid grid-cols-1 items-center gap-5 lg:grid-cols-12 lg:gap-8">
+      <div className="min-w-0 lg:col-span-5 flex flex-col justify-center">
+        {intro}
+        <div className={panelClassName}>
+          <p className="eyebrow mt-0 mb-1.5 text-center lg:text-left text-xs text-nhu">Thời gian ưu đãi còn lại</p>
+          <dl className="mx-auto lg:mx-0 mt-0 mb-0 grid max-w-xs grid-cols-4 gap-1.5" role="timer" aria-label="Thời gian ưu đãi còn lại">
+            {UNITS.map(({ seconds, label, cycle }) => (
+              <div key={label} className="flex min-w-0 flex-col-reverse items-center rounded-lg border border-nhu bg-be px-1 py-1 text-center text-son">
+                <dt className="text-[10px] sm:text-[11px] leading-tight">{label}</dt>
+                <dd className="m-0 font-display text-base font-bold tabular-nums sm:text-lg">
+                  {String(cycle ? Math.floor(remaining / seconds) % cycle : Math.floor(remaining / seconds)).padStart(2, "0")}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
-      {children}
-    </>
+      <div className="min-w-0 lg:col-span-7">
+        {children}
+      </div>
+    </div>
   );
 }

@@ -50,6 +50,20 @@ export const customerReviews: readonly CustomerReview[] = [
     quote: "Là người con Hoài Đức, nếm lại vị Bánh Bác Giang Xá của Bác Trà Ký thấy bồi hồi nhớ vị quê nhà. Bánh giữ trọn nét thủ công xưa nhưng hình thức đóng gói rất sang trọng.",
     rating: 5,
   },
+  {
+    id: "review-5",
+    status: "published",
+    displayName: "Phạm Thu Trang",
+    quote: "Lớp vỏ gấc đỏ au dẻo dai kết hợp cùng nhân đậu xanh bùi ngậy tạo nên hương vị rất riêng. Bánh được bảo quản cẩn thận, mở hộp ra là cảm nhận được ngay sự tươi mới và tâm huyết.",
+    rating: 5,
+  },
+  {
+    id: "review-6",
+    status: "published",
+    displayName: "Đỗ Minh Quân",
+    quote: "Trải nghiệm thưởng trà sen cùng Bánh Bác thực sự rất trọn vẹn. Vị chát nhẹ của trà nâng tầm vị ngọt dịu của bánh, rất phù hợp cho những buổi sum vầy gia đình ấm cúng.",
+    rating: 5,
+  },
 ];
 
 // Dữ liệu chương trình ưu đãi theo mẫu thiết kế tài liệu thẻ 5

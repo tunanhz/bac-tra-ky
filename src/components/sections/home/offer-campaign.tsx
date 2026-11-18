@@ -1,6 +1,5 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { Divider } from "@/components/ornaments/divider";
 import { cn } from "@/lib/cn";
 import { getOfferEndTime, type CustomerOffer } from "@/data/customer-content";
 import { OfferWindow } from "./offer-window";
@@ -19,78 +18,57 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
       id="uu-dai"
       aria-labelledby={headingId}
       aria-describedby={preview ? "offer-preview-notice" : undefined}
-      className="on-dark relative isolate min-w-0 scroll-mt-24 overflow-hidden w-full bg-son-deep py-12 text-be shadow-2xl lg:py-20"
+      className="on-dark relative isolate min-w-0 scroll-mt-24 overflow-hidden w-full bg-son-deep py-4 text-be shadow-2xl sm:py-6 lg:py-8"
     >
-      {/* Nền sơn son truyền thống hoa văn mây vàng */}
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      {/* Ảnh nền ưu đãi đặc biệt do khách hàng cung cấp */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <Image
-          src="/images/brand/nen-son-uu-dai.webp"
+          src="/images/brand/uu-dai-dac-biet.png"
           alt="Nền ưu đãi đặc biệt Bác Trà Ký"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-contain object-top"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-[#300609]/40" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[#300609]/35" />
       </div>
       {preview && (
-        <p id="offer-preview-notice" className="m-0 border-b border-nhu/55 bg-be px-4 py-3 text-center text-xs font-bold tracking-widest text-son">
+        <p id="offer-preview-notice" className="m-0 border-b border-nhu/55 bg-be px-4 py-2 text-center text-xs font-bold tracking-widest text-son">
           DỮ LIỆU MẪU / KHÔNG NHẬN ĐƠN
         </p>
       )}
-      <div className="wrap relative z-10 mx-auto px-5 py-7 sm:px-9 sm:py-10 lg:py-12">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
-          {/* Cột trái: Hình ảnh sản phẩm combo Bác Trà Ký sắc nét, cân đối, sang trọng */}
-          <div className="flex w-full items-center justify-center lg:col-span-5 xl:col-span-6">
-            <figure className="m-0 w-full max-w-[420px] lg:max-w-[480px]">
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-nhu/50 bg-son/40 shadow-[0_20px_45px_rgba(0,0,0,0.6)]">
-                <Image
-                  src="/images/brand/bo-combo-banh-bac-giang-xa.webp"
-                  alt="Bộ combo túi xách và hộp Bánh Bác truyền thống Bác Trà Ký"
-                  fill
-                  priority
-                  sizes="(min-width: 1280px) 480px, (min-width: 1024px) 420px, 90vw"
-                  className="object-cover"
-                />
-              </div>
-              <figcaption className="caption pt-3 text-center text-cream-muted">
-                Bộ combo quà Bánh Bác truyền thống · Ấn phẩm Bác Trà Ký
-              </figcaption>
-            </figure>
-          </div>
-
-          {/* Cột phải: Thông tin ưu đãi, đồng hồ đếm ngược và form nhận ưu đãi */}
-          <div data-offer-center className="mx-auto w-full max-w-xl min-w-0 text-center lg:col-span-7 xl:col-span-6 lg:mx-0">
-            <h2 id={headingId} className="m-0 inline-block rounded-full border border-nhu/70 px-5 py-1.5 font-body text-sm font-bold tracking-wider text-nhu uppercase">
-              Ưu đãi đặc biệt
-            </h2>
-            {serverNow === null ? expired : <OfferWindow
-              endTime={getOfferEndTime(offer.endsOn)}
-              serverNow={serverNow}
-              expired={expired}
-              panelClassName="mt-3 rounded-2xl border border-nhu/70 bg-son-deep/75 px-2.5 pt-4 pb-2 sm:px-4"
-              intro={(
-                <header className="mt-4">
-                  {/* Slide 16: TO CÁI GIẢM 10% LÊN */}
-                  {discount && (
-                    <div className="m-0 mb-3 text-center">
-                      <span className="block font-display text-2xl font-bold tracking-[0.25em] text-be/95 uppercase sm:text-3xl">
-                        GIẢM
-                      </span>
-                      <span className="font-heading text-[clamp(4.5rem,11vw,7.5rem)] leading-none font-extrabold text-nhu italic drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
-                        {discount}
-                      </span>
-                    </div>
-                  )}
-                  <h3 className={cn("m-0 mb-2 font-bold text-be", discount ? "text-h3" : "text-h2")}>{offer.title}</h3>
-                  <p className="mx-auto mt-0 mb-0 max-w-[40ch] text-sm text-cream-muted sm:text-base">{offer.description}</p>
-                  <Divider className="mx-auto mt-2 h-4 w-28 text-nhu" />
-                </header>
-              )}
-            >
-              {children}
-            </OfferWindow>}
-          </div>
+      <div className="wrap relative z-10 mx-auto px-4 py-2 sm:px-8 sm:py-4 lg:py-4">
+        <div data-offer-center className="w-full min-w-0 mx-auto max-w-xl lg:max-w-4xl xl:max-w-5xl lg:ml-auto lg:mr-0 xl:mx-auto">
+          {serverNow === null ? expired : <OfferWindow
+            endTime={getOfferEndTime(offer.endsOn)}
+            serverNow={serverNow}
+            expired={expired}
+            panelClassName="mt-3 rounded-2xl border border-nhu/75 bg-son-deep/80 px-3 py-2.5 shadow-[0_12px_30px_rgba(0,0,0,0.45)] sm:px-4 sm:py-3"
+            intro={(
+              <header className="text-center lg:text-left">
+                <div className="mb-2">
+                  <h2 id={headingId} className="m-0 inline-block rounded-full border border-nhu/70 bg-son-deep/65 px-4 py-1 font-body text-xs font-bold tracking-wider text-nhu uppercase shadow-md">
+                    Ưu đãi đặc biệt
+                  </h2>
+                </div>
+                {/* Slide 16: TO CÁI GIẢM 10% LÊN */}
+                {discount && (
+                  <div className="m-0 mb-2 flex items-baseline justify-center gap-2.5 lg:justify-start">
+                    <span className="font-display text-xl sm:text-2xl font-bold tracking-[0.2em] text-be/95 uppercase">
+                      GIẢM
+                    </span>
+                    <span className="font-heading text-4xl sm:text-5xl font-extrabold text-nhu italic drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
+                      {discount}
+                    </span>
+                  </div>
+                )}
+                <h3 className={cn("m-0 mb-1 font-bold text-be", discount ? "text-base sm:text-lg lg:text-xl" : "text-lg sm:text-xl")}>{offer.title}</h3>
+                <p className="m-0 text-xs text-cream-muted sm:text-sm leading-relaxed max-w-[38ch] mx-auto lg:mx-0">{offer.description}</p>
+              </header>
+            )}
+          >
+            {children}
+          </OfferWindow>}
         </div>
       </div>
     </section>

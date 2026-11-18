@@ -101,11 +101,11 @@ export function OfferSection({ offer }: { offer: CustomerOffer | null }) {
         </p>
       }
     >
-      <div className="mt-6 rounded-3xl border border-nhu/80 bg-[#fdf7e5] p-6 text-left text-ink shadow-2xl sm:p-8">
-        <h4 className="mt-0 mb-4 font-display text-2xl font-bold text-son">
+      <div className="rounded-2xl border border-nhu/80 bg-[#fdf7e5] p-3.5 sm:p-5 text-left text-ink shadow-xl">
+        <h4 className="mt-0 mb-2 font-display text-base sm:text-lg font-bold text-son">
           Để lại lời nhắn
         </h4>
-        <ContactForm />
+        <ContactForm compact />
       </div>
     </OfferCampaign>
   );

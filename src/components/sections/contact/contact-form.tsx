@@ -85,6 +85,8 @@ type ContactFormProps = {
   facebookUrl?: string | null;
   /** Endpoint nhận form. */
   endpoint?: string;
+  /** Chế độ thu gọn phù hợp hiển thị trong 1 màn hình */
+  compact?: boolean;
 };
 
 /**
@@ -92,7 +94,11 @@ type ContactFormProps = {
  * `aria-describedby`), focus ô lỗi đầu tiên; honeypot ẩn; khoá nút khi đang gửi.
  * Không bao giờ báo thành công trừ khi API trả 201.
  */
-export function ContactForm({ facebookUrl = siteConfig.facebookUrl, endpoint = "/api/contact" }: ContactFormProps) {
+export function ContactForm({
+  facebookUrl = siteConfig.facebookUrl,
+  endpoint = "/api/contact",
+  compact = false,
+}: ContactFormProps) {
   const baseId = useId();
   const statusRef = useRef<HTMLDivElement>(null);
   const [values, setValues] = useState<Values>(EMPTY);
@@ -174,7 +180,7 @@ export function ContactForm({ facebookUrl = siteConfig.facebookUrl, endpoint = "
       onSubmit={onSubmit}
       aria-busy={sending}
       aria-label="Gửi lời nhắn cho Bác Trà Ký"
-      className="space-y-5"
+      className={compact ? "grid grid-cols-1 gap-2.5 sm:grid-cols-2" : "space-y-5"}
     >
       {CONTACT_FIELDS.map((field) => {
         const meta = FIELD_META[field];
@@ -187,21 +193,26 @@ export function ContactForm({ facebookUrl = siteConfig.facebookUrl, endpoint = "
           autoComplete: meta.autoComplete,
           "aria-invalid": error ? true : undefined,
           "aria-describedby": error ? errorId(field) : undefined,
-          className: INPUT_CLASS,
+          className: cn(INPUT_CLASS, compact && "min-h-9 px-3 py-1.5 text-sm rounded-lg"),
           disabled: sending,
         };
         return (
-          <div key={field}>
-            <label htmlFor={fieldId(field)} className="mb-1.5 block text-[0.78rem] font-bold tracking-[0.14em] text-ink uppercase">
+          <div key={field} className={compact && (field === "message" || field === "email") ? "sm:col-span-2" : undefined}>
+            <label htmlFor={fieldId(field)} className={cn("block font-bold tracking-[0.14em] text-ink uppercase", compact ? "mb-1 text-[0.7rem]" : "mb-1.5 text-[0.78rem]")}>
               {meta.label} <span className="text-gac" aria-hidden="true">*</span>
             </label>
             {meta.type === "textarea" ? (
-              <textarea {...common} rows={5} className={cn(common.className, "min-h-32 resize-y")} onChange={(e) => onChange(field, e.target.value)} />
+              <textarea
+                {...common}
+                rows={compact ? 2 : 5}
+                className={cn(common.className, compact ? "min-h-14 resize-none" : "min-h-32 resize-y")}
+                onChange={(e) => onChange(field, e.target.value)}
+              />
             ) : (
               <input {...common} type={meta.type} inputMode={meta.inputMode} onChange={(e) => onChange(field, e.target.value)} />
             )}
             {error ? (
-              <p id={errorId(field)} className="mt-1.5 mb-0 text-[0.9rem] text-gac">
+              <p id={errorId(field)} className={cn("text-gac", compact ? "mt-1 mb-0 text-xs" : "mt-1.5 mb-0 text-[0.9rem]")}>
                 {error}
               </p>
             ) : null}
@@ -223,26 +234,32 @@ export function ContactForm({ facebookUrl = siteConfig.facebookUrl, endpoint = "
         />
       </div>
 
-      <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center">
-        <Button type="submit" disabled={sending} aria-disabled={sending}>
+      <div className={cn("flex flex-col gap-2.5 pt-1 sm:flex-row sm:items-center", compact && "sm:col-span-2")}>
+        <Button
+          type="submit"
+          disabled={sending}
+          aria-disabled={sending}
+          className={compact ? "min-h-9 px-6 py-2 text-sm" : undefined}
+        >
           {sending ? "Đang gửi…" : "Gửi liên hệ"}
         </Button>
-        <p className="m-0 text-[0.85rem] text-ink-soft italic">
+        <p className={cn("m-0 text-ink-soft italic", compact ? "text-xs" : "text-[0.85rem]")}>
           <span className="text-gac" aria-hidden="true">*</span> Thông tin bắt buộc
         </p>
       </div>
 
       {/* Không đặt aria-live ở đây: hộp con đã có role status/alert và được focus — đặt thêm sẽ bị đọc hai lần. */}
-      <div ref={statusRef} tabIndex={-1} className="outline-none">
+      <div ref={statusRef} tabIndex={-1} className={cn("outline-none", compact && "sm:col-span-2")}>
         {status === "not-ready" || status === "failed" || status === "sent" ? (
           <div
             role={status === "failed" ? "alert" : "status"}
             className={cn(
               "border px-5 py-4",
+              compact && "px-3.5 py-2.5 text-sm",
               status === "sent" ? "border-dong/60 bg-dong/10" : status === "failed" ? "border-gac/50 bg-gac/5" : "border-dong/50 bg-be",
             )}
           >
-            <p className={cn("mt-0 mb-3.5", status === "sent" ? "text-son font-semibold" : status === "failed" ? "text-gac" : "text-ink")}>
+            <p className={cn("mt-0 mb-3.5", compact && "mb-2 text-xs", status === "sent" ? "text-son font-semibold" : status === "failed" ? "text-gac" : "text-ink")}>
               {status === "sent" ? CONTACT_SUCCESS_MESSAGE : status === "failed" ? CONTACT_FAILED_MESSAGE : CONTACT_NOT_READY_MESSAGE}
             </p>
             <FacebookButton
