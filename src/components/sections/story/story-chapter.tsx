@@ -175,14 +175,14 @@ export function StoryChapter({
               fill
               priority
               sizes="100vw"
-              className="object-cover object-right lg:origin-right lg:scale-[1.03] lg:translate-x-[14%]"
+              className="object-cover object-right lg:origin-right lg:scale-100 lg:translate-x-0"
             />
             <figcaption className="sr-only">{chapter.image.caption}</figcaption>
           </figure>
           {/* Scrim overlay: làm dịu nền phía trái để chữ đọc rõ, trong khi phía phải giữ nguyên ảnh chụp sản phẩm rực rỡ */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#fae4cf] via-[#fae4cf]/90 to-transparent lg:w-[62%] xl:w-[60%]"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#fae4cf] via-[#fae4cf]/90 to-transparent lg:w-[58%] xl:w-[54%]"
           />
           <div
             aria-hidden="true"
@@ -191,7 +191,7 @@ export function StoryChapter({
         </div>
 
         <div className="wrap relative z-10 w-full py-12 sm:py-16 lg:py-20">
-          <div className="w-full lg:w-[58%] lg:max-w-[650px] xl:w-[55%] xl:max-w-[740px] 2xl:w-[53%] 2xl:max-w-[820px]">
+          <div className="w-full lg:w-[62%] lg:max-w-[740px] xl:w-[60%] xl:max-w-[840px] 2xl:max-w-[920px]">
             <div className="mb-3 flex items-center gap-2.5 sm:mb-4">
               <Image
                 src="/images/brand/logo.png"
