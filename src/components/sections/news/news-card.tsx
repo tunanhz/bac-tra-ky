@@ -41,7 +41,9 @@ export function NewsCard({ post, className }: NewsCardProps) {
       </figure>
       <div className="flex flex-1 flex-col px-2 pt-4.5">
         <NewsMeta post={post} showDate={false} />
-        <h3 className="mt-3 mb-2 text-[1.3rem] leading-snug font-bold text-son">{post.title}</h3>
+        <h3 className="mt-3 mb-2 font-display text-[1.45rem] leading-snug font-bold text-son sm:text-[1.65rem]">
+          {post.title}
+        </h3>
         <p className="mt-0 mb-4 text-[0.95rem] text-ink-soft">{post.excerpt}</p>
         <Button
           href={newsHref(post.slug)}
