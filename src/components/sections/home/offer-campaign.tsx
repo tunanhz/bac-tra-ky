@@ -24,7 +24,7 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
       {/* Nền sơn son truyền thống hoa văn mây vàng */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <Image
-          src="/images/brand/nen-uu-dai-clean.webp"
+          src="/images/brand/nen-son-uu-dai.webp"
           alt="Nền ưu đãi đặc biệt Bác Trà Ký"
           fill
           priority
@@ -39,23 +39,28 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
         </p>
       )}
       <div className="wrap relative z-10 mx-auto px-5 py-7 sm:px-9 sm:py-10 lg:py-12">
-        <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
-          {/* Cột trái: Hình ảnh sản phẩm combo Bác Trà Ký sắc nét, cân đối, không bị phóng to hay cắt góc */}
-          <div className="flex items-center justify-center lg:col-span-5 xl:col-span-6">
-            <div className="relative aspect-[4/5] w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[400px] drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)]">
-              <Image
-                src="/images/brand/combo-uu-dai.webp"
-                alt="Bộ combo túi xách và hộp Bánh Bác truyền thống Bác Trà Ký"
-                fill
-                priority
-                sizes="(min-width: 1280px) 400px, (min-width: 1024px) 340px, 280px"
-                className="object-contain object-center"
-              />
-            </div>
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
+          {/* Cột trái: Hình ảnh sản phẩm combo Bác Trà Ký sắc nét, cân đối, sang trọng */}
+          <div className="flex w-full items-center justify-center lg:col-span-5 xl:col-span-6">
+            <figure className="m-0 w-full max-w-[420px] lg:max-w-[480px]">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-nhu/50 bg-son/40 shadow-[0_20px_45px_rgba(0,0,0,0.6)]">
+                <Image
+                  src="/images/brand/bo-combo-banh-bac-giang-xa.webp"
+                  alt="Bộ combo túi xách và hộp Bánh Bác truyền thống Bác Trà Ký"
+                  fill
+                  priority
+                  sizes="(min-width: 1280px) 480px, (min-width: 1024px) 420px, 90vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="caption pt-3 text-center text-cream-muted">
+                Bộ combo quà Bánh Bác truyền thống · Ấn phẩm Bác Trà Ký
+              </figcaption>
+            </figure>
           </div>
 
           {/* Cột phải: Thông tin ưu đãi, đồng hồ đếm ngược và form nhận ưu đãi */}
-          <div data-offer-center className="col-span-12 mx-auto w-full max-w-xl min-w-0 text-center lg:col-span-7 xl:col-span-6 lg:mx-0">
+          <div data-offer-center className="mx-auto w-full max-w-xl min-w-0 text-center lg:col-span-7 xl:col-span-6 lg:mx-0">
             <h2 id={headingId} className="m-0 inline-block rounded-full border border-nhu/70 px-5 py-1.5 font-body text-sm font-bold tracking-wider text-nhu uppercase">
               Ưu đãi đặc biệt
             </h2>

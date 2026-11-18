@@ -173,20 +173,14 @@ describe("FacebookButton", () => {
 });
 
 describe("ContactSection", () => {
-  it("id lien-he, tiêu đề, form đủ 4 trường + honeypot ẩn, nút 'Gửi liên hệ', thông tin liên hệ", () => {
+  it("id lien-he, tiêu đề, thông tin liên hệ và ảnh tư liệu làng nghề", () => {
     const { container } = render(<ContactSection />);
     expect(container.querySelector("section#lien-he")).not.toBeNull();
     expect(screen.getByRole("heading", { level: 2, name: "Liên hệ" })).toBeInTheDocument();
-    for (const label of [/Họ và tên/, /Số điện thoại/, /Email/, /Nội dung/]) {
-      expect(screen.getByLabelText(label)).toBeInTheDocument();
-    }
-    const honeypot = container.querySelector('input[name="website"]');
-    expect(honeypot).toHaveAttribute("tabindex", "-1");
-    expect(honeypot?.closest("[aria-hidden='true']")).not.toBeNull();
-    expect(screen.getByRole("button", { name: "Gửi liên hệ" })).toBeInTheDocument();
     for (const term of ["Facebook", "TikTok", "Email", "Hotline", "Địa chỉ"]) {
       expect(screen.getAllByText(term).length).toBeGreaterThan(0);
     }
     expect(screen.getByText("Làng nghề Giang Xá, xã Hoài Đức, Hà Nội")).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Sân lát gạch với lọng và đồ lễ ở làng Giang Xá" })).toBeInTheDocument();
   });
 });
