@@ -16,8 +16,7 @@ export function ProductsSection({ products }: ProductsSectionProps) {
       <div className="wrap">
         <SectionHeading
           id="products-title"
-          eyebrow="Bác Trà Ký"
-          title="Sản phẩm Bác Trà Ký"
+          title="Sản phẩm"
           description="Bánh Bác Giang Xá cùng Trà Sen và các hộp bánh dùng để thưởng thức hoặc làm quà tặng."
         />
         {products.some(({ category }) => category === "qua-tang") ? (

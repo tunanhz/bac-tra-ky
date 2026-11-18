@@ -73,12 +73,13 @@ describe("NewsSection / NewsBoard", () => {
     const { container } = render(<NewsSection posts={posts} />);
     expect(container.querySelector("section#tin-tuc")).not.toBeNull();
     expect(screen.getByRole("heading", { level: 2, name: "Tin tức" })).toBeInTheDocument();
-    expect(screen.getByText("Bài nổi bật")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: posts[0].title })).toBeInTheDocument();
+    expect(screen.queryByText("Bài nổi bật")).not.toBeInTheDocument();
     expect(screen.getByRole("img", { name: posts[0].coverImageAlt })).toBeInTheDocument();
     expect(screen.getByText("Ấn phẩm Bác Trà Ký")).toBeInTheDocument();
     expect(gridTitles()).toHaveLength(5);
     expect(screen.queryByText(DRAFT_LABEL)).not.toBeInTheDocument();
-    expect(container.querySelectorAll("time").length).toBeGreaterThan(0);
+    expect(container.querySelectorAll("time")).toHaveLength(0);
   });
 
   it("không có bài → trạng thái rỗng", () => {

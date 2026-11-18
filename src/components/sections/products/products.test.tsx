@@ -48,7 +48,7 @@ describe("filterProducts", () => {
 describe("ProductsSection", () => {
   it("chỉ hiển thị ba bộ quà theo thẻ 5, không lặp danh mục sản phẩm lẻ", () => {
     render(<ProductsSection products={products} />);
-    const section = screen.getByRole("region", { name: "Sản phẩm Bác Trà Ký" });
+    const section = screen.getByRole("region", { name: "Sản phẩm" });
     expect(section).toHaveAttribute("id", "san-pham");
     const scope = within(section);
     expect(scope.getAllByRole("article").map((card) => within(card).getByRole("heading").textContent)).toEqual([

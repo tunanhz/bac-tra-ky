@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 import type { NewsPost } from "@/lib/types";
 import { cn } from "@/lib/cn";
-import { NewsMeta, newsHref } from "./news-meta";
+import { newsHref } from "./news-meta";
 
 /**
  * Bài nổi bật: ảnh lớn trong khung sơn son, chữ bên phải trên desktop và bên dưới trên mobile.
@@ -27,9 +27,7 @@ export function FeaturedNews({ post }: { post: NewsPost }) {
         {coverCaption && <figcaption className="caption px-2 pt-2 text-center text-cream-muted">{coverCaption}</figcaption>}
       </figure>
       <div className="lg:col-span-5">
-        <p className="eyebrow mt-0 mb-4">Bài nổi bật</p>
-        <NewsMeta post={post} />
-        <h3 className="mt-4 mb-4 text-[clamp(1.6rem,1.2rem+1.4vw,2.3rem)] leading-tight font-bold text-son">
+        <h3 className="mt-0 mb-4 text-[clamp(1.6rem,1.2rem+1.4vw,2.3rem)] leading-tight font-bold text-son">
           {post.title}
         </h3>
         <p className="mt-0 mb-7 text-ink-soft">{post.excerpt}</p>

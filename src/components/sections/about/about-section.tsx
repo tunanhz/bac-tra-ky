@@ -30,12 +30,9 @@ export function AboutSection() {
             </figure>
           </div>
           <div className="min-w-0 md:col-span-7">
-            <span className="text-xs font-bold tracking-widest text-dong uppercase">
-              Hành trình Bác Trà Ký
-            </span>
             <h2
               id="about-title"
-              className="mt-2 mb-3 font-display text-2xl font-bold leading-tight text-gac sm:text-3xl lg:text-4xl"
+              className="mt-0 mb-3 font-display text-2xl font-bold leading-tight text-gac sm:text-3xl lg:text-4xl"
             >
               {ABOUT_INSPIRATION.title}
             </h2>
