@@ -64,7 +64,7 @@ export function Footer() {
     "inline-flex min-h-11 items-center whitespace-nowrap text-[#efe2c6] no-underline transition-colors duration-300 hover:text-white hover:underline";
 
   return (
-    <footer className="on-dark border-t border-nhu/50 bg-tram pt-12 pb-7 text-be has-[+_.quick-contact]:pb-20 md:pt-16 md:has-[+_.quick-contact]:pb-7">
+    <footer id="lien-he" className="on-dark border-t border-nhu/50 bg-tram pt-12 pb-7 text-be has-[+_.quick-contact]:pb-20 md:pt-16 md:has-[+_.quick-contact]:pb-7">
       <div className="wrap">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-[1.1fr_1.8fr_1.1fr_1fr]">
           <div>

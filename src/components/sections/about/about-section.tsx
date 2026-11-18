@@ -50,54 +50,91 @@ export function AboutSection() {
         </Reveal>
       </div>
 
-      {/* Slide 10: Tầm nhìn & Sứ mệnh - Tone sơn son đỏ trầm sang trọng tràn viền toàn màn hình, không bọc hình chữ nhật */}
-      <div className="relative isolate w-full overflow-hidden bg-[#4a0b0e] py-16 text-be shadow-xl lg:py-24 border-b border-nhu/20">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-0 opacity-15 bg-[radial-gradient(circle_at_top_right,var(--color-gac-deep),transparent_70%)]" />
+      {/* Slide 10: Tầm nhìn & Sứ mệnh - Thiết kế poster nghệ thuật với ảnh Polaroid trung tâm & 2 card đối xứng theo form mẫu */}
+      <div className="relative isolate w-full overflow-hidden bg-gradient-to-b from-[#380609] via-[#4d0c10] to-[#300508] py-16 text-be shadow-2xl lg:py-24 border-b border-nhu/20">
+        {/* Họa tiết ánh sáng & quầng sáng vàng nhũ chìm */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-0 opacity-25 bg-[radial-gradient(circle_at_50%_35%,#c88e28,transparent_60%)]" />
 
-        <Reveal className="wrap relative z-10 grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-7">
-            <span className="text-xs font-bold tracking-widest text-nhu uppercase">
-              Định hướng thương hiệu
-            </span>
-            <h3 className="mt-2 mb-6 font-display text-3xl font-bold tracking-wide text-be sm:text-4xl">
+        <div className="wrap relative z-10 mx-auto max-w-6xl">
+          <Reveal>
+            {/* Nhãn nhỏ phía trên */}
+            <div className="text-center mb-2 sm:mb-3">
+              <span className="inline-block rounded-full border border-nhu/50 bg-black/30 px-4 py-1 text-xs font-bold tracking-widest text-nhu uppercase backdrop-blur-sm">
+                Định hướng thương hiệu
+              </span>
+            </div>
+
+            {/* Tiêu đề lớn ấn tượng theo phong cách poster như ảnh mẫu */}
+            <h3 className="mt-0 mb-6 text-center font-heading text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] font-black tracking-tight text-nhu uppercase drop-shadow-[0_4px_24px_rgba(0,0,0,0.65)] leading-none">
               TẦM NHÌN & SỨ MỆNH
             </h3>
 
-            <div className="grid gap-5 sm:grid-cols-2">
-              {ABOUT_STATEMENTS.map(({ title, description }, index) => (
-                <div
-                  key={title}
-                  className="rounded-2xl border border-nhu/30 bg-black/25 p-5 backdrop-blur-sm transition-all duration-300 hover:border-nhu"
-                >
-                  <span className="inline-block rounded-full bg-nhu/20 px-3 py-1 font-body text-xs font-bold tracking-wider text-nhu uppercase">
-                    0{index + 1} · {title}
+            {/* Bố cục 3 phần: Card Tầm nhìn bên trái - Ảnh nghệ nhân ở giữa - Card Sứ mệnh bên phải */}
+            <div className="relative mt-8 grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-6">
+              {/* Card bên trái: TẦM NHÌN */}
+              <div className="order-2 lg:order-1 lg:col-span-4">
+                <div className="relative rounded-3xl border border-nhu/35 bg-black/40 p-6 sm:p-7 shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-nhu/70 hover:bg-black/50">
+                  <span className="font-heading text-xs font-bold tracking-widest text-nhu uppercase sm:text-sm">
+                    TẦM NHÌN
                   </span>
-                  <p className="mt-3 mb-0 text-sm leading-relaxed text-be/95 sm:text-base">
-                    {description}
+                  <p className="mt-3 mb-4 font-body text-sm sm:text-base leading-relaxed text-be/95">
+                    {ABOUT_STATEMENTS[0].description}
                   </p>
+                  {/* Pill tag bo tròn ở góc dưới như ảnh mẫu */}
+                  <div className="flex justify-start lg:justify-end">
+                    <span className="inline-flex items-center rounded-full bg-[#fdf7e5] px-4 py-1.5 font-heading text-xs font-bold tracking-wide text-son shadow-md">
+                      Lan tỏa · Gìn giữ · Hiện đại
+                    </span>
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Ảnh lát Bánh Bác truyền thống theo Slide 10 */}
-          <div className="lg:col-span-5">
-            <figure className="m-0 mx-auto max-w-sm overflow-hidden rounded-2xl bg-black/20 p-3 shadow-2xl ring-1 ring-nhu/40">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
-                <Image
-                  src="/images/story/banh-bac-boc-mang.webp"
-                  alt="Những lát Bánh Bác Giang Xá cuộn đỏ gấc và nhân đỗ bùi"
-                  fill
-                  sizes="(min-width: 1024px) 380px, 80vw"
-                  className="object-cover"
-                />
               </div>
-              <figcaption className="caption px-1 pt-2.5 text-center text-xs text-cream-muted">
-                Bánh Bác Giang Xá — Thức quà truyền thống gìn giữ lửa nghề
-              </figcaption>
-            </figure>
-          </div>
-        </Reveal>
+
+              {/* Khung ảnh Polaroid ở chính giữa - Xoay nghiêng và có lớp lót nền vàng be */}
+              <div className="order-1 lg:order-2 lg:col-span-4 flex justify-center z-20">
+                <div className="group relative mx-auto w-full max-w-[280px] sm:max-w-[310px] lg:max-w-[320px]">
+                  {/* Lớp nền lót màu vàng nhạt/be hơi lệch xoay như tấm giấy kẹp phía sau */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 -rotate-3 rounded-3xl bg-[#d4a034]/85 shadow-xl transition-transform duration-500 ease-out group-hover:-rotate-1"
+                  />
+                  {/* Khung ảnh chính hơi xoay 2 độ ngược lại */}
+                  <div className="relative rotate-2 overflow-hidden rounded-3xl bg-[#fdf7e5] p-3 shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-transform duration-500 ease-out group-hover:rotate-0">
+                    <div className="relative aspect-[4/4.5] w-full overflow-hidden rounded-2xl bg-black/10">
+                      <Image
+                        src="/images/story/nghe-nhan-cuon-banh-bac.webp"
+                        alt="Nghệ nhân Giang Xá đang tỉ mỉ cuộn từng chiếc Bánh Bác"
+                        fill
+                        sizes="(min-width: 1024px) 320px, 80vw"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      />
+                    </div>
+                    <p className="caption m-0 pt-2.5 pb-0.5 text-center font-display text-xs font-bold text-son">
+                      Nghệ nhân giữ lửa nghề Bánh Bác Giang Xá
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card bên phải: SỨ MỆNH */}
+              <div className="order-3 lg:col-span-4">
+                <div className="relative rounded-3xl border border-nhu/35 bg-black/40 p-6 sm:p-7 shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-nhu/70 hover:bg-black/50">
+                  <span className="font-heading text-xs font-bold tracking-widest text-nhu uppercase sm:text-sm">
+                    SỨ MỆNH
+                  </span>
+                  <p className="mt-3 mb-4 font-body text-sm sm:text-base leading-relaxed text-be/95">
+                    {ABOUT_STATEMENTS[1].description}
+                  </p>
+                  {/* Pill tag bo tròn ở góc dưới như ảnh mẫu */}
+                  <div className="flex justify-start">
+                    <span className="inline-flex items-center rounded-full bg-[#fdf7e5] px-4 py-1.5 font-heading text-xs font-bold tracking-wide text-son shadow-md">
+                      Bàn tay · Ký ức · Truyền thống
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
       </div>
 
       {/* Slide 11: Giá trị cốt lõi - Tràn rộng toàn màn hình với nền hoa sen, không bọc hình chữ nhật */}

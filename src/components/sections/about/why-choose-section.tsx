@@ -35,7 +35,7 @@ export function WhyChooseSection() {
     <section
       id="tai-sao-chon-bac-tra-ky"
       aria-labelledby="why-choose-title"
-      className="relative isolate min-w-0 scroll-mt-24 overflow-hidden w-full bg-[#250406] py-16 text-be shadow-2xl lg:py-24 border-y border-line/40"
+      className="relative isolate min-w-0 scroll-mt-24 overflow-hidden w-full bg-[#460c11] py-16 text-be shadow-2xl lg:py-24 border-y border-nhu/20"
     >
       {/* Nền làng quê cổ kính với mái ngói và không gian thủ công tràn viền toàn màn hình */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -44,12 +44,17 @@ export function WhyChooseSection() {
           alt="Phong cảnh làng nghề cổ truyền Giang Xá"
           fill
           sizes="100vw"
-          className="object-cover object-center opacity-30"
+          className="object-cover object-center opacity-25 mix-blend-luminosity"
         />
-        {/* Lớp phủ màu sơn son trầm cinematic */}
+        {/* Lớp phủ màu sơn son quý phái, ấm áp và bớt tối sầm theo chuẩn Hộp Sơn Son */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-[#1f0305]/95 via-[#2d0508]/85 to-[#1c0204]/95"
+          className="absolute inset-0 bg-gradient-to-b from-[#3c090d]/90 via-[#581219]/85 to-[#38070b]/92"
+        />
+        {/* Quầng sáng vàng nhũ chìm trung tâm tạo chiều sâu nghệ thuật, làm dịu nền tối */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_75%_55%_at_50%_20%,rgba(212,160,52,0.18),transparent_75%)]"
         />
       </div>
 

@@ -122,11 +122,10 @@ function ReviewSlider({ reviews }: { reviews: readonly CustomerReview[] }) {
                 aria-selected={current === i}
                 aria-label={`Trang đánh giá ${i + 1}`}
                 onClick={() => setCurrent(i)}
-                className={`h-2.5 transition-all duration-300 ${
-                  current === i
-                    ? "w-8 rounded-full bg-gac"
-                    : "w-2.5 rounded-full bg-gac/30 hover:bg-gac/60"
-                }`}
+                className={`h-2.5 transition-all duration-300 ${current === i
+                  ? "w-8 rounded-full bg-gac"
+                  : "w-2.5 rounded-full bg-gac/30 hover:bg-gac/60"
+                  }`}
               />
             ))}
           </div>

@@ -1,6 +1,5 @@
 import { AboutSection } from "@/components/sections/about/about-section";
 import { WhyChooseSection } from "@/components/sections/about/why-choose-section";
-import { ContactSection } from "@/components/sections/contact/contact-section";
 import { CustomerPanels } from "@/components/sections/home/customer-panels";
 import { Hero } from "@/components/sections/home/hero";
 import { NewsSection } from "@/components/sections/news/news-section";
@@ -21,7 +20,6 @@ export default async function HomePage() {
       <WhyChooseSection />
       <NewsSection posts={posts} />
       <CustomerPanels />
-      <ContactSection />
     </>
   );
 }

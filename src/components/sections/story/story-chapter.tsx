@@ -179,19 +179,6 @@ export function StoryChapter({
 
         <div className="wrap relative z-10 w-full py-12 sm:py-16 lg:py-20">
           <div className="w-full lg:w-[62%] lg:max-w-[740px] xl:w-[60%] xl:max-w-[840px] 2xl:max-w-[920px]">
-            <div className="mb-3 flex items-center gap-2.5 sm:mb-4">
-              <Image
-                src="/images/brand/logo.png"
-                alt="Bác Trà Ký"
-                width={28}
-                height={28}
-                className="size-7 object-contain"
-              />
-              <span className="font-heading text-xs font-bold tracking-wider text-son uppercase sm:text-sm">
-                Bác Trà Ký
-              </span>
-            </div>
-
             <h3
               id={titleId}
               className="mt-0 mb-4 font-display text-2xl font-bold leading-[1.25] text-gac sm:text-3xl lg:text-4xl xl:text-5xl"
