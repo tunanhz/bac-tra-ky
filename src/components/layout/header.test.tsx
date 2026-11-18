@@ -12,7 +12,7 @@ describe("Header", () => {
     pathname.value = "/";
   });
 
-  it("có logo và đủ 6 mục điều hướng trỏ tới section trang chủ", () => {
+  it("có logo và đủ 5 mục điều hướng trỏ tới section trang chủ", () => {
     render(<Header />);
     const nav = screen.getByRole("navigation", { name: "Điều hướng chính" });
     const links = within(nav).getAllByRole("link");
@@ -22,7 +22,6 @@ describe("Header", () => {
       "Sản phẩm",
       "Về chúng tôi",
       "Tin tức",
-      "Liên hệ",
     ]);
     expect(links.map((a) => a.getAttribute("href"))).toEqual([
       "/#trang-chu",
@@ -30,7 +29,6 @@ describe("Header", () => {
       "/#san-pham",
       "/#ve-chung-toi",
       "/#tin-tuc",
-      "/#lien-he",
     ]);
     const logo = screen.getByRole("link", { name: /Bác Trà Ký — về trang chủ/ });
     expect(logo).toHaveAttribute("href", "/#trang-chu");
@@ -131,10 +129,10 @@ describe("Header", () => {
     await user.tab({ shift: true });
     expect(button).toHaveFocus();
     await user.tab({ shift: true });
-    expect(screen.getByRole("link", { name: "Liên hệ" })).toHaveFocus();
+    expect(screen.getByRole("link", { name: "Tin tức" })).toHaveFocus();
   });
 
-  it("cuộn tới đáy trang (đang xem footer) → mục 'Liên hệ' sáng, aria-current='location'", () => {
+  it("cuộn tới đáy trang (đang xem footer) → mục cuối ('Tin tức') sáng, aria-current='location'", () => {
     const scrollHeight = vi.spyOn(document.documentElement, "scrollHeight", "get").mockReturnValue(5000);
     try {
       render(<Header />);
@@ -142,7 +140,7 @@ describe("Header", () => {
         window.scrollY = 5000 - window.innerHeight;
         window.dispatchEvent(new Event("scroll"));
       });
-      expect(screen.getByRole("link", { name: "Liên hệ" })).toHaveAttribute("aria-current", "location");
+      expect(screen.getByRole("link", { name: "Tin tức" })).toHaveAttribute("aria-current", "location");
       expect(screen.getByRole("link", { name: "Trang chủ" })).not.toHaveAttribute("aria-current");
     } finally {
       scrollHeight.mockRestore();

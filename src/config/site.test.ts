@@ -13,14 +13,13 @@ import {
 } from "./site";
 
 describe("siteConfig", () => {
-  it("có đủ 6 mục điều hướng theo spec, đúng thứ tự", () => {
+  it("có đủ 5 mục điều hướng theo spec, đúng thứ tự", () => {
     expect(NAV_ITEMS.map((i) => i.label)).toEqual([
       "Trang chủ",
       "Câu chuyện văn hoá",
       "Sản phẩm",
       "Về chúng tôi",
       "Tin tức",
-      "Liên hệ",
     ]);
     expect(sectionHref("lien-he")).toBe("/#lien-he");
   });

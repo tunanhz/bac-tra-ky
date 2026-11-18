@@ -17,10 +17,9 @@ export const NAV_ITEMS = [
   { id: "san-pham", label: "Sản phẩm" },
   { id: "ve-chung-toi", label: "Về chúng tôi" },
   { id: "tin-tuc", label: "Tin tức" },
-  { id: "lien-he", label: "Liên hệ" },
 ] as const satisfies readonly NavItem[];
 
-export type SectionId = (typeof NAV_ITEMS)[number]["id"];
+export type SectionId = (typeof NAV_ITEMS)[number]["id"] | "lien-he";
 
 /** Đường dẫn tới một section của trang chủ; dùng được từ mọi trang (vd. `/tin-tuc/...`). */
 export function sectionHref(id: SectionId): string {
