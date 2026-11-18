@@ -193,11 +193,15 @@ function FeedbackSection({ reviews }: { reviews: readonly CustomerReview[] }) {
 
 export function CustomerPanels({
   reviews = customerReviews,
+  offer = customerOffer,
 }: { reviews?: readonly CustomerReview[]; offer?: CustomerOffer | null } = {}) {
   return (
-    <div className="section-y">
+    <div className="section-y space-y-16 lg:space-y-24">
       <div className="wrap">
         <FeedbackSection reviews={reviews} />
+      </div>
+      <div className="w-full">
+        <OfferSection offer={offer} />
       </div>
     </div>
   );
