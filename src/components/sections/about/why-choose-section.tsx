@@ -64,11 +64,11 @@ export function WhyChooseSection() {
               </span>
               <h2
                 id="why-choose-title"
-                className="mt-4 mb-3 font-display text-3xl font-extrabold tracking-wide text-nhu uppercase drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] sm:text-4xl md:text-5xl lg:text-6xl"
+                className="mt-4 mb-3 font-display text-3xl font-bold tracking-wide text-nhu uppercase drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] sm:text-4xl md:text-5xl lg:text-6xl"
               >
                 Tại sao nên chọn Bác Trà Ký?
               </h2>
-              <p className="m-0 font-serif text-base text-cream-muted sm:text-lg">
+              <p className="m-0 font-body text-base text-cream-muted sm:text-lg">
                 Giữ trọn nét xưa, thêm những trải nghiệm mới – để mỗi chiếc bánh không chỉ ngon mà còn mang theo một câu chuyện.
               </p>
             </div>
