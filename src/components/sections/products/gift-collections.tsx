@@ -93,12 +93,12 @@ export function GiftCollections({ products }: { products: readonly Product[] }) 
           >
             {/* Header sơn son sang trọng theo bảng màu chủ đạo Đỏ Gấc & Vàng Nhũ */}
             <div className="border-b border-nhu/30 bg-[#8e0b16] px-6 py-4 text-be shadow-inner">
-              <span className="text-xs font-bold tracking-widest text-nhu uppercase">
-                Nhóm 0{index + 1} · {size}
-              </span>
-              <h3 id={titleId} className="mt-1 mb-0 font-display text-2xl font-bold text-be">
+              <h3 id={titleId} className="mt-0 mb-1 font-display text-2xl font-bold text-be">
                 {title}
               </h3>
+              <p className="m-0 text-xs font-bold tracking-widest text-nhu uppercase">
+                {size}
+              </p>
             </div>
 
             <div className="flex flex-1 flex-col p-6">
@@ -144,7 +144,7 @@ export function GiftCollections({ products }: { products: readonly Product[] }) 
                 <a
                   href={hotlineHref}
                   aria-label={`Liên hệ ngay về ${title} (Gọi ${siteConfig.hotline})`}
-                  className="flex min-h-12 w-full items-center justify-center gap-2 rounded-full border-2 border-gac bg-[#fdf7e5] font-body text-sm font-bold text-gac no-underline shadow-sm transition-all duration-300 hover:border-gac hover:bg-gac hover:text-be hover:shadow-md sm:text-base"
+                  className="flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-gac bg-gac font-body text-sm font-bold text-be no-underline shadow-md transition-all duration-300 hover:border-gac-deep hover:bg-gac-deep hover:shadow-lg sm:text-base"
                 >
                   LIÊN HỆ NGAY <span aria-hidden="true">→</span>
                 </a>

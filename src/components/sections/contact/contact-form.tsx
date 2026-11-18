@@ -166,6 +166,22 @@ export function ContactForm({
       return;
     }
     setStatus(outcome.status);
+
+    // Khi người dùng gửi liên hệ: sao chép nội dung lời nhắn và tự động mở Facebook thẳng
+    if (outcome.status === "not-ready" || outcome.status === "sent") {
+      if (typeof navigator !== "undefined" && navigator.clipboard) {
+        const textToCopy = `[Lời nhắn gửi Bác Trà Ký]\n- Họ và tên: ${values.name}\n- Số điện thoại: ${values.phone}\n- Email: ${values.email}\n- Nội dung: ${values.message}`;
+        void navigator.clipboard.writeText(textToCopy).catch(() => undefined);
+      }
+      if (facebookUrl && typeof window !== "undefined" && typeof window.open === "function") {
+        try {
+          window.open(facebookUrl, "_blank", "noopener,noreferrer");
+        } catch {
+          // Bỏ qua nếu môi trường test không hỗ trợ window.open
+        }
+      }
+    }
+
     if (outcome.status === "sent") setValues(EMPTY);
     // Đưa người dùng (và trình đọc màn hình) tới hộp thông báo.
     requestAnimationFrame(() => statusRef.current?.focus());
@@ -262,6 +278,11 @@ export function ContactForm({
             <p className={cn("mt-0 mb-3.5", compact && "mb-2 text-xs", status === "sent" ? "text-son font-semibold" : status === "failed" ? "text-gac" : "text-ink")}>
               {status === "sent" ? CONTACT_SUCCESS_MESSAGE : status === "failed" ? CONTACT_FAILED_MESSAGE : CONTACT_NOT_READY_MESSAGE}
             </p>
+            {status === "not-ready" && (
+              <p className={cn("mt-0 mb-3 text-ink-soft italic", compact ? "text-xs" : "text-sm")}>
+                Đang tự động chuyển tiếp tới Facebook Bác Trà Ký để bạn gửi lời nhắn trực tiếp (nội dung đã được sao chép vào bộ nhớ tạm). Nếu trang chưa tự mở, bạn có thể bấm nút bên dưới:
+              </p>
+            )}
             <FacebookButton
               url={facebookUrl}
               variant={status === "sent" ? "outline" : "primary"}

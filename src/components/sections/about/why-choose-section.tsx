@@ -61,12 +61,9 @@ export function WhyChooseSection() {
       <div className="wrap relative z-10">
         {/* Tiêu đề cao, dõng dạc, màu vàng nhũ theo phong cách MỤC LỤC trong ảnh mẫu */}
         <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-14">
-          <span className="inline-block rounded-full border border-nhu/60 bg-black/30 px-4 py-1 text-xs font-bold tracking-[0.25em] text-nhu uppercase backdrop-blur-sm">
-            Giá trị khác biệt
-          </span>
           <h2
             id="why-choose-title"
-            className="mt-4 mb-3 font-display text-3xl font-bold tracking-wide text-nhu uppercase drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] sm:text-4xl md:text-5xl lg:text-6xl"
+            className="mt-0 mb-3 font-display text-3xl font-bold tracking-wide text-nhu uppercase drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] sm:text-4xl md:text-5xl lg:text-6xl"
           >
             Tại sao nên chọn Bác Trà Ký?
           </h2>

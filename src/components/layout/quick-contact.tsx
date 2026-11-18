@@ -28,7 +28,7 @@ export function QuickContact() {
           rel="noopener noreferrer"
           aria-label="Facebook Bác Trà Ký"
           title="Facebook Bác Trà Ký"
-          className={`${action} bg-son-deep`}
+          className={`${action} bg-gac`}
         >
           <FacebookIcon className="size-6" />
         </a>
@@ -40,7 +40,7 @@ export function QuickContact() {
           rel="noopener noreferrer"
           aria-label="TikTok Bác Trà Ký"
           title="TikTok Bác Trà Ký"
-          className={`${action} bg-son-deep`}
+          className={`${action} bg-gac`}
         >
           <TikTokIcon className="size-6" />
         </a>

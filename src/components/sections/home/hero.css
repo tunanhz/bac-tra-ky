@@ -1,7 +1,7 @@
 @layer components {
   .home-hero {
     --hero-paper: #ffebd6;
-    --hero-red: var(--color-gac-deep);
+    --hero-red: var(--color-gac);
     --hero-artwork-width: 1777;
     --hero-artwork-height: 1000;
     position: relative;
@@ -92,12 +92,12 @@
   }
 
   .home-hero__primary:hover {
-    background: var(--color-son-deep);
+    background: var(--color-gac-deep);
   }
 
   .home-hero__secondary {
     background: var(--hero-paper);
-    color: var(--color-son-deep);
+    color: var(--color-gac);
   }
 
   .home-hero__secondary:hover {

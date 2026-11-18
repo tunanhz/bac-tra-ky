@@ -102,9 +102,22 @@ export function OfferSection({ offer }: { offer: CustomerOffer | null }) {
       }
     >
       <div className="rounded-2xl border border-nhu/80 bg-[#fdf7e5] p-3.5 sm:p-5 text-left text-ink shadow-xl">
-        <h4 className="mt-0 mb-2 font-display text-base sm:text-lg font-bold text-son">
-          Để lại lời nhắn
-        </h4>
+        <div className="mb-2 flex items-center justify-between">
+          <h4 className="m-0 font-display text-base sm:text-lg font-bold text-son">
+            Để lại lời nhắn
+          </h4>
+          {siteConfig.facebookUrl && (
+            <a
+              href={siteConfig.facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-gac transition-colors hover:text-gac-deep hover:underline"
+            >
+              <span>Nhắn qua Facebook</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          )}
+        </div>
         <ContactForm compact />
       </div>
     </OfferCampaign>

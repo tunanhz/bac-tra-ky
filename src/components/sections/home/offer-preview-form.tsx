@@ -149,7 +149,7 @@ export function OfferPreviewForm() {
         type="submit"
         fullWidth
         aria-label="Thử đăng ký"
-        className="mt-5 rounded-full bg-gac py-3 text-base font-bold text-be shadow-md hover:bg-son-deep"
+        className="mt-5 rounded-full bg-gac py-3 text-base font-bold text-be shadow-md hover:bg-gac-deep hover:shadow-lg"
       >
         ĐẶT HÀNG NGAY
       </Button>

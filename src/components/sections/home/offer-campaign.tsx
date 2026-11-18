@@ -28,9 +28,9 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
           fill
           priority
           sizes="100vw"
-          className="object-contain object-top"
+          className="object-cover object-center"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-[#300609]/35" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[#300609]/20" />
       </div>
       {preview && (
         <p id="offer-preview-notice" className="m-0 border-b border-nhu/55 bg-be px-4 py-2 text-center text-xs font-bold tracking-widest text-son">

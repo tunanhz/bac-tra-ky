@@ -107,7 +107,7 @@ function ReviewSlider({ reviews }: { reviews: readonly CustomerReview[] }) {
             type="button"
             onClick={prev}
             aria-label="Đánh giá trước"
-            className="flex size-11 items-center justify-center rounded-xl border border-gac bg-gac text-be shadow-md transition-all duration-300 hover:border-gac hover:bg-be hover:text-gac"
+            className="flex size-11 items-center justify-center rounded-full border border-gac bg-gac text-be shadow-md transition-all duration-300 hover:border-gac-deep hover:bg-gac-deep hover:shadow-lg"
           >
             <span aria-hidden="true" className="text-xl font-bold">←</span>
           </button>
@@ -134,7 +134,7 @@ function ReviewSlider({ reviews }: { reviews: readonly CustomerReview[] }) {
             type="button"
             onClick={next}
             aria-label="Đánh giá tiếp theo"
-            className="flex size-11 items-center justify-center rounded-xl border border-gac bg-gac text-be shadow-md transition-all duration-300 hover:border-gac hover:bg-be hover:text-gac"
+            className="flex size-11 items-center justify-center rounded-full border border-gac bg-gac text-be shadow-md transition-all duration-300 hover:border-gac-deep hover:bg-gac-deep hover:shadow-lg"
           >
             <span aria-hidden="true" className="text-xl font-bold">→</span>
           </button>
@@ -172,7 +172,7 @@ function FeedbackSection({ reviews }: { reviews: readonly CustomerReview[] }) {
         <button
           type="button"
           onClick={() => setShowForm((v) => !v)}
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-gac bg-gac px-7 py-3 font-body text-sm font-bold text-be shadow-md transition-all duration-300 hover:border-gac hover:bg-be hover:text-gac sm:text-base"
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-gac bg-gac px-8 py-3.5 font-body text-sm font-bold text-be shadow-md transition-all duration-300 hover:border-gac-deep hover:bg-gac-deep hover:shadow-lg sm:text-base"
         >
           {showForm ? "Đóng form cảm nhận" : "Gửi cảm nhận của bạn"} <span aria-hidden="true">✉</span>
         </button>
