@@ -16,7 +16,7 @@ export function Hero() {
       <div className="home-hero__inner">
         <div className="home-hero__panel">
           <h1 id="hero-title" aria-label={`${siteConfig.name} – ${siteConfig.slogan}`} className="home-hero__title">
-            {siteConfig.name}
+            <span className="home-hero__brand">{siteConfig.name}</span>
             <span className="home-hero__slogan">{siteConfig.slogan}</span>
           </h1>
           <p className="home-hero__lead">
