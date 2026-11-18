@@ -66,19 +66,13 @@ export function AboutSection() {
             <div className="relative mt-8 grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-6">
               {/* Card bên trái: TẦM NHÌN */}
               <div className="order-2 lg:order-1 lg:col-span-4">
-                <div className="relative rounded-3xl border border-nhu/35 bg-black/40 p-6 sm:p-7 shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-nhu/70 hover:bg-black/50">
+                <div className="relative rounded-3xl border border-nhu/35 bg-black/40 p-6 sm:p-8 shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-nhu/70 hover:bg-black/50">
                   <span className="font-heading text-xs font-bold tracking-widest text-nhu uppercase sm:text-sm">
-                    TẦM NHÌN
+                    2. TẦM NHÌN
                   </span>
-                  <p className="mt-3 mb-4 font-body text-sm sm:text-base leading-relaxed text-be/95">
+                  <p className="mt-3.5 mb-0 font-body text-sm sm:text-base leading-relaxed text-be/95">
                     {ABOUT_STATEMENTS[0].description}
                   </p>
-                  {/* Pill tag bo tròn ở góc dưới như ảnh mẫu */}
-                  <div className="flex justify-start lg:justify-end">
-                    <span className="inline-flex items-center rounded-full bg-[#fdf7e5] px-4 py-1.5 font-heading text-xs font-bold tracking-wide text-son shadow-md">
-                      Lan tỏa · Gìn giữ · Hiện đại
-                    </span>
-                  </div>
                 </div>
               </div>
 
@@ -110,19 +104,13 @@ export function AboutSection() {
 
               {/* Card bên phải: SỨ MỆNH */}
               <div className="order-3 lg:col-span-4">
-                <div className="relative rounded-3xl border border-nhu/35 bg-black/40 p-6 sm:p-7 shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-nhu/70 hover:bg-black/50">
+                <div className="relative rounded-3xl border border-nhu/35 bg-black/40 p-6 sm:p-8 shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-nhu/70 hover:bg-black/50">
                   <span className="font-heading text-xs font-bold tracking-widest text-nhu uppercase sm:text-sm">
-                    SỨ MỆNH
+                    3. SỨ MỆNH
                   </span>
-                  <p className="mt-3 mb-4 font-body text-sm sm:text-base leading-relaxed text-be/95">
+                  <p className="mt-3.5 mb-0 font-body text-sm sm:text-base leading-relaxed text-be/95">
                     {ABOUT_STATEMENTS[1].description}
                   </p>
-                  {/* Pill tag bo tròn ở góc dưới như ảnh mẫu */}
-                  <div className="flex justify-start">
-                    <span className="inline-flex items-center rounded-full bg-[#fdf7e5] px-4 py-1.5 font-heading text-xs font-bold tracking-wide text-son shadow-md">
-                      Bàn tay · Ký ức · Truyền thống
-                    </span>
-                  </div>
                 </div>
               </div>
             </div>
