@@ -275,11 +275,18 @@ export function ContactForm({
               status === "sent" ? "border-dong/60 bg-dong/10" : status === "failed" ? "border-gac/50 bg-gac/5" : "border-dong/50 bg-be",
             )}
           >
-            <p className={cn("mt-0 mb-3.5", compact && "mb-2 text-xs", status === "sent" ? "text-son font-semibold" : status === "failed" ? "text-gac" : "text-ink")}>
-              {status === "sent" ? CONTACT_SUCCESS_MESSAGE : status === "failed" ? CONTACT_FAILED_MESSAGE : CONTACT_NOT_READY_MESSAGE}
-            </p>
+            {status === "sent" && (
+              <p className={cn("mt-0 mb-3.5 text-son font-semibold", compact && "mb-2 text-xs")}>
+                {CONTACT_SUCCESS_MESSAGE}
+              </p>
+            )}
+            {status === "failed" && (
+              <p className={cn("mt-0 mb-3.5 text-gac", compact && "mb-2 text-xs")}>
+                {CONTACT_FAILED_MESSAGE}
+              </p>
+            )}
             {status === "not-ready" && (
-              <p className={cn("mt-0 mb-3 text-ink-soft italic", compact ? "text-xs" : "text-sm")}>
+              <p className={cn("mt-0 mb-3.5 text-ink leading-relaxed", compact ? "text-xs" : "text-sm sm:text-base")}>
                 Đang tự động chuyển tiếp tới Facebook Bác Trà Ký để bạn gửi lời nhắn trực tiếp (nội dung đã được sao chép vào bộ nhớ tạm). Nếu trang chưa tự mở, bạn có thể bấm nút bên dưới:
               </p>
             )}

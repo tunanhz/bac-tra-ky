@@ -23,7 +23,7 @@ export function FacebookButton({ url = siteConfig.facebookUrl, variant = "outlin
       <span
         role="link"
         aria-disabled="true"
-        className={buttonClassName(variant, false, `pointer-events-none select-none ${className ?? ""}`)}
+        className={buttonClassName(variant, false, `pointer-events-none select-none normal-case tracking-normal ${className ?? ""}`)}
       >
         {icon}
         <span>
@@ -34,7 +34,7 @@ export function FacebookButton({ url = siteConfig.facebookUrl, variant = "outlin
     );
   }
   return (
-    <a href={url} target="_blank" rel="noopener noreferrer" className={buttonClassName(variant, false, className)}>
+    <a href={url} target="_blank" rel="noopener noreferrer" className={buttonClassName(variant, false, `normal-case tracking-normal ${className ?? ""}`)}>
       {icon}
       <span>{FACEBOOK_BUTTON_LABEL}</span>
     </a>

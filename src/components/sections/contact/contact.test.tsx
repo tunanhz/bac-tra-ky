@@ -75,7 +75,7 @@ describe("ContactForm", () => {
     await fillValid(user);
     await user.click(submitButton());
 
-    expect(await screen.findByText(CONTACT_NOT_READY_MESSAGE)).toBeInTheDocument();
+    expect(await screen.findByText(/Đang tự động chuyển tiếp tới Facebook Bác Trà Ký/)).toBeInTheDocument();
     expect(screen.queryByText(CONTACT_SUCCESS_MESSAGE)).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Nhắn qua Facebook" })).toHaveAttribute("href", FB);
 
@@ -139,7 +139,7 @@ describe("ContactForm", () => {
     expect(screen.getByRole("button", { name: "Đang gửi…" })).toBeDisabled();
     expect(screen.getByRole("form")).toHaveAttribute("aria-busy", "true");
     resolve(jsonResponse(501, { ok: false, error: "x" }));
-    expect(await screen.findByText(CONTACT_NOT_READY_MESSAGE)).toBeInTheDocument();
+    expect(await screen.findByText(/Đang tự động chuyển tiếp tới Facebook Bác Trà Ký/)).toBeInTheDocument();
   });
 
   it("API 201 (khi có backend) → báo đã nhận + nút Facebook, xoá form", async () => {
