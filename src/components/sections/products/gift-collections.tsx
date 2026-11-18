@@ -83,7 +83,6 @@ export function GiftCollections({ products }: { products: readonly Product[] }) 
     <div className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
       {COLLECTIONS.map(({ product, title, size, image, imageAlt, caption, description, specs }, index) => {
         const isSixPack = product === "hop-6-banh";
-        const isPremium = product === "bo-qua-banh-bac-tra-sen";
         const titleId = `collection-${product}`;
 
         return (
@@ -145,12 +144,7 @@ export function GiftCollections({ products }: { products: readonly Product[] }) 
                 <a
                   href={hotlineHref}
                   aria-label={`Liên hệ ngay về ${title} (Gọi ${siteConfig.hotline})`}
-                  className={cn(
-                    "flex min-h-12 w-full items-center justify-center gap-2 rounded-full font-body text-sm font-bold no-underline shadow-sm transition-all duration-300 hover:shadow-md sm:text-base",
-                    isPremium
-                      ? "bg-gac text-be hover:bg-gac-deep"
-                      : "border-2 border-gac bg-transparent text-gac hover:bg-gac hover:text-be"
-                  )}
+                  className="flex min-h-12 w-full items-center justify-center gap-2 rounded-full border-2 border-gac bg-[#fdf7e5] font-body text-sm font-bold text-gac no-underline shadow-sm transition-all duration-300 hover:border-gac hover:bg-gac hover:text-be hover:shadow-md sm:text-base"
                 >
                   LIÊN HỆ NGAY <span aria-hidden="true">→</span>
                 </a>

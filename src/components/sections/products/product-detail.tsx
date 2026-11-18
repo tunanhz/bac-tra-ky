@@ -53,7 +53,7 @@ export function ProductDetail({ product, titleId, onClose }: ProductDetailProps)
         </p>
         {/* Mobile: dính đáy vùng cuộn của modal; desktop: nằm cuối cột chữ. */}
         <div className="sticky bottom-0 -mx-6 mt-6 border-t border-line bg-be/95 px-6 py-4 md:static md:mx-0 md:mt-8 md:border-0 md:bg-transparent md:p-0">
-          <OrderLink className={buttonClassName("primary", true)} onNavigate={onClose} />
+          <OrderLink className={buttonClassName("outline", true)} onNavigate={onClose} />
         </div>
       </div>
     </div>
