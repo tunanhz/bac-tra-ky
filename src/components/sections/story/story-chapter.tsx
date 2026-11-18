@@ -163,56 +163,75 @@ export function StoryChapter({
     );
   }
 
-  // Chapter 3: Hương vị quê nhà (Slide 4: bố cục nội dung kèm Ý TƯỞNG ĐƯỢC HÌNH THÀNH và chèn ảnh lớn bên dưới)
+  // Chapter 3: Hương vị quê nhà (Ảnh nền sản vật tiến vua tràn viền, text + Ý TƯỞNG ĐƯỢC HÌNH THÀNH bên trái)
   return (
     <article id={chapter.id} aria-labelledby={titleId} className="scroll-mt-24 py-4">
-      <Reveal className="space-y-8 rounded-3xl bg-[#fcf7ea] p-6 sm:p-9 md:p-11 lg:p-14 shadow-sm">
-        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12 items-start">
-          <div className="lg:col-span-7">
+      <Reveal className="relative overflow-hidden rounded-3xl bg-[#fcf7ea]">
+        <div className="relative flex min-h-[580px] flex-col justify-center lg:min-h-[660px]">
+          {/* Ảnh nền sản vật tiến vua tràn viền */}
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            <figure className="relative m-0 h-full w-full">
+              <Image
+                src={chapter.image.src}
+                alt={chapter.image.alt}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 1491px"
+                className="object-cover object-right"
+              />
+              <figcaption className="sr-only">{chapter.image.caption}</figcaption>
+            </figure>
+            {/* Scrim overlay để text bên trái luôn sắc nét, rõ ràng */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#fcf7ea] via-[#fcf7ea]/90 to-transparent lg:w-[60%]"
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-[#fcf7ea]/75 lg:hidden"
+            />
+          </div>
+
+          <div className="relative z-10 w-full p-6 sm:p-9 md:p-11 lg:w-[60%] lg:p-14">
+            <div className="mb-3 flex items-center gap-2.5 sm:mb-4">
+              <Image
+                src="/images/brand/logo.png"
+                alt="Bác Trà Ký"
+                width={28}
+                height={28}
+                className="size-7 object-contain"
+              />
+              <span className="font-heading text-xs font-bold tracking-wider text-son uppercase sm:text-sm">
+                Bác Trà Ký
+              </span>
+            </div>
+
             <h3
               id={titleId}
-              className="mt-0 mb-4 font-display text-3xl font-bold leading-tight text-gac sm:text-4xl lg:text-5xl"
+              className="mt-0 mb-4 font-display text-2xl font-bold leading-[1.2] text-gac sm:text-3xl lg:text-4xl xl:text-5xl"
             >
               {chapter.heading}
             </h3>
-            <div className="space-y-3.5 text-base leading-relaxed text-ink-soft sm:text-lg">
+
+            <div className="space-y-3 text-sm leading-relaxed text-ink-soft sm:space-y-3.5 sm:text-base">
               {chapter.paragraphs.map((paragraph) => (
                 <p key={paragraph} className="m-0">
                   {paragraph}
                 </p>
               ))}
             </div>
-          </div>
 
-          {/* Khung Ý TƯỞNG ĐƯỢC HÌNH THÀNH */}
-          <div className="lg:col-span-5">
-            <div className="relative overflow-hidden rounded-2xl border border-nhu/60 bg-gradient-to-br from-[#8e0b16] to-[#5c060d] p-6 text-be shadow-xl sm:p-7">
-              <div className="mb-3 inline-block rounded-md bg-[#ae000d] px-3.5 py-1 text-xs font-bold tracking-widest text-nhu uppercase shadow-sm">
+            {/* Khung Ý TƯỞNG ĐƯỢC HÌNH THÀNH */}
+            <div className="mt-6 overflow-hidden rounded-2xl border border-nhu/60 bg-gradient-to-br from-[#8e0b16] to-[#5c060d] p-5 text-be shadow-xl sm:mt-7 sm:p-6">
+              <div className="mb-2.5 inline-block rounded-md bg-[#ae000d] px-3 py-1 text-xs font-bold tracking-widest text-nhu uppercase shadow-sm">
                 Ý TƯỞNG ĐƯỢC HÌNH THÀNH
               </div>
-              <p className="m-0 font-serif text-base leading-relaxed text-be/95 italic sm:text-lg">
+              <p className="m-0 font-serif text-sm leading-relaxed text-be/95 italic sm:text-base">
                 &ldquo;Từ tình yêu dành cho những giá trị truyền thống và mong muốn đưa đặc sản địa phương đến gần hơn với cộng đồng, Bác Trà Ký ra đời với ý tưởng kết hợp Bánh Bác và trà Sen, tạo nên một trải nghiệm thưởng thức hài hòa, đậm đà bản sắc Việt.&rdquo;
               </p>
             </div>
           </div>
         </div>
-
-        {/* Ảnh sản vật tiến vua chèn ở bên dưới theo yêu cầu */}
-        <figure className="m-0">
-          <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden rounded-2xl bg-be-2/60 shadow-xl ring-1 ring-gac/20">
-            <Image
-              src={chapter.image.src}
-              alt={chapter.image.alt}
-              fill
-              priority
-              sizes="(min-width: 1200px) 1100px, 92vw"
-              className="object-cover"
-            />
-          </div>
-          <figcaption className="caption px-1 pt-3 text-center text-ink-soft">
-            {chapter.image.caption}
-          </figcaption>
-        </figure>
       </Reveal>
     </article>
   );
