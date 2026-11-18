@@ -13,9 +13,9 @@ export type NavItem = {
 
 export const NAV_ITEMS = [
   { id: "trang-chu", label: "Trang chủ" },
-  { id: "ve-chung-toi", label: "Về chúng tôi" },
   { id: "cau-chuyen", label: "Câu chuyện văn hoá" },
   { id: "san-pham", label: "Sản phẩm" },
+  { id: "ve-chung-toi", label: "Về chúng tôi" },
   { id: "tin-tuc", label: "Tin tức" },
   { id: "lien-he", label: "Liên hệ" },
 ] as const satisfies readonly NavItem[];

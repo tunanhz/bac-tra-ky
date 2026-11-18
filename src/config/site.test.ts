@@ -16,9 +16,9 @@ describe("siteConfig", () => {
   it("có đủ 6 mục điều hướng theo spec, đúng thứ tự", () => {
     expect(NAV_ITEMS.map((i) => i.label)).toEqual([
       "Trang chủ",
-      "Về chúng tôi",
       "Câu chuyện văn hoá",
       "Sản phẩm",
+      "Về chúng tôi",
       "Tin tức",
       "Liên hệ",
     ]);

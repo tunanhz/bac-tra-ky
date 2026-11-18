@@ -18,17 +18,17 @@ describe("Header", () => {
     const links = within(nav).getAllByRole("link");
     expect(links.map((a) => a.textContent)).toEqual([
       "Trang chủ",
-      "Về chúng tôi",
       "Câu chuyện văn hoá",
       "Sản phẩm",
+      "Về chúng tôi",
       "Tin tức",
       "Liên hệ",
     ]);
     expect(links.map((a) => a.getAttribute("href"))).toEqual([
       "/#trang-chu",
-      "/#ve-chung-toi",
       "/#cau-chuyen",
       "/#san-pham",
+      "/#ve-chung-toi",
       "/#tin-tuc",
       "/#lien-he",
     ]);
