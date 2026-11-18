@@ -163,36 +163,12 @@ export function StoryChapter({
     );
   }
 
-  // Chapter 3: Hương vị quê nhà (Slide 4: chèn chữ lên nền ảnh, bỏ badge, to tiêu đề)
+  // Chapter 3: Hương vị quê nhà (Slide 4: bố cục nội dung kèm Ý TƯỞNG ĐƯỢC HÌNH THÀNH và chèn ảnh lớn bên dưới)
   return (
     <article id={chapter.id} aria-labelledby={titleId} className="scroll-mt-24 py-4">
-      <Reveal className="relative overflow-hidden rounded-3xl bg-[#fcf7ea]">
-        <div className="relative flex min-h-[540px] items-center lg:min-h-[600px]">
-          {/* Background scenic photo */}
-          <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <figure className="relative m-0 h-full w-full">
-              <Image
-                src={chapter.image.src}
-                alt={chapter.image.alt}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 1491px"
-                className="object-cover object-right"
-              />
-              <figcaption className="sr-only">{chapter.image.caption}</figcaption>
-            </figure>
-            {/* Scrim overlay to keep text readable on left */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#fcf7ea] via-[#fcf7ea]/95 to-transparent lg:w-[60%]"
-            />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-[#fcf7ea]/70 lg:hidden"
-            />
-          </div>
-
-          <div className="relative z-10 w-full p-6 sm:p-9 md:p-11 lg:w-[58%] lg:p-14">
+      <Reveal className="space-y-8 rounded-3xl bg-[#fcf7ea] p-6 sm:p-9 md:p-11 lg:p-14 shadow-sm">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12 items-start">
+          <div className="lg:col-span-7">
             <h3
               id={titleId}
               className="mt-0 mb-4 font-display text-3xl font-bold leading-tight text-gac sm:text-4xl lg:text-5xl"
@@ -207,7 +183,36 @@ export function StoryChapter({
               ))}
             </div>
           </div>
+
+          {/* Khung Ý TƯỞNG ĐƯỢC HÌNH THÀNH */}
+          <div className="lg:col-span-5">
+            <div className="relative overflow-hidden rounded-2xl border border-nhu/60 bg-gradient-to-br from-[#8e0b16] to-[#5c060d] p-6 text-be shadow-xl sm:p-7">
+              <div className="mb-3 inline-block rounded-md bg-[#ae000d] px-3.5 py-1 text-xs font-bold tracking-widest text-nhu uppercase shadow-sm">
+                Ý TƯỞNG ĐƯỢC HÌNH THÀNH
+              </div>
+              <p className="m-0 font-serif text-base leading-relaxed text-be/95 italic sm:text-lg">
+                &ldquo;Từ tình yêu dành cho những giá trị truyền thống và mong muốn đưa đặc sản địa phương đến gần hơn với cộng đồng, Bác Trà Ký ra đời với ý tưởng kết hợp Bánh Bác và trà Sen, tạo nên một trải nghiệm thưởng thức hài hòa, đậm đà bản sắc Việt.&rdquo;
+              </p>
+            </div>
+          </div>
         </div>
+
+        {/* Ảnh sản vật tiến vua chèn ở bên dưới theo yêu cầu */}
+        <figure className="m-0">
+          <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden rounded-2xl bg-be-2/60 shadow-xl ring-1 ring-gac/20">
+            <Image
+              src={chapter.image.src}
+              alt={chapter.image.alt}
+              fill
+              priority
+              sizes="(min-width: 1200px) 1100px, 92vw"
+              className="object-cover"
+            />
+          </div>
+          <figcaption className="caption px-1 pt-3 text-center text-ink-soft">
+            {chapter.image.caption}
+          </figcaption>
+        </figure>
       </Reveal>
     </article>
   );

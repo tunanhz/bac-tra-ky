@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { sectionHref, siteConfig } from "@/config/site";
 import { getActiveOffer, type CustomerOffer } from "@/data/customer-content";
+import { ContactForm } from "@/components/sections/contact/contact-form";
 import { OfferCampaign } from "./offer-campaign";
-import { OfferPreviewForm } from "./offer-preview-form";
 
 function OfferAnnouncement() {
   const { facebookUrl } = siteConfig;
@@ -101,7 +101,12 @@ export function OfferSection({ offer }: { offer: CustomerOffer | null }) {
         </p>
       }
     >
-      <OfferPreviewForm />
+      <div className="mt-6 rounded-3xl border border-nhu/80 bg-[#fdf7e5] p-6 text-left text-ink shadow-2xl sm:p-8">
+        <h4 className="mt-0 mb-4 font-display text-2xl font-bold text-son">
+          Để lại lời nhắn
+        </h4>
+        <ContactForm />
+      </div>
     </OfferCampaign>
   );
 }
