@@ -11,21 +11,21 @@ export function AboutSection() {
   return (
     <section id="ve-chung-toi" aria-labelledby="about-title" className="section-y">
       <div className="wrap space-y-12 lg:space-y-16">
-        {/* Slide 9: Chúng tôi bắt đầu từ đâu - Tràn rộng, thay ảnh quả gấc bằng ảnh phòng trà Bác Trà Ký */}
+        {/* Slide 9: Chúng tôi bắt đầu từ đâu - Tràn rộng, ảnh bàn trà và bánh bác Giang Xá */}
         <Reveal as="article" className="grid items-center gap-8 rounded-3xl bg-paper p-6 shadow-sm md:grid-cols-12 md:p-10 lg:gap-12 lg:p-12">
           <div className="md:col-span-5">
             <figure className="m-0">
               <div className="relative aspect-square overflow-hidden rounded-2xl bg-be-2/60 shadow-md">
                 <Image
-                  src="/images/story/phong-tra-bac-tra-ky.webp"
-                  alt="Không gian thưởng trà và Bánh Bác tại Bác Trà Ký"
+                  src="/images/story/tra-va-banh-bac-giang-xa.webp"
+                  alt="Bàn trà và Bánh Bác Giang Xá bên hoa sen Bác Trà Ký"
                   fill
                   sizes="(min-width: 1024px) 460px, 90vw"
                   className="object-cover"
                 />
               </div>
               <figcaption className="caption px-1 pt-3 text-center text-ink-soft">
-                Không gian Bác Trà Ký — Kết nối vị xưa với nhịp sống nay
+                Thưởng trà và Bánh Bác — trọn vị truyền thống Giang Xá
               </figcaption>
             </figure>
           </div>
