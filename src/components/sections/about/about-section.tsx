@@ -57,13 +57,6 @@ export function AboutSection() {
 
         <div className="wrap relative z-10 mx-auto max-w-6xl">
           <Reveal>
-            {/* Nhãn nhỏ phía trên */}
-            <div className="text-center mb-2 sm:mb-3">
-              <span className="inline-block rounded-full border border-nhu/50 bg-black/30 px-4 py-1 text-xs font-bold tracking-widest text-nhu uppercase backdrop-blur-sm">
-                Định hướng thương hiệu
-              </span>
-            </div>
-
             {/* Tiêu đề lớn ấn tượng theo phong cách poster như ảnh mẫu */}
             <h3 className="mt-0 mb-6 text-center font-heading text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] font-black tracking-tight text-nhu uppercase drop-shadow-[0_4px_24px_rgba(0,0,0,0.65)] leading-none">
               TẦM NHÌN & SỨ MỆNH
