@@ -21,7 +21,7 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
       aria-describedby={preview ? "offer-preview-notice" : undefined}
       className="on-dark relative isolate min-w-0 scroll-mt-24 overflow-hidden w-full bg-son-deep py-12 text-be shadow-2xl lg:py-20"
     >
-      {/* Slide 16: Sử dụng nền này và hiệu ứng tràn màn hình sang trọng */}
+      {/* Nền sơn son truyền thống hoa văn mây vàng */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <Image
           src="/images/brand/nen-uu-dai-clean.webp"
@@ -29,9 +29,9 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
           fill
           priority
           sizes="100vw"
-          className="object-cover object-left md:object-center"
+          className="object-cover object-center"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-[#300609]/60 md:hidden" />
+        <div aria-hidden="true" className="absolute inset-0 bg-[#300609]/40" />
       </div>
       {preview && (
         <p id="offer-preview-notice" className="m-0 border-b border-nhu/55 bg-be px-4 py-3 text-center text-xs font-bold tracking-widest text-son">
@@ -40,8 +40,19 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
       )}
       <div className="wrap relative z-10 mx-auto px-5 py-7 sm:px-9 sm:py-10 lg:py-12">
         <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
-          {/* Cột trái để lộ sản phẩm trong ảnh nền trên màn hình lớn */}
-          <div aria-hidden="true" className="hidden lg:block lg:col-span-5 xl:col-span-6" />
+          {/* Cột trái: Hình ảnh sản phẩm combo Bác Trà Ký sắc nét, cân đối, không bị phóng to hay cắt góc */}
+          <div className="flex items-center justify-center lg:col-span-5 xl:col-span-6">
+            <div className="relative aspect-[4/5] w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[400px] drop-shadow-[0_20px_35px_rgba(0,0,0,0.6)]">
+              <Image
+                src="/images/brand/combo-uu-dai.webp"
+                alt="Bộ combo túi xách và hộp Bánh Bác truyền thống Bác Trà Ký"
+                fill
+                priority
+                sizes="(min-width: 1280px) 400px, (min-width: 1024px) 340px, 280px"
+                className="object-contain object-center"
+              />
+            </div>
+          </div>
 
           {/* Cột phải: Thông tin ưu đãi, đồng hồ đếm ngược và form nhận ưu đãi */}
           <div data-offer-center className="col-span-12 mx-auto w-full max-w-xl min-w-0 text-center lg:col-span-7 xl:col-span-6 lg:mx-0">
