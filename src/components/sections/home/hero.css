@@ -86,10 +86,24 @@
     transition: background-color 200ms var(--ease-son), color 200ms var(--ease-son);
   }
 
-  .home-hero__primary { background: var(--hero-red); color: var(--color-be); }
-  .home-hero__primary:hover { background: var(--color-son-deep); }
-  .home-hero__secondary { background: var(--hero-paper); color: var(--color-son-deep); }
-  .home-hero__secondary:hover { background: var(--hero-red); color: var(--color-be); }
+  .home-hero__primary {
+    background: var(--hero-red);
+    color: var(--color-be);
+  }
+
+  .home-hero__primary:hover {
+    background: var(--color-son-deep);
+  }
+
+  .home-hero__secondary {
+    background: var(--hero-paper);
+    color: var(--color-son-deep);
+  }
+
+  .home-hero__secondary:hover {
+    background: var(--hero-red);
+    color: var(--color-be);
+  }
 
   .home-hero__stage {
     position: absolute;
@@ -103,14 +117,42 @@
   }
 
   @media (width < 64rem) {
-    .home-hero__inner { min-height: 0; aspect-ratio: auto; padding: 6rem 0 0; }
-    .home-hero__panel { width: auto; padding-inline: clamp(1.25rem, 5.3vw, 3.5rem); }
-    .home-hero__title { font-size: clamp(2.1rem, 9.8vw, 4.2rem); }
-    .home-hero__slogan { text-wrap: pretty; }
-    .home-hero__lead { margin-bottom: 1.3rem; }
-    .home-hero__lead::before { margin-block: 0.95rem 0.9rem; }
-    .home-hero__actions { gap: 0.5rem; }
-    .home-hero__action { min-height: 2.75rem; padding-inline: 0.8rem; }
+    .home-hero__inner {
+      min-height: 0;
+      aspect-ratio: auto;
+      padding: 6rem 0 0;
+    }
+
+    .home-hero__panel {
+      width: auto;
+      padding-inline: clamp(1.25rem, 5.3vw, 3.5rem);
+    }
+
+    .home-hero__title {
+      font-size: clamp(2.1rem, 9.8vw, 4.2rem);
+    }
+
+    .home-hero__slogan {
+      text-wrap: pretty;
+    }
+
+    .home-hero__lead {
+      margin-bottom: 1.3rem;
+    }
+
+    .home-hero__lead::before {
+      margin-block: 0.95rem 0.9rem;
+    }
+
+    .home-hero__actions {
+      gap: 0.5rem;
+    }
+
+    .home-hero__action {
+      min-height: 2.75rem;
+      padding-inline: 0.8rem;
+    }
+
     .home-hero__stage {
       /* Crop the mostly empty left side and the top 120px, keeping the product and the full plate. */
       --hero-crop-width: 1422;
@@ -119,6 +161,7 @@
       margin-top: 1rem;
       aspect-ratio: var(--hero-crop-width) / 880;
     }
+
     .home-hero__stage::after {
       position: absolute;
       inset: 0 0 auto;
@@ -127,6 +170,7 @@
       pointer-events: none;
       content: "";
     }
+
     .home-hero__artwork {
       inset: -13.64% 0 auto auto;
       width: calc(100% * var(--hero-artwork-width) / var(--hero-crop-width));
@@ -135,11 +179,19 @@
   }
 
   @media (width < 40rem) {
-    .home-hero__stage { --hero-crop-width: 1040; }
+    .home-hero__stage {
+      --hero-crop-width: 1040;
+    }
   }
 
   @media (max-width: 24.5rem) {
-    .home-hero__action { padding-inline: 0.65rem; gap: 0.35rem; }
-    .home-hero__action svg { width: 0.85rem; }
+    .home-hero__action {
+      padding-inline: 0.65rem;
+      gap: 0.35rem;
+    }
+
+    .home-hero__action svg {
+      width: 0.85rem;
+    }
   }
 }
