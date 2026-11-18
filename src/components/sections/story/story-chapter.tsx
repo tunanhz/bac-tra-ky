@@ -177,22 +177,22 @@ export function StoryChapter({
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 1491px"
-                className="object-cover object-right"
+                className="object-cover object-right lg:origin-right lg:scale-[1.03] lg:translate-x-[14%]"
               />
               <figcaption className="sr-only">{chapter.image.caption}</figcaption>
             </figure>
             {/* Scrim overlay: làm dịu nền phía trái để chữ đọc rõ, trong khi phía phải giữ nguyên ảnh chụp sản phẩm rực rỡ */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#fae4cf] via-[#fae4cf]/85 to-transparent lg:w-[58%]"
+              className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#fae4cf] via-[#fae4cf] to-transparent lg:w-[50%]"
             />
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-[#fae4cf]/85 lg:hidden"
+              className="pointer-events-none absolute inset-0 bg-[#fae4cf]/90 lg:hidden"
             />
           </div>
 
-          <div className="relative z-10 w-full p-6 sm:p-9 md:p-11 lg:w-[56%] lg:p-14">
+          <div className="relative z-10 w-full p-6 sm:p-9 md:p-11 lg:w-[46%] lg:max-w-[500px] lg:p-14 xl:w-[45%] xl:max-w-[540px]">
             <div className="mb-3 flex items-center gap-2.5 sm:mb-4">
               <Image
                 src="/images/brand/logo.png"
@@ -228,7 +228,7 @@ export function StoryChapter({
                   Ý TƯỞNG ĐƯỢC HÌNH THÀNH
                 </span>
               </div>
-              <p className="mt-3 mb-0 font-body text-sm leading-relaxed text-ink/90 italic sm:text-base">
+              <p className="mt-3 mb-0 font-body text-sm leading-relaxed text-ink font-medium italic sm:text-base">
                 &ldquo;Từ tình yêu dành cho những giá trị truyền thống và mong muốn đưa đặc sản địa phương đến gần hơn với cộng đồng, Bác Trà Ký ra đời với ý tưởng kết hợp Bánh Bác và trà Sen, tạo nên một trải nghiệm thưởng thức hài hòa, đậm đà bản sắc Việt.&rdquo;
               </p>
             </div>
