@@ -111,7 +111,6 @@ export function ContactSection() {
 
         <Reveal className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
           <div className="rounded-3xl bg-paper px-6 py-9 shadow-sm sm:px-10 sm:py-11">
-            <h3 className="mt-0 mb-6 text-h3 font-semibold text-son">Để lại lời nhắn</h3>
             <ContactForm />
           </div>
         </Reveal>
