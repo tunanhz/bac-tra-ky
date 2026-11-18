@@ -102,20 +102,6 @@
     inset: 0;
   }
 
-  /* The supplied banner already includes a chevron. Put the actual link directly over it. */
-  .home-hero__down {
-    position: absolute;
-    top: 92.7%;
-    left: 49.9%;
-    width: max(2.75rem, 3.4%);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .home-hero__down:hover { box-shadow: 0 0 0 2px var(--color-be); }
-  .home-hero__down:focus-visible { outline: 2px solid var(--color-nhu); outline-offset: 3px; }
-
   @media (width < 64rem) {
     .home-hero__inner { min-height: 0; aspect-ratio: auto; padding: 6rem 0 0; }
     .home-hero__panel { width: auto; padding-inline: clamp(1.25rem, 5.3vw, 3.5rem); }

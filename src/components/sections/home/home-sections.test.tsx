@@ -29,10 +29,9 @@ describe("Hero", () => {
     ).toBeInTheDocument();
   });
 
-  it("nút cuộn trỏ đến phần câu chuyện làng nghề", () => {
+  it("không hiển thị nút cuộn xuống dạng mũi tên trong hero", () => {
     render(<><Hero /><StorySection /></>);
-    const link = screen.getByRole("link", { name: "Cuộn xuống câu chuyện làng nghề" });
-    expect(link).toHaveAttribute("href", "/#cau-chuyen");
+    expect(screen.queryByRole("link", { name: "Cuộn xuống câu chuyện làng nghề" })).toBeNull();
     expect(screen.getByRole("region", { name: "Khám phá câu chuyện làng nghề" })).toHaveAttribute("id", "cau-chuyen");
   });
 });
