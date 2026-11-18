@@ -39,7 +39,7 @@ export function AboutSection() {
             >
               {ABOUT_INSPIRATION.title}
             </h2>
-            <p className="mt-0 mb-4 font-serif text-base font-semibold text-son sm:text-lg">
+            <p className="mt-0 mb-4 font-body text-base font-bold text-son sm:text-lg">
               {ABOUT_INSPIRATION.heading}
             </p>
             <div className="space-y-3.5 text-base leading-relaxed text-ink-soft">
@@ -125,7 +125,7 @@ export function AboutSection() {
               <h3 id="core-values-title" className="mt-0 mb-3 font-display text-3xl font-bold tracking-tight text-gac sm:text-4xl lg:text-5xl xl:text-6xl">
                 {ABOUT_CORE_VALUES.heading}
               </h3>
-              <p className="m-0 font-serif text-base font-semibold text-son sm:text-xl">
+              <p className="m-0 font-body text-base font-bold text-son sm:text-xl">
                 {ABOUT_CORE_VALUES.tagline}
               </p>
             </div>

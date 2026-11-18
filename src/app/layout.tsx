@@ -22,7 +22,7 @@ const playfair = localFont({
     { path: "./fonts/playfair-display-italic.woff2", weight: "400 700", style: "italic" },
   ],
   display: "swap",
-  preload: false,
+  preload: true,
   adjustFontFallback: "Times New Roman",
 });
 
@@ -46,7 +46,7 @@ const caudex = localFont({
     { path: "./fonts/caudex-bold-italic.woff2", weight: "700", style: "italic" },
   ],
   display: "swap",
-  preload: false,
+  preload: true,
   adjustFontFallback: "Times New Roman",
 });
 

@@ -31,11 +31,11 @@
   --color-cream-muted: #e9d9b7; /* chữ phụ trên nền tối */
 
   /* Chữ theo tài liệu: Tiêu đề dùng Playfair Display, Body & Serif dùng Caudex (chuẩn tiếng Việt đầy đủ dấu) */
-  --font-heading: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-heading: var(--font-playfair), "Playfair Display", "Times New Roman", Times, serif;
   --font-display: var(--font-playfair), var(--font-heading);
-  --font-body: var(--font-caudex), "Caudex", Georgia, serif;
-  --font-serif: var(--font-caudex), "Caudex", Georgia, serif;
-  --font-mely: var(--font-mely), var(--font-playfair), serif;
+  --font-body: var(--font-caudex), "Caudex", "Times New Roman", Times, serif;
+  --font-serif: var(--font-caudex), "Caudex", "Times New Roman", Times, serif;
+  --font-mely: var(--font-mely), var(--font-playfair), "Times New Roman", Times, serif;
 
   /* Thang chữ (mobile → desktop qua clamp) */
   --text-eyebrow: 0.72rem;

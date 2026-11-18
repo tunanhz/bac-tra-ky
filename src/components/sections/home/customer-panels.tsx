@@ -61,7 +61,7 @@ function ReviewSlider({ reviews }: { reviews: readonly CustomerReview[] }) {
                   </div>
                 </div>
 
-                <blockquote className="mt-5 mb-0 border-t border-nhu/30 pt-4 font-serif text-base leading-relaxed text-be/95 italic sm:text-lg">
+                <blockquote className="mt-5 mb-0 border-t border-nhu/30 pt-4 font-body text-base leading-relaxed text-be/95 italic sm:text-lg">
                   “{review.quote}”
                 </blockquote>
               </article>

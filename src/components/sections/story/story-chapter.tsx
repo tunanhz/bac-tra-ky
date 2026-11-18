@@ -65,7 +65,7 @@ export function StoryChapter({
                 </h3>
 
                 {/* Sửa text lỗi: dùng font rõ ràng, không nghiêng lỗi dấu */}
-                <p className="mt-0 mb-3 font-serif text-base font-semibold leading-relaxed text-ink sm:mb-4 sm:text-lg">
+                <p className="mt-0 mb-3 font-body text-base font-semibold leading-relaxed text-ink sm:mb-4 sm:text-lg">
                   {chapter.paragraphs[0]}
                 </p>
 
@@ -166,8 +166,8 @@ export function StoryChapter({
   // Chapter 3: Hương vị quê nhà (Ảnh nền sản vật tiến vua tràn viền, text + Ý TƯỞNG ĐƯỢC HÌNH THÀNH bên trái)
   return (
     <article id={chapter.id} aria-labelledby={titleId} className="scroll-mt-24 py-4">
-      <Reveal className="relative overflow-hidden rounded-3xl bg-[#fcf7ea]">
-        <div className="relative flex min-h-[580px] flex-col justify-center lg:min-h-[660px]">
+      <Reveal className="relative overflow-hidden rounded-3xl bg-[#fae4cf] shadow-md border border-[#e8ceb5]">
+        <div className="relative flex min-h-[560px] flex-col justify-center lg:min-h-[640px]">
           {/* Ảnh nền sản vật tiến vua tràn viền */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <figure className="relative m-0 h-full w-full">
@@ -181,18 +181,18 @@ export function StoryChapter({
               />
               <figcaption className="sr-only">{chapter.image.caption}</figcaption>
             </figure>
-            {/* Scrim overlay để text bên trái luôn sắc nét, rõ ràng */}
+            {/* Scrim overlay: làm dịu nền phía trái để chữ đọc rõ, trong khi phía phải giữ nguyên ảnh chụp sản phẩm rực rỡ */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#fcf7ea] via-[#fcf7ea]/90 to-transparent lg:w-[60%]"
+              className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#fae4cf] via-[#fae4cf]/85 to-transparent lg:w-[58%]"
             />
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-[#fcf7ea]/75 lg:hidden"
+              className="pointer-events-none absolute inset-0 bg-[#fae4cf]/85 lg:hidden"
             />
           </div>
 
-          <div className="relative z-10 w-full p-6 sm:p-9 md:p-11 lg:w-[60%] lg:p-14">
+          <div className="relative z-10 w-full p-6 sm:p-9 md:p-11 lg:w-[56%] lg:p-14">
             <div className="mb-3 flex items-center gap-2.5 sm:mb-4">
               <Image
                 src="/images/brand/logo.png"
@@ -208,12 +208,12 @@ export function StoryChapter({
 
             <h3
               id={titleId}
-              className="mt-0 mb-4 font-display text-2xl font-bold leading-[1.2] text-gac sm:text-3xl lg:text-4xl xl:text-5xl"
+              className="mt-0 mb-4 font-display text-2xl font-bold leading-[1.25] text-gac sm:text-3xl lg:text-4xl xl:text-5xl"
             >
               {chapter.heading}
             </h3>
 
-            <div className="space-y-3 text-sm leading-relaxed text-ink-soft sm:space-y-3.5 sm:text-base">
+            <div className="space-y-3 font-body text-sm leading-relaxed text-ink sm:space-y-3.5 sm:text-base">
               {chapter.paragraphs.map((paragraph) => (
                 <p key={paragraph} className="m-0">
                   {paragraph}
@@ -221,12 +221,14 @@ export function StoryChapter({
               ))}
             </div>
 
-            {/* Khung Ý TƯỞNG ĐƯỢC HÌNH THÀNH */}
-            <div className="mt-6 overflow-hidden rounded-2xl border border-nhu/60 bg-gradient-to-br from-[#8e0b16] to-[#5c060d] p-5 text-be shadow-xl sm:mt-7 sm:p-6">
-              <div className="mb-2.5 inline-block rounded-md bg-[#ae000d] px-3 py-1 text-xs font-bold tracking-widest text-nhu uppercase shadow-sm">
-                Ý TƯỞNG ĐƯỢC HÌNH THÀNH
+            {/* Dải Ý TƯỞNG ĐƯỢC HÌNH THÀNH theo Canva layout */}
+            <div className="mt-6 sm:mt-7">
+              <div className="relative inline-flex items-center rounded-md bg-[#8e0b16] px-4 py-1.5 shadow-md">
+                <span className="font-heading text-xs font-bold tracking-widest text-[#fdf7e5] uppercase sm:text-sm">
+                  Ý TƯỞNG ĐƯỢC HÌNH THÀNH
+                </span>
               </div>
-              <p className="m-0 font-serif text-sm leading-relaxed text-be/95 italic sm:text-base">
+              <p className="mt-3 mb-0 font-body text-sm leading-relaxed text-ink/90 italic sm:text-base">
                 &ldquo;Từ tình yêu dành cho những giá trị truyền thống và mong muốn đưa đặc sản địa phương đến gần hơn với cộng đồng, Bác Trà Ký ra đời với ý tưởng kết hợp Bánh Bác và trà Sen, tạo nên một trải nghiệm thưởng thức hài hòa, đậm đà bản sắc Việt.&rdquo;
               </p>
             </div>
