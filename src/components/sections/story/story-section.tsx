@@ -51,9 +51,6 @@ function CraftSection() {
       </ol>
 
       <div className={styles.craftClosing}>
-        <p className={styles.craftCredit}>
-          Hình ảnh minh họa được tạo bằng AI theo mẫu bố cục khách hàng cung cấp.
-        </p>
         <a
           href={sectionHref("san-pham")}
           className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gac px-8 py-3 font-body text-base font-bold text-be transition-colors hover:bg-gac-deep"

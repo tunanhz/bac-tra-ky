@@ -162,7 +162,6 @@
   text-align: center;
   background: url('/images/revisions/craft-cloud-footer.webp') bottom center / 100% auto no-repeat;
 }
-.craftCredit { margin: 0 0 1rem; color: var(--color-ink-soft); font-size: .75rem; font-style: italic; }
 @media (min-width: 640px) {
   .craftGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.5rem, .83vw, 1rem); }
 }

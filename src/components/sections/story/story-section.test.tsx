@@ -101,7 +101,8 @@ describe("StorySection", () => {
     expect(craft.getAllByRole("heading", { level: 4 }).map(({ textContent }) => textContent)).toEqual([
       "Chuẩn bị nguyên liệu", "Chuẩn bị bột bánh", "Bác bánh – giữ lửa nghề xưa", "Hoàn thiện chiếc bánh",
     ]);
-    expect(craft.getByText(/Hình ảnh minh họa được tạo bằng AI theo mẫu bố cục khách hàng cung cấp/)).toBeInTheDocument();
+    expect(craft.queryByText(/Hình ảnh minh họa được tạo bằng AI theo mẫu bố cục khách hàng cung cấp/)).not.toBeInTheDocument();
+    expect(craft.getByRole("link", { name: /Khám phá sản phẩm/ })).toHaveAttribute("href", "/#san-pham");
     expect(craft.queryByText(/trích từ ấn phẩm/)).not.toBeInTheDocument();
     for (const step of CRAFT_STEPS) expect(craft.getByText(step.caption)).toBeInTheDocument();
     for (const { alt, src } of [...STORY_CHAPTERS.flatMap(({ image, relatedPhotos }) => [image, ...(relatedPhotos ?? [])]), ...CRAFT_STEPS]) {
