@@ -15,7 +15,7 @@
   grid-column: 1;
   margin: 0 0 clamp(2.5rem, 4vw, 4.5rem);
   color: #8a0610;
-  font-family: var(--font-mely), var(--font-display), serif;
+  font-family: var(--font-display);
   font-size: clamp(2.5rem, 4.9vw, 5.8rem);
   font-weight: 700;
   line-height: 1.12;
@@ -51,7 +51,7 @@
   background: #c21d1d;
   color: #fff3e7;
   padding: .3rem 1.6rem;
-  font-family: var(--font-mely), var(--font-display), serif;
+  font-family: var(--font-display);
   font-size: clamp(1.3rem, 2vw, 2.1rem);
   line-height: 1.2;
   text-transform: uppercase;

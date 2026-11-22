@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site";
 import {
   customerOffer,
@@ -63,7 +62,7 @@ function ReviewSlider({ reviews }: { reviews: readonly CustomerReview[] }) {
           style={{ transform: `translateX(-${current * 100}%)` }}
         >
           {pages.map((pageReviews, pageIdx) => (
-            <div key={pageIdx} className="w-full shrink-0 px-1 sm:px-2">
+            <div key={pageIdx} inert={pageIdx !== current} aria-hidden={pageIdx !== current} className="w-full shrink-0 px-1 sm:px-2">
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 sm:gap-6">
                 {pageReviews.map((review) => (
                   <article
@@ -113,20 +112,18 @@ function ReviewSlider({ reviews }: { reviews: readonly CustomerReview[] }) {
           </button>
 
           {/* Dấu chấm trượt ngang theo Slide 15 */}
-          <div className="flex items-center gap-2" role="tablist" aria-label="Chọn bài đánh giá">
+          <div className="flex items-center gap-2" role="group" aria-label="Chọn bài đánh giá">
             {pages.map((_, i) => (
               <button
                 key={i}
                 type="button"
-                role="tab"
-                aria-selected={current === i}
+                aria-pressed={current === i}
                 aria-label={`Trang đánh giá ${i + 1}`}
                 onClick={() => setCurrent(i)}
-                className={`h-2.5 transition-all duration-300 ${current === i
-                  ? "w-8 rounded-full bg-gac"
-                  : "w-2.5 rounded-full bg-gac/30 hover:bg-gac/60"
-                  }`}
-              />
+                className="flex size-11 items-center justify-center rounded-full transition-colors duration-300 hover:bg-gac/10"
+              >
+                <span aria-hidden="true" className={current === i ? "h-2.5 w-8 rounded-full bg-gac" : "size-2.5 rounded-full bg-gac/40"} />
+              </button>
             ))}
           </div>
 

@@ -25,6 +25,19 @@ describe("CustomerPanels", () => {
     expect(feedback.queryByText("Khách thử nghiệm")).not.toBeInTheDocument();
   });
 
+  it("chuyển trang đánh giá cập nhật trạng thái và ẩn trang cũ với trình đọc màn hình", async () => {
+    const user = userEvent.setup();
+    render(<CustomerPanels reviews={Array.from({ length: 4 }, (_, i) => ({
+      id: String(i), status: "published" as const, displayName: "Khách kiểm thử " + (i + 1), quote: "Nội dung kiểm thử",
+    }))} offer={null} />);
+    expect(screen.getByRole("heading", { name: "Khách kiểm thử 1" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Khách kiểm thử 4" })).not.toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Trang đánh giá 2" }));
+    expect(screen.getByRole("button", { name: "Trang đánh giá 2" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.queryByRole("heading", { name: "Khách kiểm thử 1" })).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Khách kiểm thử 4" })).toBeInTheDocument();
+  });
+
   it("chỉ hiển thị trích dẫn đã được phép đăng trong slider", () => {
     render(<CustomerPanels reviews={[
       { id: "approved", status: "published", displayName: "Tên dùng trong test", quote: "Nội dung được phép đăng trong test", rating: 4 },

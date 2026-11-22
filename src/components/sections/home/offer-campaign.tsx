@@ -61,7 +61,7 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
             intro={(
               <header className="text-center lg:text-left">
                 <div className="mb-2">
-                  <h2 id={headingId} className="m-0 inline-block rounded-full border border-nhu/70 bg-son-deep/65 px-4 py-1 font-body text-xs font-bold tracking-wider text-nhu uppercase shadow-md">
+                  <h2 id={headingId} className="m-0 inline-block rounded-full border border-nhu/70 bg-son-deep/65 px-4 py-1 font-display text-sm font-bold tracking-wider text-nhu uppercase shadow-md">
                     Ưu đãi đặc biệt
                   </h2>
                 </div>

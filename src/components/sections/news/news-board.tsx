@@ -46,17 +46,17 @@ export function NewsBoard({ posts }: { posts: NewsPost[] }) {
 
       {/* Slide 14: Lưới tin tức trượt sang ngang */}
       <div className="relative">
-        <div className="mb-4 flex items-center justify-between">
+        <div className="mb-4 flex items-center justify-between gap-3">
           <h3 className="m-0 font-display text-xl font-bold text-son sm:text-2xl">
             Các câu chuyện mới nhất
           </h3>
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
             <button
               type="button"
               aria-label="Cuộn tin tức sang trái"
               disabled={!canScrollLeft}
               onClick={() => scroll("left")}
-              className="flex size-10 items-center justify-center rounded-full border border-line bg-paper text-son shadow-sm transition-all hover:bg-gac hover:text-be disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex size-11 items-center lg:size-10 justify-center rounded-full border border-line bg-paper text-son shadow-sm transition-all hover:bg-gac hover:text-be disabled:cursor-not-allowed disabled:opacity-40"
             >
               <span aria-hidden="true" className="font-bold">←</span>
             </button>
@@ -65,7 +65,7 @@ export function NewsBoard({ posts }: { posts: NewsPost[] }) {
               aria-label="Cuộn tin tức sang phải"
               disabled={!canScrollRight}
               onClick={() => scroll("right")}
-              className="flex size-10 items-center justify-center rounded-full border border-line bg-paper text-son shadow-sm transition-all hover:bg-gac hover:text-be disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex size-11 items-center lg:size-10 justify-center rounded-full border border-line bg-paper text-son shadow-sm transition-all hover:bg-gac hover:text-be disabled:cursor-not-allowed disabled:opacity-40"
             >
               <span aria-hidden="true" className="font-bold">→</span>
             </button>

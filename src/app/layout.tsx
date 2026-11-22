@@ -7,33 +7,15 @@ import { siteConfig } from "@/config/site";
 import { REVEAL_BOOT_SCRIPT } from "@/lib/reveal-boot";
 import "./globals.css";
 
-/*
- * Playfair và Caudex tự host, đã subset tiếng Việt (src/app/fonts/subset_fonts.py; giấy phép SIL OFL — OFL-*.txt).
- * Google Fonts tách mỗi kiểu chữ thành 3 file latin/latin-ext/vietnamese và trang tiếng Việt tải cả 3 (~300 KB cho 5
- * kiểu đang dùng), giành băng thông với ảnh hero (LCP) trên mạng di động; bản subset ~125 KB, 1 file/kiểu.
- * Không preload: trình duyệt chỉ tải đúng kiểu chữ trang dùng khi đọc CSS; `display: swap` + font dự phòng đã chỉnh số
- * đo (adjustFontFallback) nên chữ hiện ngay, không xô bố cục.
- */
-const playfair = localFont({
-  variable: "--font-playfair",
-  src: [
-    // Font biến thiên, trục wght đã cắt còn 400–700.
-    { path: "./fonts/playfair-display.woff2", weight: "400 700", style: "normal" },
-    { path: "./fonts/playfair-display-italic.woff2", weight: "400 700", style: "italic" },
-  ],
-  display: "swap",
-  preload: true,
-  adjustFontFallback: "Times New Roman",
-});
-
-// Bản web Bold chính thức của CDA, giữ nguyên bảng ký tự tiếng Việt.
+// Tự host font theo nội dung khách: CDA Mê Ly Display cho tiêu đề, Caudex cho body.
+// Giữ giấy phép của các font trong src/app/fonts; không tải font từ dịch vụ ngoài.
 const mely = localFont({
   variable: "--font-mely",
   src: "./fonts/cda-me-ly-display-bold.woff2",
   weight: "700",
   style: "normal",
   display: "swap",
-  preload: false,
+  preload: true,
   adjustFontFallback: "Times New Roman",
 });
 
@@ -84,7 +66,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     // suppressHydrationWarning: script inline gắn class `js` lên <html> trước khi React hydrate.
-    <html lang="vi" className={`${mely.variable} ${playfair.variable} ${caudex.variable}`} suppressHydrationWarning>
+    <html lang="vi" className={`${mely.variable} ${caudex.variable}`} suppressHydrationWarning>
       <head>
         {/* Nội dung cố định do ta viết (không có dữ liệu người dùng) — xem src/lib/reveal-boot.ts. */}
         <script dangerouslySetInnerHTML={{ __html: REVEAL_BOOT_SCRIPT }} />

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal";
 import { VisionMission } from "./vision-mission";
+import { BrandJourney } from "./brand-journey";
 import {
   ABOUT_CORE_VALUES,
   ABOUT_INSPIRATION,
@@ -49,6 +50,7 @@ export function AboutSection() {
         </Reveal>
       </div>
 
+      <BrandJourney />
       <VisionMission />
 
       {/* Slide 11: Giá trị cốt lõi - Tràn rộng toàn màn hình với nền hoa sen, không bọc hình chữ nhật */}

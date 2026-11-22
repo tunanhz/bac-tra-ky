@@ -31,12 +31,11 @@
   --color-cream-soft: #efdfc0; /* chữ thân trên nền sơn son */
   --color-cream-muted: #e9d9b7; /* chữ phụ trên nền tối */
 
-  /* Chữ theo tài liệu: Tiêu đề dùng Playfair Display, Body & Serif dùng Caudex (chuẩn tiếng Việt đầy đủ dấu) */
-  --font-heading: var(--font-playfair), "Playfair Display", "Times New Roman", Times, serif;
-  --font-display: var(--font-playfair), var(--font-heading);
+  /* Đúng yêu cầu khách: CDA Mê Ly Display cho toàn bộ tiêu đề, Caudex cho nội dung. */
+  --font-heading: var(--font-mely), "CDA Me Ly Display", "Times New Roman", Times, serif;
+  --font-display: var(--font-heading);
   --font-body: var(--font-caudex), "Caudex", "Times New Roman", Times, serif;
   --font-serif: var(--font-caudex), "Caudex", "Times New Roman", Times, serif;
-  --font-mely: var(--font-mely), var(--font-playfair), "Times New Roman", Times, serif;
 
   /* Thang chữ (mobile → desktop qua clamp) */
   --text-eyebrow: 0.72rem;
@@ -119,7 +118,9 @@
   h1,
   h2,
   h3,
-  h4 {
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
     font-weight: 700;
     line-height: 1.12;
@@ -417,6 +418,13 @@
 /* Ẩn phím tắt liên hệ khi mở menu, hộp thoại hoặc bản xem thử form. */
 @layer components {
   body:has(header [aria-controls="menu-dieu-huong"][aria-expanded="true"], [role="dialog"][aria-modal="true"], [data-offer-preview]) .quick-contact {
+    visibility: hidden;
+  }
+}
+
+/* Bàn phím mobile: không để thanh liên hệ nổi che trường đang nhập. */
+@media (width < 48rem) {
+  body:has(input:focus, textarea:focus, select:focus) .quick-contact {
     visibility: hidden;
   }
 }

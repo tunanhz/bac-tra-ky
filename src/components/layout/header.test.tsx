@@ -62,6 +62,39 @@ describe("Header", () => {
     expect(button).toHaveAttribute("aria-expanded", "false");
   });
 
+  it("menu khóa cuộn nền và khôi phục đúng style cũ khi đóng", async () => {
+    const user = userEvent.setup();
+    const root = document.documentElement;
+    const oldRoot = root.style.overflow;
+    const oldBody = document.body.style.overflow;
+    root.style.overflow = "auto";
+    document.body.style.overflow = "clip";
+    try {
+      render(<Header />);
+      await user.click(screen.getByRole("button", { name: "Mở menu" }));
+      expect(root.style.overflow).toBe("hidden");
+      expect(document.body.style.overflow).toBe("hidden");
+      await user.keyboard("{Escape}");
+      expect(root.style.overflow).toBe("auto");
+      expect(document.body.style.overflow).toBe("clip");
+    } finally {
+      root.style.overflow = oldRoot;
+      document.body.style.overflow = oldBody;
+    }
+  });
+
+  it("tháo header khi menu đang mở không để trang bị khóa cuộn", async () => {
+    const user = userEvent.setup();
+    const rootOverflow = document.documentElement.style.overflow;
+    const bodyOverflow = document.body.style.overflow;
+    const { unmount } = render(<Header />);
+    await user.click(screen.getByRole("button", { name: "Mở menu" }));
+    expect(document.body.style.overflow).toBe("hidden");
+    unmount();
+    expect(document.documentElement.style.overflow).toBe(rootOverflow);
+    expect(document.body.style.overflow).toBe(bodyOverflow);
+  });
+
   it("Esc đóng menu và trả focus về nút", async () => {
     const user = userEvent.setup();
     render(<Header />);

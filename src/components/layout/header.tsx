@@ -91,6 +91,13 @@ export function Header() {
 
   useEffect(() => {
     if (!menuOpen) return;
+    // Khóa cả root và body để thao tác vuốt không kéo trang phía sau menu.
+    const root = document.documentElement;
+    const body = document.body;
+    const previousRootOverflow = root.style.overflow;
+    const previousBodyOverflow = body.style.overflow;
+    root.style.overflow = "hidden";
+    body.style.overflow = "hidden";
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
@@ -125,6 +132,8 @@ export function Header() {
     document.addEventListener("pointerdown", onPointerDown);
     desktop?.addEventListener("change", onViewportChange);
     return () => {
+      root.style.overflow = previousRootOverflow;
+      body.style.overflow = previousBodyOverflow;
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("pointerdown", onPointerDown);
       desktop?.removeEventListener("change", onViewportChange);
@@ -142,6 +151,13 @@ export function Header() {
         solid ? "on-dark bg-son-deep shadow-[0_1px_0_rgb(226_191_110/0.35)]" : "bg-transparent",
       )}
     >
+      {menuOpen && (
+        <div
+          aria-hidden="true"
+          onClick={closeMenu}
+          className="fixed inset-x-0 top-[68px] bottom-0 -z-10 bg-son-deep/45 lg:hidden"
+        />
+      )}
       <div className="wrap flex h-[68px] items-center justify-between gap-2 lg:gap-4">
         <Logo className="shrink-0 whitespace-nowrap" />
         <nav aria-label="Điều hướng chính">
@@ -152,7 +168,7 @@ export function Header() {
               "m-0 list-none p-0",
               "lg:flex lg:items-center lg:gap-[clamp(14px,1.8vw,26px)]",
               menuOpen
-                ? "absolute inset-x-0 top-[68px] flex max-h-[calc(100dvh-68px)] flex-col overflow-y-auto overscroll-contain border-t border-nhu/30 bg-son-deep px-5 pt-2 pb-5 shadow-[0_18px_30px_-18px_rgb(0_0_0/0.6)] lg:static lg:max-h-none lg:flex-row lg:overflow-visible lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none"
+                ? "absolute inset-x-0 top-[68px] flex max-h-[calc(100dvh-68px)] flex-col overflow-y-auto overscroll-contain border-t border-nhu/30 bg-son-deep px-5 pt-2 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-[0_18px_30px_-18px_rgb(0_0_0/0.6)] lg:static lg:max-h-none lg:flex-row lg:overflow-visible lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none"
                 : "hidden",
             )}
           >

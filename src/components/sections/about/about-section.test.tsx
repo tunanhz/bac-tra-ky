@@ -61,3 +61,26 @@ describe("WhyChooseSection", () => {
     ]);
   });
 });
+
+// Customer-supplied copy is checked literally, independently of the content constant.
+describe("BrandJourney", () => {
+  it("đúng lời dẫn và năm mốc, đúng thứ tự, không thêm ngày hay tên người gửi", () => {
+    render(<AboutSection />);
+    const journey = within(screen.getByRole("region", { name: "HÀNH TRÌNH CỦA BÁC TRÀ KÝ" }));
+    expect(journey.getByText("Từ một đặc sản làng quê, đến hành trình lan tỏa hương vị truyền thống Việt.")).toBeInTheDocument();
+    const items = journey.getAllByRole("listitem");
+    expect(items.map((item) => within(item).getByRole("heading", { level: 4 }).textContent)).toEqual([
+      "KHỞI NGUỒN", "KHÁM PHÁ", "GÌN GIỮ", "LAN TỎA", "VƯƠN XA",
+    ]);
+    const descriptions = [
+      "Từ làng Giang Xá, Hoài Đức – nơi lưu giữ nghề làm Bánh Bác truyền thống.",
+      "Bắt đầu biết đến Bánh Bác – đặc sản mang đậm hồn quê Việt.",
+      "Bác Trà Ký ra đời với mong muốn gìn giữ và phát huy giá trị Bánh Bác Giang Xá.",
+      "Mang hương vị truyền thống đến gần hơn với mọi người qua những trải nghiệm hiện đại.",
+      "Tiếp tục lan tỏa giá trị Việt, để Bánh Bác và trà sen vươn xa hơn nữa, đến với nhiều thế hệ.",
+    ];
+    items.forEach((item, index) => expect(within(item).getByText(descriptions[index])).toBeInTheDocument());
+    expect(journey.queryByText(/Thu Thuy|23:48|2026/)).not.toBeInTheDocument();
+    expect(journey.queryByRole("img")).not.toBeInTheDocument();
+  });
+});

@@ -102,7 +102,7 @@ export function OfferSection({ offer }: { offer: CustomerOffer | null }) {
       }
     >
       <div className="rounded-2xl border border-nhu/80 bg-paper p-3.5 sm:p-5 text-left text-ink shadow-xl">
-        <div className="mb-2 flex items-center justify-between">
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <h4 className="m-0 font-display text-base sm:text-lg font-bold text-son">
             Để lại lời nhắn
           </h4>
@@ -111,7 +111,7 @@ export function OfferSection({ offer }: { offer: CustomerOffer | null }) {
               href={siteConfig.facebookUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-gac transition-colors hover:text-gac-deep hover:underline"
+              className="inline-flex min-h-11 items-center gap-1.5 text-sm font-bold text-gac transition-colors hover:text-gac-deep hover:underline"
             >
               <span>Nhắn qua Facebook</span>
               <span aria-hidden="true">→</span>

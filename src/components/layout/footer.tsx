@@ -9,7 +9,7 @@ function Pending() {
 }
 
 function ColumnTitle({ children }: { children: ReactNode }) {
-  return <h2 className="mb-3.5 font-body text-[0.72rem] font-bold tracking-[0.24em] text-nhu uppercase">{children}</h2>;
+  return <h2 className="mb-3.5 font-display text-base font-bold lg:text-[0.72rem] tracking-[0.24em] text-nhu uppercase">{children}</h2>;
 }
 
 type SocialLinkProps = { href: string | null; label: string; tone: string; children: ReactNode };
@@ -64,7 +64,7 @@ export function Footer() {
     "inline-flex min-h-11 items-center whitespace-nowrap text-[#efe2c6] no-underline transition-colors duration-300 hover:text-white hover:underline";
 
   return (
-    <footer id="lien-he" className="on-dark border-t border-nhu/50 bg-tram pt-12 pb-7 text-be has-[+_.quick-contact]:pb-20 md:pt-16 md:has-[+_.quick-contact]:pb-7">
+    <footer id="lien-he" className="on-dark border-t border-nhu/50 bg-tram pt-12 pb-7 text-be has-[+_.quick-contact]:pb-[calc(5rem+env(safe-area-inset-bottom))] md:pt-16 md:has-[+_.quick-contact]:pb-7">
       <div className="wrap">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-[1.1fr_1.8fr_1.1fr_1fr]">
           <div>

@@ -6,7 +6,6 @@ import { siteConfig } from "@/config/site";
 import {
   CONTACT_FAILED_MESSAGE,
   CONTACT_FIELDS,
-  CONTACT_NOT_READY_MESSAGE,
   HONEYPOT_FIELD,
   type ContactApiResponse,
   type ContactField,
@@ -78,7 +77,7 @@ const FIELD_META: Record<ContactField, { label: string; type: string; autoComple
 };
 
 const INPUT_CLASS =
-  "block w-full border border-line bg-be px-3.5 py-3 font-body text-base text-ink transition-colors duration-300 ease-son placeholder:text-muted/70 hover:border-dong/60 focus:border-gac focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gac aria-invalid:border-gac";
+  "block w-full border border-line bg-be font-body text-ink transition-colors duration-300 ease-son placeholder:text-muted/70 hover:border-dong/60 focus:border-gac focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gac aria-invalid:border-gac";
 
 type ContactFormProps = {
   /** URL Facebook cho nút "Nhắn qua Facebook"; mặc định `siteConfig.facebookUrl`. */
@@ -209,7 +208,7 @@ export function ContactForm({
           autoComplete: meta.autoComplete,
           "aria-invalid": error ? true : undefined,
           "aria-describedby": error ? errorId(field) : undefined,
-          className: cn(INPUT_CLASS, compact && "min-h-9 px-3 py-1.5 text-sm rounded-lg"),
+          className: cn(INPUT_CLASS, compact ? "min-h-12 rounded-lg px-3 py-2 text-base lg:min-h-9 lg:py-3 lg:text-sm" : "px-3.5 py-3 text-base"),
           disabled: sending,
         };
         return (
@@ -265,7 +264,7 @@ export function ContactForm({
       </div>
 
       {/* Không đặt aria-live ở đây: hộp con đã có role status/alert và được focus — đặt thêm sẽ bị đọc hai lần. */}
-      <div ref={statusRef} tabIndex={-1} className={cn("outline-none", compact && "sm:col-span-2")}>
+      <div ref={statusRef} tabIndex={-1} hidden={status === "idle" || status === "sending"} className={cn("outline-none", compact && "sm:col-span-2")}>
         {status === "not-ready" || status === "failed" || status === "sent" ? (
           <div
             role={status === "failed" ? "alert" : "status"}

@@ -38,3 +38,31 @@ export const ABOUT_CORE_VALUES = {
     },
   ],
 } as const;
+
+/** Nội dung hành trình do khách xác nhận ngày 23/11/2026; không tự gán năm cho các mốc. */
+export const ABOUT_JOURNEY = {
+  title: "HÀNH TRÌNH CỦA BÁC TRÀ KÝ",
+  description: "Từ một đặc sản làng quê, đến hành trình lan tỏa hương vị truyền thống Việt.",
+  steps: [
+    {
+      title: "KHỞI NGUỒN",
+      description: "Từ làng Giang Xá, Hoài Đức – nơi lưu giữ nghề làm Bánh Bác truyền thống.",
+    },
+    {
+      title: "KHÁM PHÁ",
+      description: "Bắt đầu biết đến Bánh Bác – đặc sản mang đậm hồn quê Việt.",
+    },
+    {
+      title: "GÌN GIỮ",
+      description: "Bác Trà Ký ra đời với mong muốn gìn giữ và phát huy giá trị Bánh Bác Giang Xá.",
+    },
+    {
+      title: "LAN TỎA",
+      description: "Mang hương vị truyền thống đến gần hơn với mọi người qua những trải nghiệm hiện đại.",
+    },
+    {
+      title: "VƯƠN XA",
+      description: "Tiếp tục lan tỏa giá trị Việt, để Bánh Bác và trà sen vươn xa hơn nữa, đến với nhiều thế hệ.",
+    },
+  ],
+} as const;

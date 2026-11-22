@@ -179,19 +179,19 @@
   }
 
   @media (width < 40rem) {
+    .home-hero__actions {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .home-hero__action {
+      min-height: 3rem;
+      padding-inline: 1.25rem;
+      font-size: 1rem;
+    }
+
     .home-hero__stage {
       --hero-crop-width: 1040;
-    }
-  }
-
-  @media (max-width: 24.5rem) {
-    .home-hero__action {
-      padding-inline: 0.65rem;
-      gap: 0.35rem;
-    }
-
-    .home-hero__action svg {
-      width: 0.85rem;
     }
   }
 }
