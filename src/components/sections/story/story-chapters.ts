@@ -8,6 +8,7 @@ export type StoryChapter = {
   paragraphs: readonly string[];
   image: StoryPhoto;
   relatedPhotos?: readonly StoryPhoto[];
+  video?: { href: string; label: string };
 };
 
 export const FOLK_LEGEND_LABEL = "Theo truyền thuyết dân gian";
@@ -17,6 +18,10 @@ export const STORY_CHAPTERS: readonly StoryChapter[] = [
     id: "chuong-1",
     numeral: "I",
     title: "Hồn quê Giang Xá",
+    video: {
+      href: "https://www.facebook.com/reel/1112875721624364",
+      label: "Xem video về Giang Xá",
+    },
     heading: "Giang Xá – Nét đẹp làng quê Bắc Bộ",
     paragraphs: [
       "Giang Xá – nơi mỗi góc làng đều mang theo một câu chuyện, mỗi nếp nhà đều lưu giữ một phần ký ức quê hương.",

@@ -27,6 +27,18 @@ export function StoryChapter({
             <div className={styles.villageBody}>
               {chapter.paragraphs.slice(1).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </div>
+            {chapter.video && (
+              <a
+                href={chapter.video.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gac px-6 py-3 font-body text-sm font-bold text-be transition-colors hover:bg-gac-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gac"
+              >
+                <span aria-hidden="true">▶</span>
+                {chapter.video.label}
+                <span className="sr-only"> (mở trong tab mới)</span>
+              </a>
+            )}
           </div>
           {village && (
             <figure data-village-paper className={styles.villagePaper}>

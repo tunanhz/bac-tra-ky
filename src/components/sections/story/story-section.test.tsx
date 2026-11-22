@@ -39,8 +39,13 @@ describe("StorySection", () => {
     expect(paper?.previousElementSibling).toBe(heading.parentElement);
     expect(stack?.previousElementSibling).toBe(paper);
     expect(villageContent.getByRole("img", { name: "Đoàn rước kiệu và người dân trong lễ hội làng Giang Xá" })).toBeInTheDocument();
-    // Canva không cung cấp URL video: không dựng nút giả hoặc liên kết trống.
-    expect(villageContent.queryByRole("link", { name: /video/i })).not.toBeInTheDocument();
+    const videoLink = villageContent.getByRole("link", { name: /Xem video về Giang Xá/ });
+    expect(videoLink).toHaveAttribute("href", "https://www.facebook.com/reel/1112875721624364");
+    expect(videoLink).toHaveAttribute("target", "_blank");
+    expect(videoLink).toHaveAttribute("rel", "noopener noreferrer");
+    expect(videoLink).toHaveAccessibleName(/mở trong tab mới/);
+    expect(videoLink.parentElement).toBe(heading.parentElement);
+    expect(screen.getAllByRole("link", { name: /Xem video về Giang Xá/ })).toHaveLength(1);
   });
 
   it("dùng bốn ảnh AI theo đúng thứ tự mẫu Bỏ (12), giữ chữ riêng trong bố cục 2×2", () => {
