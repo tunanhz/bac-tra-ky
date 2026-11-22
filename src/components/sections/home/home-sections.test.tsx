@@ -32,7 +32,7 @@ describe("Hero", () => {
   it("không hiển thị nút cuộn xuống dạng mũi tên trong hero", () => {
     render(<><Hero /><StorySection /></>);
     expect(screen.queryByRole("link", { name: "Cuộn xuống câu chuyện làng nghề" })).toBeNull();
-    expect(screen.getByRole("region", { name: "Khám phá câu chuyện làng nghề" })).toHaveAttribute("id", "cau-chuyen");
+    expect(screen.getByRole("region", { name: "Khám phá làng nghề Giang Xá" })).toHaveAttribute("id", "cau-chuyen");
   });
 });
 

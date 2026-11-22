@@ -1,100 +1,50 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal";
-import { cn } from "@/lib/cn";
 import type { StoryChapter as StoryChapterData } from "./story-chapters";
+import styles from "./story-section.module.css";
 
 export function StoryChapter({
   chapter,
-  alignRight = false,
 }: {
   chapter: StoryChapterData;
   alignRight?: boolean;
 }) {
   const titleId = `${chapter.id}-title`;
 
-  // Chapter 1: Hồn quê Giang Xá (Slide 2: tràn viền toàn màn hình như homepage, không bọc hình chữ nhật)
+  // Canva trang 4–5: chữ trái, ảnh trên giấy ở giữa, hai ảnh dọc bên phải.
   if (chapter.id === "chuong-1") {
+    const [entrance, courtyard, village] = chapter.relatedPhotos ?? [];
     return (
-      <article id={chapter.id} aria-labelledby={titleId} className="relative w-full overflow-hidden bg-[#fcf7ea] scroll-mt-24 border-b border-line/60">
-        <Reveal className="relative flex min-h-[580px] flex-col justify-center lg:min-h-[640px]">
-          {/* Background scenic photo tràn toàn màn hình */}
-          <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <figure className="relative m-0 h-full w-full">
-              <Image
-                src={chapter.image.src}
-                alt={chapter.image.alt}
-                fill
-                priority
-                sizes="100vw"
-                className="object-cover object-right-bottom lg:object-right"
-              />
-              <figcaption className="sr-only">{chapter.image.caption}</figcaption>
-            </figure>
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#fcf7ea] via-[#fcf7ea]/95 to-transparent lg:w-[60%]"
-            />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-[#fcf7ea]/65 lg:hidden"
-            />
-          </div>
-
-          <div className="wrap relative z-10 grid items-center gap-8 py-12 sm:py-16 lg:grid-cols-12 lg:py-20">
-            {/* Left text column */}
-            <div className="lg:col-span-7 xl:col-span-6">
-              <h3
-                id={titleId}
-                className="mt-0 mb-3 font-display text-2xl font-bold leading-[1.2] text-gac sm:mb-4 sm:text-3xl lg:text-4xl xl:text-5xl"
-              >
-                {chapter.heading}
-              </h3>
-
-              <p className="mt-0 mb-3 font-body text-base font-semibold leading-relaxed text-ink sm:mb-4 sm:text-lg">
-                {chapter.paragraphs[0]}
-              </p>
-
-              <div
-                aria-hidden="true"
-                className="mb-4 h-1 w-16 rounded-full bg-gradient-to-r from-gac via-gac/80 to-transparent sm:mb-5"
-              />
-
-              <div className="space-y-3 text-sm leading-relaxed text-ink-soft sm:space-y-3.5 sm:text-base">
-                {chapter.paragraphs.slice(1).map((paragraph) => (
-                  <p key={paragraph} className="m-0">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
+      <article id={chapter.id} aria-labelledby={titleId} className={styles.villageSection}>
+        <div className={styles.villageBackdrop} aria-hidden="true">
+          <Image src={chapter.image.src} alt="" fill sizes="100vw" className={styles.villageBackdropImage} />
+        </div>
+        <Reveal className={styles.villageComposition}>
+          <div className={styles.villageCopy}>
+            <h3 id={titleId} className={styles.villageTitle}>{chapter.heading}</h3>
+            <p className={`${styles.villageLead} italic text-tra`}>{chapter.paragraphs[0]}</p>
+            <div aria-hidden="true" className={styles.villageRule} />
+            <div className={styles.villageBody}>
+              {chapter.paragraphs.slice(1).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </div>
-
-            {/* Right floating archival photos (Slide 2: Chèn 2 ảnh lên kiểu giấy ghi nhớ / ảnh nổi) */}
-            {chapter.relatedPhotos?.length ? (
-              <div className="flex flex-col gap-4 sm:flex-row lg:col-span-5 lg:flex-col lg:items-end xl:col-span-6">
-                {chapter.relatedPhotos.map((photo, i) => (
-                  <figure
-                    key={photo.src}
-                    className={cn(
-                      "m-0 max-w-sm rounded-2xl bg-paper/95 p-3 shadow-xl backdrop-blur-sm transition-transform duration-300 hover:scale-105",
-                      i === 0 ? "lg:-rotate-2" : "lg:rotate-2 lg:mr-4"
-                    )}
-                  >
-                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-be-2/60 sm:w-64 lg:w-72">
-                      <Image
-                        src={photo.src}
-                        alt={photo.alt}
-                        fill
-                        sizes="300px"
-                        className="object-cover"
-                      />
-                    </div>
-                    <figcaption className="caption px-1 pt-2.5 text-center font-medium text-ink">
-                      {photo.caption}
-                    </figcaption>
-                  </figure>
-                ))}
+          </div>
+          {village && (
+            <figure data-village-paper className={styles.villagePaper}>
+              <div className={styles.villagePaperPhoto}>
+                <Image src={village.src} alt={village.alt} fill sizes="(min-width: 1024px) 21vw, (min-width: 640px) 44vw, 85vw" className={styles.villagePhoto} />
               </div>
-            ) : null}
+              <figcaption>{village.caption}</figcaption>
+            </figure>
+          )}
+          <div data-village-photo-stack className={styles.villagePhotoStack}>
+            {[entrance, courtyard].filter((photo) => photo !== undefined).map((photo) => (
+              <figure key={photo.src} className={styles.villagePhotoCard}>
+                <div className={styles.villageCardImage}>
+                  <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 1024px) 18vw, (min-width: 640px) 30vw, 42vw" className={styles.villagePhoto} />
+                </div>
+                <figcaption>{photo.caption}</figcaption>
+              </figure>
+            ))}
           </div>
         </Reveal>
       </article>

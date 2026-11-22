@@ -41,7 +41,6 @@ export function FlavorGallery({ slides, label }: { slides: readonly FlavorSlide[
     setPlaying(false);
     setActive(index);
   };
-  const step = (offset: number) => choose((active + offset + slides.length) % slides.length);
 
   return (
     <div
@@ -84,21 +83,6 @@ export function FlavorGallery({ slides, label }: { slides: readonly FlavorSlide[
           </button>
         ))}
       </div>
-      {slides.length > 1 && (
-        <div className="mt-2 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
-          <div className="flex gap-1.5">
-            <button type="button" onClick={() => step(-1)} aria-label="Ảnh trước" className="grid size-11 cursor-pointer place-items-center rounded-full border border-line text-son transition-colors hover:border-gac hover:bg-gac hover:text-be">
-              <span aria-hidden="true">←</span>
-            </button>
-            <button type="button" onClick={() => step(1)} aria-label="Ảnh tiếp theo" className="grid size-11 cursor-pointer place-items-center rounded-full border border-line text-son transition-colors hover:border-gac hover:bg-gac hover:text-be">
-              <span aria-hidden="true">→</span>
-            </button>
-          </div>
-          <button type="button" onClick={() => setPlaying((current) => !current)} className="min-h-11 cursor-pointer text-sm text-son underline underline-offset-4 hover:text-gac">
-            {playing ? "Tạm dừng tự chuyển ảnh" : "Bật tự chuyển ảnh"}
-          </button>
-        </div>
-      )}
     </div>
   );
 }

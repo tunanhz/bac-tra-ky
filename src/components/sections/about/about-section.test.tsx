@@ -1,6 +1,4 @@
 // @vitest-environment jsdom
-import { existsSync } from "node:fs";
-import { join } from "node:path";
 import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { ABOUT_INSPIRATION } from "./about-content";
@@ -26,6 +24,18 @@ describe("AboutSection", () => {
     expect(screen.getByText(/TẦM NHÌN & SỨ MỆNH/)).toBeInTheDocument();
     expect(screen.getByText(/Đưa hương vị Bánh Bác Giang Xá vượt ra khỏi làng quê/)).toBeInTheDocument();
     expect(screen.getByText(/Giữ trọn hương vị xưa, thêm chút sáng tạo mới/)).toBeInTheDocument();
+  });
+
+  it("trang 10 dùng ảnh bánh chồng giữa hai tấm đỏ và hình quà bên phải", () => {
+    render(<AboutSection />);
+    const section = screen.getByRole("region", { name: "TẦM NHÌN & SỨ MỆNH" });
+    const content = within(section);
+    expect(content.getByRole("heading", { level: 4, name: "Tầm nhìn" })).toBeInTheDocument();
+    expect(content.getByRole("heading", { level: 4, name: "Sứ mệnh" })).toBeInTheDocument();
+    expect(content.getByRole("img", { name: /được gói trong màng trong suốt/ })).toHaveAttribute("src", expect.stringContaining("banh-bac-boc-mang.webp"));
+    expect(content.getByRole("img", { name: /trên lụa đỏ/ })).toHaveAttribute("src", expect.stringContaining("home-hero-bac-tra-ky.webp"));
+    expect(content.queryByText(/mdgnfjagdvna/)).not.toBeInTheDocument();
+    expect(content.queryByText(/Nghệ nhân giữ lửa/)).not.toBeInTheDocument();
   });
 
   it("hiển thị đúng ba giá trị cốt lõi và thông điệp chung", () => {

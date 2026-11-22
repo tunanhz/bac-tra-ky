@@ -7,6 +7,7 @@ import type { CustomerOffer } from "@/data/customer-content";
 import { CustomerFeedbackForm } from "./customer-feedback-form";
 import { CustomerPanels } from "./customer-panels";
 import { OfferSection } from "./offer-section";
+import { OfferCampaign } from "./offer-campaign";
 import { OfferWindow } from "./offer-window";
 
 const draftOffer: CustomerOffer = {
@@ -46,6 +47,32 @@ describe("OfferSection", () => {
     expect(offers.getByText(/Hiện chưa có chương trình ưu đãi/)).toBeInTheDocument();
     expect(offers.getByRole("link", { name: "Theo dõi trên Facebook" })).toHaveAttribute("href", siteConfig.facebookUrl);
     expect(offers.getByRole("link", { name: "Xem các bộ quà" })).toHaveAttribute("href", "/#san-pham");
+  });
+});
+
+describe("Canva trang 7–8", () => {
+  it("dùng ảnh nền gốc đầy đủ chiều ngang và chữ giảm giá nổi bật, không giới hạn khung desktop hẹp", () => {
+    const { container } = render(<OfferCampaign
+      offer={{ ...draftOffer, status: "published" }}
+      serverNow={Date.parse("2026-11-22T00:00:00Z")}
+      discount="10%"
+      expired={<p>Đã kết thúc</p>}
+    ><p>Form liên hệ</p></OfferCampaign>);
+    const section = screen.getByRole("region", { name: "Ưu đãi đặc biệt" });
+    const background = section.querySelector("img");
+    expect(background).toHaveAttribute("src", expect.stringContaining("nen-uu-dai-clean.webp"));
+    expect(section.querySelectorAll('img[src*="uu-dai-dac-biet.png"]')).toHaveLength(2);
+    expect(background).toHaveAttribute("alt", "");
+    expect(screen.getByText("10%")).toHaveClass("text-6xl", "lg:text-8xl");
+    expect(container.querySelector("[data-offer-center]")).toHaveClass("lg:max-w-none");
+  });
+
+  it("không chừa dải đệm be sau ưu đãi trước footer", () => {
+    const { container } = render(<CustomerPanels reviews={[]} offer={null} />);
+    const wrapper = container.querySelector("[data-customer-panels]");
+    expect(wrapper).not.toHaveClass("section-y");
+    expect(wrapper).toHaveClass("pt-12");
+    expect(wrapper?.lastElementChild?.querySelector("#uu-dai")).toBeInTheDocument();
   });
 });
 

@@ -10,6 +10,7 @@
  *  - Sơn son phủ tối đa ~20% diện tích trang; giữ ít nhất 2 khoảng nền be thuần (sản phẩm, liên hệ).
  */
 @theme {
+  /* Canva trang 6: dùng cùng nền be đào #ffebd8 cho các mặt nền sáng. */
   /* Màu */
   --color-gac: #ae000d; /* đỏ gấc: nút, tiêu đề trên nền be */
   --color-gac-deep: #8a0510; /* hover nút */
@@ -17,10 +18,10 @@
   --color-son-deep: #4a0b0e; /* sơn son đậm: header khi cuộn, khung */
   --color-tram: #4a0b0e; /* đỏ trầm: nền footer */
   --color-tra: #1c5a1b; /* xanh lá trà: chữ phụ, trích dẫn */
-  --color-be: #fdf7e5; /* be giấy dó: nền chính */
-  --color-be-2: #f4e8cc; /* be đậm: dải chương, khung xương */
-  --color-paper: #fffaf0; /* tấm giấy: card, tấm chương truyện */
-  --color-scroll: #f3e3bd; /* giấy treo tranh Đông Hồ */
+  --color-be: #ffebd8; /* be giấy dó: nền chính */
+  --color-be-2: #ffebd8; /* be đậm: dải chương, khung xương */
+  --color-paper: #ffebd8; /* tấm giấy: card, tấm chương truyện */
+  --color-scroll: #ffebd8; /* giấy treo tranh Đông Hồ */
   --color-ink: #33231c; /* nâu mực: chữ thân */
   --color-ink-soft: #5c473c; /* nâu mực nhạt: mô tả */
   --color-muted: #6b5244;

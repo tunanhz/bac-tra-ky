@@ -1,0 +1,186 @@
+.intro {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--color-be);
+}
+
+.introContent {
+  position: relative;
+  z-index: 1;
+  padding-block: 3rem 2rem;
+}
+
+.introTitle {
+  margin: 0 0 1.25rem;
+  color: var(--color-gac);
+  font-size: clamp(1.8rem, 6vw, 2.5rem);
+  line-height: 1.15;
+  text-wrap: pretty;
+}
+
+.introArtwork {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1769 / 493;
+}
+
+.villageSection {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  scroll-margin-top: 6rem;
+  background: #fcf7ea;
+}
+.villageBackdrop { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.villageBackdropImage { object-fit: cover; object-position: right 48%; }
+.villageComposition {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 1.75rem;
+  padding: 2.5rem 1.25rem;
+  background: linear-gradient(to right, #fcf7ea 0%, rgb(252 247 234 / 96%) 45%, rgb(252 247 234 / 55%) 100%);
+}
+.villageCopy { min-width: 0; }
+.villageTitle {
+  margin: 0 0 .8rem;
+  color: var(--color-gac);
+  font-size: clamp(1.6rem, 4.3vw, 2.5rem);
+  line-height: 1.2;
+  text-wrap: pretty;
+}
+.villageLead { margin: 0; font-weight: 600; font-size: .95rem; line-height: 1.6; }
+.villageRule { width: 3rem; height: 2px; margin-block: .8rem 1rem; background: var(--color-gac); }
+.villageBody { color: var(--color-ink-soft); font-size: .9rem; line-height: 1.65; }
+.villageBody p { margin: 0; }
+.villageBody p + p { margin-top: .5rem; }
+.villagePaper {
+  position: relative;
+  margin: 0 auto;
+  width: min(100%, 23rem);
+  padding: 1rem .9rem .7rem;
+  background: linear-gradient(115deg, #f6eedb, #e8dcc0 48%, #f8f0df);
+  clip-path: polygon(2% 0, 9% 2%, 17% 0, 27% 2%, 38% 0, 47% 2%, 59% 0, 69% 2%, 80% 0, 91% 2%, 98% 0, 100% 9%, 98% 19%, 100% 30%, 98% 42%, 100% 55%, 98% 67%, 100% 79%, 98% 91%, 100% 98%, 89% 100%, 78% 98%, 65% 100%, 53% 98%, 41% 100%, 29% 98%, 18% 100%, 8% 98%, 1% 100%, 0 89%, 2% 78%, 0 66%, 2% 54%, 0 43%, 2% 31%, 0 19%, 2% 9%);
+  transform: rotate(-2deg);
+  filter: drop-shadow(0 4px 8px rgb(66 41 19 / 15%));
+}
+.villagePaperPhoto { position: relative; aspect-ratio: 1.15; overflow: hidden; }
+.villagePhoto { object-fit: cover; }
+.villagePaper figcaption, .villagePhotoCard figcaption {
+  margin-top: .35rem;
+  color: #66513a;
+  text-align: center;
+  font-size: clamp(.62rem, .75vw, .85rem);
+  font-style: italic;
+  line-height: 1.35;
+}
+.villagePhotoStack { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; min-width: 0; }
+.villagePhotoCard { margin: 0; padding: .5rem .5rem .6rem; border-radius: .5rem; background: #fffaf0; box-shadow: 0 3px 10px rgb(67 44 22 / 13%); }
+.villageCardImage { position: relative; aspect-ratio: 1.5; overflow: hidden; border-radius: .3rem; }
+@media (min-width: 640px) and (max-width: 1023px) {
+  .villageComposition { grid-template-columns: 1.1fr .9fr; padding-inline: 2rem; }
+  .villageCopy { grid-column: 1 / -1; }
+  .villagePhotoStack { grid-template-columns: 1fr; }
+}
+@media (min-width: 1024px) {
+  .villageComposition {
+    grid-template-columns: minmax(0, 55fr) minmax(0, 24fr) minmax(0, 21fr);
+    gap: clamp(1rem, 1.7vw, 2rem);
+    min-height: clamp(30rem, 37vw, 40rem);
+    padding: clamp(2rem, 3.4vw, 4rem) clamp(1.5rem, 3.3vw, 4rem);
+    background: linear-gradient(to right, #fcf7ea 0%, rgb(252 247 234 / 97%) 39%, rgb(252 247 234 / 76%) 50%, transparent 65%);
+  }
+  .villageTitle { font-size: clamp(1.5rem, 2.65vw, 3rem); white-space: nowrap; text-wrap: nowrap; }
+  .villageLead { font-size: clamp(.85rem, 1.03vw, 1.1rem); }
+  .villageBody { font-size: clamp(.8rem, 1vw, 1.0625rem); }
+  .villagePaper { width: 100%; margin-top: 1.5rem; }
+  .villagePhotoStack { grid-template-columns: minmax(0, 1fr); gap: .8rem; align-self: stretch; align-content: center; }
+}
+
+
+@media (min-width: 1024px) {
+  .introContent {
+    display: flex;
+    align-items: center;
+    min-height: clamp(28rem, 32vw, 38rem);
+    padding-block: 3.5rem;
+  }
+
+  .introCopy {
+    width: 55%;
+  }
+
+  .introTitle {
+    font-size: clamp(1.7rem, 2.8vw, 3rem);
+    white-space: nowrap;
+    text-wrap: nowrap;
+  }
+
+  .introArtwork {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    aspect-ratio: auto;
+  }
+
+  .introArtwork img {
+    object-position: center;
+  }
+
+}
+/* Bỏ (12).png: cổng làng trên phải, bốn khung 2×2 với chữ trên nền trống. */
+.craftSection {
+  position: relative;
+  overflow: hidden;
+  scroll-margin-top: 6rem;
+  background: #fce6d3;
+}
+.craftHeader { position: relative; }
+.craftHeaderArtwork { display: block; width: 100%; height: auto; }
+.craftIntro { padding: 1.5rem 1.25rem 2rem; }
+.craftTitle { margin: 0 0 1rem; color: var(--color-gac); font-size: clamp(1.8rem, 3.3vw, 3.5rem); line-height: 1.17; }
+.craftIntro p { max-width: 44ch; margin: 0; color: var(--color-ink-soft); font-size: 1rem; line-height: 1.6; }
+.craftGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+  margin: 0;
+  padding: 0 1.65%;
+  list-style: none;
+}
+.craftStep { position: relative; min-width: 0; }
+.craftFigure { margin: 0; }
+.craftStepArtwork { display: block; width: 100%; height: auto; }
+.craftStepCopy { padding: .75rem 1rem 1rem; }
+.craftStepNumber { color: var(--color-gac); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.craftStepCopy h4 { margin: .35rem 0 .65rem; color: var(--color-son); font-size: 1.25rem; line-height: 1.25; }
+.craftStepCopy p { margin: 0; color: var(--color-ink); font-size: .95rem; line-height: 1.5; }
+.craftClosing {
+  padding: 1.75rem 1.25rem 3rem;
+  text-align: center;
+  background: url('/images/revisions/craft-cloud-footer.webp') bottom center / 100% auto no-repeat;
+}
+.craftCredit { margin: 0 0 1rem; color: var(--color-ink-soft); font-size: .75rem; font-style: italic; }
+@media (min-width: 640px) {
+  .craftGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.5rem, .83vw, 1rem); }
+}
+@media (min-width: 1024px) {
+  .craftIntro { position: absolute; inset: 0 auto 0 0; display: flex; flex-direction: column; justify-content: center; width: 49%; padding: 2rem 3.3%; }
+  .craftIntro p { font-size: clamp(.85rem, 1.2vw, 1.2rem); }
+  .craftStepCopy { position: absolute; inset: 0 auto 0 0; display: flex; flex-direction: column; justify-content: center; width: 34%; padding: .7rem 3.8%; }
+  .craftStepNumber { font-size: clamp(.58rem, .75vw, .75rem); letter-spacing: .04em; }
+  .craftStepCopy h4 { font-size: clamp(.95rem, 1.42vw, 1.5rem); margin-block: .3rem .55rem; }
+  .craftStepCopy p { font-size: clamp(.72rem, .96vw, 1rem); line-height: 1.45; }
+}
+@media (min-width: 1024px) {
+  .craftStepCopy { isolation: isolate; }
+  .craftStepCopy::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 8px -1rem 8px 9px;
+    background: linear-gradient(to right, #fce6d3 0%, rgb(252 230 211 / 95%) 72%, transparent 100%);
+  }
+}

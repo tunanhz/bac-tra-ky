@@ -101,7 +101,7 @@ export function OfferSection({ offer }: { offer: CustomerOffer | null }) {
         </p>
       }
     >
-      <div className="rounded-2xl border border-nhu/80 bg-[#fdf7e5] p-3.5 sm:p-5 text-left text-ink shadow-xl">
+      <div className="rounded-2xl border border-nhu/80 bg-paper p-3.5 sm:p-5 text-left text-ink shadow-xl">
         <div className="mb-2 flex items-center justify-between">
           <h4 className="m-0 font-display text-base sm:text-lg font-bold text-son">
             Để lại lời nhắn

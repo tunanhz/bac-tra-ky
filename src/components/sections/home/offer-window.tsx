@@ -9,12 +9,13 @@ const UNITS: readonly { seconds: number; label: string; cycle?: number }[] = [
   { seconds: 1, label: "Giây", cycle: 60 },
 ];
 
-export function OfferWindow({ endTime, serverNow, children, expired, intro, panelClassName }: {
+export function OfferWindow({ endTime, serverNow, children, expired, intro, artwork, panelClassName }: {
   endTime: number;
   serverNow: number;
   children: ReactNode;
   expired: ReactNode;
   intro?: ReactNode;
+  artwork?: ReactNode;
   panelClassName?: string;
 }) {
   const [now, setNow] = useState(serverNow);
@@ -39,8 +40,9 @@ export function OfferWindow({ endTime, serverNow, children, expired, intro, pane
 
   return (
     <div className="grid grid-cols-1 items-center gap-5 lg:grid-cols-12 lg:gap-8">
-      <div className="min-w-0 lg:col-span-5 flex flex-col justify-center">
+      <div className="min-w-0 lg:col-span-5 lg:max-w-[21rem] flex flex-col justify-center">
         {intro}
+        {artwork}
         <div className={panelClassName}>
           <p className="eyebrow mt-0 mb-1.5 text-center lg:text-left text-xs text-nhu">Thời gian ưu đãi còn lại</p>
           <dl className="mx-auto lg:mx-0 mt-0 mb-0 grid max-w-xs grid-cols-4 gap-1.5" role="timer" aria-label="Thời gian ưu đãi còn lại">
@@ -55,7 +57,7 @@ export function OfferWindow({ endTime, serverNow, children, expired, intro, pane
           </dl>
         </div>
       </div>
-      <div className="min-w-0 lg:col-span-7">
+      <div className="min-w-0 lg:col-start-7 lg:col-span-6">
         {children}
       </div>
     </div>

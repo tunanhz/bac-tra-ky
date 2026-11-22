@@ -8,7 +8,7 @@ import { FlavorGallery, type FlavorSlide } from "./flavor-gallery";
 const SIX_PACK_FLAVORS: FlavorSlide[] = [
   {
     name: "Truyền thống",
-    src: "/images/products/hop-6-banh.webp",
+    src: "/images/revisions/products-six-traditional.png",
     alt: "Hộp 6 bánh nhân đậu xanh truyền thống",
     note: "Nhân đậu xanh truyền thống thơm bùi",
   },
@@ -32,7 +32,7 @@ const SIX_PACK_FLAVORS: FlavorSlide[] = [
   },
   {
     name: "Nhân mặn",
-    src: "/images/products/hop-6-banh-nhan-man.webp",
+    src: "/images/revisions/products-six-savory.png",
     alt: "Hộp 6 Bánh Bác nhân mặn đặc biệt",
     note: "Nhân mặn hài hòa, tròn vị",
   },

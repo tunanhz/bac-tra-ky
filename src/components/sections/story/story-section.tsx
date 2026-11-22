@@ -1,68 +1,65 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Reveal } from "@/components/ui/reveal";
 import { sectionHref } from "@/config/site";
 import { StoryChapter } from "./story-chapter";
 import { CRAFT_STEPS, STORY_CHAPTERS } from "./story-chapters";
+import styles from "./story-section.module.css";
 
 function CraftSection() {
   return (
-    <section id="chuong-4" aria-labelledby="craft-title" className="relative w-full overflow-hidden bg-paper/60 scroll-mt-24 py-12 sm:py-16 lg:py-24 border-b border-line/60">
-      <div className="wrap relative z-10">
-        <div className="mb-8 text-center sm:mb-12">
-          <h3 id="craft-title" className="mt-0 mb-3 font-display text-3xl font-bold text-gac sm:text-4xl lg:text-5xl">
+    <section id="chuong-4" aria-labelledby="craft-title" className={styles.craftSection}>
+      <header className={styles.craftHeader}>
+        <Image
+          src="/images/revisions/craft-village-header.webp"
+          alt=""
+          width={1448}
+          height={352}
+          sizes="100vw"
+          className={styles.craftHeaderArtwork}
+        />
+        <div className={styles.craftIntro}>
+          <h3 id="craft-title" className={styles.craftTitle}>
             Bí quyết làm nên hương vị Bánh Bác
           </h3>
-          <p className="mx-auto max-w-[50ch] text-base text-ink-soft sm:text-lg">
+          <p>
             Trải qua 4 công đoạn kỳ công để tạo nên từng chiếc Bánh Bác dẻo thơm, trọn vẹn phong vị đất Giang Xá.
           </p>
         </div>
+      </header>
 
-        {/* Slide 6: Bố cục form 2x2 ảnh bên phải text bên trái theo mẫu Slide 6 */}
-        <ol role="list" className="m-0 grid list-none gap-5 p-0 sm:grid-cols-2 lg:gap-6">
-          {CRAFT_STEPS.map((step, i) => (
-            <Reveal
-              key={step.title}
-              as="li"
-              delay={i * 80}
-              className="group flex flex-col-reverse items-center justify-between gap-4 overflow-hidden rounded-2xl border border-line/60 bg-paper p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gac/40 hover:shadow-md sm:flex-row"
-            >
-              <div className="flex-1 min-w-0 pr-0 sm:pr-2">
-                <span className="inline-block rounded-full bg-gac/10 px-2.5 py-0.5 text-xs font-bold text-gac">
-                  Công đoạn 0{i + 1}
-                </span>
-                <h4 className="mt-2 mb-2 text-lg font-bold leading-snug text-son">{step.title}</h4>
-                <p className="m-0 text-sm leading-relaxed text-ink-soft">{step.text}</p>
-              </div>
-              <figure className="m-0 w-full shrink-0 sm:w-44 lg:w-48">
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-be-2/60 shadow-inner">
-                  <Image
-                    src={step.src}
-                    alt={step.alt}
-                    fill
-                    sizes="220px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <figcaption className="caption px-1 pt-1.5 text-center text-xs text-ink-soft">{step.caption}</figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </ol>
+      {/* Ảnh khách xác nhận: cổng làng trên phải, bốn khung 2×2 bên dưới. */}
+      <ol role="list" className={styles.craftGrid}>
+        {CRAFT_STEPS.map((step, i) => (
+          <li key={step.title} className={styles.craftStep}>
+            <figure className={styles.craftFigure}>
+              <Image
+                src={step.src}
+                alt={step.alt}
+                width={694}
+                height={i < 2 ? 320 : 344}
+                sizes="(min-width: 640px) 48vw, 96vw"
+                className={styles.craftStepArtwork}
+              />
+              <figcaption className="sr-only">{step.caption}</figcaption>
+            </figure>
+            <div className={styles.craftStepCopy}>
+              <span className={styles.craftStepNumber}>Công đoạn 0{i + 1}</span>
+              <h4>{step.title}</h4>
+              <p>{step.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
 
-        <p className="caption mt-5 text-center text-ink-soft">
-          Hình ảnh công đoạn trích từ ấn phẩm “Hành trình làm Bánh Bác” của Bác Trà Ký.
+      <div className={styles.craftClosing}>
+        <p className={styles.craftCredit}>
+          Hình ảnh minh họa được tạo bằng AI theo mẫu bố cục khách hàng cung cấp.
         </p>
-
-        {/* Slide 6: Nút pill Khám phá sản phẩm -> */}
-        <div className="mt-8 text-center">
-          <a
-            href={sectionHref("san-pham")}
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gac px-8 py-3 font-body text-base font-bold text-be shadow-md transition-all duration-300 hover:bg-gac-deep hover:shadow-lg"
-          >
-            Khám phá sản phẩm <span aria-hidden="true">→</span>
-          </a>
-        </div>
+        <a
+          href={sectionHref("san-pham")}
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gac px-8 py-3 font-body text-base font-bold text-be transition-colors hover:bg-gac-deep"
+        >
+          Khám phá sản phẩm <span aria-hidden="true">→</span>
+        </a>
       </div>
     </section>
   );
@@ -71,47 +68,32 @@ function CraftSection() {
 export function StorySection() {
   return (
     <section id="cau-chuyen" aria-labelledby="story-title" className="w-full">
-      {/* Slide 1: Intro Banner tràn luôn như phần trang chủ theo yêu cầu người dùng */}
-      <div className="relative overflow-hidden bg-[#2a130f] shadow-lg">
-        <div className="pointer-events-none absolute inset-0">
-          <figure className="relative m-0 h-full w-full">
-            <Image
-              src="/images/story/nghe-nhan-cuon-banh-bac.webp"
-              alt="Đôi tay nghệ nhân cuộn Bánh Bác truyền thống"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-          </figure>
-          {/* Lớp phủ chuyển màu đen mờ dần từ trái sang phải để làm nổi text và hòa dần vào ảnh tự nhiên */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-black/60 lg:bg-gradient-to-r lg:from-black/95 lg:via-black/80 lg:via-40% lg:to-transparent lg:to-75%"
-          />
-        </div>
-
-        <div className="wrap relative z-10 py-12 sm:py-16 md:py-20 lg:py-24">
-          <div className="max-w-2xl text-left">
-            <h2
-              id="story-title"
-              className="mt-0 mb-4 font-display text-3xl font-bold leading-tight text-be sm:text-4xl lg:text-5xl"
-            >
-              Khám phá câu chuyện làng nghề
+      {/* Canva trang 1–2: nền sạch do khách cung cấp, không chứa chữ chú thích. */}
+      <div className={styles.intro}>
+        <div className={`wrap ${styles.introContent}`}>
+          <div className={styles.introCopy}>
+            <h2 id="story-title" className={styles.introTitle}>
+              Khám phá làng nghề Giang Xá
             </h2>
-            <p className="mt-0 mb-8 font-body text-base font-normal leading-relaxed text-be/90 sm:text-lg">
+            <p className="mb-6 mt-0 font-body text-base leading-relaxed text-ink sm:text-lg">
               Theo dấu làng xưa, tìm về hương vị cũ. Ẩn mình giữa vùng đất Giang Xá, Hoài Đức, Hà Nội là câu chuyện về một thức quà truyền thống được gìn giữ qua nhiều thế hệ. Mỗi chiếc Bánh Bác không chỉ mang hương vị quê nhà mà còn chứa đựng sự khéo léo, tâm huyết và những nét đẹp văn hóa của người dân nơi đây.
             </p>
-
-            <div>
-              <a
-                href="#chuong-1"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gac px-8 py-3.5 font-body text-sm font-bold text-be shadow-md transition-all duration-300 hover:bg-gac-deep hover:shadow-lg sm:text-base"
-              >
-                Tìm Hiểu Thêm <span aria-hidden="true">→</span>
-              </a>
-            </div>
+            <a
+              href="#chuong-1"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gac px-8 py-3.5 font-body text-sm font-bold text-be transition-colors hover:bg-gac-deep sm:text-base"
+            >
+              Tìm Hiểu Thêm <span aria-hidden="true">→</span>
+            </a>
           </div>
+        </div>
+        <div className={styles.introArtwork}>
+          <Image
+            src="/images/revisions/story-intro-rolling-cake.webp"
+            alt="Đôi tay nghệ nhân cuộn Bánh Bác trên nền be, viền đỏ hoa văn truyền thống"
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
         </div>
       </div>
 

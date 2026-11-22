@@ -195,7 +195,7 @@ export function CustomerPanels({
   offer = customerOffer,
 }: { reviews?: readonly CustomerReview[]; offer?: CustomerOffer | null } = {}) {
   return (
-    <div className="section-y space-y-16 lg:space-y-24">
+    <div data-customer-panels className="space-y-16 pt-12 md:pt-[72px] lg:space-y-24 lg:pt-24">
       <div className="wrap">
         <FeedbackSection reviews={reviews} />
       </div>
