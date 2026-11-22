@@ -7,7 +7,14 @@ import type { NewsPost } from "@/lib/types";
  */
 
 function clone(post: NewsPost): NewsPost {
-  return { ...post, content: [...post.content], coverCredit: post.coverCredit && { ...post.coverCredit } };
+  return {
+    ...post,
+    content: [...post.content],
+    body: post.body?.map((block) => block.type === "image"
+      ? { ...block, caption: block.caption?.map((run) => ({ ...run })) }
+      : { ...block, runs: block.runs.map((run) => ({ ...run })) }),
+    coverCredit: post.coverCredit && { ...post.coverCredit },
+  };
 }
 
 /** Mọi bài, mới nhất trước (cùng ngày giữ thứ tự khai báo); bài `featured` lên đầu. */

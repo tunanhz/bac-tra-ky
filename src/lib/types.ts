@@ -18,7 +18,21 @@ export type Product = {
   featured: boolean;
 };
 
-export type NewsCategory = "hoat-dong" | "am-thuc" | "van-hoa-tra" | "lang-nghe" | "san-pham-uu-dai";
+export type NewsCategory =
+  | "hoat-dong" | "am-thuc" | "van-hoa-tra" | "lang-nghe" | "san-pham-uu-dai"
+  | "van-hoa-di-san" | "am-thuc-doi-song" | "thi-truong-xu-huong" | "su-kien-cong-dong";
+
+/** Text typed từ nội dung khách, không chèn HTML từ tài liệu vào trang. */
+export type NewsInline = {
+  text: string;
+  strong?: boolean;
+  emphasis?: boolean;
+  href?: string;
+};
+
+export type NewsBlock =
+  | { type: "paragraph" | "heading"; runs: NewsInline[] }
+  | { type: "image"; src: string; alt: string; width: number; height: number; caption?: NewsInline[] };
 
 export type NewsPost = {
   slug: string;
@@ -26,6 +40,10 @@ export type NewsPost = {
   excerpt: string;
   /** Nội dung bài, mỗi phần tử là một đoạn văn. */
   content: string[];
+  /** Lời dẫn đầy đủ khi excerpt trên card cần ngắn gọn hơn. */
+  lead?: string;
+  /** Bài dài có đề mục, ảnh và nguồn; bài cũ vẫn dùng content. */
+  body?: NewsBlock[];
   category: NewsCategory;
   /** Đường dẫn ảnh bìa trong `public/` (vd. `/images/news/<slug>.webp`). */
   coverImage: string;

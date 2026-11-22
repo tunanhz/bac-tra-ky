@@ -1,4 +1,5 @@
 import type { NewsCategory, NewsPost } from "@/lib/types";
+import { customerNewsPosts } from "./customer-news";
 
 /** Bài viết chính thức cho chuyên mục Tin tức của Bác Trà Ký. */
 
@@ -8,6 +9,10 @@ export const NEWS_CATEGORY_LABELS: Record<NewsCategory, string> = {
   "van-hoa-tra": "Văn hoá thưởng trà",
   "lang-nghe": "Câu chuyện làng nghề",
   "san-pham-uu-dai": "Sản phẩm mới và chương trình ưu đãi",
+  "van-hoa-di-san": "Văn hóa & Di sản",
+  "am-thuc-doi-song": "Ẩm thực & Đời sống",
+  "thi-truong-xu-huong": "Thị trường & Xu hướng",
+  "su-kien-cong-dong": "Sự kiện & Cộng đồng",
 };
 
 /** Thứ tự hiển thị bộ lọc. */
@@ -17,6 +22,10 @@ export const NEWS_CATEGORIES: readonly NewsCategory[] = [
   "van-hoa-tra",
   "lang-nghe",
   "san-pham-uu-dai",
+  "van-hoa-di-san",
+  "am-thuc-doi-song",
+  "thi-truong-xu-huong",
+  "su-kien-cong-dong",
 ];
 
 function coverImage(slug: string): string {
@@ -138,4 +147,5 @@ export const newsPosts: readonly NewsPost[] = [
     featured: false,
     isDraft: false,
   },
+  ...customerNewsPosts,
 ];

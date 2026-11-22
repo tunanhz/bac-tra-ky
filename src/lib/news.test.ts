@@ -5,9 +5,9 @@ import { NEWS_CATEGORIES, NEWS_CATEGORY_LABELS, newsPosts } from "@/data/news";
 import { getNewsPostBySlug, getNewsPosts, getRelatedNewsPosts } from "./news";
 
 describe("dữ liệu tin tức tĩnh", () => {
-  it("có 6 bài, slug không trùng, là bài viết chính thức đã hoàn thiện", () => {
-    expect(newsPosts).toHaveLength(6);
-    expect(new Set(newsPosts.map((p) => p.slug)).size).toBe(6);
+  it("có 15 bài, slug không trùng, là bài viết chính thức đã hoàn thiện", () => {
+    expect(newsPosts).toHaveLength(15);
+    expect(new Set(newsPosts.map((p) => p.slug)).size).toBe(15);
     expect(newsPosts.every((p) => !p.isDraft)).toBe(true);
   });
 
@@ -39,7 +39,7 @@ describe("dữ liệu tin tức tĩnh", () => {
 describe("lib/news", () => {
   it("getNewsPosts đưa bài nổi bật lên đầu", async () => {
     const posts = await getNewsPosts();
-    expect(posts).toHaveLength(6);
+    expect(posts).toHaveLength(15);
     expect(posts[0].featured).toBe(true);
   });
 
