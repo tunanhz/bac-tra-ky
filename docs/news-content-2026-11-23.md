@@ -50,3 +50,7 @@
 - Không thêm dòng nguồn ở footer. Nguồn ảnh nằm dưới ảnh và trong hồ sơ credits, không tự nhận có giấy phép mở. Chưa push/deploy ở lượt này.
 
 - Kiểm tra sau lượt bổ sung ảnh: **206/206 tests / 28 files**, build production qua; browser27 lượt bài trên375/768/1440px qua. Ảnh mới và caption tải đúng, không tràn ngang hay JSerror. Dev3026 đã cập nhật ảnh mới.
+
+
+## Đính chính phạm vi feedback Canva — 23/11/2026
+Khách làm rõ không bỏ toàn bộ Tin tức. Trang chủ giữ 9 bài nhập từ tài liệu khách, bỏ khối nổi bật lớn và nhóm 6 bài cũ khỏi danh sách trang chủ. Dữ liệu, ảnh và URL chi tiết của cả 15 bài vẫn giữ nguyên; menu Tin tức và liên kết quay lại /#tin-tuc đã khôi phục. Kiểm tra lượt sửa: 217/217 tests, typecheck và build đạt; không push/deploy.
