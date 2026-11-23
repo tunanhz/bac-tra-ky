@@ -81,6 +81,6 @@ describe("BrandJourney", () => {
     ];
     items.forEach((item, index) => expect(within(item).getByText(descriptions[index])).toBeInTheDocument());
     expect(journey.queryByText(/Thu Thuy|23:48|2026/)).not.toBeInTheDocument();
-    expect(journey.queryByRole("img")).not.toBeInTheDocument();
+    expect(journey.getAllByRole("img")).toHaveLength(5);
   });
 });

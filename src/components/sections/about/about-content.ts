@@ -46,22 +46,32 @@ export const ABOUT_JOURNEY = {
   steps: [
     {
       title: "KHỞI NGUỒN",
+      image: "/images/story/cong-lang-giang-xa.webp",
+      imageAlt: "Cổng làng Giang Xá trong ngày hội",
       description: "Từ làng Giang Xá, Hoài Đức – nơi lưu giữ nghề làm Bánh Bác truyền thống.",
     },
     {
       title: "KHÁM PHÁ",
+      image: "/images/products/banh-bac-cat-lat.webp",
+      imageAlt: "Bánh Bác cắt lát với lớp nếp đỏ và nhân đậu xanh",
       description: "Bắt đầu biết đến Bánh Bác – đặc sản mang đậm hồn quê Việt.",
     },
     {
       title: "GÌN GIỮ",
+      image: "/images/news/noi-dung-bao-16.webp",
+      imageAlt: "Đôi tay cuộn lớp bánh gấc đỏ phủ vừng trên lá xanh",
       description: "Bác Trà Ký ra đời với mong muốn gìn giữ và phát huy giá trị Bánh Bác Giang Xá.",
     },
     {
       title: "LAN TỎA",
+      image: "/images/products/hop-2-banh.webp",
+      imageAlt: "Hộp hai Bánh Bác của Bác Trà Ký",
       description: "Mang hương vị truyền thống đến gần hơn với mọi người qua những trải nghiệm hiện đại.",
     },
     {
       title: "VƯƠN XA",
+      image: "/images/products/bo-qua-banh-bac-tra-sen.webp",
+      imageAlt: "Bộ quà Bánh Bác và trà sen của Bác Trà Ký",
       description: "Tiếp tục lan tỏa giá trị Việt, để Bánh Bác và trà sen vươn xa hơn nữa, đến với nhiều thế hệ.",
     },
   ],
