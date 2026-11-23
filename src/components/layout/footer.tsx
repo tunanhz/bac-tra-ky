@@ -18,7 +18,7 @@ type SocialLinkProps = { href: string | null; label: string; tone: string; child
 const SOCIAL_TONES = {
   facebook: "bg-[#1877f2] text-white",
   gmail: "bg-white",
-  tiktok: "bg-[#010101] text-white [&_svg]:[filter:drop-shadow(-1.5px_-1px_0_#25f4ee)_drop-shadow(1.5px_1px_0_#fe2c55)]",
+  tiktok: "bg-[#010101] text-white",
 } as const;
 
 const FOOTER_LINKS = [

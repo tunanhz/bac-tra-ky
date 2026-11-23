@@ -266,15 +266,9 @@
   .btn-primary {
     background: var(--color-gac);
     color: var(--color-be);
-    box-shadow:
-      inset 0 0 0 3px var(--color-gac),
-      inset 0 0 0 4px rgb(253 247 229 / 0.55);
   }
   .btn-primary:hover:not(:disabled) {
     background: var(--color-gac-deep);
-    box-shadow:
-      inset 0 0 0 3px var(--color-gac-deep),
-      inset 0 0 0 4px var(--color-nhu);
   }
   /* Viền sáng — trên nền tối/ảnh */
   .btn-outline-light {

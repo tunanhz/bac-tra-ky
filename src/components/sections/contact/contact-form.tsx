@@ -254,7 +254,7 @@ export function ContactForm({
           type="submit"
           disabled={sending}
           aria-disabled={sending}
-          className={compact ? "w-full sm:w-auto" : undefined}
+          className={cn("border-transparent shadow-none hover:shadow-none", compact ? "w-full sm:w-auto" : undefined)}
         >
           {sending ? "Đang gửi…" : "Gửi liên hệ"}
         </Button>

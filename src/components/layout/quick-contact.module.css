@@ -1,3 +1,4 @@
+.phone, .facebook, .tiktok { will-change: transform; backface-visibility: hidden; }
 .phone { animation: phone-ring 7s ease-in-out infinite; transform-origin: center; }
 .facebook { animation: social-lift 8s ease-in-out 1s infinite; }
 .tiktok { animation: social-lift 8s ease-in-out 3s infinite; }

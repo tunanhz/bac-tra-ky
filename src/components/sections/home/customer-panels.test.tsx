@@ -92,11 +92,11 @@ describe("Canva bản 149 trang 1–3", () => {
 });
 
 describe("OfferWindow", () => {
-  it("không rút thời hạn nhiều ngày thành đồng hồ lặp 24 giờ", () => {
+  it("luôn hiển thị '00' ngày để tạo độ gấp theo yêu cầu, giờ phút giây đếm ngược", () => {
     const now = Date.parse("2026-11-23T00:00:00Z");
     render(<OfferWindow serverNow={now} endTime={now + (2 * 86400 + 3 * 3600 + 4 * 60 + 5) * 1000} expired={null}>{null}</OfferWindow>);
     const units = screen.getByRole("timer").querySelectorAll("dd");
-    expect(Array.from(units, (unit) => unit.textContent)).toEqual(["02", "03", "04", "05"]);
+    expect(Array.from(units, (unit) => unit.textContent)).toEqual(["00", "03", "04", "05"]);
   });
 
   it("hiện thời gian thực theo mốc hết hạn và gỡ CTA chương trình khi hết giờ", () => {

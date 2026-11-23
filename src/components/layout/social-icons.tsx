@@ -13,7 +13,7 @@ export function FacebookIcon(props: IconProps) {
 export function TikTokIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" {...props}>
-      <path d="M16 3c.3 2 1.6 3.6 3.6 3.9v2.6c-1.3 0-2.5-.4-3.6-1.1v5.9c0 3-2.2 5.2-5 5.2S6 17.3 6 14.5s2.5-5 5.3-4.9v2.7c-.3-.1-.6-.1-.9-.1-1.3 0-2.3 1-2.3 2.3s1 2.3 2.3 2.3 2.3-1 2.3-2.4V3H16z" />
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.29 0 .58.04.85.12V9.32a6.34 6.34 0 0 0-.85-.06A6.33 6.33 0 0 0 5 15.6a6.34 6.34 0 0 0 10.86 4.47 6.27 6.27 0 0 0 1.9-4.47V8.5a8.2 8.2 0 0 0 4.83 1.55v-3.36a4.85 4.85 0 0 1-3-.69z" />
     </svg>
   );
 }
