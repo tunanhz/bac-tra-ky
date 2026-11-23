@@ -1,0 +1,19 @@
+/* News-only treatment: keep other site buttons unchanged. */
+.readMore {
+  background: var(--color-gac);
+  color: var(--color-be);
+  border-color: var(--color-gac);
+  box-shadow: none;
+}
+.readMore:hover,
+.readMore:focus-visible,
+.readMore:active {
+  background: var(--color-be);
+  color: var(--color-gac);
+  border-color: var(--color-gac);
+  box-shadow: none;
+}
+.readMore:focus-visible {
+  outline: 2px solid var(--color-gac);
+  outline-offset: 4px;
+}

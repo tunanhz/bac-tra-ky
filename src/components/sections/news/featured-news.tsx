@@ -1,3 +1,4 @@
+import styles from "./news-button.module.css";
 import { Button } from "@/components/ui/button";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 import type { NewsPost } from "@/lib/types";
@@ -31,7 +32,7 @@ export function FeaturedNews({ post }: { post: NewsPost }) {
           {post.title}
         </h3>
         <p className="mt-0 mb-7 text-ink-soft">{post.excerpt}</p>
-        <Button href={newsHref(post.slug)} aria-label={`Đọc thêm: ${post.title}`}>
+        <Button className={styles.readMore} href={newsHref(post.slug)} aria-label={`Đọc thêm: ${post.title}`}>
           Đọc thêm
         </Button>
       </div>

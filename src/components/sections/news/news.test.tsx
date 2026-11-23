@@ -50,6 +50,8 @@ describe("NewsCard", () => {
     expect(screen.getByText("Hình ảnh từ Bác Trà Ký")).toBeInTheDocument();
     expect(screen.queryByText("Ảnh minh hoạ – sẽ thay ảnh thật")).not.toBeInTheDocument();
     expect(links[0]).toHaveAttribute("href", newsHref(post.slug));
+    expect(links[0]).toHaveClass("btn-primary");
+    expect(links[0].className).toMatch(/readMore/);
   });
 
   it("chỉ hiện nhãn 'Bản nháp' với dữ liệu nháp; không có chú thích thì không hiện nhãn ảnh mẫu", () => {

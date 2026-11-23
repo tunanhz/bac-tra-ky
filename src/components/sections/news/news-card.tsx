@@ -3,6 +3,7 @@ import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 import type { NewsPost } from "@/lib/types";
 import { cn } from "@/lib/cn";
 import { NewsMeta, newsHref } from "./news-meta";
+import styles from "./news-button.module.css";
 
 type NewsCardProps = {
   post: NewsPost;
@@ -47,9 +48,9 @@ export function NewsCard({ post, className }: NewsCardProps) {
         <p className="mt-0 mb-4 text-[0.95rem] text-ink-soft">{post.excerpt}</p>
         <Button
           href={newsHref(post.slug)}
-          variant="outline"
+          variant="primary"
           aria-label={`Đọc thêm: ${post.title}`}
-          className="mt-auto w-fit"
+          className={cn("mt-auto w-fit", styles.readMore)}
         >
           Đọc thêm <span aria-hidden="true">→</span>
         </Button>
