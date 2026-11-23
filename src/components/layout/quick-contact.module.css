@@ -1,0 +1,15 @@
+.phone { animation: phone-ring 7s ease-in-out infinite; transform-origin: center; }
+.facebook { animation: social-lift 8s ease-in-out 1s infinite; }
+.tiktok { animation: social-lift 8s ease-in-out 3s infinite; }
+@keyframes phone-ring {
+  0%, 4%, 12%, 100% { transform: rotate(0); }
+  5%, 9% { transform: rotate(-12deg); }
+  7%, 11% { transform: rotate(12deg); }
+}
+@keyframes social-lift {
+  0%, 8%, 20%, 100% { transform: translateY(0) scale(1); }
+  14% { transform: translateY(-2px) scale(1.06); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phone, .facebook, .tiktok { animation: none; }
+}

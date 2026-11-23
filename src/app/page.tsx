@@ -5,11 +5,11 @@ import { Hero } from "@/components/sections/home/hero";
 import { NewsSection } from "@/components/sections/news/news-section";
 import { ProductsSection } from "@/components/sections/products/products-section";
 import { StorySection } from "@/components/sections/story/story-section";
-import { getNewsPosts } from "@/lib/news";
+import { getHomepageNewsPosts } from "@/lib/news";
 import { getProducts } from "@/lib/products";
 
 export default async function HomePage() {
-  const [products, posts] = await Promise.all([getProducts(), getNewsPosts()]);
+  const [products, posts] = await Promise.all([getProducts(), getHomepageNewsPosts()]);
 
   return (
     <>

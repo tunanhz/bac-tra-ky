@@ -48,7 +48,7 @@ describe("StorySection", () => {
     expect(screen.getAllByRole("link", { name: /Xem video về Giang Xá/ })).toHaveLength(1);
   });
 
-  it("dùng bốn ảnh AI theo đúng thứ tự mẫu Bỏ (12), giữ chữ riêng trong bố cục 2×2", () => {
+  it("giữ bốn ảnh đã duyệt, ưu tiên chữ riêng trước ảnh nhỏ trong từng công đoạn", () => {
     render(<StorySection />);
     const craft = within(screen.getByRole("region", { name: /Bí quyết làm nên hương vị Bánh Bác/ }));
     const list = craft.getByRole("list");
@@ -57,12 +57,16 @@ describe("StorySection", () => {
     expect(steps).toHaveLength(4);
     const expectedAssets = ["craft-ingredients.webp", "craft-kneading.webp", "craft-cooking.webp", "craft-finished.webp"];
     steps.forEach((step, i) => {
-      expect(step.firstElementChild?.tagName).toBe("FIGURE");
+      expect(step.firstElementChild).toHaveClass(styles.craftStepCopy);
       const image = within(step).getByRole("img");
       expect(image).toHaveAttribute("src", expect.stringContaining(expectedAssets[i]));
-      expect(image).toHaveAttribute("sizes", "(min-width: 640px) 48vw, 96vw");
+      expect(image).toHaveAttribute("sizes", "(min-width: 1280px) 16rem, (min-width: 640px) 13rem, 12rem");
       expect(image).toHaveAttribute("width", "694");
-      expect(within(step).getByRole("heading", { level: 4 }).parentElement).toHaveClass(styles.craftStepCopy);
+      const copy = within(step).getByRole("heading", { level: 4 }).parentElement;
+      expect(copy).toHaveClass(styles.craftStepCopy);
+      expect(copy?.nextElementSibling?.tagName).toBe("FIGURE");
+      expect(within(copy as HTMLElement).getByText(CRAFT_STEPS[i].text)).toBeInTheDocument();
+      expect(copy).not.toContainElement(image);
       expect(within(step).getByText("Công đoạn 0" + (i + 1))).toBeInTheDocument();
     });
     const header = list.previousElementSibling;

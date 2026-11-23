@@ -1,0 +1,31 @@
+.offer {
+  background: radial-gradient(ellipse at 28% 35%, #76010d 0%, #450208 90%);
+  border-block: 1px solid #ba6e26;
+}
+.offer::before, .offer::after, .feedback::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  height: clamp(12px, 2vw, 28px);
+  pointer-events: none;
+  background: url('/images/revisions/feedback-home-border-top.png') repeat-x center / auto 100%;
+}
+.offer::before, .feedback::before { top: 0; }
+.offer::after { bottom: 0; background-image: url('/images/revisions/feedback-home-border-bottom.png'); }
+.offerScenery { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.offerVillage { object-fit: contain; object-position: left bottom; opacity: .32; padding-right: 45%; }
+.offerGift { object-fit: contain; object-position: right bottom; opacity: .28; padding-left: 48%; }
+.cake { position: relative; width: min(100%, 380px); aspect-ratio: 1.5; margin-top: 1.25rem; align-self: flex-start; }
+.discount { transform-origin: left center; animation: discount-breathe 3.6s ease-in-out infinite; }
+.feedback { background: #fce8d3; }
+.feedbackScenery { position: absolute; right: 0; bottom: 0; width: min(65%, 850px); height: 85%; opacity: .45; z-index: -1; pointer-events: none; }
+@keyframes discount-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+@media (max-width: 1023px) {
+ .discount { transform-origin: center; }
+ .cake { align-self: flex-start; width: min(80%, 320px); }
+ .offerGift { opacity: .12; }
+ .feedbackScenery { width: 95%; opacity: .22; }
+}
+@media (prefers-reduced-motion: reduce) { .discount { animation: none; } }

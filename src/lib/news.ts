@@ -1,3 +1,4 @@
+import { customerNewsPosts } from "@/data/customer-news";
 import { newsPosts } from "@/data/news";
 import type { NewsPost } from "@/lib/types";
 
@@ -28,6 +29,12 @@ export async function getNewsPosts(): Promise<NewsPost[]> {
         a.index - b.index,
     )
     .map(({ post }) => clone(post));
+}
+
+/** Trang chủ chỉ hiển thị 9 bài từ tài liệu khách; giữ bài cũ và URL trong kho tin. */
+export async function getHomepageNewsPosts(): Promise<NewsPost[]> {
+  const approvedSlugs = new Set(customerNewsPosts.map((post) => post.slug));
+  return (await getNewsPosts()).filter((post) => approvedSlugs.has(post.slug));
 }
 
 export async function getNewsPostBySlug(slug: string): Promise<NewsPost | null> {

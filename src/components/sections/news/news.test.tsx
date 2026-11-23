@@ -1,14 +1,15 @@
 // @vitest-environment jsdom
 import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { getNewsPosts } from "@/lib/news";
+import { getHomepageNewsPosts, getNewsPosts } from "@/lib/news";
 import type { NewsPost } from "@/lib/types";
-import { arrangeNews, NewsBoard } from "./news-board";
+import { NewsBoard } from "./news-board";
 import { NewsCard } from "./news-card";
 import { DRAFT_LABEL, formatNewsDate, newsHref } from "./news-meta";
 import { NewsSection } from "./news-section";
 
 const posts = await getNewsPosts();
+const homepagePosts = await getHomepageNewsPosts();
 const originalCakePost = posts.find((post) => post.slug === "banh-bac-giang-xa-sac-do-gac-huong-vung-rang")!;
 
 function gridTitles() {
@@ -27,12 +28,6 @@ describe("news helpers", () => {
     expect(newsHref("abc")).toBe("/tin-tuc/abc");
   });
 
-  it("arrangeNews: tách bài nổi bật và lưới bài viết", () => {
-    const all = arrangeNews(posts);
-    expect(all.featured?.featured).toBe(true);
-    expect(all.grid).toHaveLength(posts.length - 1);
-    expect(all.grid).not.toContain(all.featured);
-  });
 });
 
 describe("NewsCard", () => {
@@ -71,17 +66,23 @@ describe("NewsCard", () => {
 });
 
 describe("NewsSection / NewsBoard", () => {
-  it("id tin-tuc, tiêu đề 'Tin tức', bài nổi bật + lưới trượt ngang 14 card chính thức", () => {
-    const { container } = render(<NewsSection posts={posts} />);
+  it("giữ Tin tức và 9 bài khách cung cấp, bỏ khối nổi bật và nhóm 6 bài cũ", () => {
+    const { container } = render(<NewsSection posts={homepagePosts} />);
     expect(container.querySelector("section#tin-tuc")).not.toBeNull();
     expect(screen.getByRole("heading", { level: 2, name: "Tin tức" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: posts[0].title })).toBeInTheDocument();
-    expect(screen.queryByText("Bài nổi bật")).not.toBeInTheDocument();
-    expect(screen.getByRole("img", { name: posts[0].coverImageAlt })).toBeInTheDocument();
-    expect(within(screen.getByRole("heading", { name: posts[0].title }).closest("article")!).getByText("Ấn phẩm Bác Trà Ký")).toBeInTheDocument();
-    expect(gridTitles()).toHaveLength(14);
+    expect(gridTitles()).toEqual(homepagePosts.map((post) => post.title));
+    expect(gridTitles()).toHaveLength(9);
+    for (const post of posts.filter((post) => !homepagePosts.some((home) => home.slug === post.slug))) {
+      expect(screen.queryByRole("heading", { name: post.title })).not.toBeInTheDocument();
+    }
+    expect(container.querySelector("article.grid")).toBeNull();
     expect(screen.queryByText(DRAFT_LABEL)).not.toBeInTheDocument();
     expect(container.querySelectorAll("time")).toHaveLength(0);
+  });
+
+  it("không tự tách mất bài đầu tiên khi không dùng khối nổi bật", () => {
+    render(<NewsBoard posts={homepagePosts.slice(0, 1)} />);
+    expect(gridTitles()).toEqual([homepagePosts[0].title]);
   });
 
   it("không có bài → trạng thái rỗng", () => {

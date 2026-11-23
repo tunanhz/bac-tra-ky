@@ -8,8 +8,8 @@ export type NewsSectionProps = {
 };
 
 /**
- * Tin tức (id `tin-tuc`) — theo Slide 14:
- * Bỏ bộ lọc chủ đề, tin tức trượt sang ngang, nền làng quê hoa sen.
+ * Tin tức (id `tin-tuc`): giữ 9 bài từ tài liệu khách và thanh cuộn ngang.
+ * Feedback slide 9 bỏ khối nổi bật/nhóm bài cũ, không bỏ cả mục Tin tức.
  */
 export function NewsSection({ posts }: NewsSectionProps) {
   return (

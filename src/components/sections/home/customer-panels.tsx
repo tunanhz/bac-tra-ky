@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import styles from "./customer-scenes.module.css";
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site";
 import {
@@ -40,7 +42,7 @@ function ReviewSlider({ reviews }: { reviews: readonly CustomerReview[] }) {
 
   // Tự động chuyển sau 6 giây, tạm dừng khi người dùng rê chuột vào đọc
   useEffect(() => {
-    if (totalPages <= 1 || isPaused) return;
+    if (totalPages <= 1 || isPaused || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
     const timer = setInterval(() => {
       setCurrent((c) => (c + 1) % totalPages);
     }, 6000);
@@ -54,6 +56,8 @@ function ReviewSlider({ reviews }: { reviews: readonly CustomerReview[] }) {
       className="space-y-6"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onFocusCapture={() => setIsPaused(true)}
+      onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false); }}
     >
       {/* Slider Viewport */}
       <div className="relative overflow-hidden">
@@ -87,7 +91,7 @@ function ReviewSlider({ reviews }: { reviews: readonly CustomerReview[] }) {
                         </div>
                       </div>
 
-                      <blockquote className="mt-4 mb-0 border-t border-nhu/25 pt-4 font-body text-sm leading-relaxed text-be/95 italic sm:text-base">
+                      <blockquote className="mt-4 mb-0 border-t border-nhu/25 pt-4 font-body text-base leading-relaxed text-be/95 italic">
                         “{review.quote}”
                       </blockquote>
                     </div>
@@ -147,42 +151,47 @@ function FeedbackSection({ reviews }: { reviews: readonly CustomerReview[] }) {
   const published = reviews.filter((review) => review.status === "published");
 
   return (
-    <section id="goc-feedback" aria-labelledby="feedback-title" className="mx-auto w-full max-w-6xl min-w-0 scroll-mt-24">
-      {/* Slide 15: Tiêu đề theo concept ĐÁNH GIÁ CỦA KHÁCH HÀNG */}
-      <div className="mb-8 text-center sm:mb-10">
-        <span className="text-xs font-bold tracking-widest text-dong uppercase">
-          Chia sẻ từ người thưởng thức
-        </span>
-        <h2 id="feedback-title" className="mt-2 mb-3 font-display text-3xl font-bold tracking-tight text-gac sm:text-4xl lg:text-5xl">
-          ĐÁNH GIÁ CỦA KHÁCH HÀNG
-        </h2>
-        <p className="mx-auto max-w-[50ch] text-sm tracking-wider text-ink-soft uppercase sm:text-base">
-          Những khách hàng đã trải nghiệm hương vị nói gì về sản phẩm
-        </p>
+    <section id="goc-feedback" aria-labelledby="feedback-title" className={`section-y relative isolate w-full min-w-0 scroll-mt-24 overflow-hidden ${styles.feedback}`}>
+      <div aria-hidden="true" className={styles.feedbackScenery}>
+        <Image src="/images/revisions/feedback-home-gate.png" alt="" fill sizes="(min-width: 1024px) 50vw, 90vw" className="object-contain object-right-bottom" />
       </div>
+      <div className="wrap relative z-10"><div className="mx-auto w-full max-w-6xl min-w-0">
+          {/* Canva bản 149: Tiêu đề theo concept ĐÁNH GIÁ CỦA KHÁCH HÀNG */}
+          <div className="mb-8 text-center sm:mb-10">
+            <span className="text-xs font-bold tracking-widest text-dong uppercase">
+              Chia sẻ từ người thưởng thức
+            </span>
+            <h2 id="feedback-title" className="mt-2 mb-3 font-display text-h2 font-bold tracking-tight text-gac">
+              ĐÁNH GIÁ CỦA KHÁCH HÀNG
+            </h2>
+            <p className="mx-auto max-w-[50ch] text-base text-ink-soft">
+              Những khách hàng đã trải nghiệm hương vị nói gì về sản phẩm
+            </p>
+          </div>
 
-      {/* Review Slider */}
-      {published.length > 0 ? <ReviewSlider reviews={published} /> : null}
+          {/* Review Slider */}
+          {published.length > 0 ? <ReviewSlider reviews={published} /> : null}
 
-      {/* Toggle gửi góp ý */}
-      <div className="mt-10 text-center">
-        <button
-          type="button"
-          onClick={() => setShowForm((v) => !v)}
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-gac bg-gac px-8 py-3.5 font-body text-sm font-bold text-be shadow-md transition-all duration-300 hover:border-gac-deep hover:bg-gac-deep hover:shadow-lg sm:text-base"
-        >
-          {showForm ? "Đóng form cảm nhận" : "Gửi cảm nhận của bạn"} <span aria-hidden="true">✉</span>
-        </button>
-      </div>
+          {/* Toggle gửi góp ý */}
+          <div className="mt-10 text-center">
+            <button
+              type="button"
+              onClick={() => setShowForm((v) => !v)}
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-gac bg-gac px-8 py-3.5 font-body text-sm font-bold text-be shadow-md transition-all duration-300 hover:border-gac-deep hover:bg-gac-deep hover:shadow-lg sm:text-base"
+            >
+              {showForm ? "Đóng form cảm nhận" : "Gửi cảm nhận của bạn"} <span aria-hidden="true">✉</span>
+            </button>
+          </div>
 
-      {showForm && email && (
-        <div className="mt-6 rounded-3xl bg-paper p-6 shadow-lg sm:p-9">
-          <p className="mt-0 mb-5 text-center text-ink-soft">
-            Bánh Bác có hợp khẩu vị của bạn không? Kể cho chúng mình điều bạn thích hoặc điều bạn muốn Bác Trà Ký làm tốt hơn.
-          </p>
-          <CustomerFeedbackForm email={email} />
-        </div>
-      )}
+          {showForm && email && (
+            <div className="mt-6 rounded-3xl bg-paper p-6 shadow-lg sm:p-9">
+              <p className="mt-0 mb-5 text-center text-ink-soft">
+                Bánh Bác có hợp khẩu vị của bạn không? Kể cho chúng mình điều bạn thích hoặc điều bạn muốn Bác Trà Ký làm tốt hơn.
+              </p>
+              <CustomerFeedbackForm email={email} />
+            </div>
+          )}
+      </div></div>
     </section>
   );
 }
@@ -192,10 +201,8 @@ export function CustomerPanels({
   offer = customerOffer,
 }: { reviews?: readonly CustomerReview[]; offer?: CustomerOffer | null } = {}) {
   return (
-    <div data-customer-panels className="space-y-16 pt-12 md:pt-[72px] lg:space-y-24 lg:pt-24">
-      <div className="wrap">
-        <FeedbackSection reviews={reviews} />
-      </div>
+    <div data-customer-panels className="min-w-0">
+      <FeedbackSection reviews={reviews} />
       <div className="w-full">
         <OfferSection offer={offer} />
       </div>

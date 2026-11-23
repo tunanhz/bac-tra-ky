@@ -63,7 +63,7 @@ describe("OfferSection", () => {
   });
 });
 
-describe("Canva trang 7–8", () => {
+describe("Canva bản 149 trang 1–3", () => {
   it("dùng ảnh nền gốc đầy đủ chiều ngang và chữ giảm giá nổi bật, không giới hạn khung desktop hẹp", () => {
     const { container } = render(<OfferCampaign
       offer={{ ...draftOffer, status: "published" }}
@@ -73,8 +73,9 @@ describe("Canva trang 7–8", () => {
     ><p>Form liên hệ</p></OfferCampaign>);
     const section = screen.getByRole("region", { name: "Ưu đãi đặc biệt" });
     const background = section.querySelector("img");
-    expect(background).toHaveAttribute("src", expect.stringContaining("nen-uu-dai-clean.webp"));
-    expect(section.querySelectorAll('img[src*="uu-dai-dac-biet.png"]')).toHaveLength(2);
+    expect(background).toHaveAttribute("src", expect.stringContaining("feedback-home-village-gold.png"));
+    expect(section.querySelectorAll('img[src*="uu-dai-dac-biet"]')).toHaveLength(0);
+    expect(section.querySelectorAll('img[src*="feedback-home-gift.png"]')).toHaveLength(2);
     expect(background).toHaveAttribute("alt", "");
     expect(screen.getByText("10%")).toHaveClass("text-6xl", "lg:text-8xl");
     expect(container.querySelector("[data-offer-center]")).toHaveClass("lg:max-w-none");
@@ -84,12 +85,20 @@ describe("Canva trang 7–8", () => {
     const { container } = render(<CustomerPanels reviews={[]} offer={null} />);
     const wrapper = container.querySelector("[data-customer-panels]");
     expect(wrapper).not.toHaveClass("section-y");
-    expect(wrapper).toHaveClass("pt-12");
+    expect(wrapper).not.toHaveClass("pt-12");
+    expect(screen.getByRole("region", { name: /ĐÁNH GIÁ/ })).toHaveClass("section-y");
     expect(wrapper?.lastElementChild?.querySelector("#uu-dai")).toBeInTheDocument();
   });
 });
 
 describe("OfferWindow", () => {
+  it("không rút thời hạn nhiều ngày thành đồng hồ lặp 24 giờ", () => {
+    const now = Date.parse("2026-11-23T00:00:00Z");
+    render(<OfferWindow serverNow={now} endTime={now + (2 * 86400 + 3 * 3600 + 4 * 60 + 5) * 1000} expired={null}>{null}</OfferWindow>);
+    const units = screen.getByRole("timer").querySelectorAll("dd");
+    expect(Array.from(units, (unit) => unit.textContent)).toEqual(["02", "03", "04", "05"]);
+  });
+
   it("hiện thời gian thực theo mốc hết hạn và gỡ CTA chương trình khi hết giờ", () => {
     vi.useFakeTimers({ toFake: ["setInterval", "clearInterval", "performance"] });
     try {

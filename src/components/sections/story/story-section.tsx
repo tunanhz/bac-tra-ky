@@ -26,26 +26,26 @@ function CraftSection() {
         </div>
       </header>
 
-      {/* Ảnh khách xác nhận: cổng làng trên phải, bốn khung 2×2 bên dưới. */}
+      {/* Canva hiện tại, trang 7: chữ riêng dễ đọc, ảnh minh họa nhỏ; giữ lưới 2×2. */}
       <ol role="list" className={styles.craftGrid}>
         {CRAFT_STEPS.map((step, i) => (
           <li key={step.title} className={styles.craftStep}>
+            <div className={styles.craftStepCopy}>
+              <span className={styles.craftStepNumber}>Công đoạn 0{i + 1}</span>
+              <h4>{step.title}</h4>
+              <p>{step.text}</p>
+            </div>
             <figure className={styles.craftFigure}>
               <Image
                 src={step.src}
                 alt={step.alt}
                 width={694}
                 height={i < 2 ? 320 : 344}
-                sizes="(min-width: 640px) 48vw, 96vw"
+                sizes="(min-width: 1280px) 16rem, (min-width: 640px) 13rem, 12rem"
                 className={styles.craftStepArtwork}
               />
               <figcaption className="sr-only">{step.caption}</figcaption>
             </figure>
-            <div className={styles.craftStepCopy}>
-              <span className={styles.craftStepNumber}>Công đoạn 0{i + 1}</span>
-              <h4>{step.title}</h4>
-              <p>{step.text}</p>
-            </div>
           </li>
         ))}
       </ol>
@@ -53,7 +53,7 @@ function CraftSection() {
       <div className={styles.craftClosing}>
         <a
           href={sectionHref("san-pham")}
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gac px-8 py-3 font-body text-base font-bold text-be transition-colors hover:bg-gac-deep"
+          className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gac px-8 py-3 font-body font-bold text-be transition-colors hover:bg-gac-deep ${styles.craftProductLink}`}
         >
           Khám phá sản phẩm <span aria-hidden="true">→</span>
         </a>

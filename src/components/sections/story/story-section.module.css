@@ -129,57 +129,121 @@
   }
 
 }
-/* Bỏ (12).png: cổng làng trên phải, bốn khung 2×2 với chữ trên nền trống. */
+/* Canva hiện tại, trang 7: chữ không còn đè lên vùng trống của ảnh. */
 .craftSection {
+  --craft-spacing: 1.5rem;
+  --craft-image-width: 12rem;
+  --craft-motion-duration: 240ms;
   position: relative;
   overflow: hidden;
   scroll-margin-top: 6rem;
   background: #fce6d3;
+  font-family: var(--font-body);
 }
+
 .craftHeader { position: relative; }
 .craftHeaderArtwork { display: block; width: 100%; height: auto; }
-.craftIntro { padding: 1.5rem 1.25rem 2rem; }
-.craftTitle { margin: 0 0 1rem; color: var(--color-gac); font-size: clamp(1.8rem, 3.3vw, 3.5rem); line-height: 1.17; }
-.craftIntro p { max-width: 44ch; margin: 0; color: var(--color-ink-soft); font-size: 1rem; line-height: 1.6; }
+.craftIntro { padding: var(--craft-spacing) 1.25rem 2rem; }
+.craftTitle {
+  margin: 0 0 1rem;
+  color: var(--color-gac);
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  line-height: var(--text-h2--line-height);
+  text-wrap: balance;
+}
+.craftIntro p {
+  max-width: 44ch;
+  margin: 0;
+  color: var(--color-ink-soft);
+  font-size: var(--text-body, 1rem);
+  line-height: 1.7;
+}
 .craftGrid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 1.25rem;
+  gap: var(--craft-spacing);
+  box-sizing: border-box;
   width: 100%;
   margin: 0;
-  padding: 0 1.65%;
+  padding: 0 clamp(1.25rem, 3.3vw, 4rem);
   list-style: none;
 }
-.craftStep { position: relative; min-width: 0; }
-.craftFigure { margin: 0; }
+.craftStep {
+  display: grid;
+  align-content: start;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+  padding-block: var(--craft-spacing);
+  border-block-end: 1px solid var(--color-line);
+}
+.craftStepCopy { min-width: 0; }
+.craftStepNumber {
+  color: var(--color-gac);
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.craftStepCopy h4 {
+  margin: .5rem 0 .75rem;
+  color: var(--color-son);
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  line-height: var(--text-h3--line-height);
+  text-wrap: pretty;
+}
+.craftStepCopy p {
+  max-width: 54ch;
+  margin: 0;
+  color: var(--color-ink);
+  font-size: var(--text-body, 1rem);
+  line-height: 1.7;
+}
+.craftFigure {
+  justify-self: end;
+  overflow: hidden;
+  width: min(100%, var(--craft-image-width));
+  margin: 0;
+}
 .craftStepArtwork { display: block; width: 100%; height: auto; }
-.craftStepCopy { padding: .75rem 1rem 1rem; }
-.craftStepNumber { color: var(--color-gac); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-.craftStepCopy h4 { margin: .35rem 0 .65rem; color: var(--color-son); font-size: 1.25rem; line-height: 1.25; }
-.craftStepCopy p { margin: 0; color: var(--color-ink); font-size: .95rem; line-height: 1.5; }
 .craftClosing {
   padding: 1.75rem 1.25rem 3rem;
   text-align: center;
   background: url('/images/revisions/craft-cloud-footer.webp') bottom center / 100% auto no-repeat;
 }
+.craftProductLink {
+  font-family: var(--font-body);
+  font-size: var(--text-button, 1rem);
+}
+
 @media (min-width: 640px) {
-  .craftGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.5rem, .83vw, 1rem); }
+  .craftSection { --craft-image-width: 13rem; }
+  .craftGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (min-width: 1024px) {
-  .craftIntro { position: absolute; inset: 0 auto 0 0; display: flex; flex-direction: column; justify-content: center; width: 49%; padding: 2rem 3.3%; }
-  .craftIntro p { font-size: clamp(.85rem, 1.2vw, 1.2rem); }
-  .craftStepCopy { position: absolute; inset: 0 auto 0 0; display: flex; flex-direction: column; justify-content: center; width: 34%; padding: .7rem 3.8%; }
-  .craftStepNumber { font-size: clamp(.58rem, .75vw, .75rem); letter-spacing: .04em; }
-  .craftStepCopy h4 { font-size: clamp(.95rem, 1.42vw, 1.5rem); margin-block: .3rem .55rem; }
-  .craftStepCopy p { font-size: clamp(.72rem, .96vw, 1rem); line-height: 1.45; }
-}
-@media (min-width: 1024px) {
-  .craftStepCopy { isolation: isolate; }
-  .craftStepCopy::before {
-    content: "";
+  .craftIntro {
     position: absolute;
-    z-index: -1;
-    inset: 8px -1rem 8px 9px;
-    background: linear-gradient(to right, #fce6d3 0%, rgb(252 230 211 / 95%) 72%, transparent 100%);
+    inset: 0 auto 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 49%;
+    padding: 2rem 3.3%;
   }
+}
+@media (min-width: 1280px) {
+  .craftSection { --craft-image-width: 16rem; }
+  .craftStep { grid-template-columns: minmax(0, 1fr) minmax(0, .65fr); gap: var(--craft-spacing); }
+}
+/* Chuyển động chỉ phục vụ phản hồi hover, không ẩn chữ/ảnh khi không có JS. */
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .craftFigure { transition: transform var(--craft-motion-duration) var(--ease-son); }
+  .craftStepArtwork { transition: transform var(--craft-motion-duration) var(--ease-son); }
+  .craftStep:hover .craftFigure { transform: translateY(-.125rem); }
+  .craftStep:hover .craftStepArtwork { transform: scale(1.025); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .craftFigure, .craftStepArtwork { animation: none; transition: none; transform: none; }
 }

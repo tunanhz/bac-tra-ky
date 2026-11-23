@@ -2,7 +2,7 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { NEWS_CATEGORIES, NEWS_CATEGORY_LABELS, newsPosts } from "@/data/news";
-import { getNewsPostBySlug, getNewsPosts, getRelatedNewsPosts } from "./news";
+import { getHomepageNewsPosts, getNewsPostBySlug, getNewsPosts, getRelatedNewsPosts } from "./news";
 
 describe("dữ liệu tin tức tĩnh", () => {
   it("có 15 bài, slug không trùng, là bài viết chính thức đã hoàn thiện", () => {
@@ -37,6 +37,20 @@ describe("dữ liệu tin tức tĩnh", () => {
 });
 
 describe("lib/news", () => {
+  it("trang chủ giữ đúng 9 bài từ tài liệu khách, không xoá 6 bài cũ hay URL của chúng", async () => {
+    const { customerNewsPosts } = await import("@/data/customer-news");
+    const homepagePosts = await getHomepageNewsPosts();
+    expect(homepagePosts).toHaveLength(9);
+    expect(new Set(homepagePosts.map((post) => post.slug))).toEqual(new Set(customerNewsPosts.map((post) => post.slug)));
+    expect(homepagePosts.some((post) => post.featured)).toBe(false);
+    const allPosts = await getNewsPosts();
+    expect(allPosts).toHaveLength(15);
+    for (const post of allPosts.filter((post) => !homepagePosts.some((home) => home.slug === post.slug))) {
+      expect(await getNewsPostBySlug(post.slug)).not.toBeNull();
+    }
+    homepagePosts[0].content.push("kiểm tra bản sao");
+    expect((await getHomepageNewsPosts())[0].content).not.toContain("kiểm tra bản sao");
+  });
   it("getNewsPosts đưa bài nổi bật lên đầu", async () => {
     const posts = await getNewsPosts();
     expect(posts).toHaveLength(15);

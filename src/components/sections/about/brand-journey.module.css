@@ -1,18 +1,46 @@
-.list {
-  list-style: none;
-  max-width: 64rem;
-  margin: 0 auto;
-  padding: 0;
-}
-.step {
+.section {
   position: relative;
-  padding: 0 0 2rem 3.75rem;
+  isolation: isolate;
+  overflow: clip;
+  background: var(--color-be);
+  padding-block: clamp(3rem, 5vw, 5rem) clamp(10rem, 24vw, 20rem);
+  border-bottom: 1px solid var(--color-line);
 }
+/* Clean source layers from Canva page 6; the tea tray is media MAHbvJJKB88. */
+.topBorder, .teaTray { position: absolute; pointer-events: none; user-select: none; }
+.topBorder { inset: 0 0 auto; width: 100%; height: auto; }
+.teaTray {
+  bottom: -1rem;
+  left: clamp(-9.75rem, -10vw, -2rem);
+  width: clamp(18rem, 44vw, 42.8125rem);
+  height: auto;
+}
+.content {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 2.5rem, 88rem);
+  margin-inline: auto;
+}
+.intro {
+  max-width: 52rem;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+.description {
+  margin: 0 auto;
+  max-width: 52ch;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-ink-soft);
+}
+.list { list-style: none; margin: 0; padding: 0; }
+.step { position: relative; min-width: 0; padding: 0 0 1.5rem 3.5rem; }
 .step::before {
   content: "";
   position: absolute;
-  left: 1.375rem;
-  top: 2.75rem;
+  left: 1.25rem;
+  top: 2.5rem;
   bottom: 0;
   width: 1px;
   background: var(--color-line);
@@ -27,13 +55,13 @@
   left: 0;
   display: grid;
   place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border: 1px solid var(--color-line);
   border-radius: 50%;
   background: var(--color-paper);
   color: var(--color-gac);
-  font-family: var(--font-heading);
+  font-family: var(--font-display);
   font-variant-numeric: tabular-nums;
   transition: background 300ms var(--ease-son), color 300ms var(--ease-son);
 }
@@ -44,28 +72,44 @@
   border-color: var(--color-gac);
 }
 .card {
+  height: 100%;
   overflow: hidden;
   border: 1px solid var(--color-line);
   border-radius: 1rem;
+  background: var(--color-paper);
   transition: border-color 300ms var(--ease-son), box-shadow 300ms var(--ease-son);
 }
-.step[data-active="true"] .card {
-  border-color: var(--color-gac);
-  box-shadow: var(--shadow-card);
-}
+.step[data-active="true"] .card { border-color: var(--color-gac); box-shadow: var(--shadow-card); }
 .image {
   position: relative;
   aspect-ratio: 3 / 2;
   overflow: hidden;
   background: var(--color-be);
 }
-.copy { padding: 1.5rem; }
-@media (min-width: 768px) {
-  .step { padding-bottom: 3rem; }
-  .card { display: grid; grid-template-columns: 1fr 1fr; align-items: center; }
+.copy { padding: 1rem; }
+.title {
+  margin: 0 0 .75rem;
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  line-height: var(--text-h3--line-height, 1.2);
+  color: var(--color-son);
+}
+.body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-ink-soft);
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .list { max-width: 46rem; margin-inline: auto; }
+  .card { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); align-items: center; }
+}
+@media (min-width: 1024px) {
+  .list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1rem; align-items: stretch; }
+  .step, .step:last-child { padding: 3.5rem 0 0; }
+  .step::before { left: 2.5rem; top: 1.25rem; bottom: auto; width: calc(100% + 1rem - 2.5rem); height: 1px; }
   .image { aspect-ratio: 4 / 3; }
-  .copy { padding: 2rem; }
-  .step:nth-child(even) .image { order: 2; }
 }
 @media (prefers-reduced-motion: reduce) {
   .step::before, .marker, .card { transition: none; }

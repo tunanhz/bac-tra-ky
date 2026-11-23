@@ -75,16 +75,15 @@ function OfferStandby() {
   );
 }
 
-const DEFAULT_NOW = 1794907884000;
-
 export function OfferSection({ offer }: { offer: CustomerOffer | null }) {
-  const [now, setNow] = useState(DEFAULT_NOW);
+  const [now, setNow] = useState<number | null>(null);
 
   useEffect(() => {
-    setNow(Date.now());
+    const frame = requestAnimationFrame(() => setNow(Date.now()));
+    return () => cancelAnimationFrame(frame);
   }, []);
 
-  if (offer?.status !== "published") return <OfferStandby />;
+  if (now === null || offer?.status !== "published") return <OfferStandby />;
 
   const active = getActiveOffer(offer, now);
   if (!active) return <OfferStandby />;

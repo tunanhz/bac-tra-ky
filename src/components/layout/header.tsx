@@ -181,7 +181,7 @@ export function Header() {
                     onClick={closeMenu}
                     aria-current={active ? "location" : undefined}
                     className={cn(
-                      "flex min-h-12 items-center border-b border-nhu/15 text-base tracking-wide no-underline transition-colors duration-300 lg:text-[0.76rem] lg:tracking-[0.16em] lg:uppercase",
+                      "flex min-h-12 items-center border-b border-nhu/15 text-base tracking-wide no-underline transition-colors duration-300 lg:text-sm lg:tracking-[0.16em] lg:uppercase",
                       "lg:min-h-11 lg:border-0",
                       solid
                         ? active ? "text-nhu" : "text-be hover:text-nhu"

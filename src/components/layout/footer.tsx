@@ -9,7 +9,7 @@ function Pending() {
 }
 
 function ColumnTitle({ children }: { children: ReactNode }) {
-  return <h2 className="mb-3.5 font-display text-base font-bold lg:text-[0.72rem] tracking-[0.24em] text-nhu uppercase">{children}</h2>;
+  return <h2 className="mb-3.5 font-display text-base font-bold tracking-[0.24em] text-nhu uppercase">{children}</h2>;
 }
 
 type SocialLinkProps = { href: string | null; label: string; tone: string; children: ReactNode };

@@ -38,12 +38,12 @@
   --font-serif: var(--font-caudex), "Caudex", "Times New Roman", Times, serif;
 
   /* Thang chữ (mobile → desktop qua clamp) */
-  --text-eyebrow: 0.72rem;
+  --text-eyebrow: 0.75rem;
   --text-eyebrow--letter-spacing: 0.28em;
   --text-eyebrow--line-height: 1.4;
-  --text-caption: 0.78rem;
+  --text-caption: 0.8125rem;
   --text-caption--line-height: 1.4;
-  --text-h3: clamp(1.25rem, 1.1rem + 0.5vw, 1.375rem);
+  --text-h3: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
   --text-h3--line-height: 1.2;
   --text-h2: clamp(1.9rem, 1.2rem + 2.6vw, 2.9rem);
   --text-h2--line-height: 1.1;
@@ -427,4 +427,11 @@
   body:has(input:focus, textarea:focus, select:focus) .quick-contact {
     visibility: hidden;
   }
+}
+
+/* Semantic defaults must not override explicit section/card typography utilities. */
+@layer base {
+  main :where(h1):not(.home-hero__title) { font-size: var(--text-h1); line-height: var(--text-h1--line-height); }
+  main :where(h2) { font-size: var(--text-h2); line-height: var(--text-h2--line-height); }
+  main :where(h3) { font-size: var(--text-h3); line-height: var(--text-h3--line-height); }
 }

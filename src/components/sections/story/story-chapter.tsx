@@ -93,7 +93,7 @@ export function StoryChapter({
             <div className="min-w-0 md:col-span-7 lg:col-span-7">
               <h3
                 id={titleId}
-                className="mt-0 mb-4 font-display text-3xl font-bold leading-tight text-gac sm:text-4xl lg:text-5xl"
+                className="mt-0 mb-4 font-display text-h2 font-bold text-gac"
               >
                 {chapter.heading}
               </h3>
@@ -143,7 +143,7 @@ export function StoryChapter({
           <div className="w-full lg:w-[62%] lg:max-w-[740px] xl:w-[60%] xl:max-w-[840px] 2xl:max-w-[920px]">
             <h3
               id={titleId}
-              className="mt-0 mb-4 font-display text-2xl font-bold leading-[1.25] text-gac sm:text-3xl lg:text-4xl xl:text-5xl"
+              className="mt-0 mb-4 font-display text-h2 font-bold text-gac"
             >
               {chapter.heading}
             </h3>

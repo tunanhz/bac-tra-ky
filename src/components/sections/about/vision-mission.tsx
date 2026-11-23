@@ -3,7 +3,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { ABOUT_STATEMENTS } from "./about-content";
 import styles from "./vision-mission.module.css";
 
-/** Canva page 10: red horizontal statements, overlapping cake photo and gift art. */
+/** Current Canva page 4: approved red panels with a gentle, motion-safe cake pulse. */
 export function VisionMission() {
   return (
     <section aria-labelledby="vision-mission-title" className={styles.section}>

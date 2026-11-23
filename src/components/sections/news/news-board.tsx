@@ -2,15 +2,9 @@
 
 import { useRef, useState } from "react";
 import type { NewsPost } from "@/lib/types";
-import { FeaturedNews } from "./featured-news";
 import { NewsCard } from "./news-card";
 
-export function arrangeNews(posts: readonly NewsPost[], filter?: string): { featured: NewsPost | null; grid: NewsPost[] } {
-  const featured = posts.find((post) => post.featured) ?? posts[0] ?? null;
-  return { featured, grid: posts.filter((post) => post !== featured) };
-}
-
-/** Tin tức client: bài nổi bật và thanh cuộn/slider trượt ngang theo Slide 14 */
+/** Tin tức: giữ thanh bài khách cung cấp, không còn khối bài nổi bật bị khoanh đỏ. */
 export function NewsBoard({ posts }: { posts: NewsPost[] }) {
   const scrollRef = useRef<HTMLOListElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -23,8 +17,6 @@ export function NewsBoard({ posts }: { posts: NewsPost[] }) {
       </div>
     );
   }
-
-  const { featured, grid } = arrangeNews(posts);
 
   const checkScroll = () => {
     if (!scrollRef.current) return;
@@ -41,9 +33,6 @@ export function NewsBoard({ posts }: { posts: NewsPost[] }) {
 
   return (
     <div className="space-y-10 lg:space-y-12">
-      {/* Bài viết nổi bật */}
-      {featured ? <FeaturedNews post={featured} /> : null}
-
       {/* Slide 14: Lưới tin tức trượt sang ngang */}
       <div className="relative">
         <div className="mb-4 flex items-center justify-between gap-3">
@@ -78,7 +67,7 @@ export function NewsBoard({ posts }: { posts: NewsPost[] }) {
           role="list"
           className="m-0 flex snap-x snap-mandatory gap-5 overflow-x-auto p-0 pb-4 pt-1 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-line sm:gap-6"
         >
-          {grid.map((post) => (
+          {posts.map((post) => (
             <li
               key={post.slug}
               className="w-[280px] shrink-0 snap-start sm:w-[340px] md:w-[360px]"

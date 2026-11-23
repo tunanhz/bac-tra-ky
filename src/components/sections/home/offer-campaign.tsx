@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { cn } from "@/lib/cn";
+import styles from "./customer-scenes.module.css";
 import { getOfferEndTime, type CustomerOffer } from "@/data/customer-content";
 import { OfferWindow } from "./offer-window";
 
@@ -18,28 +18,11 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
       id="uu-dai"
       aria-labelledby={headingId}
       aria-describedby={preview ? "offer-preview-notice" : undefined}
-      className="on-dark relative isolate min-w-0 scroll-mt-24 overflow-hidden w-full bg-son-deep py-4 text-be shadow-2xl sm:py-6 lg:py-8"
+      className={`on-dark relative isolate min-w-0 scroll-mt-24 overflow-hidden w-full py-4 text-be shadow-2xl sm:py-6 lg:py-8 ${styles.offer}`}
     >
-      {/* Ảnh nền ưu đãi đặc biệt do khách hàng cung cấp */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <Image
-          src="/images/brand/nen-uu-dai-clean.webp"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        <div aria-hidden="true" className="absolute inset-0 bg-[#300609]/20" />
-      </div>
-      {/* Tách bố cục khỏi ảnh nền: vùng sản phẩm không bị object-cover cắt khi form cao hơn banner. */}
-      <div aria-hidden="true" className="pointer-events-none absolute bottom-0 left-[29%] z-0 hidden aspect-[7/9] w-[23%] max-w-[390px] xl:block [mask-image:linear-gradient(to_bottom,transparent,black_18%),linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] [mask-composite:intersect]">
-        <Image
-          src="/images/brand/uu-dai-dac-biet.png"
-          alt=""
-          fill
-          sizes="1920px"
-          className="object-cover object-[42%_bottom]"
-        />
+      <div aria-hidden="true" className={styles.offerScenery}>
+        <Image src="/images/revisions/feedback-home-village-gold.png" alt="" fill sizes="55vw" className={styles.offerVillage} />
+        <Image src="/images/revisions/feedback-home-gift.png" alt="" fill sizes="50vw" className={styles.offerGift} />
       </div>
       {preview && (
         <p id="offer-preview-notice" className="m-0 border-b border-nhu/55 bg-be px-4 py-2 text-center text-xs font-bold tracking-widest text-son">
@@ -54,20 +37,20 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
             expired={expired}
             panelClassName="mt-3 rounded-2xl border border-nhu/75 bg-son-deep/80 px-3 py-2.5 shadow-[0_12px_30px_rgba(0,0,0,0.45)] sm:px-4 sm:py-3"
             artwork={(
-              <div aria-hidden="true" className="relative mx-auto mt-4 aspect-[7/9] w-44 overflow-hidden sm:w-52 xl:hidden [mask-image:linear-gradient(to_bottom,transparent,black_18%),linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] [mask-composite:intersect]">
-                <Image src="/images/brand/uu-dai-dac-biet.png" alt="" fill sizes="1440px" className="object-cover object-[42%_bottom]" />
+              <div aria-hidden="true" className={styles.cake}>
+                <Image src="/images/revisions/feedback-home-gift.png" alt="" fill sizes="(min-width: 1024px) 32vw, 75vw" className="object-contain object-left-bottom" />
               </div>
             )}
             intro={(
               <header className="text-center lg:text-left">
                 <div className="mb-2">
-                  <h2 id={headingId} className="m-0 inline-block rounded-full border border-nhu/70 bg-son-deep/65 px-4 py-1 font-display text-sm font-bold tracking-wider text-nhu uppercase shadow-md">
+                  <h2 id={headingId} className="m-0 text-h2 font-display font-bold text-nhu">
                     Ưu đãi đặc biệt
                   </h2>
                 </div>
-                {/* Canva trang 7: GIẢM 10% là điểm nhấn chính, không thu nhỏ như nhãn phụ. */}
+                {/* Canva bản 149, trang 1: GIẢM 10% là điểm nhấn chính, không thu nhỏ như nhãn phụ. */}
                 {discount && (
-                  <div className="m-0 mb-2 flex items-baseline justify-center gap-2.5 lg:justify-start">
+                  <div className={`m-0 mb-2 flex items-baseline justify-center gap-2.5 lg:justify-start ${styles.discount}`}>
                     <span className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[0.04em] text-be/95 uppercase">
                       GIẢM
                     </span>
@@ -76,8 +59,8 @@ export function OfferCampaign({ offer, serverNow, preview, discount, expired, ch
                     </span>
                   </div>
                 )}
-                <h3 className={cn("m-0 mb-1 font-bold text-be", discount ? "text-base sm:text-lg lg:text-xl" : "text-lg sm:text-xl")}>{offer.title}</h3>
-                <p className="m-0 text-xs text-cream-muted sm:text-sm leading-relaxed max-w-[38ch] mx-auto lg:mx-0">{offer.description}</p>
+                <h3 className="m-0 mb-2 text-h3 font-bold text-be">{offer.title}</h3>
+                <p className="m-0 text-base text-cream-muted leading-relaxed max-w-[38ch] mx-auto lg:mx-0">{offer.description}</p>
               </header>
             )}
           >

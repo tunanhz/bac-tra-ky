@@ -1,3 +1,4 @@
+import styles from "./quick-contact.module.css";
 import { siteConfig, telHref } from "@/config/site";
 import { FacebookIcon, TikTokIcon } from "./social-icons";
 
@@ -16,7 +17,7 @@ export function QuickContact() {
     >
       {hotline ? (
         <a href={telHref(hotline)} aria-label={`Gọi điện: ${hotline}`} title={`Gọi ${hotline}`} className={`${action} bg-gac`}>
-          <svg viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+          <svg viewBox="0 0 24 24" className={`size-6 ${styles.phone}`} fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
             <path d="M5 3h3l2 5-2 2a14 14 0 0 0 6 6l2-2 5 2v3a2 2 0 0 1-2 2C10 21 3 14 3 5a2 2 0 0 1 2-2Z" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </a>
@@ -30,7 +31,7 @@ export function QuickContact() {
           title="Facebook Bác Trà Ký"
           className={`${action} bg-gac`}
         >
-          <FacebookIcon className="size-6" />
+          <FacebookIcon className={`size-6 ${styles.facebook}`} />
         </a>
       ) : null}
       {tiktokUrl ? (
@@ -42,7 +43,7 @@ export function QuickContact() {
           title="TikTok Bác Trà Ký"
           className={`${action} bg-gac`}
         >
-          <TikTokIcon className="size-6" />
+          <TikTokIcon className={`size-6 ${styles.tiktok}`} />
         </a>
       ) : null}
     </aside>

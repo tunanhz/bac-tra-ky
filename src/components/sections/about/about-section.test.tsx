@@ -6,17 +6,17 @@ import { AboutSection } from "./about-section";
 import { WhyChooseSection } from "./why-choose-section";
 
 describe("AboutSection", () => {
-  it("giữ neo Về chúng tôi và nội dung kể chuyện từ thẻ 5", () => {
+  it("giữ neo Về chúng tôi nhưng bỏ trọn khối mở đầu theo trang 5 mới", () => {
     render(<AboutSection />);
-    expect(document.getElementById("ve-chung-toi")).not.toBeNull();
-    expect(screen.getByRole("heading", { level: 2, name: "Chúng tôi bắt đầu từ đâu?" })).toBeInTheDocument();
-    const storyCopy = [
-      ABOUT_INSPIRATION.heading,
-      ...ABOUT_INSPIRATION.paragraphs,
-    ];
-    for (const text of storyCopy) {
-      expect(screen.getByText(text)).toBeInTheDocument();
-    }
+    const about = screen.getByRole("region", { name: "Về chúng tôi" });
+    expect(about).toHaveAttribute("id", "ve-chung-toi");
+    expect(screen.getByRole("heading", { level: 2, name: "Về chúng tôi" })).toHaveAttribute("id", "about-title");
+    expect(screen.queryByText(ABOUT_INSPIRATION.title)).not.toBeInTheDocument();
+    expect(screen.queryByText(ABOUT_INSPIRATION.heading)).not.toBeInTheDocument();
+    for (const paragraph of ABOUT_INSPIRATION.paragraphs) expect(screen.queryByText(paragraph)).not.toBeInTheDocument();
+    expect(screen.queryByRole("img", { name: "Bàn trà và Bánh Bác Giang Xá bên hoa sen Bác Trà Ký" })).not.toBeInTheDocument();
+    expect(screen.getByRole("region", { name: "TẦM NHÌN & SỨ MỆNH" })).toBeInTheDocument();
+    expect(screen.getByRole("region", { name: "HÀNH TRÌNH CỦA BÁC TRÀ KÝ" })).toBeInTheDocument();
   });
 
   it("có Tầm nhìn và Sứ mệnh với đúng nội dung", () => {
@@ -26,7 +26,7 @@ describe("AboutSection", () => {
     expect(screen.getByText(/Giữ trọn hương vị xưa, thêm chút sáng tạo mới/)).toBeInTheDocument();
   });
 
-  it("trang 10 dùng ảnh bánh chồng giữa hai tấm đỏ và hình quà bên phải", () => {
+  it("giữ bố cục đã duyệt: ảnh bánh chồng giữa hai tấm đỏ và hình quà bên phải", () => {
     render(<AboutSection />);
     const section = screen.getByRole("region", { name: "TẦM NHÌN & SỨ MỆNH" });
     const content = within(section);
