@@ -1,0 +1,3 @@
+# Chỉ owner mới được approve thay đổi file deploy config
+vercel.json @tunanhz
+.github/CODEOWNERS @tunanhz
