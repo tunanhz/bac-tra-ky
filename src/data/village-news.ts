@@ -142,13 +142,13 @@ export const villageFacebookPosts: readonly NewsPost[] = [
     body: [
       {
         type: "image",
-        src: "/images/news/lang-nghe-fb-03.webp",
-        width: 1024,
-        height: 579,
-        alt: "Nghi lễ truyền thống tại di tích đình – đền làng Giang Xá, Hoài Đức",
+        src: "/images/news/nguon-den-giang-xa.webp",
+        width: 1600,
+        height: 1200,
+        alt: "Đền Giang Xá – di tích gắn với Hoàng đế Lý Nam Đế tại Hoài Đức",
         caption: [
           {
-            text: "Không gian nghi lễ truyền thống tại cụm di tích làng Giang Xá – Hoài Đức.",
+            text: "Không gian Đền Giang Xá tại cụm di tích làng Giang Xá – Hoài Đức.",
             emphasis: true,
           },
         ],
