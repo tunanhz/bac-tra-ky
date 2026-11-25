@@ -18,7 +18,7 @@ export function NewsCard({ post, className }: NewsCardProps) {
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col rounded-2xl bg-paper p-4 pb-6 shadow-sm",
+        "group relative flex h-full flex-col rounded-2xl border border-line/50 bg-paper p-3.5 pb-5 shadow-sm sm:p-4 sm:pb-6",
         "transition-[transform,box-shadow] duration-400 ease-son hover:-translate-y-1.5 hover:shadow-md",
         "motion-reduce:hover:translate-y-0",
         className,
@@ -40,12 +40,12 @@ export function NewsCard({ post, className }: NewsCardProps) {
         </div>
         {post.coverCaption && <figcaption className="caption px-2 pt-2.5 text-center text-ink-soft">{post.coverCaption}</figcaption>}
       </figure>
-      <div className="flex flex-1 flex-col px-2 pt-4.5">
+      <div className="flex flex-1 flex-col px-1.5 pt-4 sm:px-2 sm:pt-4.5">
         <NewsMeta post={post} showDate={false} />
-        <h3 className="mt-3 mb-2 font-display text-[1.45rem] leading-snug font-bold text-son sm:text-[1.65rem]">
+        <h3 className="mt-2.5 mb-2 font-display text-[1.22rem] leading-snug font-bold text-son sm:mt-3 sm:text-[1.45rem] lg:text-[1.55rem]">
           {post.title}
         </h3>
-        <p className="mt-0 mb-4 text-[0.95rem] text-ink-soft">{post.excerpt}</p>
+        <p className="mt-0 mb-4 text-[0.92rem] leading-relaxed text-ink-soft sm:text-[0.95rem]">{post.excerpt}</p>
         <Button
           href={newsHref(post.slug)}
           variant="primary"

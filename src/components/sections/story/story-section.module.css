@@ -8,7 +8,13 @@
 .introContent {
   position: relative;
   z-index: 1;
-  padding-block: 3rem 2rem;
+  padding-block: 2.25rem 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .introContent {
+    padding-block: 3rem 2rem;
+  }
 }
 
 .introTitle {

@@ -66,12 +66,12 @@ describe("NewsCard", () => {
 });
 
 describe("NewsSection / NewsBoard", () => {
-  it("giữ Tin tức và 9 bài khách cung cấp, bỏ khối nổi bật và nhóm 6 bài cũ", () => {
+  it("giữ Tin tức và hiển thị đủ các bài tin tức trang chủ (14 bài)", () => {
     const { container } = render(<NewsSection posts={homepagePosts} />);
     expect(container.querySelector("section#tin-tuc")).not.toBeNull();
     expect(screen.getByRole("heading", { level: 2, name: "Tin tức" })).toBeInTheDocument();
     expect(gridTitles()).toEqual(homepagePosts.map((post) => post.title));
-    expect(gridTitles()).toHaveLength(9);
+    expect(gridTitles()).toHaveLength(14);
     for (const post of posts.filter((post) => !homepagePosts.some((home) => home.slug === post.slug))) {
       expect(screen.queryByRole("heading", { name: post.title })).not.toBeInTheDocument();
     }

@@ -76,8 +76,10 @@ export function StorySection() {
               Theo dấu làng xưa, tìm về hương vị cũ. Ẩn mình giữa vùng đất Giang Xá, Hoài Đức, Hà Nội là câu chuyện về một thức quà truyền thống được gìn giữ qua nhiều thế hệ. Mỗi chiếc Bánh Bác không chỉ mang hương vị quê nhà mà còn chứa đựng sự khéo léo, tâm huyết và những nét đẹp văn hóa của người dân nơi đây.
             </p>
             <a
-              href="#chuong-1"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gac px-8 py-3.5 font-body text-sm font-bold text-be transition-colors hover:bg-gac-deep sm:text-base"
+              href="/kham-pha-lang-nghe"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-gac px-8 py-3.5 font-body text-sm font-bold text-be transition-colors hover:bg-gac-deep sm:w-auto sm:text-base"
             >
               Tìm Hiểu Thêm <span aria-hidden="true">→</span>
             </a>
