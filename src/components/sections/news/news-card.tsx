@@ -47,7 +47,7 @@ export function NewsCard({ post, className }: NewsCardProps) {
         </h3>
         <p className="mt-0 mb-4 text-[0.92rem] leading-relaxed text-ink-soft sm:text-[0.95rem]">{post.excerpt}</p>
         <Button
-          href={newsHref(post.slug)}
+          href={post.externalUrl ?? newsHref(post.slug)}
           variant="primary"
           aria-label={`Đọc thêm: ${post.title}`}
           className={cn("mt-auto w-fit", styles.readMore)}
