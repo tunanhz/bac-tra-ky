@@ -51,12 +51,12 @@ export async function NewsArticle({ params }: { params: Promise<{ slug: string }
         <div className="wrap">
           <div
             className={cn(
-              "frame-paper relative mx-auto max-w-[760px] px-5 pt-9 pb-10 shadow-paper sm:px-10 md:px-14 md:pt-12 md:pb-14",
-              isBanner ? "mt-9" : "-mt-20 md:-mt-32",
+              "frame-paper relative mx-auto max-w-[760px] px-4 pt-7 pb-8 shadow-paper sm:px-10 sm:pt-9 sm:pb-10 md:px-14 md:pt-12 md:pb-14",
+              isBanner ? "mt-6 sm:mt-9" : "-mt-10 sm:-mt-20 md:-mt-32",
             )}
           >
             <NewsMeta post={post} />
-            <h1 id="article-title" className="mt-5 mb-6 text-[clamp(1.8rem,1.3rem+2vw,2.7rem)] leading-tight font-bold text-son">
+            <h1 id="article-title" className="mt-4 mb-5 text-[1.55rem] leading-tight font-bold text-son sm:mt-5 sm:mb-6 sm:text-[clamp(1.8rem,1.3rem+2vw,2.7rem)]">
               {post.title}
             </h1>
             <p className={cn("mt-0 mb-7 border-b border-line pb-7 text-quote text-son italic", post.body ? "font-body" : "font-heading")}>{post.lead ?? post.excerpt}</p>
@@ -79,7 +79,7 @@ export async function NewsArticle({ params }: { params: Promise<{ slug: string }
               </p>
             ) : null}
             <div className="mt-9 border-t border-dashed border-line pt-6">
-              <Button href={sectionHref("tin-tuc")} variant="outline">
+              <Button href={sectionHref("tin-tuc")} variant="outline" className="w-full sm:w-auto">
                 ← Quay lại Tin tức
               </Button>
             </div>

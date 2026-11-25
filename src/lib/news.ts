@@ -1,6 +1,11 @@
 import { customerNewsPosts } from "@/data/customer-news";
+import { extraNewsPosts } from "@/data/extra-news";
 import { newsPosts } from "@/data/news";
+import { villageFacebookPosts } from "@/data/village-news";
 import type { NewsPost } from "@/lib/types";
+
+/** Bài "Dấu ấn Vua Lý Nam Đế..." được chuyển sang tab con Khám phá làng nghề Giang Xá. */
+export const VILLAGE_MOVED_NEWS_SLUG = "dau-an-vua-ly-nam-de-trong-lich-su-va-van-hoa-lang-giang-xa";
 
 /*
  * Lớp truy cập tin tức. Hiện đọc dữ liệu tĩnh `src/data/news.ts`; phase 05 (backend) chỉ thay phần ruột sang
@@ -31,10 +36,20 @@ export async function getNewsPosts(): Promise<NewsPost[]> {
     .map(({ post }) => clone(post));
 }
 
-/** Trang chủ chỉ hiển thị 9 bài từ tài liệu khách; giữ bài cũ và URL trong kho tin. */
+/** Trang chủ hiển thị các bài tin tức (bổ sung 6 bài mới, chuyển bài Dấu ấn sang Khám phá làng nghề). */
 export async function getHomepageNewsPosts(): Promise<NewsPost[]> {
-  const approvedSlugs = new Set(customerNewsPosts.map((post) => post.slug));
+  const approvedSlugs = new Set([
+    ...customerNewsPosts.filter((post) => post.slug !== VILLAGE_MOVED_NEWS_SLUG).map((post) => post.slug),
+    ...extraNewsPosts.map((post) => post.slug),
+  ]);
   return (await getNewsPosts()).filter((post) => approvedSlugs.has(post.slug));
+}
+
+/** 5 bài viết cho trang Khám phá làng nghề Giang Xá (4 bài Facebook + bài Dấu ấn Vua Lý Nam Đế). */
+export async function getVillageNewsPosts(): Promise<NewsPost[]> {
+  const fifth = newsPosts.find((post) => post.slug === VILLAGE_MOVED_NEWS_SLUG);
+  const list = fifth ? [...villageFacebookPosts, fifth] : [...villageFacebookPosts];
+  return list.map(clone);
 }
 
 export async function getNewsPostBySlug(slug: string): Promise<NewsPost | null> {

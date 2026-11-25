@@ -83,7 +83,10 @@ describe("StorySection", () => {
     expect(document.getElementById("cau-chuyen")).not.toBeNull();
     expect(screen.getByText(/Theo dấu làng xưa, tìm về hương vị cũ.*tâm huyết và những nét đẹp văn hóa/)).toBeInTheDocument();
     expect(screen.getByText(/Không chỉ là nơi lưu giữ những dấu tích lịch sử/)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Tìm Hiểu Thêm/ })).toHaveAttribute("href", "#chuong-1");
+    const learnMore = screen.getByRole("link", { name: /Tìm Hiểu Thêm/ });
+    expect(learnMore).toHaveAttribute("href", "/kham-pha-lang-nghe");
+    expect(learnMore).toHaveAttribute("target", "_blank");
+    expect(learnMore).toHaveAttribute("rel", "noopener noreferrer");
 
     for (let i = 1; i <= 4; i++) {
       expect(document.getElementById(`chuong-${i}`)).not.toBeNull();

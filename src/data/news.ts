@@ -1,5 +1,7 @@
 import type { NewsCategory, NewsPost } from "@/lib/types";
 import { customerNewsPosts } from "./customer-news";
+import { extraNewsPosts } from "./extra-news";
+import { villageFacebookPosts } from "./village-news";
 
 /** Bài viết chính thức cho chuyên mục Tin tức của Bác Trà Ký. */
 
@@ -147,5 +149,7 @@ export const newsPosts: readonly NewsPost[] = [
     featured: false,
     isDraft: false,
   },
+  ...villageFacebookPosts,
+  ...extraNewsPosts,
   ...customerNewsPosts,
 ];
