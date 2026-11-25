@@ -56,6 +56,8 @@ export type NewsPost = {
   coverCredit?: Readonly<{ sourceUrl: string; license: string; licenseUrl: string; changes: string }>;
   /** Ấn phẩm khổ ngang từ bộ nhận diện, cần hiển thị trọn khung. */
   coverIsBrandBanner?: boolean;
+  /** Link bài gốc bên ngoài (vd. video/bài đăng Facebook) khi nút "Đọc thêm" trỏ thẳng ra ngoài. */
+  externalUrl?: string;
   /** Ngày ISO `YYYY-MM-DD`. */
   publishedAt: string;
   featured: boolean;

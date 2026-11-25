@@ -63,6 +63,17 @@ describe("NewsCard", () => {
       .toContain("chen-tra-sen-tay-ho.webp");
     expect(screen.getByText("Trà sen Tây Hồ · Ảnh: Viethavvh")).toBeInTheDocument();
   });
+  it("bài có externalUrl → 'Đọc thêm' mở thẳng link ngoài trong tab mới", () => {
+    const fbPost: NewsPost = {
+      ...originalCakePost,
+      externalUrl: "https://www.facebook.com/share/v/1AHWkoman9/?mibextid=wwXIfr",
+    };
+    render(<NewsCard post={fbPost} />);
+    const link = screen.getByRole("link", { name: `Đọc thêm: ${fbPost.title}` });
+    expect(link).toHaveAttribute("href", fbPost.externalUrl);
+    expect(link).toHaveAttribute("target", "_blank");
+    expect(link).toHaveAttribute("rel", "noopener noreferrer");
+  });
 });
 
 describe("NewsSection / NewsBoard", () => {
